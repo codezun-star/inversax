@@ -1,0 +1,488 @@
+---
+export const prerender = true;
+// src/pages/herramientas/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { ArrowRight, Calculator, DollarSign, BarChart2, Shield, TrendingUp, Layers, Landmark } from 'lucide-astro';
+
+const herramientas = [
+  {
+    icon: 'chart',
+    nombre: 'Mercados Cripto',
+    descripcion: 'Precios en tiempo real, gráficos TradingView y análisis técnico de las principales criptomonedas.',
+    href: '/herramientas/cripto',
+    disponible: true,
+    badge: 'En vivo',
+    color: '#F59E0B',
+  },
+  {
+    icon: 'forex',
+    nombre: 'Forex',
+    descripcion: 'Tipos de cambio en tiempo real de los principales pares de divisas globales y monedas de Latinoamérica.',
+    href: '/herramientas/forex',
+    disponible: true,
+    badge: 'En vivo',
+    color: '#EC4899',
+  },
+  {
+    icon: 'layers',
+    nombre: 'Metales Preciosos',
+    descripcion: 'Precios actualizados de oro, plata, platino y paladio por onza troy con gráficas en vivo.',
+    href: '/herramientas/metales',
+    disponible: true,
+    badge: 'En vivo',
+    color: '#F59E0B',
+  },
+  {
+    icon: 'acciones',
+    nombre: 'Acciones',
+    descripcion: 'Cotizaciones en tiempo real de las principales empresas del mercado estadounidense.',
+    href: '/herramientas/acciones',
+    disponible: true,
+    badge: 'En vivo',
+    color: '#10B981',
+  },
+  {
+    icon: 'dollar',
+    nombre: 'Precio del Dólar',
+    descripcion: 'Precio del dólar oficial y paralelo (blue en Argentina) en todos los países de Latinoamérica.',
+    href: '/herramientas/dolar',
+    disponible: true,
+    badge: 'En vivo',
+    color: '#D4A843',
+  },
+  {
+    icon: 'calculator',
+    nombre: 'Calculadora Cripto',
+    descripcion: 'Convertí y calculá ganancias entre criptomonedas y monedas fiat al instante.',
+    href: '/herramientas/calculadora-cripto',
+    disponible: true,
+    badge: 'En  Vivo',
+    color: '#D4A843',
+  },
+
+
+  {
+  icon: 'calculator',
+  nombre: 'Calculadoras de Trading',
+  descripcion: 'Calcula pips, tamaño de posición, ganancias/pérdidas y margen requerido para Forex y CFDs.',
+  href: '/herramientas/calculadora-trading',
+  disponible: true,
+  badge: 'Gratis',
+  color: '#3B82F6',
+},
+
+  {
+    icon: 'shield',
+    nombre: 'Comparar Brokers',
+    descripcion: 'Compará comisiones, regulaciones y características de los principales brokers para Latinoamérica.',
+    href: '/herramientas/comparar-brokers',
+    disponible: true,
+    badge: 'En Vivo',
+    color: '#D4A843',
+  },
+];
+---
+
+<Layout>
+
+<slot name="head" slot="head">
+
+  <!-- ═══════════════════════════════════════
+       PRECONNECT
+  ═══════════════════════════════════════ -->
+  <link rel="preconnect" href="https://res.cloudinary.com" />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- ═══════════════════════════════════════
+       BASIC SEO
+  ═══════════════════════════════════════ -->
+  <title>Herramientas Financieras — Cripto, Forex y Bolsa | Inversax</title>
+  <meta name="description"    content="Precios en tiempo real de criptomonedas, forex, acciones y metales preciosos. Herramientas financieras gratuitas para inversores y traders en Latinoamérica." />
+  <meta name="author"         content="José Zúniga" />
+  <meta name="robots"         content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot"      content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="googlebot-news" content="index, follow" />
+  <link rel="canonical"       href="https://inversax.com/herramientas" />
+
+  <!-- ═══════════════════════════════════════
+       KEYWORDS
+  ═══════════════════════════════════════ -->
+  <meta name="keywords"      content="herramientas financieras latam, precio bitcoin tiempo real, forex en vivo, precio oro hoy, acciones en tiempo real, precio dolar latinoamerica, herramientas trading gratis" />
+  <meta name="news_keywords" content="precio bitcoin hoy, forex en vivo, precio oro, acciones tiempo real, Inversax" />
+
+  <!-- ═══════════════════════════════════════
+       GEO
+  ═══════════════════════════════════════ -->
+  <meta name="geo.region"       content="LATAM" />
+  <meta name="geo.placename"    content="Latinoamérica" />
+  <meta name="language"         content="Spanish" />
+  <meta name="content-language" content="es" />
+  <meta name="coverage"         content="Worldwide" />
+  <meta name="target"           content="all" />
+
+  <!-- ═══════════════════════════════════════
+       HREFLANG — página global, aplican los 36
+  ═══════════════════════════════════════ -->
+  <link rel="alternate" hreflang="es"    href="https://inversax.com/herramientas" />
+  <!-- América Latina -->
+  <link rel="alternate" hreflang="es-MX" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-AR" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-CO" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-CL" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-PE" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-VE" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-EC" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-BO" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-PY" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-UY" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-CR" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-PA" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-DO" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-SV" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-HN" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-NI" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-GT" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-CU" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-PR" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-BZ" href="https://inversax.com/herramientas" />
+  <!-- Europa -->
+  <link rel="alternate" hreflang="es-ES" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-AD" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-DE" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-FR" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-IT" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-CH" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-NL" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-GB" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-PT" href="https://inversax.com/herramientas" />
+  <!-- Resto del mundo -->
+  <link rel="alternate" hreflang="es-US" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-CA" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-AU" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-BR" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-PH" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-GQ" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="es-MA" href="https://inversax.com/herramientas" />
+  <link rel="alternate" hreflang="x-default" href="https://inversax.com/herramientas" />
+
+  <!-- ═══════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════ -->
+  <meta property="og:site_name"   content="Inversax" />
+  <meta property="og:locale"      content="es_LA" />
+  <meta property="og:locale:alternate" content="es_MX" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="es_CO" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Herramientas Financieras — Cripto, Forex y Bolsa | Inversax" />
+  <meta property="og:description" content="Precios en tiempo real de cripto, forex, acciones y metales. Gratis para toda Latinoamérica." />
+  <meta property="og:url"         content="https://inversax.com/herramientas" />
+  <meta property="og:image"       content="https://inversax.com/og/herramientas.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content="Herramientas Financieras — Inversax" />
+  <meta property="og:image:type"  content="image/png" />
+
+  <!-- ═══════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@inversax" />
+  <meta name="twitter:creator"     content="@inversax" />
+  <meta name="twitter:title"       content="Herramientas Financieras — Cripto, Forex y Bolsa | Inversax" />
+  <meta name="twitter:description" content="Precios en tiempo real de cripto, forex, acciones y metales para Latinoamérica. Gratis." />
+  <meta name="twitter:image"       content="https://inversax.com/og/herramientas.png" />
+  <meta name="twitter:image:alt"   content="Herramientas Financieras — Inversax" />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebSite + SearchAction
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Inversax",
+    "url": "https://inversax.com",
+    "description": "Noticias de cripto, trading, forex y bolsa en español para Latinoamérica",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://inversax.com/noticias?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebPage
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Herramientas Financieras — Inversax",
+    "description": "Precios en tiempo real de cripto, forex, acciones y metales. Gratis para Latinoamérica.",
+    "url": "https://inversax.com/herramientas",
+    "inLanguage": "es",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Inversax",
+      "url": "https://inversax.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Inversax",
+      "url": "https://inversax.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://inversax.com/favicon.png",
+        "width": 512,
+        "height": 512
+      }
+    }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — BreadcrumbList
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio",       "item": "https://inversax.com" },
+      { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://inversax.com/herramientas" }
+    ]
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — ItemList de herramientas
+  ═══════════════════════════════════════ -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Herramientas financieras de Inversax",
+  "url": "https://inversax.com/herramientas",
+  "numberOfItems": 8,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Mercados Cripto — Precios en vivo",              "url": "https://inversax.com/herramientas/cripto"             },
+    { "@type": "ListItem", "position": 2, "name": "Forex — Tipos de cambio en tiempo real",         "url": "https://inversax.com/herramientas/forex"              },
+    { "@type": "ListItem", "position": 3, "name": "Metales Preciosos — Precio del oro y plata",     "url": "https://inversax.com/herramientas/metales"            },
+    { "@type": "ListItem", "position": 4, "name": "Acciones — Cotizaciones en tiempo real",         "url": "https://inversax.com/herramientas/acciones"           },
+    { "@type": "ListItem", "position": 8, "name": "Calculadoras de Trading — Pips, Posición y Margen", "url": "https://inversax.com/herramientas/calculadora-trading" },
+    { "@type": "ListItem", "position": 5, "name": "Precio del Dólar en Latinoamérica",              "url": "https://inversax.com/herramientas/dolar"              },
+    { "@type": "ListItem", "position": 6, "name": "Calculadora Cripto",                             "url": "https://inversax.com/herramientas/calculadora-cripto" },
+    { "@type": "ListItem", "position": 7, "name": "Comparar Brokers — XM vs Exness vs Pepperstone", "url": "https://inversax.com/herramientas/comparar-brokers"   }
+  ]
+})} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — SoftwareApplication
+       Le dice a Google que es una app de finanzas
+       gratuita, lo que puede activar rich results
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Herramientas de mercado en vivo — Inversax",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "url": "https://inversax.com/herramientas",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Precios en tiempo real de cripto, forex, metales y acciones para Latinoamérica.",
+    "inLanguage": "es",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Inversax",
+      "url": "https://inversax.com"
+    }
+  })} />
+
+</slot>
+
+
+  <!-- ── PAGE HEADER EDITORIAL ─────────────────────────────── -->
+  <div style="background: #FAFAF8; border-bottom: 2px solid #1C1917;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <div class="flex items-center gap-1.5 text-xs mb-4" style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+        <a href="/" class="no-underline" style="color: #A8A29E;"
+           onmouseover="this.style.color='#B91C1C';" onmouseout="this.style.color='#A8A29E';">Inicio</a>
+        <span>›</span>
+        <span style="color: #1C1917; font-weight: 600;">Herramientas</span>
+      </div>
+      <h1 class="font-bold leading-tight mb-2"
+          style="font-family: 'Playfair Display', serif; color: #1C1917; font-size: clamp(28px, 4vw, 48px);">
+        Herramientas de Mercado
+      </h1>
+      <p class="text-sm sm:text-base" style="color: #78716C; font-family: 'DM Sans', sans-serif;">
+        Precios en vivo, gráficas y recursos financieros para inversores en Latinoamérica
+      </p>
+    </div>
+  </div>
+
+  <!-- ── GRID DE HERRAMIENTAS: fondo oscuro #1C1917 ─────────── -->
+  <section style="background: #1C1917;" class="px-4 sm:px-6 py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Eyebrow de sección -->
+      <p class="text-[10px] font-bold uppercase tracking-[0.22em] mb-8"
+         style="color: rgba(245,240,232,0.35); font-family: 'DM Sans', sans-serif;">
+        8 herramientas disponibles · Actualizadas en tiempo real
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        {herramientas.map((h) => (
+          <a href={h.href}
+             class="relative flex flex-col gap-5 no-underline transition-all duration-200 hover:-translate-y-0.5 group"
+             style="background: rgba(245,240,232,0.05); border: 1px solid rgba(245,240,232,0.1); padding: 24px;"
+             onmouseover="this.style.borderColor='rgba(245,240,232,0.25)';"
+             onmouseout="this.style.borderColor='rgba(245,240,232,0.1)';">
+
+            <!-- Cabecera: ícono + dato vivo -->
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"
+                   style={`background: ${h.color}25;`}>
+                {h.icon === 'calculator' && <Calculator  size={18} style={`color: ${h.color};`} />}
+                {h.icon === 'dollar'     && <DollarSign  size={18} style={`color: ${h.color};`} />}
+                {h.icon === 'chart'      && <BarChart2   size={18} style={`color: ${h.color};`} />}
+                {h.icon === 'forex'      && <TrendingUp  size={18} style={`color: ${h.color};`} />}
+                {h.icon === 'layers'     && <Layers      size={18} style={`color: ${h.color};`} />}
+                {h.icon === 'acciones'   && <Landmark    size={18} style={`color: ${h.color};`} />}
+                {h.icon === 'shield'     && <Shield      size={18} style={`color: ${h.color};`} />}
+              </div>
+
+              <!-- Dato en vivo según tipo -->
+              {h.icon === 'chart' && (
+                <span class="text-right">
+                  <span class="block text-[9px] uppercase tracking-widest mb-0.5"
+                        style="color: rgba(245,240,232,0.3); font-family: 'DM Sans', sans-serif;">BTC</span>
+                  <span data-live="btc-price"
+                        class="font-bold text-sm animate-pulse"
+                        style="color: #60A5FA; font-family: 'DM Sans', sans-serif;">···</span>
+                </span>
+              )}
+              {h.icon === 'forex' && (
+                <span class="text-right">
+                  <span class="block text-[9px] uppercase tracking-widest mb-0.5"
+                        style="color: rgba(245,240,232,0.3); font-family: 'DM Sans', sans-serif;">EUR/USD</span>
+                  <span data-live="eurusd-rate"
+                        class="font-bold text-sm animate-pulse"
+                        style="color: #4ADE80; font-family: 'DM Sans', sans-serif;">···</span>
+                </span>
+              )}
+              {h.icon === 'layers' && (
+                <span class="text-right">
+                  <span class="block text-[9px] uppercase tracking-widest mb-0.5"
+                        style="color: rgba(245,240,232,0.3); font-family: 'DM Sans', sans-serif;">Oro / oz</span>
+                  <span data-live="gold-price"
+                        class="font-bold text-sm animate-pulse"
+                        style="color: #FCD34D; font-family: 'DM Sans', sans-serif;">···</span>
+                </span>
+              )}
+              {h.icon === 'acciones' && (
+                <span class="text-right">
+                  <span class="block text-[9px] uppercase tracking-widest mb-0.5"
+                        style="color: rgba(245,240,232,0.3); font-family: 'DM Sans', sans-serif;">NYSE · NASDAQ</span>
+                  <span class="font-bold text-sm" style="color: #9CA3AF; font-family: 'DM Sans', sans-serif;">En vivo</span>
+                </span>
+              )}
+              {h.icon === 'dollar' && (
+                <span class="text-right">
+                  <span class="block text-[9px] uppercase tracking-widest mb-0.5"
+                        style="color: rgba(245,240,232,0.3); font-family: 'DM Sans', sans-serif;">Países</span>
+                  <span class="font-bold text-sm" style="color: #9CA3AF; font-family: 'DM Sans', sans-serif;">16+</span>
+                </span>
+              )}
+              {(h.icon === 'calculator' || h.icon === 'shield') && (
+                <span class="text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider"
+                      style={`background: ${h.color}20; color: ${h.color}; font-family: 'DM Sans', sans-serif;`}>
+                  {h.badge}
+                </span>
+              )}
+            </div>
+
+            <!-- Nombre + descripción -->
+            <div class="flex flex-col gap-2 flex-1">
+              <h2 class="font-bold text-base leading-snug transition-colors duration-200"
+                  style="color: rgba(245,240,232,0.9); font-family: 'DM Sans', sans-serif;">
+                {h.nombre}
+              </h2>
+              <p class="text-sm leading-relaxed" style="color: rgba(245,240,232,0.45); font-family: 'DM Sans', sans-serif;">
+                {h.descripcion}
+              </p>
+            </div>
+
+            <!-- CTA -->
+            <span class="flex items-center gap-1.5 text-sm font-semibold mt-auto transition-all duration-200 group-hover:gap-2.5"
+                  style={`color: ${h.color}; font-family: 'DM Sans', sans-serif;`}>
+              Abrir herramienta <ArrowRight size={13} />
+            </span>
+
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Carga datos en vivo para las cards de herramientas
+  const fmtPrice = (p: number) => {
+    if (!p) return '···';
+    if (p >= 1000) return `$${p.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+    return `$${p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  };
+  const fmtForex = (p: number) => {
+    if (!p) return '···';
+    return p.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+  };
+
+  async function cargarDatos() {
+    const [resCripto, resForex, resMetales] = await Promise.allSettled([
+      fetch('/api/precios'),
+      fetch('/api/forex'),
+      fetch('/api/metales'),
+    ]);
+
+    if (resCripto.status === 'fulfilled' && resCripto.value.ok) {
+      const data = await resCripto.value.json() as any[];
+      const btc = data.find((c: any) => c.id === 'bitcoin');
+      if (btc) {
+        document.querySelectorAll<HTMLElement>('[data-live="btc-price"]').forEach(el => {
+          el.textContent = fmtPrice(btc.price);
+          el.classList.remove('animate-pulse');
+        });
+      }
+    }
+    if (resForex.status === 'fulfilled' && resForex.value.ok) {
+      const json = await resForex.value.json() as any;
+      const forex = json.data ?? json;
+      const eurusd = forex.find((f: any) => f.par === 'EUR/USD');
+      if (eurusd) {
+        document.querySelectorAll<HTMLElement>('[data-live="eurusd-rate"]').forEach(el => {
+          el.textContent = fmtForex(eurusd.precio);
+          el.classList.remove('animate-pulse');
+        });
+      }
+    }
+    if (resMetales.status === 'fulfilled' && resMetales.value.ok) {
+      const json = await resMetales.value.json() as any;
+      const metales = json.data ?? json;
+      const oro = metales.find((m: any) => m.slug === 'oro' || m.simbolo === 'XAU');
+      if (oro && oro.precio > 0) {
+        document.querySelectorAll<HTMLElement>('[data-live="gold-price"]').forEach(el => {
+          el.textContent = `$${oro.precio.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+          el.classList.remove('animate-pulse');
+        });
+      }
+    }
+  }
+
+  cargarDatos();
+</script>

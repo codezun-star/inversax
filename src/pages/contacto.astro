@@ -1,0 +1,216 @@
+---
+export const prerender = true;
+// src/pages/contacto.astro
+import Layout from '../layouts/Layout.astro';
+import {
+  ArrowRight, MessageSquare, Globe,
+  Megaphone, Shield, Clock, Send
+} from 'lucide-astro';
+
+const sitioWeb = "https://inversax.com";
+const correos = [
+  { tipo: "General",    email: "codezun@gmail.com",      icon: "msg" },
+  { tipo: "Publicidad", email: "codezun@gmail.com", icon: "ads" },
+  { tipo: "Legal",      email: "codezun@gmail.com",      icon: "law" },
+];
+
+const motivos = [
+  "Consulta general",
+  "Error o problema técnico",
+  "Sugerencia de contenido",
+  "Solicitud de publicidad",
+  "Reporte de información incorrecta",
+  "Otro",
+];
+---
+
+<Layout>
+  <slot name="head" slot="head">
+    <title>Contacto — Inversax</title>
+    <meta name="description" content="¿Tienes preguntas, sugerencias o quieres anunciarte en Inversax? Escríbenos." />
+    <link rel="canonical" href={`${sitioWeb}/contacto`} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Contacto — Inversax" />
+    <meta property="og:description" content="¿Tienes preguntas, sugerencias o quieres anunciarte en Inversax? Escríbenos." />
+    <meta property="og:url"         content={`${sitioWeb}/contacto`} />
+    <meta property="og:image"       content={`${sitioWeb}/og/home.png`} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Inversax — Finanzas en Español para Latinoamérica" />
+  </slot>
+
+  <!-- HEADER EDITORIAL -->
+  <div style="background: #FAFAF8; border-bottom: 1px solid #E5E0D8;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex items-center gap-2 text-sm mb-6" style="color: #A8A29E;">
+        <a href="/" class="no-underline hover:underline" style="color: #A8A29E;">Inicio</a>
+        <span>›</span>
+        <span style="color: #57534E;">Contacto</span>
+      </div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: #1C1917; line-height: 1.2; margin: 0 0 12px;">
+        Contáctanos
+      </h1>
+      <p style="color: #78716C; font-size: 15px; line-height: 1.7; max-width: 520px; margin: 0;">
+        ¿Tienes una pregunta, encontraste un error o quieres colaborar con nosotros? Completa el formulario o escríbenos directamente al correo que corresponda.
+      </p>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div style="background: #FAFAF8; min-height: 60vh;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- SIDEBAR INFO -->
+        <aside style="width: 100%; flex-shrink: 0;" class="lg:w-64 flex flex-col gap-5">
+
+          <!-- Correos directos -->
+          <div style="border: 1px solid #E5E0D8; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #A8A29E; margin: 0;">Correos directos</p>
+            {correos.map((c) => (
+              <div>
+                <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #A8A29E; margin: 0 0 4px;">{c.tipo}</p>
+                <a href={`mailto:${c.email}`} class="no-underline" style="color: #B91C1C; font-size: 13px;">{c.email}</a>
+              </div>
+            ))}
+          </div>
+
+          <!-- Cobertura -->
+          <div style="background: #F5F1EC; border: 1px solid #E5E0D8; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #78716C; margin: 0;">Cobertura</p>
+            <p style="color: #57534E; font-size: 13px; line-height: 1.6; margin: 0;">
+              Operamos en <strong style="color: #1C1917;">37 países</strong> hispanohablantes. Si tu consulta es de una región, indícalo en el mensaje.
+            </p>
+            <a href="/paises" class="no-underline" style="color: #B91C1C; font-size: 13px; font-weight: 600;">Ver países →</a>
+          </div>
+
+          <!-- Publicidad -->
+          <div style="border: 1px solid #E5E0D8; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #B91C1C; margin: 0;">¿Anunciarte?</p>
+            <p style="color: #57534E; font-size: 13px; line-height: 1.6; margin: 0;">
+              Si quieres publicitar tu plataforma o broker en Inversax, visita nuestra página de publicidad.
+            </p>
+            <a href="/publicidad" class="no-underline" style="color: #B91C1C; font-size: 13px; font-weight: 600;">Ver opciones →</a>
+          </div>
+
+        </aside>
+
+        <!-- FORMULARIO -->
+        <main style="flex: 1; min-width: 0;">
+          <div style="border: 1px solid #E5E0D8; padding: 32px;">
+
+            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #A8A29E; margin: 0 0 24px;">Formulario de contacto</p>
+
+            <form class="flex flex-col gap-5" action="#" method="POST">
+
+              <!-- Nombre + Email -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <label for="nombre" style="font-size: 13px; font-weight: 600; color: #57534E;">
+                    Nombre <span style="color: #B91C1C;">*</span>
+                  </label>
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    type="text"
+                    required
+                    placeholder="Tu nombre"
+                    style="background: #FAFAF8; border: 1px solid #D6D0C8; padding: 10px 14px; font-size: 14px; color: #1C1917; outline: none; width: 100%; box-sizing: border-box;"
+                  />
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <label for="email" style="font-size: 13px; font-weight: 600; color: #57534E;">
+                    Correo electrónico <span style="color: #B91C1C;">*</span>
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="tu@correo.com"
+                    style="background: #FAFAF8; border: 1px solid #D6D0C8; padding: 10px 14px; font-size: 14px; color: #1C1917; outline: none; width: 100%; box-sizing: border-box;"
+                  />
+                </div>
+              </div>
+
+              <!-- Motivo -->
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="motivo" style="font-size: 13px; font-weight: 600; color: #57534E;">
+                  Motivo del contacto <span style="color: #B91C1C;">*</span>
+                </label>
+                <select
+                  id="motivo"
+                  name="motivo"
+                  required
+                  style="background: #FAFAF8; border: 1px solid #D6D0C8; padding: 10px 14px; font-size: 14px; color: #57534E; outline: none; width: 100%; appearance: none; cursor: pointer;"
+                >
+                  <option value="" disabled selected={true}>Selecciona un motivo…</option>
+                  {motivos.map((m) => (
+                    <option value={m.toLowerCase().replace(/\s+/g, '-')}>{m}</option>
+                  ))}
+                </select>
+              </div>
+
+              <!-- País (opcional) -->
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="pais" style="font-size: 13px; font-weight: 600; color: #57534E;">
+                  País <span style="color: #A8A29E; font-weight: 400;">(opcional)</span>
+                </label>
+                <input
+                  id="pais"
+                  name="pais"
+                  type="text"
+                  placeholder="Ej: México, Argentina, España…"
+                  style="background: #FAFAF8; border: 1px solid #D6D0C8; padding: 10px 14px; font-size: 14px; color: #1C1917; outline: none; width: 100%; box-sizing: border-box;"
+                />
+              </div>
+
+              <!-- Mensaje -->
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="mensaje" style="font-size: 13px; font-weight: 600; color: #57534E;">
+                  Mensaje <span style="color: #B91C1C;">*</span>
+                </label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  required
+                  rows={5}
+                  placeholder="Cuéntanos cómo podemos ayudarte…"
+                  style="background: #FAFAF8; border: 1px solid #D6D0C8; padding: 10px 14px; font-size: 14px; color: #1C1917; outline: none; width: 100%; resize: none; box-sizing: border-box;"
+                ></textarea>
+              </div>
+
+              <!-- Aviso privacidad -->
+              <p style="font-size: 12px; color: #A8A29E; line-height: 1.6; margin: 0;">
+                Al enviar este formulario aceptas nuestra
+                <a href="/privacidad" class="no-underline" style="color: #57534E;">Política de Privacidad</a>.
+                Tu información nunca será compartida con terceros para fines comerciales.
+              </p>
+
+              <!-- Botón enviar -->
+              <div>
+                <button
+                  type="submit"
+                  style="display: inline-flex; align-items: center; gap: 8px; background: #B91C1C; color: #fff; font-size: 14px; font-weight: 700; padding: 12px 24px; border: none; cursor: pointer;"
+                >
+                  <Send size={14} />
+                  Enviar mensaje
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Nota al pie -->
+          <div style="margin-top: 12px; background: #F5F1EC; border: 1px solid #E5E0D8; padding: 16px 20px;">
+            <p style="font-size: 12px; color: #78716C; line-height: 1.6; margin: 0;">
+              Respondemos todos los mensajes en un plazo máximo de <strong style="color: #57534E;">48 horas hábiles</strong>. Para consultas urgentes o comerciales escríbenos directamente a los correos listados arriba.
+            </p>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </div>
+</Layout>
+

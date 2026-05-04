@@ -1,0 +1,438 @@
+---
+// src/pages/herramientas/cripto/[id].astro
+export const prerender = false;
+import Layout from '../../../layouts/Layout.astro';
+import TVChart from '../../../components/TVChart.astro';
+import { ArrowLeft, TrendingUp, TrendingDown, ExternalLink } from 'lucide-astro';
+
+const { id } = Astro.params;
+
+type CoinDetail = {
+  id: string;
+  symbol: string;
+  name: string;
+  image: { large: string };
+  market_cap_rank: number;
+  market_data: {
+    current_price: { usd: number };
+    price_change_percentage_24h: number;
+    price_change_percentage_7d: number;
+    price_change_percentage_30d: number;
+    market_cap: { usd: number };
+    total_volume: { usd: number };
+    circulating_supply: number;
+    total_supply: number;
+    ath: { usd: number };
+    atl: { usd: number };
+  };
+  description: { es: string; en: string };
+  links: {
+    homepage: string[];
+    blockchain_site: string[];
+    repos_url: { github: string[] };
+  };
+};
+
+// ── Helpers de formato ────────────────────────────────────────
+const fmt = (p: number) => {
+  if (!p) return '—';
+  if (p >= 1000) return `$${p.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+  if (p >= 1)    return `$${p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (p >= 0.01) return `$${p.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`;
+  return `$${p.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 })}`;
+};
+const fmtLarge = (n: number) => {
+  if (!n) return '—';
+  if (n >= 1e12) return `$${(n/1e12).toFixed(2)}T`;
+  if (n >= 1e9)  return `$${(n/1e9).toFixed(2)}B`;
+  if (n >= 1e6)  return `$${(n/1e6).toFixed(1)}M`;
+  return `$${n.toLocaleString('en-US')}`;
+};
+const fmtChg    = (c: number) => c != null ? `${c >= 0 ? '+' : ''}${c.toFixed(2)}%` : '—';
+const fmtSupply = (n: number) => n ? n.toLocaleString('en-US', { maximumFractionDigits: 0 }) : '—';
+
+// ── Fetch con caché KV ────────────────────────────────────────
+const env = (Astro.locals.runtime?.env as any);
+const KV  = env?.INVERSA_KV as KVNamespace | undefined;
+const KEY = env?.COINGECKO_API_KEY as string | undefined;
+
+let coin: CoinDetail | null = null;
+let fetchError = false;
+
+try {
+  // 1. Leer del objeto agrupado que escribe el cron
+  const topCoins = await KV?.get('cache:top-coins', 'json') as Record<string, CoinDetail> | null;
+  const cached = topCoins?.[id as string] ?? null;
+
+  if (cached) {
+    coin = cached;
+  } else {
+    // 2. Fallback: llamar CoinGecko directamente (sin escribir en KV)
+    const res = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${id}?localization=true&tickers=false&market_data=true&community_data=false&developer_data=false`,
+      { headers: { 'Accept': 'application/json', ...(KEY ? { 'x-cg-demo-api-key': KEY } : {}) } }
+    );
+    if (!res.ok) throw new Error(`CoinGecko ${res.status}`);
+    coin = await res.json() as CoinDetail;
+    // ⚠️ Sin KV.put — el cron es el único que escribe
+  }
+} catch (e) {
+  fetchError = true;
+  console.error('[CoinDetail]', e);
+}
+
+if (!coin && !fetchError) {
+  return Astro.redirect('/herramientas/cripto');
+}
+
+const price     = coin?.market_data?.current_price?.usd ?? 0;
+const chg24     = coin?.market_data?.price_change_percentage_24h ?? 0;
+const isUp      = chg24 >= 0;
+const symbol    = coin?.symbol?.toUpperCase() ?? '';
+const tvSymbol  = `BINANCE:${symbol}USDT`;
+const desc      = coin?.description?.es || coin?.description?.en || '';
+const descClean = desc.replace(/<[^>]*>/g, '').slice(0, 400);
+---
+
+<Layout>
+
+
+<slot name="head" slot="head">
+
+  <!-- ═══════════════════════════════════════
+       PRECONNECT
+  ═══════════════════════════════════════ -->
+  <link rel="preconnect" href="https://res.cloudinary.com" />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- ═══════════════════════════════════════
+       BASIC SEO
+  ═══════════════════════════════════════ -->
+  <title>{coin?.name ?? id} — {fmt(price)} hoy · Precio en Vivo | Inversax</title>
+  <meta name="description"    content={`Precio de ${coin?.name ?? id} (${symbol}) hoy: ${fmt(price)}. Variación 24h: ${fmtChg(chg24)}. Gráfica en tiempo real, capitalización de mercado y datos actualizados para inversores en Latinoamérica.`} />
+  <meta name="author"         content="José Zúniga" />
+  <meta name="robots"         content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot"      content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="googlebot-news" content="index, follow" />
+  <link rel="canonical"       href={`https://inversax.com/herramientas/cripto/${id}`} />
+
+  <!-- ═══════════════════════════════════════
+       KEYWORDS
+  ═══════════════════════════════════════ -->
+  <meta name="keywords"      content={`${coin?.name?.toLowerCase()} precio, ${symbol.toLowerCase()} precio hoy, ${symbol.toLowerCase()} usd, precio ${coin?.name?.toLowerCase()} tiempo real, ${symbol.toLowerCase()} cripto, cuanto vale ${symbol.toLowerCase()}, ${symbol.toLowerCase()} latinoamerica`} />
+  <meta name="news_keywords" content={`${coin?.name}, ${symbol}, precio ${symbol} hoy, criptomonedas, Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       GEO
+  ═══════════════════════════════════════ -->
+  <meta name="geo.region"       content="LATAM" />
+  <meta name="geo.placename"    content="Latinoamérica" />
+  <meta name="language"         content="Spanish" />
+  <meta name="content-language" content="es" />
+  <meta name="coverage"         content="Worldwide" />
+  <meta name="target"           content="all" />
+
+  <!-- ═══════════════════════════════════════
+       HREFLANG — página global, aplican los 36
+  ═══════════════════════════════════════ -->
+  <link rel="alternate" hreflang="es"    href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <!-- América Latina -->
+  <link rel="alternate" hreflang="es-MX" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-AR" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-CO" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-CL" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-PE" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-VE" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-EC" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-BO" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-PY" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-UY" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-CR" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-PA" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-DO" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-SV" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-HN" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-NI" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-GT" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-CU" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-PR" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-BZ" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <!-- Europa -->
+  <link rel="alternate" hreflang="es-ES" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-AD" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-DE" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-FR" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-IT" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-CH" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-NL" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-GB" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-PT" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <!-- Resto del mundo -->
+  <link rel="alternate" hreflang="es-US" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-CA" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-AU" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-BR" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-PH" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-GQ" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="es-MA" href={`https://inversax.com/herramientas/cripto/${id}`} />
+  <link rel="alternate" hreflang="x-default" href={`https://inversax.com/herramientas/cripto/${id}`} />
+
+  <!-- ═══════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════ -->
+  <meta property="og:site_name"   content="Inversax" />
+  <meta property="og:locale"      content="es_LA" />
+  <meta property="og:locale:alternate" content="es_MX" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="es_CO" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={`${coin?.name ?? id} — ${fmt(price)} hoy | Inversax`} />
+  <meta property="og:description" content={`${coin?.name} (${symbol}) cotiza a ${fmt(price)} con variación de ${fmtChg(chg24)} en las últimas 24h. Gráfica y datos para inversores en Latinoamérica.`} />
+  <meta property="og:url"         content={`https://inversax.com/herramientas/cripto/${id}`} />
+  <meta property="og:image"       content={`https://inversax.com/og/herramientas/cripto/${id}.png`} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content={`${coin?.name} (${symbol}) precio hoy — Inversax`} />
+  <meta property="og:image:type"  content="image/png" />
+
+  <!-- ═══════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@inversax" />
+  <meta name="twitter:creator"     content="@inversax" />
+  <meta name="twitter:title"       content={`${symbol} — ${fmt(price)} hoy | Inversax`} />
+  <meta name="twitter:description" content={`${coin?.name} cotiza a ${fmt(price)} (${fmtChg(chg24)} 24h). Gráfica en tiempo real en Inversax.`} />
+  <meta name="twitter:image"       content={`https://inversax.com/og/herramientas/cripto/${id}.png`} />
+  <meta name="twitter:image:alt"   content={`${coin?.name} (${symbol}) precio hoy — Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebSite + SearchAction
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Inversax",
+    "url": "https://inversax.com",
+    "description": "Noticias de cripto, trading, forex y bolsa en español para Latinoamérica",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://inversax.com/noticias?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebPage
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${coin?.name ?? id} — Precio en Vivo | Inversax`,
+    "description": `Precio de ${coin?.name} (${symbol}) en tiempo real con gráfica histórica y datos de mercado para inversores en Latinoamérica.`,
+    "url": `https://inversax.com/herramientas/cripto/${id}`,
+    "inLanguage": "es",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Inversax",
+      "url": "https://inversax.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Inversax",
+      "url": "https://inversax.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://inversax.com/favicon.png",
+        "width": 512,
+        "height": 512
+      }
+    },
+    "about": { "@type": "Thing", "name": `Criptomoneda ${coin?.name} (${symbol})` }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — BreadcrumbList
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio",        "item": "https://inversax.com" },
+      { "@type": "ListItem", "position": 2, "name": "Herramientas",  "item": "https://inversax.com/herramientas" },
+      { "@type": "ListItem", "position": 3, "name": "Criptomonedas", "item": "https://inversax.com/herramientas/cripto" },
+      { "@type": "ListItem", "position": 4, "name": coin?.name ?? id,"item": `https://inversax.com/herramientas/cripto/${id}` }
+    ]
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — FAQPage
+  ═══════════════════════════════════════ -->
+  {coin && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": `¿Cuánto vale ${coin.name} (${symbol}) hoy?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `${coin.name} (${symbol}) cotiza a ${fmt(price)} USD hoy, con una variación de ${fmtChg(chg24)} en las últimas 24 horas según datos actualizados en Inversax.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `¿Dónde comprar ${coin.name} (${symbol}) en Latinoamérica?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `Podés comprar ${coin.name} en exchanges como Binance, Bybit o Kraken que operan en Latinoamérica. Verificá los métodos de pago disponibles en tu país antes de registrarte.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `¿Cuál es la capitalización de mercado de ${coin.name}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `La capitalización de mercado de ${coin.name} es de ${fmtLarge(coin.market_data.market_cap.usd)} USD con un volumen de operaciones de ${fmtLarge(coin.market_data.total_volume.usd)} en las últimas 24 horas.`
+          }
+        }
+      ]
+    })} />
+  )}
+
+</slot>
+
+
+  <div style="background:#FAFAF8;min-height:100vh;font-family:'DM Sans',sans-serif;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+      <!-- Back -->
+      <a href="/herramientas/cripto" class="inline-flex items-center gap-2 text-sm mb-6 no-underline" style="color:#A8A29E;">
+        <ArrowLeft size={15} /> Volver a Criptomonedas
+      </a>
+
+      {fetchError || !coin ? (
+        <div style="display:flex;align-items:center;justify-content:center;padding:80px 20px;border:1px solid #E5E0D8;">
+          <p style="color:#A8A29E;font-size:14px;">
+            No se pudo cargar la información.{' '}
+            <a href="/herramientas/cripto" style="color:#B91C1C;">Volver</a>
+          </p>
+        </div>
+      ) : (
+        <div class="flex flex-col gap-6">
+
+          <!-- Header: logo + precio + cambio -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4" style="border:1px solid #E5E0D8;background:#fff;padding:20px 24px;">
+            <div class="flex items-center gap-4">
+              <img src={coin.image.large} alt={coin.name} width="48" height="48" loading="eager" class="w-12 h-12 rounded-full" />
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,24px);font-weight:700;color:#1C1917;margin:0;">{coin.name}</h1>
+                  <span style="color:#78716C;font-size:13px;font-weight:500;background:#F0EDE7;padding:2px 8px;">{symbol}</span>
+                  {coin.market_cap_rank && (
+                    <span style="color:#1D4ED8;font-size:11px;font-weight:700;background:rgba(29,78,216,0.08);padding:2px 8px;border:1px solid rgba(29,78,216,0.2);">
+                      #{coin.market_cap_rank}
+                    </span>
+                  )}
+                </div>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(20px,3vw,28px);color:#1C1917;">{fmt(price)}</span>
+                  <span class="flex items-center gap-1" style={`font-size:13px;font-weight:700;color:${isUp ? '#15803D' : '#DC2626'};`}>
+                    {isUp ? <TrendingUp size={14}/> : <TrendingDown size={14}/>}
+                    {fmtChg(chg24)} hoy
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Links externos -->
+            <div class="flex gap-2 flex-wrap">
+              {coin.links?.homepage?.[0] && (
+                <a href={coin.links.homepage[0]} target="_blank" rel="noopener noreferrer nofollow"
+                   class="flex items-center gap-1.5 no-underline" style="font-size:12px;color:#57534E;border:1px solid #E5E0D8;background:#FAFAF8;padding:6px 12px;">
+                  <ExternalLink size={11}/> Web oficial
+                </a>
+              )}
+              {coin.links?.repos_url?.github?.[0] && (
+                <a href={coin.links.repos_url.github[0]} target="_blank" rel="noopener noreferrer nofollow"
+                   class="flex items-center gap-1.5 no-underline" style="font-size:12px;color:#57534E;border:1px solid #E5E0D8;background:#FAFAF8;padding:6px 12px;">
+                  <ExternalLink size={11}/> GitHub
+                </a>
+              )}
+            </div>
+          </div>
+
+          <!-- Cambios por período -->
+          <div class="grid grid-cols-3 gap-3">
+            {[
+              { label: '24 horas', val: coin.market_data.price_change_percentage_24h  },
+              { label: '7 días',   val: coin.market_data.price_change_percentage_7d   },
+              { label: '30 días',  val: coin.market_data.price_change_percentage_30d  },
+            ].map(({ label, val }) => (
+              <div style="border:1px solid #E5E0D8;background:#fff;padding:16px;text-align:center;">
+                <div style="color:#A8A29E;font-size:12px;margin-bottom:6px;">{label}</div>
+                <div style={`font-weight:700;font-size:18px;color:${val >= 0 ? '#15803D' : '#DC2626'};`}>
+                  {fmtChg(val)}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style="border:1px solid #E5E0D8;overflow:hidden;">
+            <TVChart chartId="tv-cripto" tvSymbol={tvSymbol} />
+          </div>
+
+          <!-- Stats de mercado -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { label: 'Cap. de Mercado',  val: fmtLarge(coin.market_data.market_cap.usd)    },
+              { label: 'Volumen 24h',      val: fmtLarge(coin.market_data.total_volume.usd)  },
+              { label: 'Máximo histórico', val: fmt(coin.market_data.ath.usd)                },
+              { label: 'Mínimo histórico', val: fmt(coin.market_data.atl.usd)                },
+            ].map(({ label, val }) => (
+              <div style="border:1px solid #E5E0D8;background:#fff;padding:16px;">
+                <div style="color:#A8A29E;font-size:12px;margin-bottom:6px;">{label}</div>
+                <div style="color:#1C1917;font-weight:700;font-size:15px;">{val}</div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Suministro -->
+          <div class="grid grid-cols-2 gap-3">
+            <div style="border:1px solid #E5E0D8;background:#fff;padding:16px;">
+              <div style="color:#A8A29E;font-size:12px;margin-bottom:6px;">Suministro circulante</div>
+              <div style="color:#1C1917;font-weight:700;font-size:15px;">
+                {fmtSupply(coin.market_data.circulating_supply)}
+                <span style="color:#78716C;font-size:13px;font-weight:400;"> {symbol}</span>
+              </div>
+            </div>
+            <div style="border:1px solid #E5E0D8;background:#fff;padding:16px;">
+              <div style="color:#A8A29E;font-size:12px;margin-bottom:6px;">Suministro total</div>
+              <div style="color:#1C1917;font-weight:700;font-size:15px;">
+                {coin.market_data.total_supply ? fmtSupply(coin.market_data.total_supply) : '∞'}
+                <span style="color:#78716C;font-size:13px;font-weight:400;"> {symbol}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          {descClean && (
+            <div style="border:1px solid #E5E0D8;background:#F5F1EC;padding:24px;">
+              <h2 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1C1917;margin:0 0 12px;">¿Qué es {coin.name}?</h2>
+              <p style="color:#57534E;font-size:14px;line-height:1.8;margin:0;">{descClean}{desc.length > 400 ? '...' : ''}</p>
+            </div>
+          )}
+
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>
+

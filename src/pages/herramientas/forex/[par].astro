@@ -1,0 +1,451 @@
+---
+// src/pages/herramientas/forex/[par].astro
+export const prerender = false;
+
+import Layout from '../../../layouts/Layout.astro';
+import { ArrowLeft, TrendingUp } from 'lucide-astro';
+import TVChart from '../../../components/TVChart.astro';
+import { obtenerForex } from '../../../lib/forex';
+
+const { par } = Astro.params;
+
+// Convertir slug a formato par: eur-usd → EUR/USD
+const parFormateado = par!.replace('-', '/').toUpperCase();
+
+type ForexData = {
+  par: string; base: string; cotizada: string;
+  banderaBase: string; banderaCotizada: string;
+  precio: number; tradingviewSimbolo: string;
+  tvDisponible?: boolean;
+};
+
+// ── Caché KV (igual que el cron guarda 'cache:forex') ─────────
+const env = (Astro.locals.runtime?.env as any);
+const KV  = env?.INVERSA_KV as KVNamespace | undefined;
+
+let parData: (ForexData & { tvDisponible: boolean }) | null = null;
+let fetchError = false;
+
+try {
+  // 1. Leer lista completa desde KV (la misma clave que usa el cron)
+  let lista = await KV?.get('cache:forex', 'json') as ForexData[] | null;
+
+  // 2. Si KV está vacío, llamar lib directamente y guardar en KV
+  if (!lista || lista.length === 0) {
+    lista = await obtenerForex();
+    if (lista.length > 0) {
+      await KV?.put('cache:forex', JSON.stringify(lista), { expirationTtl: 3600 });
+    }
+  }
+
+  // 3. Encontrar el par solicitado
+  const found = lista?.find(f => f.par === parFormateado) ?? null;
+  if (found) {
+    parData = { ...found, tvDisponible: found.tvDisponible ?? false };
+  }
+} catch (e) {
+  fetchError = true;
+  console.error('[Forex detail]', e);
+}
+
+if (!parData && !fetchError) {
+  return Astro.redirect('/herramientas/forex');
+}
+
+// ── Helpers ───────────────────────────────────────────────────
+const formatForex = (p: number) => {
+  if (!p) return '—';
+  if (p >= 100) return p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return p.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+};
+
+const nombrePar: Record<string, string> = {
+  'EUR/USD': 'Euro / Dólar Estadounidense',
+  'GBP/USD': 'Libra Esterlina / Dólar',
+  'USD/JPY': 'Dólar / Yen Japonés',
+  'USD/CHF': 'Dólar / Franco Suizo',
+  'USD/CAD': 'Dólar / Dólar Canadiense',
+  'AUD/USD': 'Dólar Australiano / Dólar',
+  'USD/MXN': 'Dólar / Peso Mexicano',
+  'USD/COP': 'Dólar / Peso Colombiano',
+  'USD/ARS': 'Dólar / Peso Argentino',
+  'USD/CLP': 'Dólar / Peso Chileno',
+  'USD/PEN': 'Dólar / Sol Peruano',
+  'USD/BRL': 'Dólar / Real Brasileño',
+  'USD/BOB': 'Dólar / Boliviano',
+  'USD/GTQ': 'Dólar / Quetzal Guatemalteco',
+  'USD/HNL': 'Dólar / Lempira Hondureño',
+  'USD/NIO': 'Dólar / Córdoba Nicaragüense',
+  'USD/CRC': 'Dólar / Colón Costarricense',
+  'USD/DOP': 'Dólar / Peso Dominicano',
+  'USD/PYG': 'Dólar / Guaraní Paraguayo',
+  'USD/UYU': 'Dólar / Peso Uruguayo',
+  'USD/VES': 'Dólar / Bolívar Venezolano',
+  'USD/PAB': 'Dólar / Balboa Panameño',
+  'NZD/USD': 'Dólar Neozelandés / Dólar',
+  'USD/CNY': 'Dólar / Yuan Chino',
+  'USD/CUP': 'Dólar / Peso Cubano',
+  'USD/JMD': 'Dólar / Dólar Jamaicano',
+  'USD/TTD': 'Dólar / Dólar Trinidad y Tobago',
+  'USD/BBD': 'Dólar / Dólar de Barbados',
+  'USD/HTG': 'Dólar / Gourde Haitiano',
+};
+
+const infoMoneda: Record<string, { nombre: string; descripcion: string }> = {
+  USD: { nombre: 'Dólar Estadounidense', descripcion: 'La moneda de reserva mundial, emitida por la Reserva Federal de EE.UU.' },
+  EUR: { nombre: 'Euro',                 descripcion: 'Moneda oficial de 20 países de la Unión Europea, segunda más transada del mundo.' },
+  GBP: { nombre: 'Libra Esterlina',      descripcion: 'Una de las monedas más antiguas y la cuarta más transada globalmente.' },
+  JPY: { nombre: 'Yen Japonés',          descripcion: 'Moneda de Japón, considerada refugio de valor en momentos de incertidumbre global.' },
+  CHF: { nombre: 'Franco Suizo',         descripcion: 'Moneda de Suiza, considerada la más estable del mundo por la solidez del sistema financiero helvético.' },
+  CAD: { nombre: 'Dólar Canadiense',     descripcion: 'Llamado "Loonie", está fuertemente influenciado por los precios del petróleo.' },
+  AUD: { nombre: 'Dólar Australiano',    descripcion: 'Correlacionado con los precios de materias primas como oro y hierro.' },
+  MXN: { nombre: 'Peso Mexicano',        descripcion: 'La moneda más transada de Latinoamérica, influenciada por la relación comercial con EE.UU.' },
+  COP: { nombre: 'Peso Colombiano',      descripcion: 'Moneda de Colombia, sensible a los precios del petróleo por ser el país un exportador.' },
+  ARS: { nombre: 'Peso Argentino',       descripcion: 'Ha sufrido alta inflación históricamente. Existen múltiples tipos de cambio oficiales y paralelos.' },
+  CLP: { nombre: 'Peso Chileno',         descripcion: 'Ligado al precio del cobre dado que Chile es el mayor productor mundial.' },
+  PEN: { nombre: 'Sol Peruano',          descripcion: 'Considerada una de las monedas más estables de Sudamérica.' },
+  BRL: { nombre: 'Real Brasileño',       descripcion: 'Moneda de la mayor economía de Latinoamérica, sensible a factores políticos.' },
+  GTQ: { nombre: 'Quetzal Guatemalteco', descripcion: 'Moneda de Guatemala, relativamente estable gracias a las remesas del exterior.' },
+  HNL: { nombre: 'Lempira Hondureño',    descripcion: 'Moneda de Honduras, cuyo tipo de cambio es administrado por el Banco Central.' },
+};
+
+const tvSymbol     = parData?.tradingviewSimbolo ?? '';
+const tvDisponible = parData?.tvDisponible ?? false;
+const precioFmt    = parData ? formatForex(parData.precio) : '—';
+const nombre       = parData ? (nombrePar[parData.par] ?? parData.par) : parFormateado;
+const baseInfo     = parData ? (infoMoneda[parData.base.toUpperCase()]     ?? null) : null;
+const cotInfo      = parData ? (infoMoneda[parData.cotizada.toUpperCase()] ?? null) : null;
+---
+
+<Layout>
+
+
+<slot name="head" slot="head">
+
+  <!-- ═══════════════════════════════════════
+       PRECONNECT
+  ═══════════════════════════════════════ -->
+  <link rel="preconnect" href="https://res.cloudinary.com" />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- ═══════════════════════════════════════
+       BASIC SEO
+  ═══════════════════════════════════════ -->
+  <title>{parFormateado} Hoy — {nombre} en Tiempo Real | Inversax</title>
+  <meta name="description"    content={`Tipo de cambio ${parFormateado} hoy: ${precioFmt}. ${nombre} con gráfica histórica y análisis para inversores en Latinoamérica. Actualizado diariamente.`} />
+  <meta name="author"         content="José Zúniga" />
+  <meta name="robots"         content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot"      content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="googlebot-news" content="index, follow" />
+  <link rel="canonical"       href={`https://inversax.com/herramientas/forex/${par}`} />
+
+  <!-- ═══════════════════════════════════════
+       KEYWORDS
+  ═══════════════════════════════════════ -->
+  <meta name="keywords"      content={`${parFormateado} hoy, ${parFormateado.toLowerCase()} precio, tipo de cambio ${parData?.base?.toLowerCase()} ${parData?.cotizada?.toLowerCase()}, ${nombre.toLowerCase()}, cambio ${parData?.cotizada?.toLowerCase()} hoy, ${parFormateado.toLowerCase()} tiempo real`} />
+  <meta name="news_keywords" content={`${parFormateado}, tipo de cambio ${parFormateado}, ${nombre}, divisas, Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       GEO
+  ═══════════════════════════════════════ -->
+  <meta name="geo.region"       content="LATAM" />
+  <meta name="geo.placename"    content="Latinoamérica" />
+  <meta name="language"         content="Spanish" />
+  <meta name="content-language" content="es" />
+  <meta name="coverage"         content="Worldwide" />
+  <meta name="target"           content="all" />
+
+  <!-- ═══════════════════════════════════════
+       HREFLANG — página global, aplican los 36
+  ═══════════════════════════════════════ -->
+  <link rel="alternate" hreflang="es"    href={`https://inversax.com/herramientas/forex/${par}`} />
+  <!-- América Latina -->
+  <link rel="alternate" hreflang="es-MX" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-AR" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-CO" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-CL" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-PE" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-VE" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-EC" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-BO" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-PY" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-UY" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-CR" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-PA" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-DO" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-SV" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-HN" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-NI" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-GT" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-CU" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-PR" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-BZ" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <!-- Europa -->
+  <link rel="alternate" hreflang="es-ES" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-AD" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-DE" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-FR" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-IT" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-CH" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-NL" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-GB" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-PT" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <!-- Resto del mundo -->
+  <link rel="alternate" hreflang="es-US" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-CA" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-AU" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-BR" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-PH" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-GQ" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="es-MA" href={`https://inversax.com/herramientas/forex/${par}`} />
+  <link rel="alternate" hreflang="x-default" href={`https://inversax.com/herramientas/forex/${par}`} />
+
+  <!-- ═══════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════ -->
+  <meta property="og:site_name"   content="Inversax" />
+  <meta property="og:locale"      content="es_LA" />
+  <meta property="og:locale:alternate" content="es_MX" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="es_CO" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={`${parFormateado} Hoy — ${nombre} | Inversax`} />
+  <meta property="og:description" content={`${parFormateado} cotiza a ${precioFmt}. ${nombre} con gráfica histórica para inversores en Latinoamérica.`} />
+  <meta property="og:url"         content={`https://inversax.com/herramientas/forex/${par}`} />
+  <meta property="og:image"       content={`https://inversax.com/og/herramientas/forex/${par}.png`} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content={`${parFormateado} tipo de cambio hoy — Inversax`} />
+  <meta property="og:image:type"  content="image/png" />
+
+  <!-- ═══════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@inversax" />
+  <meta name="twitter:creator"     content="@inversax" />
+  <meta name="twitter:title"       content={`${parFormateado} Hoy — ${precioFmt} | Inversax`} />
+  <meta name="twitter:description" content={`${nombre}. Tipo de cambio ${parFormateado}: ${precioFmt}. Gráfica y análisis en Inversax.`} />
+  <meta name="twitter:image"       content={`https://inversax.com/og/herramientas/forex/${par}.png`} />
+  <meta name="twitter:image:alt"   content={`${parFormateado} tipo de cambio hoy — Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebSite + SearchAction
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Inversax",
+    "url": "https://inversax.com",
+    "description": "Noticias de cripto, trading, forex y bolsa en español para Latinoamérica",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://inversax.com/noticias?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebPage
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${parFormateado} Hoy — ${nombre} | Inversax`,
+    "description": `Tipo de cambio ${parFormateado} (${nombre}) actualizado diariamente con gráfica histórica para inversores en Latinoamérica.`,
+    "url": `https://inversax.com/herramientas/forex/${par}`,
+    "inLanguage": "es",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Inversax",
+      "url": "https://inversax.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Inversax",
+      "url": "https://inversax.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://inversax.com/favicon.png",
+        "width": 512,
+        "height": 512
+      }
+    },
+    "about": { "@type": "Thing", "name": `Par de divisas ${parFormateado}` }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — BreadcrumbList
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio",       "item": "https://inversax.com" },
+      { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://inversax.com/herramientas" },
+      { "@type": "ListItem", "position": 3, "name": "Forex",        "item": "https://inversax.com/herramientas/forex" },
+      { "@type": "ListItem", "position": 4, "name": parFormateado,  "item": `https://inversax.com/herramientas/forex/${par}` }
+    ]
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — FAQPage
+  ═══════════════════════════════════════ -->
+  {parData && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": `¿Cuánto vale 1 ${parData.base.toUpperCase()} en ${parData.cotizada.toUpperCase()} hoy?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `1 ${parData.base.toUpperCase()} equivale a ${precioFmt} ${parData.cotizada.toUpperCase()} hoy según la tasa de referencia actualizada en Inversax.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `¿Qué factores afectan el tipo de cambio ${parFormateado}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `El tipo de cambio ${parFormateado} está influenciado por las tasas de interés de los bancos centrales, la inflación, el comercio internacional, la confianza del mercado y las decisiones de política monetaria de cada país.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `¿Cómo hacer trading con el par ${parFormateado}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `Puedes operar el par ${parFormateado} desde Latinoamérica usando brokers regulados como XM, Pepperstone o eToro que ofrecen este par con spreads competitivos y soporte en español.`
+          }
+        }
+      ]
+    })} />
+  )}
+
+</slot>
+
+
+  <div style="background:#FAFAF8;min-height:100vh;font-family:'DM Sans',sans-serif;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+      <!-- Breadcrumb -->
+      <a href="/herramientas/forex" class="inline-flex items-center gap-2 text-sm mb-6 no-underline" style="color:#A8A29E;">
+        <ArrowLeft size={15} /> Forex
+      </a>
+
+      {fetchError || !parData ? (
+        <div style="display:flex;align-items:center;justify-content:center;padding:80px 20px;border:1px solid #E5E0D8;">
+          <p style="color:#A8A29E;font-size:14px;">
+            No se pudo cargar la información.{' '}
+            <a href="/herramientas/forex" style="color:#B91C1C;">Volver</a>
+          </p>
+        </div>
+      ) : (
+        <div class="flex flex-col gap-6">
+
+          <!-- Header: banderas + precio -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4" style="border:1px solid #E5E0D8;background:#fff;padding:20px 24px;">
+            <div class="flex items-center gap-4">
+              <div class="relative w-14 h-10 flex-shrink-0">
+                <img
+                  src={`https://flagcdn.com/w80/${parData.banderaBase.toLowerCase()}.png`}
+                  alt={parData.banderaBase}
+                  class="absolute top-0 left-0 w-10 h-10 rounded-full object-cover"
+                  style="border:2px solid #fff;"
+                  onerror="this.style.display='none'"
+                />
+                <img
+                  src={`https://flagcdn.com/w80/${parData.banderaCotizada.toLowerCase()}.png`}
+                  alt={parData.banderaCotizada}
+                  class="absolute bottom-0 right-0 w-10 h-10 rounded-full object-cover"
+                  style="border:2px solid #fff;"
+                  onerror="this.style.display='none'"
+                />
+              </div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,24px);font-weight:700;color:#1C1917;margin:0;">{parData.par}</h1>
+                  <span style="color:#78716C;font-size:13px;background:#F0EDE7;padding:2px 8px;">{nombre}</span>
+                </div>
+                <div class="flex items-center gap-3 mt-1 flex-wrap">
+                  <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(20px,3vw,28px);color:#1C1917;">{precioFmt}</span>
+                  <span style="font-size:11px;background:rgba(21,128,61,0.1);color:#15803D;padding:2px 8px;font-weight:600;">Precio de referencia</span>
+                </div>
+              </div>
+            </div>
+            <div style="color:#A8A29E;font-size:12px;text-align:right;line-height:1.6;">
+              Fuente: fawazahmed0 API<br/>
+              Actualización diaria
+            </div>
+          </div>
+
+          <div style="border:1px solid #E5E0D8;overflow:hidden;">
+            <TVChart chartId="tv-forex" tvSymbol={tvDisponible ? tvSymbol : ''} />
+          </div>
+
+          <!-- Info monedas -->
+          {(baseInfo || cotInfo) && (
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {baseInfo && (
+                <div style="border:1px solid #E5E0D8;background:#fff;padding:20px;">
+                  <div class="flex items-center gap-3 mb-3">
+                    <img
+                      src={`https://flagcdn.com/w40/${parData.banderaBase.toLowerCase()}.png`}
+                      alt={parData.banderaBase}
+                      class="w-7 h-7 rounded-full object-cover"
+                      onerror="this.style.display='none'"
+                    />
+                    <div>
+                      <div style="color:#A8A29E;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;">Moneda base</div>
+                      <div style="color:#1C1917;font-weight:700;font-size:14px;">
+                        {baseInfo.nombre} ({parData.base.toUpperCase()})
+                      </div>
+                    </div>
+                  </div>
+                  <p style="color:#57534E;font-size:14px;line-height:1.7;margin:0;">{baseInfo.descripcion}</p>
+                </div>
+              )}
+              {cotInfo && (
+                <div style="border:1px solid #E5E0D8;background:#fff;padding:20px;">
+                  <div class="flex items-center gap-3 mb-3">
+                    <img
+                      src={`https://flagcdn.com/w40/${parData.banderaCotizada.toLowerCase()}.png`}
+                      alt={parData.banderaCotizada}
+                      class="w-7 h-7 rounded-full object-cover"
+                      onerror="this.style.display='none'"
+                    />
+                    <div>
+                      <div style="color:#A8A29E;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;">Moneda cotizada</div>
+                      <div style="color:#1C1917;font-weight:700;font-size:14px;">
+                        {cotInfo.nombre} ({parData.cotizada.toUpperCase()})
+                      </div>
+                    </div>
+                  </div>
+                  <p style="color:#57534E;font-size:14px;line-height:1.7;margin:0;">{cotInfo.descripcion}</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          <!-- Nota sobre datos -->
+          <div style="background:#F5F1EC;border-left:3px solid #E5E0D8;padding:14px 18px;">
+            <p style="color:#57534E;font-size:13px;line-height:1.6;margin:0;">
+              <strong style="color:#15803D;">Nota:</strong> Los precios mostrados son tasas de referencia con actualización diaria.
+              Para trading activo, consultá los precios en tiempo real de tu broker. Las tasas de cambio oficiales pueden diferir.
+            </p>
+          </div>
+
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>
+

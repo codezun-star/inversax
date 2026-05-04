@@ -1,0 +1,597 @@
+---
+export const prerender = false;
+// src/pages/[categoria].astro
+import Layout from '../layouts/Layout.astro';
+import { getArticulosPorCategoria, getCategorias, getPaises } from '../db/queries';
+import { ArrowRight, Clock, Globe } from 'lucide-astro';
+import { getCloudinaryUrl } from '../lib/cloudinary';
+
+const SLUGS_VALIDOS = [
+  'cripto', 'trading', 'bolsa', 'economia', 'forex',
+  'finanzas-personales', 'fintech', 'impuestos', 'inversiones',
+];
+
+const { categoria: slugParam } = Astro.params;
+
+if (!slugParam || !SLUGS_VALIDOS.includes(slugParam)) {
+  return Astro.redirect('/404');
+}
+
+const paisParam = Astro.url.searchParams.get('pais') ?? 'global';
+
+const db = Astro.locals.db;
+const [articulos, todasCategorias, todosPaises] = await Promise.all([
+  getArticulosPorCategoria(db, slugParam, 30),
+  getCategorias(db),
+  getPaises(db),
+]);
+
+// Filtrar por país si no es global
+const articulosFiltrados = paisParam === 'global'
+  ? articulos
+  : articulos.filter((a) => !a.pais || a.pais.codigo === paisParam);
+
+// Datos de la categoría actual
+const categoriaActual = todasCategorias.find((c) => c.slug === slugParam);
+
+// Metadatos SEO por categoría
+const seoData: Record<string, { title: string; desc: string }> = {
+  cripto:   {
+    title: 'Criptomonedas',
+    desc:  'Noticias, análisis y precios de Bitcoin, Ethereum y las principales criptomonedas para Latinoamérica.',
+  },
+  trading:  {
+    title: 'Trading',
+    desc:  'Estrategias, análisis técnico y noticias de trading para inversores hispanohablantes.',
+  },
+  bolsa:    {
+    title: 'Bolsa de Valores',
+    desc:  'Noticias del mercado bursátil: S&P 500, bolsas latinoamericanas y análisis de acciones.',
+  },
+  economia: {
+    title: 'Economía',
+    desc:  'Noticias económicas de Latinoamérica: inflación, tipo de cambio, políticas monetarias y más.',
+  },
+  forex:    {
+    title: 'Forex',
+    desc:  'Noticias y análisis del mercado de divisas. Tipos de cambio y estrategias forex en español.',
+  },
+  'finanzas-personales': {
+    title: 'Finanzas Personales',
+    desc:  'Consejos para ahorrar, salir de deudas y manejar mejor tu dinero. Para toda Latinoamérica.',
+  },
+  fintech:  {
+    title: 'Fintech',
+    desc:  'Noticias de neobancos, pagos digitales y tecnología financiera en Latinoamérica: Nubank, Mercado Pago, Bitso y más.',
+  },
+  impuestos: {
+    title: 'Impuestos',
+    desc:  'Cómo declarar criptomonedas, obligaciones fiscales y noticias tributarias por país en Latinoamérica.',
+  },
+  inversiones: {
+    title: 'Inversiones',
+    desc:  'Estrategias de inversión para principiantes y avanzados: ETFs, fondos, bienes raíces y más en español.',
+  },
+};
+
+const seo = seoData[slugParam];
+
+function formatFecha(fecha: Date | null) {
+  if (!fecha) return '';
+  const diff = Date.now() - new Date(fecha).getTime();
+  const horas = Math.floor(diff / 1000 / 60 / 60);
+  if (horas < 1)  return 'Hace unos minutos';
+  if (horas < 24) return `Hace ${horas} ${horas === 1 ? 'hora' : 'horas'}`;
+  const dias = Math.floor(horas / 24);
+  return `Hace ${dias} ${dias === 1 ? 'día' : 'días'}`;
+}
+
+// Noticia principal y resto
+const [principal, ...resto] = articulosFiltrados;
+---
+
+<Layout categorias={todasCategorias} paises={todosPaises}>
+
+<slot name="head" slot="head">
+
+  <!-- ═══════════════════════════════════════
+       PRECONNECT
+  ═══════════════════════════════════════ -->
+  <link rel="preconnect" href="https://res.cloudinary.com" />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- ═══════════════════════════════════════
+       BASIC SEO
+  ═══════════════════════════════════════ -->
+  <title>{seo.title} en Latinoamérica — Noticias y Análisis | Inversax</title>
+  <meta name="description"    content={seo.desc} />
+  <meta name="author"         content="José Zúniga" />
+  <meta name="robots"         content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot"      content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="googlebot-news" content="index, follow" />
+  <link rel="canonical"       href={`https://inversax.com/${slugParam}`} />
+
+  <!-- ═══════════════════════════════════════
+       KEYWORDS
+  ═══════════════════════════════════════ -->
+  <meta name="keywords" content={`${seo.title.toLowerCase()} latinoamerica, ${seo.title.toLowerCase()} en español, noticias ${seo.title.toLowerCase()}, ${seo.title.toLowerCase()} hoy, ${seo.title.toLowerCase()} análisis, mercados financieros latinoamérica`} />
+  <meta name="news_keywords"  content={`${seo.title}, ${seo.title} hoy, Inversax, finanzas latinoamérica`} />
+
+  <!-- ═══════════════════════════════════════
+       GEO
+  ═══════════════════════════════════════ -->
+  <meta name="geo.region"       content="LATAM" />
+  <meta name="geo.placename"    content="Latinoamérica" />
+  <meta name="language"         content="Spanish" />
+  <meta name="content-language" content="es" />
+
+  <!-- ═══════════════════════════════════════
+       HREFLANG — 36 países + genérico + x-default
+  ═══════════════════════════════════════ -->
+  <link rel="alternate" hreflang="es"    href={`https://inversax.com/${slugParam}`} />
+  <!-- América Latina -->
+  <link rel="alternate" hreflang="es-MX" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-AR" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-CO" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-CL" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-PE" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-VE" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-EC" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-BO" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-PY" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-UY" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-CR" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-PA" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-DO" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-SV" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-HN" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-NI" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-GT" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-CU" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-PR" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-BZ" href={`https://inversax.com/${slugParam}`} />
+  <!-- Europa -->
+  <link rel="alternate" hreflang="es-ES" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-AD" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-DE" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-FR" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-IT" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-CH" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-NL" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-GB" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-PT" href={`https://inversax.com/${slugParam}`} />
+  <!-- Resto del mundo -->
+  <link rel="alternate" hreflang="es-US" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-CA" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-AU" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-BR" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-PH" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-GQ" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="es-MA" href={`https://inversax.com/${slugParam}`} />
+  <link rel="alternate" hreflang="x-default" href={`https://inversax.com/${slugParam}`} />
+
+  <!-- ═══════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════ -->
+  <meta property="og:site_name"   content="Inversax" />
+  <meta property="og:locale"      content="es_LA" />
+  <meta property="og:locale:alternate" content="es_MX" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="es_CO" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={`${seo.title} en Latinoamérica — Noticias y Análisis | Inversax`} />
+  <meta property="og:description" content={seo.desc} />
+  <meta property="og:url"         content={`https://inversax.com/${slugParam}`} />
+  <meta property="og:image"       content={`https://inversax.com/og/categoria/${slugParam}.png`} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content={`${seo.title} en Latinoamérica — Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@inversax" />
+  <meta name="twitter:creator"     content="@inversax" />
+  <meta name="twitter:title"       content={`${seo.title} en Latinoamérica — Inversax`} />
+  <meta name="twitter:description" content={seo.desc} />
+  <meta name="twitter:image"       content={`https://inversax.com/og/categoria/${slugParam}.png`} />
+  <meta name="twitter:image:alt"   content={`${seo.title} en Latinoamérica — Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebSite + SearchAction
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Inversax",
+    "url": "https://inversax.com",
+    "description": "Noticias de cripto, trading, forex y bolsa en español para Latinoamérica",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://inversax.com/noticias?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — CollectionPage
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${seo.title} en Latinoamérica — Inversax`,
+    "description": seo.desc,
+    "url": `https://inversax.com/${slugParam}`,
+    "inLanguage": "es",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Inversax",
+      "url": "https://inversax.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Inversax",
+      "url": "https://inversax.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://inversax.com/favicon.png",
+        "width": 200,
+        "height": 60
+      }
+    },
+    "about": { "@type": "Thing", "name": seo.title }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — BreadcrumbList
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio",   "item": "https://inversax.com" },
+      { "@type": "ListItem", "position": 2, "name": "Noticias", "item": "https://inversax.com/noticias" },
+      { "@type": "ListItem", "position": 3, "name": seo.title,  "item": `https://inversax.com/${slugParam}` }
+    ]
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — ItemList
+       Lista los artículos de la categoría como
+       resultados estructurados en Google
+  ═══════════════════════════════════════ -->
+  {articulosFiltrados.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": `Artículos de ${seo.title} en Inversax`,
+      "url": `https://inversax.com/${slugParam}`,
+      "numberOfItems": articulosFiltrados.length,
+      "itemListElement": articulosFiltrados.slice(0, 10).map((art, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": art.titulo,
+        "url": `https://inversax.com/noticias/${art.slug}`
+      }))
+    })} />
+  )}
+
+</slot>
+
+  <!-- ── PAGE HEADER EDITORIAL ─────────────────────────────── -->
+  <div style="background: #FAFAF8; border-bottom: 2px solid #1C1917;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-1.5 text-xs mb-4" style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+        <a href="/" class="no-underline transition-colors duration-200"
+           style="color: #A8A29E;"
+           onmouseover="this.style.color='#B91C1C';" onmouseout="this.style.color='#A8A29E';">Inicio</a>
+        <span>›</span>
+        <a href="/noticias" class="no-underline transition-colors duration-200"
+           style="color: #A8A29E;"
+           onmouseover="this.style.color='#B91C1C';" onmouseout="this.style.color='#A8A29E';">Noticias</a>
+        <span>›</span>
+        <span style="color: #1C1917; font-weight: 600;">{seo.title}</span>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-[0.2em] mb-2 block"
+                style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+            {categoriaActual?.nombre ?? seo.title}
+          </span>
+          <h1 class="font-bold leading-tight mb-2"
+              style="font-family: 'Playfair Display', serif; color: #1C1917; font-size: clamp(26px, 3.8vw, 44px);">
+            {seo.title}
+          </h1>
+          <p class="text-sm max-w-xl leading-relaxed" style="color: #78716C; font-family: 'DM Sans', sans-serif;">
+            {seo.desc}
+          </p>
+        </div>
+        <!-- Filtro por país -->
+        <div class="flex items-center gap-2 px-3.5 py-2.5 flex-shrink-0"
+             style="background: #F5F1EC; border: 1px solid #E5E0D8;">
+          <Globe size={13} style="color: #A8A29E;" />
+          <select id="pais-filter"
+                  class="bg-transparent border-none text-sm outline-none cursor-pointer"
+                  style="color: #57534E; font-family: 'DM Sans', sans-serif;">
+            <option value="global" selected={paisParam === 'global'} style="background:#FAFAF8;">Todos los países</option>
+            <optgroup label="Latinoamérica" style="background:#FAFAF8;">
+              <option value="ar" selected={paisParam === 'ar'}>Argentina</option>
+              <option value="bo" selected={paisParam === 'bo'}>Bolivia</option>
+              <option value="br" selected={paisParam === 'br'}>Brasil</option>
+              <option value="cl" selected={paisParam === 'cl'}>Chile</option>
+              <option value="co" selected={paisParam === 'co'}>Colombia</option>
+              <option value="cu" selected={paisParam === 'cu'}>Cuba</option>
+              <option value="ec" selected={paisParam === 'ec'}>Ecuador</option>
+              <option value="mx" selected={paisParam === 'mx'}>México</option>
+              <option value="py" selected={paisParam === 'py'}>Paraguay</option>
+              <option value="pe" selected={paisParam === 'pe'}>Perú</option>
+              <option value="uy" selected={paisParam === 'uy'}>Uruguay</option>
+              <option value="ve" selected={paisParam === 've'}>Venezuela</option>
+            </optgroup>
+            <optgroup label="América Central" style="background:#FAFAF8;">
+              <option value="bz" selected={paisParam === 'bz'}>Belice</option>
+              <option value="cr" selected={paisParam === 'cr'}>Costa Rica</option>
+              <option value="sv" selected={paisParam === 'sv'}>El Salvador</option>
+              <option value="gt" selected={paisParam === 'gt'}>Guatemala</option>
+              <option value="hn" selected={paisParam === 'hn'}>Honduras</option>
+              <option value="ni" selected={paisParam === 'ni'}>Nicaragua</option>
+              <option value="pa" selected={paisParam === 'pa'}>Panamá</option>
+            </optgroup>
+            <optgroup label="Caribe" style="background:#FAFAF8;">
+              <option value="do" selected={paisParam === 'do'}>República Dominicana</option>
+              <option value="pr" selected={paisParam === 'pr'}>Puerto Rico</option>
+            </optgroup>
+            <optgroup label="Europa" style="background:#FAFAF8;">
+              <option value="es" selected={paisParam === 'es'}>España</option>
+              <option value="us" selected={paisParam === 'us'}>Estados Unidos</option>
+              <option value="gb" selected={paisParam === 'gb'}>Reino Unido</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #FAFAF8; min-height: 60vh;" class="px-4 sm:px-6 py-8">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- NAVEGACIÓN DE CATEGORÍAS: línea activa editorial -->
+      <nav class="flex gap-0 overflow-x-auto scrollbar-hide mb-10 pb-0"
+           style="border-bottom: 1px solid #E5E0D8;">
+        {todasCategorias.map((cat) => (
+          <a href={`/${cat.slug}${paisParam !== 'global' ? `?pais=${paisParam}` : ''}`}
+             class="flex-shrink-0 text-sm px-5 py-3 no-underline transition-colors duration-200 whitespace-nowrap"
+             style={cat.slug === slugParam
+               ? 'color: #1C1917; font-weight: 600; border-bottom: 2px solid #B91C1C; margin-bottom: -1px; font-family: DM Sans, sans-serif;'
+               : 'color: #6B7280; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: DM Sans, sans-serif;'}
+          >
+            {cat.nombre}
+          </a>
+        ))}
+      </nav>
+
+      {articulosFiltrados.length === 0 ? (
+        <div class="flex flex-col items-center justify-center py-24 border border-[#E5E0D8]"
+             style="background: #F0EDE7;">
+          <Globe size={28} style="color: #D6D0C8; margin-bottom: 12px;" />
+          <p class="text-sm mb-3" style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+            No hay artículos publicados en esta categoría
+          </p>
+          {paisParam !== 'global' && (
+            <a href={`/${slugParam}`} class="text-sm no-underline"
+               style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+              Ver todos los países
+            </a>
+          )}
+        </div>
+      ) : (
+        <div class="flex flex-col">
+
+          <!-- HERO: primera noticia full-width -->
+          {principal && (
+            <a href={`/noticias/${principal.slug}`}
+               class="block group no-underline mb-10 pb-10"
+               style="border-bottom: 1px solid #E5E0D8;">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="overflow-hidden order-first" style="aspect-ratio: 3/2;">
+                  {principal.imagen
+                    ? <img src={getCloudinaryUrl(principal.imagen, 800)!}
+                           alt={principal.titulo}
+                           width="800" height="533"
+                           loading="eager"
+                           fetchpriority="high"
+                           class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
+                    : <div class="w-full h-full" style="background: #E8E3DB;"></div>
+                  }
+                </div>
+                <div class="flex flex-col justify-center gap-4 lg:py-6">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-[11px] font-bold uppercase tracking-[0.2em]"
+                          style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+                      {principal.categoria?.nombre}
+                    </span>
+                    {principal.pais && principal.pais.codigo !== 'global' && (
+                      <span class="flex items-center gap-1 text-xs px-2 py-0.5"
+                            style="color: #78716C; border: 1px solid #E5E0D8; font-family: 'DM Sans', sans-serif;">
+                        <Globe size={9} /> {principal.pais.nombre}
+                      </span>
+                    )}
+                  </div>
+                  <h2 class="font-bold leading-[1.1] text-[#1C1917] group-hover:text-[#B91C1C] transition-colors duration-200"
+                      style="font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.8vw, 38px);">
+                    {principal.titulo}
+                  </h2>
+                  {principal.resumen && (
+                    <p class="text-base leading-relaxed line-clamp-3"
+                       style="color: #57534E; font-family: 'DM Sans', sans-serif;">
+                      {principal.resumen}
+                    </p>
+                  )}
+                  <div class="flex items-center gap-2 text-xs" style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+                    <Clock size={11} />
+                    <span>{formatFecha(principal.creadoEn)}</span>
+                  </div>
+                  <span class="flex items-center gap-1.5 text-sm font-semibold"
+                        style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+                    Leer artículo <ArrowRight size={13} />
+                  </span>
+                </div>
+              </div>
+            </a>
+          )}
+
+          <!-- RESTO: patrón 2 medianas → 2 mini → hero → repite -->
+          {(() => {
+            const grupos: typeof resto[] = [];
+            for (let i = 0; i < resto.length; i += 5) grupos.push(resto.slice(i, i + 5));
+            return grupos.map((grupo) => (
+              <div class="mb-10 last:mb-0">
+
+                {/* — 2 MEDIANAS — */}
+                {grupo.slice(0, 2).length > 0 && (
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 pb-8"
+                       style="border-bottom: 1px solid #E5E0D8;">
+                    {grupo.slice(0, 2).map((art) => (
+                      <a href={`/noticias/${art.slug}`} class="group flex flex-col gap-3 no-underline">
+                        <div class="overflow-hidden" style="aspect-ratio: 4/3;">
+                          {art.imagen
+                            ? <img src={getCloudinaryUrl(art.imagen, 600)!}
+                                   alt={art.titulo}
+                                   width="600" height="450"
+                                   loading="lazy"
+                                   class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
+                            : <div class="w-full h-full" style="background: #E8E3DB;"></div>
+                          }
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.18em]"
+                              style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+                          {art.categoria?.nombre}
+                        </span>
+                        <h3 class="font-bold leading-snug line-clamp-2 text-[#1C1917] group-hover:text-[#B91C1C] transition-colors duration-200"
+                            style="font-family: 'Playfair Display', serif; font-size: 18px;">
+                          {art.titulo}
+                        </h3>
+                        {art.resumen && (
+                          <p class="text-sm leading-relaxed line-clamp-2"
+                             style="color: #78716C; font-family: 'DM Sans', sans-serif;">
+                            {art.resumen}
+                          </p>
+                        )}
+                        <span class="text-xs flex items-center gap-1"
+                              style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+                          <Clock size={10} /> {formatFecha(art.creadoEn)}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {/* — 2 MINI sin imagen — */}
+                {grupo.slice(2, 4).length > 0 && (
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 pb-8"
+                       style="border-bottom: 1px solid #E5E0D8;">
+                    {grupo.slice(2, 4).map((art) => (
+                      <a href={`/noticias/${art.slug}`}
+                         class="group flex flex-col gap-2 no-underline py-2"
+                         style="border-left: 3px solid #B91C1C; padding-left: 16px;">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.15em]"
+                              style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+                          {art.categoria?.nombre}
+                        </span>
+                        <h4 class="font-bold leading-snug line-clamp-2 text-[#1C1917] group-hover:text-[#B91C1C] transition-colors duration-200"
+                            style="font-family: 'Playfair Display', serif; font-size: 15px;">
+                          {art.titulo}
+                        </h4>
+                        <span class="text-[11px]" style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+                          {formatFecha(art.creadoEn)}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {/* — HERO secundario — */}
+                {grupo[4] && (
+                  <a href={`/noticias/${grupo[4].slug}`} class="block group no-underline">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                      <div class="overflow-hidden" style="aspect-ratio: 16/9;">
+                        {grupo[4].imagen
+                          ? <img src={getCloudinaryUrl(grupo[4].imagen, 800)!}
+                                 alt={grupo[4].titulo}
+                                 width="800" height="450"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
+                          : <div class="w-full h-full" style="background: #E8E3DB;"></div>
+                        }
+                      </div>
+                      <div class="flex flex-col gap-3">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.2em]"
+                              style="color: #B91C1C; font-family: 'DM Sans', sans-serif;">
+                          {grupo[4].categoria?.nombre}
+                        </span>
+                        <h3 class="font-bold leading-[1.15] text-[#1C1917] group-hover:text-[#B91C1C] transition-colors duration-200"
+                            style="font-family: 'Playfair Display', serif; font-size: clamp(18px, 2vw, 26px);">
+                          {grupo[4].titulo}
+                        </h3>
+                        {grupo[4].resumen && (
+                          <p class="text-sm leading-relaxed line-clamp-2"
+                             style="color: #78716C; font-family: 'DM Sans', sans-serif;">
+                            {grupo[4].resumen}
+                          </p>
+                        )}
+                        <span class="text-xs flex items-center gap-1"
+                              style="color: #A8A29E; font-family: 'DM Sans', sans-serif;">
+                          <Clock size={10} /> {formatFecha(grupo[4].creadoEn)}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                )}
+
+              </div>
+            ));
+          })()}
+
+        </div>
+      )}
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<script>
+const select = document.getElementById('pais-filter') as unknown as HTMLSelectElement;
+  select?.addEventListener('change', () => {
+    const pais = select.value;
+    const categoria = window.location.pathname.replace('/', '');
+    window.location.href = pais === 'global'
+      ? `/${categoria}`
+      : `/${categoria}?pais=${pais}`;
+  });
+</script>
+

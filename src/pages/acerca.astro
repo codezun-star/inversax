@@ -1,0 +1,213 @@
+---
+export const prerender = true;
+// src/pages/acerca.astro
+import Layout from '../layouts/Layout.astro';
+import {
+  Globe, ArrowRight, TrendingUp, Zap, Shield,
+  Users, BarChart2, Newspaper, DollarSign, MapPin,
+  Target, Eye, Heart
+} from 'lucide-astro';
+
+const sitioWeb = "https://inversax.com";
+
+const valores = [
+  {
+    icon: "eye",
+    titulo: "Transparencia",
+    desc: "Siempre somos claros sobre qué es contenido editorial, qué es publicidad y qué son enlaces de afiliado. Sin letra chica.",
+  },
+  {
+    icon: "shield",
+    titulo: "Responsabilidad",
+    desc: "Nunca te venderemos la idea de que invertir es fácil. Los mercados tienen riesgos y lo decimos siempre.",
+  },
+  {
+    icon: "zap",
+    titulo: "Accesibilidad",
+    desc: "Las finanzas no deben ser solo para expertos. Explicamos todo en español claro, sin tecnicismos innecesarios.",
+  },
+  {
+    icon: "heart",
+    titulo: "Comunidad",
+    desc: "Construimos esto para el latinoamericano que quiere entender mejor su dinero y el mundo financiero.",
+  },
+];
+
+const queCubrimos = [
+  { icon: "crypto",   label: "Criptomonedas",         desc: "Precios en tiempo real, análisis y guías para más de 15,000 activos digitales." },
+  { icon: "bolsa",    label: "Bolsa y Acciones",       desc: "NYSE, NASDAQ, S&P 500 y mercados bursátiles internacionales." },
+  { icon: "forex",    label: "Forex y Divisas",        desc: "Tipo de cambio oficial y paralelo para cada país de LATAM." },
+  { icon: "indices",  label: "Índices Financieros",    desc: "Dow Jones, Nasdaq Composite, Russell 2000 y principales índices globales." },
+  { icon: "news",     label: "Noticias y Análisis",    desc: "Cobertura editorial diaria del mundo financiero en español." },
+  { icon: "tools",    label: "Herramientas",           desc: "Calculadoras, gráficas en vivo y recursos para tomar mejores decisiones." },
+];
+
+const regiones = [
+  { label: "Latinoamérica",    count: 12, paises: "Argentina, México, Colombia, Chile, Perú y más" },
+  { label: "América Central",  count: 7,  paises: "Guatemala, Honduras, Costa Rica, Panamá y más" },
+  { label: "Caribe",           count: 2,  paises: "República Dominicana, Puerto Rico" },
+  { label: "Norteamérica",     count: 2,  paises: "Estados Unidos, Canadá" },
+  { label: "Europa",           count: 9,  paises: "España, Portugal, Andorra y más" },
+  { label: "África y Oceanía", count: 4,  paises: "Guinea Ecuatorial, Marruecos, Australia, Filipinas" },
+];
+---
+
+<Layout>
+  <slot name="head" slot="head">
+    <title>Acerca de Inversax — Plataforma Financiera para Latinoamérica</title>
+    <meta name="description" content="Conoce Inversax, la plataforma de información financiera en español para Latinoamérica. Cripto, acciones, forex y más en 37 países." />
+    <link rel="canonical" href={`${sitioWeb}/acerca`} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Acerca de Inversax — Plataforma Financiera para Latinoamérica" />
+    <meta property="og:description" content="Conoce Inversax, la plataforma de información financiera en español para Latinoamérica. Cripto, acciones, forex y más en 37 países." />
+    <meta property="og:url"         content={`${sitioWeb}/acerca`} />
+    <meta property="og:image"       content={`${sitioWeb}/og/home.png`} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Inversax — Finanzas en Español para Latinoamérica" />
+  </slot>
+
+  <!-- HEADER EDITORIAL -->
+  <div style="background: #FAFAF8; border-bottom: 1px solid #E5E0D8;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <div class="flex items-center gap-2 text-sm mb-6" style="color: #A8A29E;">
+        <a href="/" class="no-underline hover:underline" style="color: #A8A29E;">Inicio</a>
+        <span>›</span>
+        <span style="color: #57534E;">Acerca de</span>
+      </div>
+      <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B91C1C; margin: 0 0 12px;">37 países · En español</p>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #1C1917; line-height: 1.15; margin: 0 0 16px;">
+        Finanzas globales,<br />voz latinoamericana.
+      </h1>
+      <p style="color: #57534E; font-size: 16px; line-height: 1.7; max-width: 600px; margin: 0 0 28px;">
+        Inversax nació con una idea simple: que cualquier persona de habla hispana, sin importar su país, pueda acceder a información financiera de calidad, actualizada y comprensible. Sin barreras de idioma, sin tecnicismos innecesarios.
+      </p>
+      <div class="flex flex-wrap gap-8">
+        {[
+          { valor: "37",   label: "Países cubiertos" },
+          { valor: "15K+", label: "Criptomonedas" },
+          { valor: "24/7", label: "Datos en tiempo real" },
+          { valor: "100%", label: "En español" },
+        ].map((stat) => (
+          <div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #B91C1C; line-height: 1;">{stat.valor}</div>
+            <div style="font-size: 13px; color: #78716C; margin-top: 4px;">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div style="background: #FAFAF8; min-height: 60vh;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-14" style="display: flex; flex-direction: column; gap: 48px;">
+
+      <!-- MISIÓN Y VISIÓN -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div style="border: 1px solid #E5E0D8; padding: 32px; display: flex; flex-direction: column; gap: 16px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #1C1917; margin: 0;">Nuestra Misión</h2>
+          <p style="color: #57534E; font-size: 15px; line-height: 1.8; margin: 0;">
+            Democratizar el acceso a la información financiera en el mundo hispanohablante. Creemos que entender el mercado cripto, las bolsas internacionales o el tipo de cambio de tu país no debería requerir un título universitario ni dominar el inglés.
+          </p>
+          <p style="color: #57534E; font-size: 15px; line-height: 1.8; margin: 0;">
+            Cada artículo, cada herramienta y cada dato que publicamos está pensado para ser útil y comprensible para cualquier persona, sea que esté comenzando a ahorrar o gestionando un portafolio diversificado.
+          </p>
+        </div>
+        <div style="border: 1px solid #E5E0D8; padding: 32px; display: flex; flex-direction: column; gap: 16px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #1C1917; margin: 0;">Nuestra Visión</h2>
+          <p style="color: #57534E; font-size: 15px; line-height: 1.8; margin: 0;">
+            Ser la plataforma de referencia en información financiera para toda la comunidad hispanohablante del mundo. Un espacio donde los datos, las noticias y las herramientas estén siempre disponibles, actualizados y adaptados a la realidad económica de cada región.
+          </p>
+          <p style="color: #57534E; font-size: 15px; line-height: 1.8; margin: 0;">
+            Desde Buenos Aires hasta Madrid, desde Ciudad de México hasta Manila: una sola plataforma, muchas realidades financieras cubiertas con el mismo nivel de calidad y compromiso.
+          </p>
+        </div>
+      </div>
+
+      <!-- QUÉ CUBRIMOS -->
+      <div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1C1917; margin: 0 0 24px;">Qué cubrimos</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {queCubrimos.map((item) => (
+            <div style="border: 1px solid #E5E0D8; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="width: 32px; height: 3px; background: #B91C1C;"></div>
+              <h3 style="font-size: 14px; font-weight: 700; color: #1C1917; margin: 0;">{item.label}</h3>
+              <p style="font-size: 13px; color: #78716C; line-height: 1.6; margin: 0;">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- COBERTURA POR REGIÓN -->
+      <div>
+        <div style="margin-bottom: 24px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1C1917; margin: 0 0 4px;">Cobertura geográfica</h2>
+          <p style="color: #78716C; font-size: 13px; margin: 0;">37 países · Expansión progresiva</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {regiones.map((r) => (
+            <div style="border: 1px solid #E5E0D8; padding: 20px; display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 14px; font-weight: 700; color: #1C1917;">{r.label}</span>
+                <span style="background: #F0EDE7; color: #B91C1C; font-size: 11px; font-weight: 700; padding: 2px 8px;">{r.count} países</span>
+              </div>
+              <p style="font-size: 12px; color: #78716C; line-height: 1.5; margin: 0;">{r.paises}</p>
+            </div>
+          ))}
+        </div>
+        <div style="margin-top: 16px; background: #F5F1EC; border-left: 3px solid #E5E0D8; padding: 16px 20px;">
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            Empezamos con cobertura activa en los mercados más grandes de LATAM e iremos expandiendo la cobertura a más países a medida que el sitio crece. <a href="/paises" class="no-underline" style="color: #B91C1C;">Ver todos los países</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- VALORES -->
+      <div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1C1917; margin: 0 0 24px;">Nuestros valores</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {valores.map((v) => (
+            <div style="border: 1px solid #E5E0D8; padding: 24px; display: flex; gap: 16px;">
+              <div style="width: 3px; background: #B91C1C; flex-shrink: 0; border-radius: 2px;"></div>
+              <div>
+                <h3 style="font-size: 15px; font-weight: 700; color: #1C1917; margin: 0 0 8px;">{v.titulo}</h3>
+                <p style="font-size: 14px; color: #57534E; line-height: 1.7; margin: 0;">{v.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- AVISO FINANCIERO + CTA -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <div class="lg:col-span-3" style="background: #F5F1EC; border: 1px solid #E5E0D8; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #1C1917; margin: 0;">Aviso importante</h3>
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            Inversax es una plataforma de <strong style="color: #1C1917;">información y educación financiera</strong>. No somos asesores de inversión, no gestionamos fondos y no estamos regulados como entidad financiera. Todo el contenido publicado tiene carácter exclusivamente informativo.
+          </p>
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            Inversax participa en programas de afiliados con exchanges y brokers. Algunos enlaces en el sitio son patrocinados. Esto siempre estará indicado claramente y nunca influye en nuestra línea editorial.
+          </p>
+        </div>
+        <div class="lg:col-span-2" style="border: 1px solid #E5E0D8; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
+          <div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #1C1917; margin: 0 0 12px;">¿Quieres estar en Inversax?</h3>
+            <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+              Si tienes una plataforma financiera o crypto y quieres llegar al mercado hispanohablante, contáctanos.
+            </p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="/publicidad" class="no-underline" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #B91C1C; color: #fff; font-size: 14px; font-weight: 700; padding: 12px 20px;">
+              Publicitar en Inversax <ArrowRight size={14} />
+            </a>
+            <a href="/contacto" class="no-underline" style="display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #E5E0D8; color: #57534E; font-size: 14px; font-weight: 600; padding: 12px 20px;">
+              Contacto general
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+

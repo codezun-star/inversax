@@ -1,0 +1,377 @@
+---
+// src/components/BrokerBanner.astro
+
+interface Props {
+  mostrar?: boolean;
+}
+const { mostrar = true } = Astro.props;
+
+const brokers: {
+  nombre: string; domain: string; logo?: string; tipo: string;
+  descripcion: string; badge: string; cta: string; bono: string;
+  href: string; color: string; rating: number;
+}[] = [
+  {
+    nombre:      "XM",
+    domain:      "xm.com",
+    tipo:        "Forex & CFD",
+    descripcion: "Más de 1,400 instrumentos. Depósito mínimo desde $5. Ejecución sin recotizaciones ni rechazos.",
+    badge:       "Más popular",
+    cta:         "Abrir cuenta gratis",
+    bono:        "Bono bienvenida $30",
+    href:        "https://affs.click/nBBTT",                                    // ✅ ACTIVO
+    color:       "#E84142",
+    rating:      4.2,
+  },
+  {
+    nombre:      "Exness",
+    domain:      "exness.com",
+    tipo:        "Forex & CFD",
+    descripcion: "Spreads desde 0.0 pips en cuenta Zero. Retiros procesados en menos de 1 minuto. Sin comisión por inactividad.",
+    badge:       "Recomendado",
+    cta:         "Empezar ahora",
+    bono:        "Sin comisiones de retiro",
+    href:        "https://one.exnessonelink.com/a/c_oq7nroj1va",               // ✅ ACTIVO
+    color:       "#6C63FF",
+    rating:      4.8,
+  },
+  {
+    nombre:      "Pepperstone",
+    domain:      "pepperstone.com",
+    tipo:        "Broker ECN",
+    descripcion: "Más de 1,400 instrumentos. Regulado en 8 jurisdicciones. Soporta MT4, MT5, cTrader y TradingView.",
+    badge:       "Top profesional",
+    cta:         "Ver condiciones",
+    bono:        "Demo ilimitada gratis",
+    href:        "https://pepperstone.sjv.io/c/7061517/3194997/21941",          // ✅ ACTIVO
+    color:       "#FF6B35",
+    rating:      4.7,
+  },
+  {
+    nombre:      "Binance",
+    domain:      "www.binance.com",
+    logo:        "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+    tipo:        "Exchange Cripto",
+    descripcion: "El exchange más grande del mundo por volumen. Spot, futuros y cientos de altcoins disponibles.",
+    badge:       "Top cripto",
+    cta:         "Crear cuenta",
+    bono:        "0.1% comisión spot",
+    href:        "https://www.binance.com/activity/referral-entry/CPA?ref=CPA_0011ND849R&utm_source=default", // ✅ ACTIVO
+    color:       "#F0B90B",
+    rating:      4.8,
+  },
+  {
+    nombre:      "XTB",
+    domain:      "xtb.com",
+    tipo:        "Acciones & ETFs",
+    descripcion: "0% comisión en acciones y ETFs reales hasta 100,000 EUR/mes. Más de 6,600 acciones disponibles. Plataforma xStation premiada.",
+    badge:       "Mejor plataforma",
+    cta:         "Invertir en acciones",
+    bono:        "0% comisión hasta 100K EUR/mes",
+    href:        "https://geolink.xtb.com/I0QSx",                              // ✅ ACTIVO
+    color:       "#1565C0",
+    rating:      4.5,
+  },
+  {
+    nombre:      "Libertex",
+    domain:      "libertex.com",
+    tipo:        "Forex & CFD",
+    descripcion: "Sin spread en operaciones CFD. Más de 25 años en el mercado. App con 10M+ descargas y 4.9★ en Android.",
+    badge:       "Sin spread",
+    cta:         "Operar sin spread",
+    bono:        "Sin spread garantizado",
+    href:        "https://fwd.cx/DMQ5TyRNANPA",                                // ✅ ACTIVO
+    color:       "#00B074",
+    rating:      4.3,
+  },
+   {
+    nombre:      "IC Markets",
+    domain:      "icmarkets.com",
+     tipo:        "Broker ECN",
+     descripcion: "Más de 2,250 instrumentos: Forex, acciones, cripto, índices y materias primas. Spreads desde 0.0 pips con ejecución ECN real. Soporta MT4, MT5, cTrader y TradingView.",
+    badge:       "4.8★ Trustpilot",
+    cta:         "Operar en ECN",
+     bono:        "VPS gratuito incluido",
+    href:        "https://icmarkets.com/?camp=90874",                                 // ✅ ACTIVO
+     color:       "#1A3C6E",
+     rating:      4.8,
+   },
+
+  // ⏳ SIN LINK DE AFILIADO — comentados hasta activar
+  // {
+  //   nombre:      "Deriv",
+  //   domain:      "deriv.com",
+  //   tipo:        "Forex & Derivados",
+  //   descripcion: "Más de 300 activos: Forex, opciones, derivados sintéticos e índices. Apalancamiento hasta 1:1000. Disponible en MT5, cTrader y plataforma propia DTrader.",
+  //   badge:       "Opciones & Sintéticos",
+  //   cta:         "Abrir cuenta",
+  //   bono:        "Cuenta demo gratis",
+  //   href:        "https://deriv.com",
+  //   color:       "#FF444F",
+  //   rating:      4.4,
+  // },
+  // {
+  //   nombre:      "Vantage",
+  //   domain:      "vantagemarkets.com",
+  //   logo:        "https://vantagemarkets.com/favicon.ico",
+  //   tipo:        "Forex & CFD",
+  //   descripcion: "Más de 1,000 instrumentos CFD en Forex, índices, materias primas y ETFs. Spreads desde 0.0 pips. Regulado por ASIC y FCA. Soporta MT4, MT5 y TradingView.",
+  //   badge:       "15+ años",
+  //   cta:         "Empezar a operar",
+  //   bono:        "Depósito mínimo $50",
+  //   href:        "https://www.vantagemarkets.com",
+  //   color:       "#00C896",
+  //   rating:      4.5,
+  // },
+  // {
+  //   nombre:      "FBS",
+  //   domain:      "fbs.com",
+  //   tipo:        "Forex & CFD",
+  //   descripcion: "Más de 240 instrumentos CFD con apalancamiento hasta 1:3000. Depósito mínimo desde $1. Plataformas MT4, MT5 y app propia. Más de 17M de traders en 150 países.",
+  //   badge:       "Desde $1",
+  //   cta:         "Abrir cuenta",
+  //   bono:        "Apalancamiento 1:3000",
+  //   href:        "https://fbs.com",
+  //   color:       "#F5A623",
+  //   rating:      4.4,
+  // },
+];
+---
+
+
+{mostrar && (
+  <aside class="bb-section" aria-label="Brokers recomendados por Inversax">
+    <div class="bb-wrap">
+
+      <div class="bb-header">
+        <div class="bb-label">
+          <span class="bb-dot"></span>
+          Brokers recomendados por Inversax
+        </div>
+        <span class="bb-legal">Contiene enlaces de afiliado · Invertir implica riesgos</span>
+      </div>
+
+      <div class="bb-grid">
+        {brokers.map((b, i) => (
+          <a
+            href={b.href}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            class="bb-card"
+            style={`--c:${b.color}; --delay:${i * 70}ms`}
+          >
+            <div class="bb-glow"></div>
+
+            <div class="bb-top">
+              <div class="bb-logo-wrap">
+                <img
+                  src={b.logo ?? `https://icon.horse/icon/${b.domain}`}
+                  alt={`Logo ${b.nombre}`}
+                  class="bb-logo"
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                />
+                <div class="bb-logo-fallback" style={`background:${b.color}18;color:${b.color};`}>
+                  {b.nombre.slice(0,2).toUpperCase()}
+                </div>
+              </div>
+
+              <div class="bb-meta">
+                <div class="bb-name-row">
+                  <span class="bb-name">{b.nombre}</span>
+                  <span class="bb-badge" style={`background:${b.color}18;color:${b.color};border-color:${b.color}35`}>
+                    {b.badge}
+                  </span>
+                </div>
+                <span class="bb-tipo">{b.tipo}</span>
+              </div>
+            </div>
+
+            <p class="bb-desc">{b.descripcion}</p>
+
+            <div class="bb-mid">
+              <div class="bb-stars">
+                {[1,2,3,4,5].map(s => (
+                  <span class={s <= Math.round(b.rating) ? 'bb-star on' : 'bb-star'}>★</span>
+                ))}
+                <span class="bb-rnum">{b.rating}</span>
+              </div>
+              <span class="bb-bono">{b.bono}</span>
+            </div>
+
+            <div class="bb-cta" style={`background:${b.color};box-shadow:0 4px 18px ${b.color}45`}>
+              {b.cta}
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </div>
+
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </aside>
+)}
+
+<style>
+.bb-section {
+  background: #FAFAF8;
+  border-top:    1px solid #E5E0D8;
+  border-bottom: 1px solid #E5E0D8;
+  padding: 1.75rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.bb-wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.bb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.bb-label {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .72rem;
+  font-weight: 700;
+  color: #78716C;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.bb-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #B91C1C;
+  animation: bbPulse 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes bbPulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.4; transform:scale(.75); }
+}
+.bb-legal { font-size:.6rem; color: #A8A29E; }
+
+/* Grid: 1 col mobile → 2 tablet → 3 desktop */
+.bb-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .75rem;
+}
+@media (min-width: 600px)  { .bb-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1024px) { .bb-grid { grid-template-columns: repeat(3,1fr); } }
+
+.bb-card {
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid #E5E0D8;
+  border-radius: 4px;
+  padding: 1.1rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  transition: border-color .25s, transform .25s;
+  animation: bbUp .4s ease both;
+  animation-delay: var(--delay, 0ms);
+}
+.bb-card:hover {
+  border-color: color-mix(in srgb, var(--c) 45%, transparent);
+  transform: translateY(-3px);
+}
+@keyframes bbUp {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.bb-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--c) 8%, transparent), transparent 65%);
+  pointer-events: none;
+  opacity: .6;
+  transition: opacity .3s;
+}
+.bb-card:hover .bb-glow { opacity: 1; }
+
+.bb-top {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  position: relative;
+  z-index: 1;
+}
+.bb-logo-wrap {
+  width: 42px; height: 42px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid #E5E0D8;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bb-logo {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 5px;
+}
+.bb-logo-fallback {
+  display: none;
+  width: 100%; height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: .65rem;
+  font-weight: 800;
+  font-family: 'DM Sans', sans-serif;
+}
+.bb-meta { display:flex; flex-direction:column; gap:.2rem; min-width:0; }
+.bb-name-row { display:flex; align-items:center; gap:.45rem; flex-wrap:wrap; }
+.bb-name { font-family:'DM Sans',sans-serif; font-weight:700; font-size:.95rem; color:#1C1917; }
+.bb-badge {
+  font-size:.58rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:.06em; padding:.12rem .45rem;
+  border-radius:999px; border:1px solid; white-space:nowrap;
+}
+.bb-tipo { font-size:.68rem; color: #A8A29E; }
+
+.bb-desc {
+  font-size:.73rem; color: #57534E;
+  line-height:1.55; margin:0; position:relative; z-index:1;
+}
+
+.bb-mid {
+  display:flex; align-items:center;
+  justify-content:space-between;
+  position:relative; z-index:1;
+}
+.bb-stars { display:flex; align-items:center; gap:.05rem; }
+.bb-star     { font-size:.72rem; color: #E5E0D8; }
+.bb-star.on  { color:#D4A843; }
+.bb-rnum { font-size:.68rem; color: #78716C; margin-left:.3rem; }
+.bb-bono {
+  font-size:.62rem; color: #78716C;
+  background: #F0EDE7;
+  border:1px solid #E5E0D8;
+  padding:.12rem .5rem; border-radius:999px; white-space:nowrap;
+}
+
+.bb-cta {
+  display:flex; align-items:center; justify-content:center;
+  gap:.4rem; padding:.62rem 1rem; border-radius:4px;
+  font-size:.78rem; font-weight:700; color:#fff;
+  transition:opacity .2s, transform .2s;
+  position:relative; z-index:1; margin-top:auto;
+}
+.bb-card:hover .bb-cta { opacity:.88; transform:scale(.98); }
+</style>

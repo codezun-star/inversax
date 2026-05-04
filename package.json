@@ -1,0 +1,32 @@
+{
+  "name": "Inversax-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "npx tsx --env-file=.env src/db/seed.ts",
+    "db:seed-articulo": "npx tsx --env-file=.env src/db/seed-articulo.ts",
+    "astro": "astro"
+  },
+"dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
+    "@astrojs/node": "^9.5.4",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/tailwind": "^5.1.4",
+    "@neondatabase/serverless": "^1.0.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "astro": "^5.17.1",
+    "drizzle-orm": "^0.45.1",
+    "lucide-astro": "^0.556.0",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260301.1",
+    "drizzle-kit": "^0.31.9",
+    "tsx": "^4.21.0"
+  }
+}

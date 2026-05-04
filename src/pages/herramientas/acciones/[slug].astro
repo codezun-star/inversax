@@ -1,0 +1,549 @@
+---
+// src/pages/herramientas/acciones/[slug].astro
+export const prerender = false;
+
+import Layout from '../../../layouts/Layout.astro';
+import TVChart from '../../../components/TVChart.astro';
+import { ArrowLeft, TrendingUp, TrendingDown, ExternalLink } from 'lucide-astro';
+
+const { slug } = Astro.params;
+
+const dominiosPorTicker: Record<string, string> = {
+  // ── Tecnología ──
+  AAPL:    'apple.com',
+  NVDA:    'nvidia.com',
+  MSFT:    'microsoft.com',
+  META:    'meta.com',
+  GOOGL:   'google.com',
+  AMD:     'amd.com',
+  PLTR:    'palantir.com',
+  CRWD:    'crowdstrike.com',
+
+  // ── Alta volatilidad ──
+  TSLA:    'tesla.com',
+  AMZN:    'amazon.com',
+  NFLX:    'netflix.com',
+  COIN:    'coinbase.com',
+  HOOD:    'robinhood.com',
+  SHOP:    'shopify.com',
+
+  // ── ETFs ──
+  SPY:     'ssga.com',
+  QQQ:     'invesco.com',
+  GLD:     'spdrgoldshares.com',
+
+  // ── LATAM ──
+  MELI:    'mercadolibre.com',
+  EC:      'ecopetrol.com.co',
+  PBR:     'petrobras.com.br',
+  VALE:    'vale.com',
+  GLOB:    'globant.com',
+  AMX:     'americamovil.com',
+
+  // ── Finanzas ──
+  V:       'visa.com',
+  JPM:     'jpmorganchase.com',
+  GS:      'goldmansachs.com',
+  'BRK-B': 'berkshirehathaway.com',
+  PYPL:    'paypal.com',
+
+  // ── Salud ──
+  LLY:     'lilly.com',
+  JNJ:     'jnj.com',
+  PFE:     'pfizer.com',
+
+  // ── Consumo ──
+  KO:      'coca-cola.com',
+  MCD:     'mcdonalds.com',
+  DIS:     'disney.com',
+  SBUX:    'starbucks.com',
+  NKE:     'nike.com',
+  UBER:    'uber.com',
+
+  // ── Energía ──
+  XOM:     'exxonmobil.com',
+  CVX:     'chevron.com',
+
+  // ── Industria ──
+  BA:      'boeing.com',
+  CAT:     'caterpillar.com',
+};
+
+// ── Descripciones completas ───────────────────────────────────
+const descripciones: Record<string, string> = {
+
+  // ── Tecnología ──
+  AAPL:  'Apple Inc. diseña, fabrica y comercializa smartphones (iPhone), computadoras (Mac), tablets (iPad), wearables (Apple Watch, AirPods) y accesorios. Su ecosistema de servicios incluye iCloud, App Store, Apple Pay, Apple Music y Apple TV+. Es la empresa más valiosa del mundo por capitalización bursátil, con una base de más de 2,000 millones de dispositivos activos. Su capacidad para retener usuarios dentro de su ecosistema y sus márgenes elevados la convierten en una de las acciones más seguidas por inversores institucionales y particulares de todo el mundo.',
+
+  NVDA:  'NVIDIA Corporation es el líder mundial en diseño de unidades de procesamiento gráfico (GPU) y hardware para inteligencia artificial. Sus chips H100 y la arquitectura Blackwell son el estándar de la industria para entrenar modelos de IA a gran escala. NVIDIA también desarrolla plataformas para conducción autónoma, robótica, simulación industrial y computación científica. La explosión de la inteligencia artificial generativa la convirtió en una de las empresas de mayor crecimiento en la historia de los mercados financieros, con una capitalización bursátil que la sitúa entre las tres más grandes del mundo.',
+
+  MSFT:  'Microsoft Corporation es uno de los conglomerados tecnológicos más grandes del mundo. Sus productos incluyen el sistema operativo Windows, la suite Office 365, la plataforma en la nube Azure (segunda en cuota global), Xbox, LinkedIn y GitHub. Su inversión estratégica en OpenAI le permitió integrar inteligencia artificial en toda su línea de productos bajo la marca Copilot. Microsoft combina ingresos recurrentes en la nube con un portafolio diversificado que la hace una de las acciones más estables y buscadas por inversores de largo plazo.',
+
+  META:  'Meta Platforms Inc. opera las plataformas de redes sociales más grandes del mundo: Facebook, Instagram, WhatsApp y Threads, con más de 3,200 millones de usuarios activos diarios combinados. Sus ingresos provienen principalmente de publicidad digital altamente segmentada. También invierte en realidad virtual y aumentada a través de los dispositivos Meta Quest y su visión del Metaverso. Tras una fuerte caída en 2022, Meta ejecutó un plan de eficiencia que disparó sus ganancias y la devolvió a máximos históricos, convirtiéndola en una de las historias de recuperación más llamativas de Wall Street.',
+
+  GOOGL: 'Alphabet Inc. es la empresa matriz de Google, el motor de búsqueda más utilizado del mundo con más del 90% de cuota de mercado global. Sus ingresos principales provienen de publicidad en Search, YouTube y la red de display. Google Cloud es su división de más rápido crecimiento, compitiendo con AWS y Azure. Alphabet también desarrolla inteligencia artificial con Gemini, opera Waymo (vehículos autónomos), DeepMind (investigación en IA) y gestiona una cartera de inversiones en startups tecnológicas a través de GV y CapitalG.',
+
+  AMD:   'Advanced Micro Devices (AMD) diseña y comercializa procesadores (CPUs) y tarjetas gráficas (GPUs) de alto rendimiento. Sus chips Ryzen para consumidores y EPYC para servidores han ganado cuota de mercado significativa frente a Intel en los últimos años. Su línea de GPUs Radeon compite con NVIDIA en el mercado de gaming y computación paralela. AMD también fabrica chips personalizados para consolas PlayStation y Xbox, y está expandiéndose en el mercado de aceleradores para inteligencia artificial con su línea Instinct MI300.',
+
+  PLTR:  'Palantir Technologies es una empresa especializada en software de análisis de datos y plataformas de inteligencia artificial para gobiernos y grandes corporaciones. Sus productos principales son Palantir Gotham (para defensa e inteligencia), Palantir Foundry (para empresas) y AIP (plataforma de IA generativa). Fundada en 2003 con respaldo de la CIA, Palantir es contratista estratégico de múltiples gobiernos y ejércitos. En los últimos años aceleró su expansión comercial y logró su primera rentabilidad consistente, atrayendo la atención de inversores que apuestan al crecimiento de la IA aplicada.',
+
+  CRWD:  'CrowdStrike Holdings es el líder del mercado en ciberseguridad en la nube, especializado en protección de endpoints, inteligencia de amenazas y respuesta a incidentes. Su plataforma Falcon utiliza inteligencia artificial para detectar y neutralizar ciberataques en tiempo real. Opera en modo SaaS con ingresos recurrentes anuales (ARR) que crecen de forma consistente. Es una de las empresas más recomendadas por analistas en el segmento de seguridad informática y una referencia para empresas que buscan protegerse de ransomware y amenazas avanzadas.',
+
+  SHOP:  'Shopify Inc. es la plataforma de comercio electrónico más popular del mundo para pequeñas y medianas empresas, con más de 2 millones de comercios activos en más de 175 países. Ofrece herramientas para crear tiendas en línea, gestionar inventarios, procesar pagos y vender en redes sociales. También tiene Shopify Payments, Shopify Capital (financiamiento a comercios) y Shopify Fulfillment (logística). Su modelo SaaS con ingresos por suscripción y comisiones por transacción la convierte en una apuesta de largo plazo sobre el crecimiento del comercio digital global.',
+
+  // ── Alta volatilidad ──
+  TSLA:  'Tesla Inc. es el fabricante de vehículos eléctricos más reconocido del mundo, con modelos como el Model 3, Model Y, Model S y Cybertruck. Además de autos, produce sistemas de almacenamiento de energía (Powerwall, Megapack) y paneles solares. Su software de conducción autónoma (Autopilot/FSD) es una apuesta de alto potencial. Tesla también opera la red de supercargadores más grande del mundo. Es una de las acciones más negociadas del mercado, conocida por su alta volatilidad y por la influencia que tiene Elon Musk, su CEO, en el precio de la acción.',
+
+  AMZN:  'Amazon.com Inc. es el mayor retailer en línea del mundo y el líder en computación en la nube a través de AWS (Amazon Web Services), que genera la mayor parte de sus ganancias operativas. También opera Prime Video, Amazon Advertising, Alexa y una red logística propia de alcance global. Prime, su programa de membresía, cuenta con más de 200 millones de suscriptores. Amazon es además el mayor empleador privado de Estados Unidos. Su capacidad para dominar múltiples industrias simultáneamente la convierte en una de las acciones más seguidas por inversores de crecimiento a largo plazo.',
+
+  NFLX:  'Netflix Inc. es el servicio de streaming de video más grande del mundo con más de 260 millones de suscriptores en 190 países. Produce contenido original en múltiples idiomas, incluyendo series, películas, documentales y stand-up comedy que han ganado premios Emmy, Óscar y Globo de Oro. Introdujo el modelo de suscripción con publicidad para ampliar su base de usuarios y ha comenzado a incursionar en videojuegos. Netflix es la referencia del sector streaming y su capacidad para retener suscriptores en un mercado competitivo define su valor como empresa.',
+
+  COIN:  'Coinbase Global Inc. es el mayor exchange de criptomonedas de Estados Unidos y uno de los más regulados del mundo. Permite comprar, vender y custodiar más de 200 criptoactivos. También ofrece servicios institucionales, staking, wallet propia y una plataforma de derivados. Cotiza en el Nasdaq desde 2021 y su acción está altamente correlacionada con el precio de Bitcoin. Es la puerta de entrada al mundo cripto para millones de usuarios y un referente para inversores que quieren exposición al ecosistema blockchain sin comprar criptomonedas directamente.',
+
+  HOOD:  'Robinhood Markets Inc. es una plataforma de inversión que popularizó el trading sin comisiones en Estados Unidos, democratizando el acceso a acciones, ETFs, opciones y criptomonedas para millones de usuarios jóvenes. Su modelo freemium ofrece una cuenta básica gratuita y Robinhood Gold con funciones premium. También lanzó una tarjeta de crédito y servicios de retiro. Robinhood es un termómetro del sentimiento retail en los mercados y su cotización refleja el apetito por el riesgo de los inversores minoristas estadounidenses.',
+
+  // ── ETFs ──
+  SPY:   'SPDR S&P 500 ETF Trust (SPY) es el ETF con mayor volumen de negociación del mundo. Replica el índice S&P 500, que agrupa a las 500 empresas más grandes de Estados Unidos por capitalización bursátil, incluyendo Apple, Microsoft, NVIDIA, Amazon y Google. Es el instrumento de referencia para obtener exposición diversificada a la economía estadounidense con una sola operación. Históricamente ha generado un rendimiento promedio anual de alrededor del 10% en dólares, convirtiéndolo en la base de la estrategia de inversión pasiva de largo plazo para millones de inversores en todo el mundo.',
+
+  QQQ:   'Invesco QQQ Trust replica el índice Nasdaq-100, que agrupa a las 100 mayores empresas no financieras del Nasdaq, con alta concentración en tecnología: Apple, Microsoft, NVIDIA, Amazon, Meta y Alphabet representan una parte significativa de su composición. Es el ETF de referencia para inversores que buscan exposición al sector tecnológico y de crecimiento estadounidense. Históricamente ha superado al S&P 500 en períodos alcistas, aunque también presenta mayor volatilidad. Es uno de los ETFs más negociados del mundo y favorito entre traders de corto y largo plazo.',
+
+  GLD:   'SPDR Gold Shares (GLD) es el mayor ETF de oro del mundo por activos bajo gestión. Replica el precio del oro físico, permitiendo a inversores obtener exposición al metal precioso sin necesidad de comprarlo ni almacenarlo físicamente. El oro históricamente funciona como reserva de valor y activo refugio en momentos de incertidumbre económica, inflación elevada o debilidad del dólar. GLD es el instrumento preferido por traders e inversores institucionales para operar oro con la liquidez y simplicidad de una acción en bolsa.',
+
+  // ── LATAM ──
+  MELI:  'MercadoLibre Inc. es la mayor plataforma de comercio electrónico y servicios financieros de América Latina, con operaciones en más de 18 países. Su ecosistema incluye MercadoPago (fintech y pagos digitales), MercadoShips (logística), MercadoFondos (inversiones) y MercadoCrédito (préstamos). Con más de 200 millones de usuarios activos, es el referente del e-commerce en la región y la empresa latinoamericana de mayor capitalización bursátil cotizando en el Nasdaq. Su crecimiento constante en mercados como Brasil, México y Argentina la convierte en la apuesta principal para inversores que buscan exposición a LATAM.',
+
+  EC:    'Ecopetrol S.A. es la mayor empresa de Colombia y una de las principales compañías de petróleo y gas de América Latina. Controlada mayoritariamente por el Estado colombiano, opera en exploración, producción, refinación y transporte de hidrocarburos. También tiene participación en ISA (infraestructura de transmisión eléctrica) y está avanzando en proyectos de energía renovable. Cotiza en la Bolsa de Valores de Colombia (BVC) y en el NYSE como ADR. Es una de las acciones latinoamericanas con mayor dividendo y un referente para inversores interesados en el sector energético de la región.',
+
+  PBR:   'Petróleo Brasileiro S.A. (Petrobras) es la mayor empresa de Brasil y una de las mayores compañías de energía del mundo. Controlada por el gobierno brasileño, opera en exploración y producción de petróleo en aguas profundas, refinación, distribución y gas natural. Sus reservas del presal son de las más grandes y rentables del mundo. Cotiza en la Bolsa de São Paulo (B3) y en el NYSE como ADR. Históricamente ha pagado dividendos muy elevados, lo que la convierte en una de las acciones más atractivas para inversores orientados a rentas en mercados emergentes.',
+
+  VALE:  'Vale S.A. es la mayor productora de mineral de hierro y níquel del mundo, con operaciones principalmente en Brasil y presencia en más de 30 países. El mineral de hierro que extrae es materia prima clave para la producción de acero a nivel global, especialmente en China, su principal cliente. También produce cobre, manganeso y otros minerales críticos para la transición energética. Cotiza en la B3 de Brasil y en el NYSE como ADR. Su precio está fuertemente correlacionado con el ciclo económico chino y la demanda de materias primas industriales.',
+
+  GLOB:  'Globant S.A. es una empresa tecnológica argentina especializada en servicios de desarrollo de software, transformación digital e inteligencia artificial para grandes corporaciones a nivel mundial. Sus clientes incluyen Disney, Google, Electronic Arts y Santander. Cotiza en el NYSE y es uno de los unicornios tecnológicos más exitosos de América Latina, con operaciones en más de 30 países y miles de ingenieros distribuidos globalmente. Es la referencia del sector tecnológico latinoamericano para inversores que buscan exposición al talento de la región sin los riesgos macroeconómicos locales.',
+
+  AMX:   'América Móvil S.A.B. de C.V. es la mayor empresa de telecomunicaciones de América Latina, fundada por Carlos Slim. Opera bajo marcas como Telcel en México, Claro en más de 20 países de la región y Telmex en telecomunicaciones fijas. Con más de 300 millones de suscriptores, domina los mercados móviles de la mayoría de los países latinoamericanos. Cotiza en la Bolsa Mexicana de Valores y en el NYSE como ADR. Es una acción defensiva con dividendos consistentes, muy seguida por inversores institucionales que buscan exposición estable al crecimiento de la conectividad en LATAM.',
+
+  // ── Finanzas ──
+  V:     'Visa Inc. opera la red de pagos electrónicos más grande del mundo, procesando más de 200,000 millones de transacciones al año en más de 200 países. No emite tarjetas ni asume riesgo crediticio; actúa como puente tecnológico entre bancos emisores, comerciantes e instituciones financieras. Su modelo de negocio es altamente escalable: cada nueva transacción genera ingresos sin aumentar proporcionalmente los costos. El crecimiento del comercio electrónico y la digitalización de los pagos en mercados emergentes son sus principales motores de expansión a largo plazo.',
+
+  JPM:   'JPMorgan Chase & Co. es el banco más grande de Estados Unidos por activos totales, con más de $3.9 billones bajo gestión. Ofrece servicios de banca de inversión, banca comercial, gestión de activos (J.P. Morgan Asset Management), tarjetas de crédito (Chase) y servicios al consumidor. Bajo el liderazgo de Jamie Dimon, es considerado el banco mejor gestionado de Wall Street. Sus resultados trimestrales son un termómetro de la salud del sistema financiero estadounidense y su acción es referencia obligada para inversores del sector bancario global.',
+
+  GS:    'The Goldman Sachs Group Inc. es uno de los bancos de inversión más prestigiosos e influyentes del mundo. Presta servicios de banca de inversión, trading de activos financieros, gestión de activos y finanzas corporativas para gobiernos, fondos soberanos, corporaciones y altos patrimonios. Tiene presencia en los principales centros financieros del mundo y sus análisis de mercado son seguidos por inversores institucionales globalmente. Goldman Sachs es referencia cuando se habla de fusiones y adquisiciones, salidas a bolsa (IPOs) y operaciones de deuda a gran escala.',
+
+  'BRK-B': 'Berkshire Hathaway Inc. es el conglomerado inversor liderado por Warren Buffett, considerado el mayor inversor de la historia. Posee empresas completas como GEICO (seguros), BNSF Railway (ferrocarriles), Berkshire Hathaway Energy y Dairy Queen, además de grandes posiciones accionarias en Apple, Bank of America, Chevron y Coca-Cola. La clase B (BRK-B) permite a inversores minoristas acceder al portafolio de Buffett a un precio accesible. Sus cartas anuales a accionistas son consideradas material de lectura obligatoria para cualquier inversor de largo plazo.',
+
+  PYPL:  'PayPal Holdings Inc. es una de las plataformas de pagos digitales más utilizadas del mundo, con más de 430 millones de cuentas activas en más de 200 mercados. Sus productos incluyen PayPal (pagos en línea), Venmo (pagos entre personas en EE.UU.), Braintree (procesamiento para empresas) y Honey (cupones y descuentos). Fue pionera del comercio electrónico como spin-off de eBay y hoy compite con Apple Pay, Google Pay y nuevos actores fintech. Su valuación ha caído significativamente desde sus máximos, lo que la convierte en una acción de valor seguida por inversores contrarian.',
+
+  // ── Salud ──
+  LLY:   'Eli Lilly and Company es una de las compañías farmacéuticas de mayor crecimiento del mundo gracias a sus medicamentos para diabetes y obesidad, especialmente tirzepatida (Mounjaro para diabetes, Zepbound para obesidad). La demanda global de estos tratamientos superó ampliamente la capacidad de producción de la compañía, convirtiéndola en una de las acciones de mayor rendimiento del S&P 500 en los últimos años. También tiene un sólido portafolio en oncología, Alzheimer e inmunología. Su capitalización bursátil la ubica entre las diez empresas más valiosas del mundo.',
+
+  JNJ:   'Johnson & Johnson es uno de los conglomerados de salud más grandes y diversificados del mundo, con más de 135 años de historia. Tras escindir su división de productos de consumo (Kenvue), se enfoca en farmacéuticos y dispositivos médicos. Su portafolio incluye tratamientos para cáncer, enfermedades autoinmunes y psiquiátricas, así como dispositivos quirúrgicos avanzados. Es un Dividend Aristocrat que lleva más de 60 años aumentando su dividendo de forma consecutiva, convirtiéndola en una referencia para inversores orientados a rentas estables y capital preservado.',
+
+  PFE:   'Pfizer Inc. es una de las compañías farmacéuticas más grandes del mundo, con presencia en más de 180 países. Desarrolló junto a BioNTech la vacuna de ARNm contra el COVID-19 más distribuida globalmente. Su portafolio incluye medicamentos en oncología, enfermedades infecciosas, cardiología, neurología e inflamación. Tras los ingresos extraordinarios del COVID, Pfizer atraviesa una fase de readecuación de su portafolio con nuevas adquisiciones. Su dividendo consistente y su valuación más baja respecto a pares la convierten en una opción seguida por inversores de valor en el sector salud.',
+
+  // ── Consumo ──
+  KO:    'The Coca-Cola Company es la mayor empresa de bebidas no alcohólicas del mundo, con un portafolio de más de 200 marcas que incluyen Sprite, Fanta, Powerade, Minute Maid, Smartwater y Georgia Coffee. Tiene presencia en prácticamente todos los países del mundo y distribuye más de 2,000 millones de porciones diarias. Es un Dividend Aristocrat con más de 60 años aumentando su dividendo consecutivamente. Warren Buffett, a través de Berkshire Hathaway, es uno de sus mayores accionistas históricos. Es la acción defensiva por excelencia para inversores que priorizan estabilidad y rentas.',
+
+  MCD:   'McDonald\'s Corporation opera la mayor cadena de restaurantes de comida rápida del mundo, con más de 40,000 ubicaciones en más de 100 países. Cerca del 95% son franquicias, lo que genera un modelo de negocio altamente rentable basado en rentas inmobiliarias y regalías. Además de hamburguesas, McCafé ha convertido al café en una línea de negocio relevante. McDonald\'s es Dividend Aristocrat con décadas de aumentos consecutivos y es considerada una acción defensiva que mantiene bien su valor en períodos de recesión económica gracias a la resiliencia de su demanda.',
+
+  DIS:   'The Walt Disney Company es uno de los conglomerados de entretenimiento más icónicos del mundo. Opera parques temáticos (Disneyland, Disney World, parks en Asia y Europa), estudios cinematográficos (Marvel, Pixar, Lucasfilm, 20th Century Studios), canales de televisión (ABC, ESPN, National Geographic) y la plataforma de streaming Disney+. Su capacidad de monetizar sus franquicias a través de múltiples canales simultáneos es única en la industria. Disney atraviesa una transformación hacia el streaming mientras mantiene el poder de sus marcas como activo diferencial a largo plazo.',
+
+  SBUX:  'Starbucks Corporation opera más de 36,000 cafeterías en 80 países, siendo la mayor cadena de café del mundo. Su modelo combina tiendas propias con licencias y franquicias internacionales. El programa de lealtad Starbucks Rewards cuenta con millones de miembros activos que generan ingresos recurrentes y datos valiosos. También vende productos envasados en supermercados. Starbucks enfrenta el desafío de recuperar el tráfico de clientes en un contexto de precios elevados y competencia creciente en China, su segundo mercado más importante.',
+
+  NKE:   'Nike Inc. es la mayor empresa de ropa y calzado deportivo del mundo, con marcas como Nike, Jordan y Converse presentes en más de 190 países. Su estrategia de venta directa al consumidor (DTC) a través de su app, SNKRS y tiendas propias está aumentando márgenes y control de marca. Nike invierte fuertemente en patrocinios de atletas y equipos deportivos de élite a nivel global. Su capacidad para crear productos de edición limitada con alta demanda y márgenes premium la diferencia de sus competidores. Es una de las marcas más reconocidas y valoradas del mundo.',
+
+  UBER:  'Uber Technologies Inc. opera la mayor plataforma de transporte bajo demanda del mundo en más de 70 países y 10,000 ciudades. Sus servicios incluyen viajes compartidos (Uber), entrega de comida (Uber Eats), transporte de mercancías (Uber Freight) y movilidad empresarial. Tras años de pérdidas, Uber logró su primera rentabilidad sostenida, lo que cambió radicalmente la percepción de los inversores. Su escala global, el efecto de red de su plataforma y la expansión de Uber Eats como negocio independiente la convierten en una de las acciones de crecimiento más seguidas fuera del sector tecnológico puro.',
+
+  // ── Energía ──
+  XOM:   'ExxonMobil Corporation es una de las mayores compañías de petróleo y gas del mundo, con operaciones en exploración, producción, refinación, distribución y petroquímica en más de 60 países. Produce más de 3.8 millones de barriles equivalentes de petróleo diarios. También está invirtiendo en captura de carbono y litio para baterías, como parte de su adaptación a la transición energética. Es un Dividend Aristocrat con más de 40 años de aumentos consecutivos en su dividendo. Su rentabilidad depende significativamente del precio global del crudo y el gas natural.',
+
+  CVX:   'Chevron Corporation es una de las mayores compañías energéticas del mundo, con operaciones integradas en petróleo, gas natural, refinación y productos petroquímicos en más de 180 países. Tiene posiciones estratégicas en el Pérmico (EE.UU.), el Mar del Norte, Kazajistán y Australia. También está avanzando en energías renovables, hidrógeno y combustibles de bajas emisiones. Al igual que ExxonMobil, es un Dividend Aristocrat reconocido por su política de retorno de capital a través de dividendos y recompra de acciones. Es la segunda mayor empresa energética de Estados Unidos.',
+
+  // ── Industria ──
+  BA:    'The Boeing Company es uno de los dos mayores fabricantes de aeronaves comerciales del mundo junto a Airbus. Su portafolio incluye los modelos 737 MAX, 787 Dreamliner y 777X, además de aeronaves militares, helicópteros y sistemas espaciales a través de su división de Defensa. Boeing atraviesa uno de los períodos más complejos de su historia, con problemas de control de calidad en el 737 MAX, retrasos en entregas y una huelga prolongada de trabajadores que afectó su producción. Su recuperación y cartera de pedidos son seguidas de cerca por analistas e inversores del sector aeroespacial.',
+
+  CAT:   'Caterpillar Inc. es el mayor fabricante mundial de maquinaria de construcción y minería, con productos que incluyen excavadoras, bulldozers, motores industriales y turbinas de gas. Sus máquinas son esenciales para proyectos de infraestructura, minería, energía y construcción en todo el mundo. Caterpillar es considerada un barómetro de la actividad económica global: cuando la construcción y la minería crecen, sus ventas aumentan. Es Dividend Aristocrat con décadas de aumentos consecutivos y una referencia para inversores que buscan exposición al ciclo económico industrial con una empresa de calidad reconocida.',
+};
+
+
+const fmt    = (p: number) => (!p || p <= 0) ? '—' : `$${p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const fmtChg = (c: number) => `${c >= 0 ? '+' : ''}${c.toFixed(2)}%`;
+
+const env      = (Astro.locals.runtime?.env as any);
+const KV       = env?.INVERSA_KV as KVNamespace | undefined;
+const FINN_KEY = env?.FINNHUB_API_KEY as string | undefined;
+
+let accion: any = null;
+let quote: any  = null;
+let fetchError  = false;
+
+try {
+  type CachedAccion = { accion: any; quote: any };
+
+  // 1. Leer del objeto agrupado que escribe el cron
+  const topAcciones = await KV?.get('cache:top-acciones', 'json') as Record<string, CachedAccion> | null;
+  const cached = topAcciones?.[slug as string] ?? null;
+
+  if (cached) {
+    accion = cached.accion;
+    quote  = cached.quote;
+  } else {
+    // 2. Fallback: buscar en lista y llamar Finnhub directamente
+    const lista = await KV?.get('acciones', 'json') as any[] | null;
+    const found = lista?.find((a: any) => a.slug === slug) ?? null;
+    if (!found) throw new Error('Acción no encontrada');
+    accion = found;
+
+    if (FINN_KEY) {
+      const qRes = await fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${found.ticker}&token=${FINN_KEY}`
+      );
+      if (qRes.ok) {
+        const qData = await qRes.json() as any;
+        quote = {
+          precio:     qData.c,
+          apertura:   qData.o,
+          maximo:     qData.h,
+          minimo:     qData.l,
+          prevCierre: qData.pc,
+          cambioPct:  qData.pc > 0 ? ((qData.c - qData.pc) / qData.pc) * 100 : 0,
+        };
+      }
+    }
+    // ⚠️ Sin KV.put — el cron es el único que escribe
+  }
+} catch (e) {
+  fetchError = true;
+  console.error('[AccionDetail]', e);
+}
+
+if (!accion && !fetchError) {
+  return Astro.redirect('/herramientas/acciones');
+}
+
+const precio    = quote?.precio    ?? accion?.precio    ?? 0;
+const cambioPct = quote?.cambioPct ?? accion?.cambioPct ?? 0;
+const isUp      = cambioPct >= 0;
+const ticker    = accion?.ticker ?? '';
+const tvSymbol  = accion?.tradingviewSimbolo ?? `NASDAQ:${ticker}`;
+const desc      = descripciones[ticker] ?? '';
+--- 
+
+<Layout>
+
+
+<slot name="head" slot="head">
+
+  <!-- ═══════════════════════════════════════
+       PRECONNECT
+  ═══════════════════════════════════════ -->
+  <link rel="preconnect" href="https://res.cloudinary.com" />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- ═══════════════════════════════════════
+       BASIC SEO
+  ═══════════════════════════════════════ -->
+  <title>{accion?.nombre ?? ticker} ({ticker}) — {fmt(precio)} hoy | Inversax</title>
+  <meta name="description"    content={`Cotización de ${accion?.nombre} (${ticker}) hoy: ${fmt(precio)}, variación de ${fmtChg(cambioPct)}. Gráfica en tiempo real, apertura, máximo, mínimo y datos del mercado para inversores en Latinoamérica.`} />
+  <meta name="author"         content="José Zúniga" />
+  <meta name="robots"         content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot"      content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="googlebot-news" content="index, follow" />
+  <link rel="canonical"       href={`https://inversax.com/herramientas/acciones/${slug}`} />
+
+  <!-- ═══════════════════════════════════════
+       KEYWORDS
+  ═══════════════════════════════════════ -->
+  <meta name="keywords"      content={`${ticker} precio hoy, ${accion?.nombre?.toLowerCase()} acción, ${ticker.toLowerCase()} bolsa, cotización ${ticker.toLowerCase()}, comprar ${ticker.toLowerCase()} desde latinoamerica, ${accion?.nombre?.toLowerCase()} hoy, ${ticker.toLowerCase()} tiempo real`} />
+  <meta name="news_keywords" content={`${ticker}, ${accion?.nombre}, cotización ${ticker} hoy, bolsa americana, Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       GEO
+  ═══════════════════════════════════════ -->
+  <meta name="geo.region"       content="LATAM" />
+  <meta name="geo.placename"    content="Latinoamérica" />
+  <meta name="language"         content="Spanish" />
+  <meta name="content-language" content="es" />
+  <meta name="coverage"         content="Worldwide" />
+  <meta name="target"           content="all" />
+
+  <!-- ═══════════════════════════════════════
+       HREFLANG — página global, aplican los 36
+  ═══════════════════════════════════════ -->
+  <link rel="alternate" hreflang="es"    href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <!-- América Latina -->
+  <link rel="alternate" hreflang="es-MX" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-AR" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-CO" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-CL" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-PE" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-VE" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-EC" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-BO" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-PY" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-UY" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-CR" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-PA" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-DO" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-SV" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-HN" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-NI" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-GT" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-CU" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-PR" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-BZ" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <!-- Europa -->
+  <link rel="alternate" hreflang="es-ES" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-AD" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-DE" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-FR" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-IT" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-CH" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-NL" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-GB" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-PT" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <!-- Resto del mundo -->
+  <link rel="alternate" hreflang="es-US" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-CA" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-AU" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-BR" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-PH" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-GQ" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="es-MA" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <link rel="alternate" hreflang="x-default" href={`https://inversax.com/herramientas/acciones/${slug}`} />
+
+  <!-- ═══════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════ -->
+  <meta property="og:site_name"   content="Inversax" />
+  <meta property="og:locale"      content="es_LA" />
+  <meta property="og:locale:alternate" content="es_MX" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="es_CO" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={`${accion?.nombre ?? ticker} (${ticker}) — ${fmt(precio)} hoy | Inversax`} />
+  <meta property="og:description" content={`${accion?.nombre} (${ticker}) cotiza a ${fmt(precio)} (${fmtChg(cambioPct)}). Gráfica y datos en tiempo real para inversores en Latinoamérica.`} />
+  <meta property="og:url"         content={`https://inversax.com/herramientas/acciones/${slug}`} />
+  <meta property="og:image"       content={`https://inversax.com/og/herramientas/acciones/${slug}.png`} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content={`${accion?.nombre} (${ticker}) precio hoy — Inversax`} />
+  <meta property="og:image:type"  content="image/png" />
+
+  <!-- ═══════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@inversax" />
+  <meta name="twitter:creator"     content="@inversax" />
+  <meta name="twitter:title"       content={`${ticker} — ${fmt(precio)} hoy | Inversax`} />
+  <meta name="twitter:description" content={`${accion?.nombre} cotiza a ${fmt(precio)} (${fmtChg(cambioPct)}). Gráfica en tiempo real en Inversax.`} />
+  <meta name="twitter:image"       content={`https://inversax.com/og/herramientas/acciones/${slug}.png`} />
+  <meta name="twitter:image:alt"   content={`${accion?.nombre} (${ticker}) precio hoy — Inversax`} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebSite + SearchAction
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Inversax",
+    "url": "https://inversax.com",
+    "description": "Noticias de cripto, trading, forex y bolsa en español para Latinoamérica",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://inversax.com/noticias?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — WebPage
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${accion?.nombre ?? ticker} (${ticker}) — Precio en Vivo | Inversax`,
+    "description": `Cotización de ${accion?.nombre} (${ticker}) en tiempo real con gráfica histórica y datos del mercado para inversores en Latinoamérica.`,
+    "url": `https://inversax.com/herramientas/acciones/${slug}`,
+    "inLanguage": "es",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Inversax",
+      "url": "https://inversax.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Inversax",
+      "url": "https://inversax.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://inversax.com/favicon.png",
+        "width": 512,
+        "height": 512
+      }
+    },
+    "about": { "@type": "Thing", "name": `Acción ${accion?.nombre} (${ticker})` }
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — BreadcrumbList
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio",       "item": "https://inversax.com" },
+      { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://inversax.com/herramientas" },
+      { "@type": "ListItem", "position": 3, "name": "Acciones",     "item": "https://inversax.com/herramientas/acciones" },
+      { "@type": "ListItem", "position": 4, "name": `${accion?.nombre ?? ticker} (${ticker})`, "item": `https://inversax.com/herramientas/acciones/${slug}` }
+    ]
+  })} />
+
+  <!-- ═══════════════════════════════════════
+       JSON-LD — FAQPage
+  ═══════════════════════════════════════ -->
+  {accion && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": `¿Cuánto vale la acción de ${accion.nombre} (${ticker}) hoy?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `La acción de ${accion.nombre} (${ticker}) cotiza a ${fmt(precio)} hoy, con una variación de ${fmtChg(cambioPct)} respecto al cierre anterior, según datos actualizados en Inversax.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `¿Cómo comprar acciones de ${accion.nombre} (${ticker}) desde Latinoamérica?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `Podés comprar acciones de ${accion.nombre} (${ticker}) desde Latinoamérica usando brokers internacionales como Interactive Brokers, eToro o Charles Schwab, que permiten abrir cuentas desde la región y operar en el mercado estadounidense.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `¿En qué sector opera ${accion.nombre}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `${accion.nombre} (${ticker}) opera en el sector de ${accion.sector}. ${desc ? desc.slice(0, 200) + '...' : ''}`
+          }
+        }
+      ]
+    })} />
+  )}
+
+</slot>
+
+
+  <div style="background:#FAFAF8;min-height:100vh;font-family:'DM Sans',sans-serif;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+      <!-- Back -->
+      <a href="/herramientas/acciones" class="inline-flex items-center gap-2 text-sm mb-6 no-underline transition-colors" style="color:#A8A29E;">
+        <ArrowLeft size={15} /> Volver a Acciones
+      </a>
+
+      {fetchError || !accion ? (
+        <div class="flex items-center justify-center py-24 rounded-2xl" style="border:1px solid #E5E0D8;background:#fff;">
+          <p class="text-sm" style="color:#A8A29E;">
+            No se pudo cargar la información.{' '}
+            <a href="/herramientas/acciones" style="color:#B91C1C;">Volver</a>
+          </p>
+        </div>
+      ) : (
+        <div class="flex flex-col gap-6">
+
+          <!-- Header: logo + precio + cambio -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl p-5 sm:p-6" style="border:1px solid #E5E0D8;background:#fff;">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center" style="background:#F0EDE7;border:1px solid #E5E0D8;">
+                {dominiosPorTicker[ticker] ? (
+                  <img
+                    src={`https://www.google.com/s2/favicons?domain=${dominiosPorTicker[ticker]}&sz=128`}
+                    alt={accion.nombre}
+                    class="w-8 h-8 object-contain"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                  />
+                ) : null}
+                <span class="text-sm font-bold" style={`color:#78716C;${dominiosPorTicker[ticker] ? 'display:none' : ''}`}>{ticker.slice(0, 2)}</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h1 class="font-extrabold text-xl sm:text-2xl" style="font-family:'Playfair Display',serif;color:#1C1917;">{accion.nombre}</h1>
+                  <span class="text-sm font-medium px-2 py-0.5 rounded" style="color:#78716C;background:#F0EDE7;">{ticker}</span>
+                  <span class="text-[10px] font-medium px-2 py-0.5 rounded" style="background:#F5F1EC;border:1px solid #E5E0D8;color:#57534E;">{accion.sector}</span>
+                </div>
+                <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                  <span id="precio-live" class="font-bold text-2xl sm:text-3xl" style="font-family:'Playfair Display',serif;color:#1C1917;">{fmt(precio)}</span>
+                  <span id="cambio-live" class={`flex items-center gap-1 text-sm font-bold ${isUp ? 'text-emerald-600' : 'text-red-600'}`}>
+                    {isUp ? <TrendingUp size={14}/> : <TrendingDown size={14}/>}
+                    {fmtChg(cambioPct)} hoy
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Links externos -->
+            <div class="flex gap-2 flex-wrap">
+              {dominiosPorTicker[ticker] && (
+                <a href={`https://www.${dominiosPorTicker[ticker]}`} target="_blank" rel="noopener noreferrer nofollow"
+                   class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg no-underline transition-all" style="color:#57534E;background:#FAFAF8;border:1px solid #E5E0D8;">
+                  <ExternalLink size={11}/> Web oficial
+                </a>
+              )}
+              <a href={`https://finance.yahoo.com/quote/${ticker}`} target="_blank" rel="noopener noreferrer nofollow"
+                 class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg no-underline transition-all" style="color:#57534E;background:#FAFAF8;border:1px solid #E5E0D8;">
+                <ExternalLink size={11}/> Yahoo Finance
+              </a>
+            </div>
+          </div>
+
+          <!-- Stats rápidos del día -->
+          {quote && (
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { label: 'Apertura',        val: fmt(quote.apertura)   },
+                { label: 'Máximo del día',  val: fmt(quote.maximo)     },
+                { label: 'Mínimo del día',  val: fmt(quote.minimo)     },
+                { label: 'Cierre anterior', val: fmt(quote.prevCierre) },
+              ].map(({ label, val }) => (
+                <div class="rounded-xl p-4" style="border:1px solid #E5E0D8;background:#fff;">
+                  <div class="text-xs mb-1.5" style="color:#A8A29E;">{label}</div>
+                  <div class="font-bold text-base" style="font-family:'Playfair Display',serif;color:#1C1917;">{val}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div class="rounded-2xl overflow-hidden" style="border:1px solid #E5E0D8;">
+            <TVChart chartId="tv-acciones" tvSymbol={tvSymbol} />
+          </div>
+
+          <!-- Descripción -->
+          {desc && (
+            <div class="rounded-2xl p-5 sm:p-6" style="border:1px solid #E5E0D8;background:#F5F1EC;">
+              <h2 class="font-bold text-base mb-3" style="font-family:'Playfair Display',serif;color:#1C1917;">¿Qué es {accion.nombre}?</h2>
+              <p class="text-sm leading-relaxed" style="color:#57534E;">{desc}</p>
+            </div>
+          )}
+
+          <!-- Disclaimer -->
+          <p class="text-[11px] text-center" style="color:#A8A29E;">
+            Precios con posible retraso de hasta 15 min. No constituyen asesoramiento financiero. Verifica siempre con tu broker.
+          </p>
+
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>
+

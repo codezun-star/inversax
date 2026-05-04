@@ -1,0 +1,255 @@
+---
+export const prerender = true;
+// src/pages/publicidad.astro
+import Layout from '../layouts/Layout.astro';
+import {
+  Globe, ArrowRight, TrendingUp, Zap, Shield,
+  BarChart2, Mail, Users, Target, Star,
+  CheckCircle, DollarSign, Megaphone, Award
+} from 'lucide-astro';
+
+const sitioWeb    = "https://inversax.com";
+const correoAds   = "publicidadcodezun@gmail.com";
+
+const audiencia = [
+  { valor: "37",     label: "Países con cobertura"       },
+  { valor: "LATAM",  label: "Foco principal"             },
+  { valor: "18–45",  label: "Rango de edad principal"    },
+  { valor: "100%",   label: "Audiencia hispanohablante"  },
+];
+
+const opciones = [
+  {
+    badge:  "Más popular",
+    nombre: "Banner Display",
+    icon:   "display",
+    desc:   "Anuncios visuales en posiciones premium dentro de nuestras páginas de mayor tráfico: portada, cripto, noticias y herramientas.",
+    incluye: [
+      "Posiciones above the fold",
+      "Desktop y mobile",
+      "Segmentación por país o región",
+      "Reporte de impresiones mensual",
+    ],
+  },
+  {
+    badge:  "",
+    nombre: "Contenido Patrocinado",
+    icon:   "content",
+    desc:   "Artículos y análisis elaborados con tu marca como sponsor. Redactados por nuestro equipo editorial o con tu contenido previamente aprobado.",
+    incluye: [
+      "Etiquetado como 'Patrocinado'",
+      "Distribución en todas las páginas de país",
+      "Indexado en Google",
+      "Permanece en el sitio de forma indefinida",
+    ],
+  },
+  {
+    badge:  "",
+    nombre: "Afiliados",
+    icon:   "affiliate",
+    desc:   "Integra tu plataforma en nuestras guías, comparativas y recomendaciones. Pagas solo por resultados: registros, depósitos o clics calificados.",
+    incluye: [
+      "Links en artículos editoriales",
+      "Mención en guías de comparación",
+      "Cobertura en múltiples países",
+      "Pago por performance (CPA / CPC)",
+    ],
+  },
+  {
+    badge:  "",
+    nombre: "Newsletter / Email",
+    icon:   "email",
+    desc:   "Llega directamente a nuestra base de suscriptores con menciones o piezas dedicadas en nuestros envíos de noticias y actualizaciones de mercado.",
+    incluye: [
+      "Mención en cabecera o cuerpo",
+      "Pieza dedicada exclusiva",
+      "Segmentación por interés",
+      "Estadísticas de apertura y clics",
+    ],
+  },
+];
+
+const ideal = [
+  { label: "Exchanges de criptomonedas",     icon: "crypto"  },
+  { label: "Brokers de forex y CFDs",        icon: "forex"   },
+  { label: "Plataformas de inversión",        icon: "invest"  },
+  { label: "Fintechs y neobancos",            icon: "fintech" },
+  { label: "Cursos y academias financieras",  icon: "edu"     },
+  { label: "Wallets y hardware wallets",      icon: "wallet"  },
+  { label: "Apps de ahorro e inversión",      icon: "app"     },
+  { label: "Servicios financieros LATAM",     icon: "latam"   },
+];
+
+const pasos = [
+  { num: "01", titulo: "Escríbenos",      desc: "Contáctanos por correo indicando tu marca, tipo de campaña y países de interés." },
+  { num: "02", titulo: "Propuesta",       desc: "Te enviamos opciones de formato, alcance estimado y tarifas según tu objetivo." },
+  { num: "03", titulo: "Aprobación",      desc: "Revisamos el contenido o creatividades. Nos reservamos el derecho de aceptar o rechazar anuncios." },
+  { num: "04", titulo: "Publicación",     desc: "Tu campaña entra en vivo. Recibes reportes periódicos con los resultados." },
+];
+---
+
+<Layout>
+  <slot name="head" slot="head">
+    <title>Publicidad en Inversax — Llega al mercado hispanohablante</title>
+    <meta name="description" content="Anuncia tu plataforma financiera, exchange o broker en Inversax y alcanza a miles de inversores en Latinoamérica y España." />
+    <link rel="canonical" href={`${sitioWeb}/publicidad`} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Publicidad en Inversax — Llega al mercado hispanohablante" />
+    <meta property="og:description" content="Anuncia tu plataforma financiera, exchange o broker en Inversax y alcanza a miles de inversores en Latinoamérica y España." />
+    <meta property="og:url"         content={`${sitioWeb}/publicidad`} />
+    <meta property="og:image"       content={`${sitioWeb}/og/home.png`} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Inversax — Publicidad para el mercado hispanohablante" />
+  </slot>
+
+  <!-- HEADER EDITORIAL -->
+  <div style="background: #FAFAF8; border-bottom: 1px solid #E5E0D8;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <div class="flex items-center gap-2 text-sm mb-6" style="color: #A8A29E;">
+        <a href="/" class="no-underline hover:underline" style="color: #A8A29E;">Inicio</a>
+        <span>›</span>
+        <span style="color: #57534E;">Publicidad</span>
+      </div>
+      <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B91C1C; margin: 0 0 12px;">Medios &amp; Publicidad</p>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #1C1917; line-height: 1.15; margin: 0 0 16px;">
+        Llega a miles de<br />inversores en LATAM.
+      </h1>
+      <p style="color: #57534E; font-size: 16px; line-height: 1.7; max-width: 600px; margin: 0 0 28px;">
+        Inversax conecta tu marca con una audiencia hispanohablante activamente interesada en criptomonedas, trading, bolsa y finanzas personales, en 37 países.
+      </p>
+      <div class="flex flex-wrap gap-8">
+        {audiencia.map((s) => (
+          <div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #B91C1C; line-height: 1;">{s.valor}</div>
+            <div style="font-size: 13px; color: #78716C; margin-top: 4px;">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div style="background: #FAFAF8; min-height: 60vh;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-14" style="display: flex; flex-direction: column; gap: 48px;">
+
+      <!-- POR QUÉ INVERSAX -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          { titulo: "Alcance regional",      desc: "Cobertura activa en los mercados más grandes de habla hispana. Una sola campaña, múltiples países." },
+          { titulo: "Audiencia calificada",  desc: "Visitantes que buscan activamente información sobre cripto, forex, bolsa e inversiones. Alta intención de compra." },
+          { titulo: "Contexto financiero",   desc: "Tu marca aparece rodeada de contenido relevante del nicho, no en sitios genéricos. Mejor conversión." },
+        ].map((item) => (
+          <div style="border: 1px solid #E5E0D8; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="width: 32px; height: 3px; background: #B91C1C;"></div>
+            <h3 style="font-size: 15px; font-weight: 700; color: #1C1917; margin: 0;">{item.titulo}</h3>
+            <p style="font-size: 13px; color: #78716C; line-height: 1.6; margin: 0;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- OPCIONES DE PUBLICIDAD -->
+      <div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1C1917; margin: 0 0 24px;">Opciones de publicidad</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {opciones.map((op) => (
+            <div style={`position: relative; border: 1px solid ${op.badge ? '#B91C1C' : '#E5E0D8'}; padding: 28px; display: flex; flex-direction: column; gap: 16px;`}>
+              {op.badge && (
+                <div style="position: absolute; top: 16px; right: 16px;">
+                  <span style="background: #B91C1C; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; text-transform: uppercase; letter-spacing: 0.06em;">{op.badge}</span>
+                </div>
+              )}
+              <h3 style="font-size: 16px; font-weight: 700; color: #1C1917; margin: 0;">{op.nombre}</h3>
+              <p style="font-size: 14px; color: #57534E; line-height: 1.7; margin: 0;">{op.desc}</p>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+                {op.incluye.map((item) => (
+                  <div style="display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="color: #B91C1C; font-size: 14px; line-height: 1.4; flex-shrink: 0;">✓</span>
+                    <span style="font-size: 13px; color: #57534E; line-height: 1.5;">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- IDEAL PARA -->
+      <div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1C1917; margin: 0 0 20px;">¿Tu marca encaja aquí?</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {ideal.map((item) => (
+            <div style="border: 1px solid #E5E0D8; padding: 14px 16px; display: flex; align-items: center; gap: 10px;">
+              <span style="width: 6px; height: 6px; background: #B91C1C; flex-shrink: 0;"></span>
+              <span style="font-size: 13px; color: #57534E; line-height: 1.4;">{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <p style="font-size: 13px; color: #A8A29E; margin: 16px 0 0;">
+          ¿Tu categoría no está en la lista pero crees que encaja? Escríbenos igualmente, evaluamos cada caso.
+        </p>
+      </div>
+
+      <!-- CÓMO FUNCIONA -->
+      <div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1C1917; margin: 0 0 24px;">¿Cómo funciona?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {pasos.map((p) => (
+            <div style="border: 1px solid #E5E0D8; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+              <span style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #E5E0D8; line-height: 1;">{p.num}</span>
+              <h3 style="font-size: 14px; font-weight: 700; color: #1C1917; margin: 0;">{p.titulo}</h3>
+              <p style="font-size: 13px; color: #78716C; line-height: 1.6; margin: 0;">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- POLÍTICA EDITORIAL + TRANSPARENCIA -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div style="background: #F5F1EC; border: 1px solid #E5E0D8; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-size: 15px; font-weight: 700; color: #1C1917; margin: 0;">Política editorial</h3>
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            La publicidad nunca influye en nuestra línea editorial. Las noticias, análisis y recomendaciones que publicamos son independientes de las relaciones comerciales del sitio. Nunca aceptamos dinero por publicar reseñas positivas no declaradas.
+          </p>
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            Nos reservamos el derecho de rechazar cualquier anuncio que consideremos engañoso, de alto riesgo para el usuario, o que no cumpla con los estándares mínimos de legitimidad financiera.
+          </p>
+        </div>
+        <div style="border: 1px solid #E5E0D8; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-size: 15px; font-weight: 700; color: #1C1917; margin: 0;">Transparencia con el usuario</h3>
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            Todo el contenido patrocinado y los enlaces de afiliado están claramente etiquetados como <strong style="color: #1C1917;">"Patrocinado"</strong> o <strong style="color: #1C1917;">"Publicidad"</strong>. Nuestros lectores siempre saben qué es contenido editorial y qué es comercial.
+          </p>
+          <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+            Esta política protege a nuestros usuarios y también protege el valor de la asociación con Inversax: nuestra audiencia confía en nosotros porque somos honestos.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA CONTACTO -->
+      <div style="border: 2px solid #B91C1C; padding: 40px;">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div style="display: flex; flex-direction: column; gap: 12px; max-width: 560px;">
+            <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B91C1C; margin: 0;">Contacto comercial</p>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: #1C1917; margin: 0; line-height: 1.2;">¿Listo para comenzar?</h2>
+            <p style="color: #57534E; font-size: 14px; line-height: 1.7; margin: 0;">
+              Escríbenos con el nombre de tu empresa, el tipo de campaña que te interesa y los países a los que quieres llegar. Te respondemos con una propuesta en menos de 48 horas.
+            </p>
+            <a href={`mailto:${correoAds}`} class="no-underline" style="color: #B91C1C; font-size: 14px; font-weight: 600;">{correoAds}</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;">
+            <a
+              href={`mailto:${correoAds}?subject=Solicitud%20de%20publicidad%20en%20Inversax`}
+              class="no-underline"
+              style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #B91C1C; color: #fff; font-size: 14px; font-weight: 700; padding: 14px 28px; white-space: nowrap;"
+            >
+              Solicitar propuesta <ArrowRight size={15} />
+            </a>
+            <p style="font-size: 12px; color: #A8A29E; text-align: center; margin: 0;">Respuesta en menos de 48 horas</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
