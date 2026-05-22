@@ -1,0 +1,60 @@
+import type { APIRoute } from 'astro';
+import { paises } from '../lib/paises';
+import { db } from '../db/index';
+import { posts } from '../db/schema';
+import { eq } from 'drizzle-orm';
+
+const BASE = 'https://inversax.com';
+
+export const GET: APIRoute = async () => {
+  const slugs = await db
+    .select({ slug: posts.slug })
+    .from(posts)
+    .where(eq(posts.publicado, true))
+    .all();
+
+  const staticPages: Array<{ url: string; priority: string; changefreq: string }> = [
+    { url: '',                                  priority: '1.0', changefreq: 'weekly'  },
+    { url: '/brokers',                          priority: '0.9', changefreq: 'weekly'  },
+    { url: '/calculadoras',                     priority: '0.8', changefreq: 'monthly' },
+    { url: '/calculadoras/interes-compuesto',   priority: '0.7', changefreq: 'monthly' },
+    { url: '/calculadoras/salario-neto',        priority: '0.7', changefreq: 'monthly' },
+    { url: '/calculadoras/conversion-divisas',  priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog',                             priority: '0.8', changefreq: 'weekly'  },
+    { url: '/privacidad',                       priority: '0.3', changefreq: 'yearly'  },
+    { url: '/legal',                            priority: '0.3', changefreq: 'yearly'  },
+    { url: '/contacto',                         priority: '0.5', changefreq: 'yearly'  },
+    { url: '/acerca',                           priority: '0.5', changefreq: 'yearly'  },
+  ];
+
+  const countryPages = paises.map((p) => ({
+    url: `/brokers/${p.codigo}`,
+    priority: '0.8',
+    changefreq: 'monthly',
+  }));
+
+  const blogPages = slugs.map((s) => ({
+    url: `/blog/${s.slug}`,
+    priority: '0.7',
+    changefreq: 'monthly',
+  }));
+
+  const allPages = [...staticPages, ...countryPages, ...blogPages];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allPages
+  .map(
+    (p) => `  <url>
+    <loc>${BASE}${p.url}</loc>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`
+  )
+  .join('\n')}
+</urlset>`;
+
+  return new Response(xml, {
+    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+  });
+};

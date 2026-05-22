@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const calculadoras = [
+  {
+    titulo: 'Interés Compuesto',
+    descripcion: 'Calcula el crecimiento de tu inversión con reinversión de ganancias a lo largo del tiempo.',
+    href: '/calculadoras/interes-compuesto',
+    categoria: 'Inversión',
+    svgPath: 'M22 12h-4l-3 9L9 3l-3 9H2',
+    color: '#FF8C42',
+  },
+  {
+    titulo: 'Salario Neto',
+    descripcion: 'Calcula cuánto recibes realmente después de retenciones e impuestos según tu país.',
+    href: '/calculadoras/salario-neto',
+    categoria: 'Personal',
+    svgPath: 'M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6',
+    color: '#22C55E',
+  },
+  {
+    titulo: 'Conversión de Divisas',
+    descripcion: 'Convierte entre USD, EUR, COP, MXN, CLP y más monedas usando tasas de referencia.',
+    href: '/calculadoras/conversion-divisas',
+    categoria: 'Divisas',
+    svgPath: 'M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3',
+    color: '#3B82F6',
+  },
+];
+---
+
+<Layout
+  title="Calculadoras Financieras — Inversax"
+  description="Calculadoras para planificar tu inversión: interés compuesto, salario neto, conversión de divisas y más."
+>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a>
+        <span>›</span>
+        <span style="color:#57534E;">Calculadoras</span>
+      </div>
+      <h1 style="font-size:clamp(24px, 4vw, 36px); font-weight:800; color:#1A1A1A; margin:0 0 10px; letter-spacing:-0.3px;">
+        Calculadoras financieras
+      </h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; max-width:520px; margin:0;">
+        Herramientas gratuitas para tomar mejores decisiones de inversión y planificación financiera personal.
+      </p>
+    </div>
+  </div>
+
+  <div style="max-width:1100px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:14px;">
+      {calculadoras.map((c) => (
+        <a
+          href={c.href}
+          style="display:flex; flex-direction:column; background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:24px; text-decoration:none; transition:border-color 0.15s, box-shadow 0.15s;"
+          onmouseover={`this.style.borderColor='${c.color}'; this.style.boxShadow='0 2px 12px rgba(0,0,0,0.07)'`}
+          onmouseout="this.style.borderColor='#E2DDD8'; this.style.boxShadow='none'"
+        >
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <div style={`width:42px; height:42px; background:${c.color}18; border-radius:10px; display:flex; align-items:center; justify-content:center;`}>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={c.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d={c.svgPath}></path>
+              </svg>
+            </div>
+            <span style="font-size:11px; font-weight:600; background:#F0EDE7; color:#78716C; padding:3px 9px; border-radius:5px; text-transform:uppercase; letter-spacing:0.05em;">{c.categoria}</span>
+          </div>
+          <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 8px;">{c.titulo}</h2>
+          <p style="font-size:13px; color:#57534E; line-height:1.6; margin:0 0 16px; flex:1;">{c.descripcion}</p>
+          <div style="display:flex; align-items:center; gap:5px;">
+            <span style={`font-size:13px; font-weight:600; color:${c.color};`}>Calcular ahora</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={c.color} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { paises } from '../../lib/paises';
+import { getBrokersByPais, brokers } from '../../lib/brokers';
+
+const topBrokers = brokers.sort((a, b) => b.calificacion - a.calificacion).slice(0, 3);
+---
+
+<Layout
+  title="Comparador de Brokers por País 2026 — Inversax"
+  description="Compara los mejores brokers disponibles en Colombia, México, Chile, Argentina, Perú y más. Actualizado 2026."
+>
+
+<!-- ── HERO ────────────────────────────────────────── -->
+<div style="background: linear-gradient(135deg, #1A1A1A 0%, #2D2520 100%); padding: 56px 20px 48px; border-bottom: 1px solid #2D2826;">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    <nav style="display:flex; align-items:center; gap:6px; font-size:13px; color:#6B6460; margin-bottom:24px;">
+      <a href="/" style="color:#6B6460; text-decoration:none;">Inicio</a>
+      <span>›</span>
+      <span style="color:#C7BFB5;">Brokers por País</span>
+    </nav>
+    <div style="max-width:580px;">
+      <h1 style="font-size:clamp(26px,5vw,42px); font-weight:800; color:#fff; margin:0 0 14px; letter-spacing:-0.5px; line-height:1.1;">
+        Encuentra el broker<br/>ideal para tu país
+      </h1>
+      <p style="font-size:16px; color:#A09890; line-height:1.65; margin:0 0 28px;">
+        Comparamos regulación, spreads, depósito mínimo y métodos de pago locales para que inviertas con total confianza.
+      </p>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:7px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span style="font-size:13px; color:#A09890; font-weight:500;">{paises.length} países cubiertos</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:7px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span style="font-size:13px; color:#A09890; font-weight:500;">{brokers.length} brokers analizados</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:7px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span style="font-size:13px; color:#A09890; font-weight:500;">Actualizado 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOP BROKERS STRIP ────────────────────────────── -->
+<div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:20px 20px;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+      <span style="font-size:12px; font-weight:700; color:#A8A29E; text-transform:uppercase; letter-spacing:0.07em; white-space:nowrap;">Brokers destacados:</span>
+      {topBrokers.map((b) => (
+        <a href={b.afiliado} target="_blank" rel="noopener noreferrer sponsored"
+          style="display:flex; align-items:center; gap:8px; padding:6px 14px; border:1px solid #E2DDD8; border-radius:8px; text-decoration:none; transition:border-color 0.15s;"
+          onmouseover={`this.style.borderColor='${b.color}'`}
+          onmouseout="this.style.borderColor='#E2DDD8'"
+        >
+          <img src={b.logo} alt={b.nombre} width="20" height="20" style="width:20px;height:20px;object-fit:contain;" loading="eager" />
+          <span style="font-size:13px; font-weight:700; color:#1A1A1A;">{b.nombre}</span>
+          <span style={`font-size:11px; font-weight:800; color:${b.color};`}>{b.calificacion}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<!-- ── PAÍSES GRID ──────────────────────────────────── -->
+<div style="max-width:1000px; margin:0 auto; padding:40px 20px 60px;">
+
+  <div style="margin-bottom:28px;">
+    <h2 style="font-size:19px; font-weight:800; color:#1A1A1A; margin:0 0 4px; letter-spacing:-0.3px;">Selecciona tu país</h2>
+    <p style="font-size:14px; color:#78716C; margin:0;">Haz clic para ver todos los brokers disponibles, métodos de pago y el recomendado para tu perfil.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:10px;">
+    {paises.map((p) => {
+      const disponibles = getBrokersByPais(p.codigo);
+      const top = disponibles[0];
+      return (
+        <a
+          href={`/brokers/${p.codigo}`}
+          class="card-lift"
+          style="padding:18px 20px; border-radius:12px;"
+        >
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <div>
+              <h3 style="font-size:15px; font-weight:800; color:#1A1A1A; margin:0 0 2px;">{p.nombre}</h3>
+              <span style="font-size:11px; font-weight:600; color:#A8A29E;">{p.moneda}</span>
+            </div>
+            <div style="text-align:right;">
+              <span style="font-size:20px; font-weight:800; color:#FF8C42; line-height:1;">{disponibles.length}</span>
+              <p style="font-size:10px; color:#A8A29E; margin:0; font-weight:500;">brokers</p>
+            </div>
+          </div>
+
+          {top && (
+            <div style="display:flex; align-items:center; gap:6px; padding-top:10px; border-top:1px solid #F0EDE7;">
+              <img src={top.logo} alt={top.nombre} width="16" height="16" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" loading="lazy" />
+              <span style="font-size:11px; color:#57534E; font-weight:600;">{top.nombre}</span>
+              <span style="font-size:10px; color:#A8A29E; margin-left:auto; font-weight:600;">Top pick</span>
+            </div>
+          )}
+
+          <div style="position:absolute; top:16px; right:14px; display:flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:#F7F7F5;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- Disclaimer -->
+  <div style="margin-top:40px; background:#F7F7F5; border:1px solid #E2DDD8; border-radius:10px; padding:16px 20px;">
+    <p style="font-size:12px; color:#78716C; line-height:1.7; margin:0;">
+      <strong style="color:#1A1A1A;">Aviso legal:</strong> Inversax puede recibir comisión de afiliado cuando abres una cuenta a través de nuestros enlaces. Nuestras comparativas son independientes y se basan en investigación propia. El trading con apalancamiento conlleva riesgo de pérdida de capital. Verifica siempre la regulación local antes de depositar.
+    </p>
+  </div>
+</div>
+
+</Layout>

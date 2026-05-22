@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Calculadora de Interés Compuesto — Inversax"
+  description="Calcula cuánto crecerá tu inversión con el interés compuesto. Ingresa capital inicial, tasa anual, aportes mensuales y plazo."
+>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a>
+        <span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a>
+        <span>›</span>
+        <span style="color:#57534E;">Interés Compuesto</span>
+      </div>
+      <h1 style="font-size:clamp(22px, 4vw, 32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">
+        Calculadora de Interés Compuesto
+      </h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">
+        Descubre el poder del interés compuesto: el dinero que ganas genera más ganancias con el tiempo.
+      </p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+      <!-- Formulario -->
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial (USD)</label>
+            <input id="capital" type="number" value="1000" min="0"
+              style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;"
+            />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Aporte mensual (USD)</label>
+            <input id="aporte" type="number" value="100" min="0"
+              style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;"
+            />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa anual (%)</label>
+            <input id="tasa" type="number" value="8" min="0" max="100" step="0.1"
+              style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;"
+            />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (años)</label>
+            <input id="anos" type="number" value="10" min="1" max="50"
+              style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultado -->
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Capital final</p>
+          <p id="resultado-total" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">$0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <span style="font-size:13px; color:#57534E;">Capital invertido</span>
+            <span id="resultado-invertido" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <span style="font-size:13px; color:#57534E;">Ganancias por interés</span>
+            <span id="resultado-ganancias" style="font-size:13px; font-weight:700; color:#22C55E;">$0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8; margin:12px 0;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Rentabilidad total</span>
+            <span id="resultado-rentabilidad" style="font-size:13px; font-weight:700; color:#FF8C42;">0%</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">
+            Cálculo con capitalización mensual. No incluye impuestos ni inflación. Es una estimación orientativa.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function fmt(n: number) {
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+  }
+
+  function calcular() {
+    const capital = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const aporte  = parseFloat((document.getElementById('aporte')  as HTMLInputElement).value) || 0;
+    const tasa    = parseFloat((document.getElementById('tasa')    as HTMLInputElement).value) || 0;
+    const anos    = parseFloat((document.getElementById('anos')    as HTMLInputElement).value) || 0;
+
+    const r = tasa / 100 / 12;
+    const n = anos * 12;
+
+    let total = 0;
+    if (r === 0) {
+      total = capital + aporte * n;
+    } else {
+      total = capital * Math.pow(1 + r, n) + aporte * ((Math.pow(1 + r, n) - 1) / r);
+    }
+
+    const invertido = capital + aporte * n;
+    const ganancias = total - invertido;
+    const rentabilidad = invertido > 0 ? (ganancias / invertido) * 100 : 0;
+
+    document.getElementById('resultado-total')!.textContent = fmt(total);
+    document.getElementById('resultado-invertido')!.textContent = fmt(invertido);
+    document.getElementById('resultado-ganancias')!.textContent = fmt(ganancias);
+    document.getElementById('resultado-rentabilidad')!.textContent = `${rentabilidad.toFixed(1)}%`;
+  }
+
+  ['capital', 'aporte', 'tasa', 'anos'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', calcular);
+  });
+
+  calcular();
+</script>
+
+<style>
+  @media (max-width: 600px) {
+    div[style*="grid-template-columns:1fr 1fr"] {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+  }
+</style>

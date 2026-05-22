@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Calculadora de Salario Neto — Inversax"
+  description="Calcula tu salario neto estimado después de deducciones según país. Para Colombia, México, Chile y más."
+>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a>
+        <span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a>
+        <span>›</span>
+        <span style="color:#57534E;">Salario Neto</span>
+      </div>
+      <h1 style="font-size:clamp(22px, 4vw, 32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">
+        Calculadora de Salario Neto
+      </h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">
+        Estima cuánto recibes realmente después de deducciones y aportes obligatorios.
+      </p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+
+    <div style="background:#FFF8F3; border:1px solid #FFD4A8; border-radius:10px; padding:14px 18px; margin-bottom:24px; display:flex; gap:10px; align-items:flex-start;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <p style="font-size:13px; color:#78716C; line-height:1.6; margin:0;">
+        Esta calculadora usa tasas aproximadas. Los valores reales dependen de tu situación fiscal específica. Consulta a un contador para cálculos exactos.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+      <!-- Inputs -->
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del salario</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">País</label>
+            <select id="pais" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="co">Colombia</option>
+              <option value="mx">México</option>
+              <option value="cl">Chile</option>
+              <option value="pe">Perú</option>
+              <option value="ar">Argentina</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Salario bruto mensual</label>
+            <input id="salario" type="number" value="3000000" min="0"
+              style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;"
+            />
+            <p id="moneda-label" style="font-size:11px; color:#A8A29E; margin:5px 0 0;">Moneda: COP</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Resultado -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Salario neto estimado</p>
+          <p id="neto" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">$0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:9px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Salario bruto</span>
+            <span id="bruto-label" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div id="deducciones-list" style="display:flex; flex-direction:column; gap:7px;"></div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; font-weight:700; color:#57534E;">Total descuentos</span>
+            <span id="total-desc" style="font-size:13px; font-weight:700; color:#EF4444;">-$0</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const tasas: Record<string, { moneda: string; items: { label: string; pct: number }[] }> = {
+    co: {
+      moneda: 'COP',
+      items: [
+        { label: 'Salud (4%)', pct: 0.04 },
+        { label: 'Pensión (4%)', pct: 0.04 },
+        { label: 'Retención en la fuente (aprox.)', pct: 0.05 },
+      ],
+    },
+    mx: {
+      moneda: 'MXN',
+      items: [
+        { label: 'IMSS (trabajador ~1.65%)', pct: 0.0165 },
+        { label: 'INFONAVIT (5%)', pct: 0.05 },
+        { label: 'ISR (aprox. 20%)', pct: 0.20 },
+      ],
+    },
+    cl: {
+      moneda: 'CLP',
+      items: [
+        { label: 'AFP (10%)', pct: 0.10 },
+        { label: 'Salud FONASA/Isapre (7%)', pct: 0.07 },
+        { label: 'Impuesto a la renta (aprox.)', pct: 0.05 },
+      ],
+    },
+    pe: {
+      moneda: 'PEN',
+      items: [
+        { label: 'ONP/AFP (13%)', pct: 0.13 },
+        { label: 'EsSalud trabajador (0%)', pct: 0 },
+        { label: 'Impuesto a la renta (5ta cat. ~8%)', pct: 0.08 },
+      ],
+    },
+    ar: {
+      moneda: 'ARS',
+      items: [
+        { label: 'Jubilación (11%)', pct: 0.11 },
+        { label: 'Obra social (3%)', pct: 0.03 },
+        { label: 'Ganancias (aprox. 15%)', pct: 0.15 },
+      ],
+    },
+  };
+
+  function fmt(n: number, moneda: string) {
+    return new Intl.NumberFormat('es-CO', { maximumFractionDigits: 0 }).format(n) + ' ' + moneda;
+  }
+
+  function calcular() {
+    const pais = (document.getElementById('pais') as HTMLSelectElement).value;
+    const salario = parseFloat((document.getElementById('salario') as HTMLInputElement).value) || 0;
+    const config = tasas[pais];
+
+    (document.getElementById('moneda-label') as HTMLElement).textContent = `Moneda: ${config.moneda}`;
+    (document.getElementById('bruto-label') as HTMLElement).textContent = fmt(salario, config.moneda);
+
+    let totalDesc = 0;
+    const lista = document.getElementById('deducciones-list')!;
+    lista.innerHTML = '';
+
+    for (const item of config.items) {
+      const monto = salario * item.pct;
+      totalDesc += monto;
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex; justify-content:space-between;';
+      row.innerHTML = `
+        <span style="font-size:12px; color:#78716C;">${item.label}</span>
+        <span style="font-size:12px; font-weight:600; color:#EF4444;">-${fmt(monto, config.moneda)}</span>
+      `;
+      lista.appendChild(row);
+    }
+
+    const neto = salario - totalDesc;
+    (document.getElementById('neto') as HTMLElement).textContent = fmt(neto, config.moneda);
+    (document.getElementById('total-desc') as HTMLElement).textContent = `-${fmt(totalDesc, config.moneda)}`;
+  }
+
+  document.getElementById('pais')?.addEventListener('change', calcular);
+  document.getElementById('salario')?.addEventListener('input', calcular);
+  calcular();
+</script>
+
+<style>
+  @media (max-width: 600px) {
+    div[style*="grid-template-columns:1fr 1fr"] {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+  }
+</style>

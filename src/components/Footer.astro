@@ -1,0 +1,93 @@
+---
+import { paises } from '../lib/paises';
+
+const paisesDestacados = paises.slice(0, 6);
+---
+
+<footer style="background:#1A1A1A; color:#C7C0B8; margin-top:80px;">
+  <div style="max-width:1100px; margin:0 auto; padding:48px 20px 32px;">
+
+    <!-- Top grid -->
+    <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px;">
+
+      <!-- Brand -->
+      <div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div style="width:28px; height:28px; background:#FF8C42; border-radius:6px; display:flex; align-items:center; justify-content:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+              <polyline points="16 7 22 7 22 13"></polyline>
+            </svg>
+          </div>
+          <span style="font-size:16px; font-weight:700; color:#fff;">Inversax</span>
+        </div>
+        <p style="font-size:13px; line-height:1.65; color:#A09890; max-width:240px; margin:0 0 16px;">
+          Comparamos brokers financieros para 22 países de habla hispana. Información independiente y actualizada.
+        </p>
+        <p style="font-size:11px; color:#6B6460; line-height:1.6; margin:0;">
+          Inversax no es un asesor financiero. El contenido es informativo. Siempre consulta un profesional antes de invertir.
+        </p>
+      </div>
+
+      <!-- Brokers por país -->
+      <div>
+        <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6B6460; margin:0 0 14px;">Brokers por País</p>
+        {paisesDestacados.map((p) => (
+          <a href={`/brokers/${p.codigo}`} style="display:block; font-size:13px; color:#A09890; text-decoration:none; margin-bottom:8px;">
+            {p.nombre}
+          </a>
+        ))}
+        <a href="/brokers" style="display:block; font-size:13px; color:#FF8C42; text-decoration:none; margin-top:10px; font-weight:600;">Ver todos →</a>
+      </div>
+
+      <!-- Calculadoras -->
+      <div>
+        <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6B6460; margin:0 0 14px;">Calculadoras</p>
+        {[
+          ['Interés compuesto', '/calculadoras/interes-compuesto'],
+          ['Salario neto', '/calculadoras/salario-neto'],
+          ['Conversión de divisas', '/calculadoras/conversion-divisas'],
+          ['Ver todas', '/calculadoras'],
+        ].map(([label, href]) => (
+          <a href={href} style="display:block; font-size:13px; color:#A09890; text-decoration:none; margin-bottom:8px;">{label}</a>
+        ))}
+      </div>
+
+      <!-- Sitio -->
+      <div>
+        <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6B6460; margin:0 0 14px;">Inversax</p>
+        {[
+          ['Blog', '/blog'],
+          ['Sobre nosotros', '/acerca'],
+          ['Contacto', '/contacto'],
+        ].map(([label, href]) => (
+          <a href={href} style="display:block; font-size:13px; color:#A09890; text-decoration:none; margin-bottom:8px;">{label}</a>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid #2D2826; padding-top:20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;">
+      <p style="font-size:12px; color:#6B6460; margin:0;">© {new Date().getFullYear()} Inversax. Todos los derechos reservados.</p>
+      <div style="display:flex; gap:20px;">
+        <a href="/privacidad" style="font-size:12px; color:#6B6460; text-decoration:none;">Privacidad</a>
+        <a href="/legal" style="font-size:12px; color:#6B6460; text-decoration:none;">Aviso legal</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  @media (max-width: 700px) {
+    footer > div > div:first-child {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  @media (max-width: 480px) {
+    footer > div > div:first-child {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

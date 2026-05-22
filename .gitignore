@@ -1,0 +1,18 @@
+# Build
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# DB (commit the seed, not the runtime file)
+inversax.db
+
+# OS
+.DS_Store
+Thumbs.db

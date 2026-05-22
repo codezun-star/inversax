@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { db } from '../../db/index';
+import { posts } from '../../db/schema';
+import { eq } from 'drizzle-orm';
+
+export async function getStaticPaths() {
+  const todos = await db
+    .select({ slug: posts.slug })
+    .from(posts)
+    .where(eq(posts.publicado, true))
+    .all();
+  return todos.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+
+const [post] = await db
+  .select()
+  .from(posts)
+  .where(eq(posts.slug, slug))
+  .limit(1)
+  .all();
+
+if (!post) return Astro.redirect('/blog');
+
+const categorias: Record<string, string> = {
+  brokers: 'Brokers',
+  guias: 'Guías',
+  analisis: 'Análisis',
+  general: 'General',
+};
+
+const articleSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.titulo,
+  description: post.descripcion ?? '',
+  author: { '@type': 'Organization', name: post.autor ?? 'Equipo Inversax' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Inversax',
+    url: 'https://inversax.com',
+    logo: { '@type': 'ImageObject', url: 'https://inversax.com/og/home.png' },
+  },
+  datePublished: post.fechaPublicacion ?? '',
+  url: 'https://inversax.com/blog/' + post.slug,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://inversax.com/blog/' + post.slug },
+});
+---
+
+<Layout
+  title={`${post.titulo} — Inversax`}
+  description={post.descripcion ?? ''}
+>
+  <script slot="head" is:inline type="application/ld+json" set:html={articleSchema} />
+  <!-- Header artículo -->
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:720px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:20px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a>
+        <span>›</span>
+        <a href="/blog" style="text-decoration:none; color:#A8A29E;">Blog</a>
+        <span>›</span>
+        <span style="color:#57534E; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:200px;">{post.titulo}</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+        {post.categoria && (
+          <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#FFF4EC; color:#FF8C42; padding:3px 10px; border-radius:5px;">
+            {categorias[post.categoria] ?? post.categoria}
+          </span>
+        )}
+        {post.pais && (
+          <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#F0EDE7; color:#78716C; padding:3px 10px; border-radius:5px;">
+            {post.pais.toUpperCase()}
+          </span>
+        )}
+      </div>
+
+      <h1 style="font-size:clamp(22px, 4vw, 34px); font-weight:800; color:#1A1A1A; margin:0 0 12px; line-height:1.2; letter-spacing:-0.4px;">
+        {post.titulo}
+      </h1>
+
+      {post.descripcion && (
+        <p style="font-size:16px; color:#57534E; line-height:1.65; margin:0 0 16px;">{post.descripcion}</p>
+      )}
+
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span style="font-size:13px; color:#A8A29E;">
+          Por <strong style="color:#57534E;">{post.autor}</strong>
+        </span>
+        {post.fechaPublicacion && (
+          <span style="font-size:13px; color:#A8A29E;">{post.fechaPublicacion}</span>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div style="max-width:720px; margin:0 auto; padding:40px 20px 60px;">
+    <div class="prose" set:html={post.contenido ?? ''} />
+
+    <!-- CTA brokers -->
+    <div style="margin-top:40px; background:#FFF4EC; border:1px solid #FFD4A8; border-radius:12px; padding:24px;">
+      <p style="font-size:15px; font-weight:700; color:#1A1A1A; margin:0 0 6px;">
+        ¿Buscas el mejor broker para tu país?
+      </p>
+      <p style="font-size:13px; color:#78716C; line-height:1.55; margin:0 0 14px;">
+        Compara todos los brokers disponibles por país, regulación, depósito mínimo y más.
+      </p>
+      <a href="/brokers" class="btn-primary btn-sm" style="font-size:14px; padding:11px 20px; border-radius:9px;">
+        Ver comparador de brokers
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Volver -->
+    <div style="margin-top:24px;">
+      <a href="/blog" style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#78716C; text-decoration:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Volver al blog
+      </a>
+    </div>
+  </div>
+</Layout>
