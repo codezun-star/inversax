@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Spread — Inversax" description="Calcula el costo real del spread en tus operaciones forex. Compara spreads entre brokers y conoce cuánto pagas por abrir cada posición.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Spread</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Costo del Spread</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto te cuesta el spread cada vez que abres una operación en forex.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:24px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de la operación</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Par de divisas</label>
+            <select id="par" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="4">EUR/USD (4 decimales)</option>
+              <option value="4">GBP/USD (4 decimales)</option>
+              <option value="2">USD/JPY (2 decimales)</option>
+              <option value="4">AUD/USD (4 decimales)</option>
+              <option value="4">USD/CHF (4 decimales)</option>
+              <option value="4">USD/CAD (4 decimales)</option>
+              <option value="4">NZD/USD (4 decimales)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Spread del broker (pips)</label>
+            <input id="spread-pips" type="number" value="1.2" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tamaño de lote</label>
+            <select id="lote-tipo" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="100000">Lote estándar (100,000)</option>
+              <option value="10000">Mini lote (10,000)</option>
+              <option value="1000">Micro lote (1,000)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de lotes</label>
+            <input id="lotes" type="number" value="1" min="0.01" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Operaciones por mes</label>
+            <input id="ops-mes" type="number" value="20" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#EF4444; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Costo por operación (USD)</p>
+          <p id="costo-op" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">$0.00</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tamaño de posición</span>
+            <span id="posicion" style="font-size:13px; font-weight:700; color:#1A1A1A;">0 unidades</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo mensual en spread</span>
+            <span id="costo-mes" style="font-size:13px; font-weight:700; color:#EF4444;">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo anual en spread</span>
+            <span id="costo-ano" style="font-size:13px; font-weight:700; color:#EF4444;">$0.00</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pips totales al mes</span>
+            <span id="pips-mes" style="font-size:13px; font-weight:700; color:#57534E;">0</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El spread es el costo oculto más importante en forex. Brokers como IC Markets o Pepperstone ofrecen spreads desde 0.0 pips en cuentas Raw, cobrando solo una comisión fija por lote.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const spreadPips = parseFloat((document.getElementById('spread-pips') as HTMLInputElement).value) || 0;
+    const loteT      = parseFloat((document.getElementById('lote-tipo')   as HTMLSelectElement).value) || 100000;
+    const lotes      = parseFloat((document.getElementById('lotes')       as HTMLInputElement).value) || 1;
+    const opsMes     = parseFloat((document.getElementById('ops-mes')     as HTMLInputElement).value) || 1;
+    const posicion   = lotes * loteT;
+    const pipVal     = 0.0001 * posicion; // For USD-quoted pairs
+    const costoOp    = spreadPips * pipVal;
+    const costoMes   = costoOp * opsMes;
+    const costoAno   = costoMes * 12;
+    const pipsMes    = spreadPips * opsMes;
+    document.getElementById('costo-op')!.textContent  = '$' + costoOp.toFixed(2);
+    document.getElementById('posicion')!.textContent  = posicion.toLocaleString('es') + ' unidades';
+    document.getElementById('costo-mes')!.textContent = '$' + costoMes.toFixed(2);
+    document.getElementById('costo-ano')!.textContent = '$' + costoAno.toFixed(2);
+    document.getElementById('pips-mes')!.textContent  = pipsMes.toFixed(1) + ' pips';
+  }
+  ['par','spread-pips','lote-tipo','lotes','ops-mes'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Pips — Inversax" description="Calcula el valor monetario de un pip en forex según tu par de divisas, tamaño de lote y moneda de cuenta.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Valor del Pip</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Valor del Pip</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula exactamente cuánto vale cada pip según tu par de divisas y tamaño de posición.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Par de divisas</label>
+            <select id="par" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="eurusd">EUR/USD</option>
+              <option value="gbpusd">GBP/USD</option>
+              <option value="usdjpy">USD/JPY</option>
+              <option value="usdchf">USD/CHF</option>
+              <option value="audusd">AUD/USD</option>
+              <option value="usdcad">USD/CAD</option>
+              <option value="nzdusd">NZD/USD</option>
+              <option value="eurgbp">EUR/GBP</option>
+              <option value="eurjpy">EUR/JPY</option>
+              <option value="gbpjpy">GBP/JPY</option>
+              <option value="xauusd">XAU/USD (Oro)</option>
+              <option value="xagusd">XAG/USD (Plata)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de lote</label>
+            <select id="lote-tipo" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="100000">Lote estándar (100,000 unidades)</option>
+              <option value="10000">Mini lote (10,000 unidades)</option>
+              <option value="1000">Micro lote (1,000 unidades)</option>
+              <option value="100">Nano lote (100 unidades)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de lotes</label>
+            <input id="lotes" type="number" value="1" min="0.01" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de mercado actual</label>
+            <input id="precio" type="number" value="1.0850" min="0.0001" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Valor por pip (USD)</p>
+          <p id="pip-valor" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">$0.00</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tamaño de posición</span>
+            <span id="posicion" style="font-size:13px; font-weight:700; color:#1A1A1A;">0 unidades</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor por 10 pips</span>
+            <span id="pip-10" style="font-size:13px; font-weight:700; color:#FF8C42;">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor por 50 pips</span>
+            <span id="pip-50" style="font-size:13px; font-weight:700; color:#FF8C42;">$0.00</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor por 100 pips</span>
+            <span id="pip-100" style="font-size:13px; font-weight:700; color:#FF8C42;">$0.00</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Para pares con USD como divisa cotizada (EUR/USD, GBP/USD), 1 pip = 0.0001. Para pares JPY, 1 pip = 0.01. El valor está expresado en USD.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const PIP_SIZE: Record<string, number> = {
+    eurusd: 0.0001, gbpusd: 0.0001, audusd: 0.0001, nzdusd: 0.0001,
+    usdchf: 0.0001, usdcad: 0.0001, eurgbp: 0.0001,
+    usdjpy: 0.01, eurjpy: 0.01, gbpjpy: 0.01,
+    xauusd: 0.01, xagusd: 0.001,
+  };
+  // For pairs where USD is quote: pip_value = pip_size * lots * lot_size
+  // For pairs where USD is base (USD/JPY etc): pip_value = pip_size * lots * lot_size / price
+  const USD_BASE = ['usdjpy','usdchf','usdcad'];
+  const CROSS_USD_QUOTE = ['eurjpy','gbpjpy'];
+
+  function calcular() {
+    const par    = (document.getElementById('par')       as HTMLSelectElement).value;
+    const loteT  = parseFloat((document.getElementById('lote-tipo') as HTMLSelectElement).value) || 100000;
+    const lotes  = parseFloat((document.getElementById('lotes')     as HTMLInputElement).value) || 1;
+    const precio = parseFloat((document.getElementById('precio')    as HTMLInputElement).value) || 1;
+    const posicion = lotes * loteT;
+    const pip = PIP_SIZE[par] || 0.0001;
+    let pipVal = 0;
+    if (USD_BASE.includes(par)) {
+      pipVal = pip * posicion / precio;
+    } else if (CROSS_USD_QUOTE.includes(par)) {
+      // e.g. EUR/JPY: pip in JPY, need to convert via current price (approx)
+      pipVal = pip * posicion / precio;
+    } else {
+      pipVal = pip * posicion;
+    }
+    const f = (n: number) => '$' + n.toFixed(2);
+    document.getElementById('pip-valor')!.textContent = f(pipVal);
+    document.getElementById('posicion')!.textContent  = posicion.toLocaleString('es') + ' unidades';
+    document.getElementById('pip-10')!.textContent    = f(pipVal * 10);
+    document.getElementById('pip-50')!.textContent    = f(pipVal * 50);
+    document.getElementById('pip-100')!.textContent   = f(pipVal * 100);
+  }
+  ['par','lote-tipo','lotes','precio'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

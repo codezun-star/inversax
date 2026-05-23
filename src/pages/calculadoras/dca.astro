@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora DCA — Inversax" description="Calcula el resultado de invertir una cantidad fija cada mes (Dollar Cost Averaging). Soporta todas las monedas de Latinoamérica y España.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">DCA</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora DCA</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Dollar Cost Averaging: el poder de invertir una cantidad fija cada mes sin importar el precio del mercado.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Aportación mensual</label>
+            <input id="aporte" type="number" value="200" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial (opcional)</label>
+            <input id="inicial" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento anual estimado (%)</label>
+            <input id="tasa" type="number" value="10" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Años de inversión</label>
+            <input id="anos" type="number" value="20" min="1" max="50" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Valor final de la cartera</p>
+          <p id="final" style="font-size:28px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Total aportado</span>
+            <span id="aportado" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancias por interés compuesto</span>
+            <span id="ganancias" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Multiplicador del capital</span>
+            <span id="mult" style="font-size:13px; font-weight:700; color:#FF8C42;">0x</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El DCA reduce el riesgo de comprar en un solo momento de mercado. La consistencia mensual es más importante que elegir el momento perfecto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m    = (document.getElementById('moneda')  as HTMLSelectElement).value;
+    const ap   = parseFloat((document.getElementById('aporte')   as HTMLInputElement).value) || 0;
+    const ini  = parseFloat((document.getElementById('inicial')  as HTMLInputElement).value) || 0;
+    const r    = parseFloat((document.getElementById('tasa')     as HTMLInputElement).value) || 0;
+    const anos = parseFloat((document.getElementById('anos')     as HTMLInputElement).value) || 1;
+    const n    = anos * 12;
+    const rm   = r / 100 / 12;
+    let final = ini;
+    if (rm === 0) {
+      final = ini + ap * n;
+    } else {
+      final = ini * Math.pow(1 + rm, n) + ap * (Math.pow(1 + rm, n) - 1) / rm;
+    }
+    const aportado  = ini + ap * n;
+    const ganancias = final - aportado;
+    const mult      = aportado > 0 ? final / aportado : 0;
+    document.getElementById('final')!.textContent    = fmt(final, m);
+    document.getElementById('aportado')!.textContent = fmt(aportado, m);
+    document.getElementById('ganancias')!.textContent = fmt(ganancias, m);
+    document.getElementById('mult')!.textContent     = mult.toFixed(2) + 'x';
+  }
+  ['moneda','aporte','inicial','tasa','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

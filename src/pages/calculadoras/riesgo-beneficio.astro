@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Riesgo/Beneficio — Inversax" description="Calcula la relación riesgo/beneficio de tus operaciones en forex y bolsa. Descubre si tu operación tiene sentido estadístico.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Riesgo / Beneficio</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora Riesgo / Beneficio</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Evalúa si una operación tiene sentido antes de entrar al mercado.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:24px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Niveles de precio</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de entrada</label>
+            <input id="entrada" type="number" value="1.0850" min="0" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Stop Loss</label>
+            <input id="sl" type="number" value="1.0800" min="0" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Take Profit</label>
+            <input id="tp" type="number" value="1.0970" min="0" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Dirección</label>
+            <select id="direccion" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="long">Compra (Long)</option>
+              <option value="short">Venta (Short)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital en riesgo (USD)</label>
+            <input id="riesgo-usd" type="number" value="100" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card-rr" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Ratio Riesgo/Beneficio</p>
+          <p id="ratio" style="font-size:40px; font-weight:800; margin:0; letter-spacing:-0.5px;">1:0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Riesgo en pips</span>
+            <span id="riesgo-pips" style="font-size:13px; font-weight:700; color:#EF4444;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Beneficio potencial en pips</span>
+            <span id="beneficio-pips" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pérdida máxima</span>
+            <span id="perdida-max" style="font-size:13px; font-weight:700; color:#EF4444;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancia potencial</span>
+            <span id="ganancia-pot" style="font-size:13px; font-weight:700; color:#22C55E;">$0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tasa de éxito mínima para ser rentable</span>
+            <span id="win-rate" style="font-size:13px; font-weight:700; color:#FF8C42;">0%</span>
+          </div>
+        </div>
+        <div id="alerta" style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p id="alerta-texto" style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Busca ratios de al menos 1:2. Con un ratio de 1:2, solo necesitas acertar el 34% de tus operaciones para ser rentable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const entrada = parseFloat((document.getElementById('entrada')    as HTMLInputElement).value) || 0;
+    const sl      = parseFloat((document.getElementById('sl')         as HTMLInputElement).value) || 0;
+    const tp      = parseFloat((document.getElementById('tp')         as HTMLInputElement).value) || 0;
+    const dir     = (document.getElementById('direccion') as HTMLSelectElement).value;
+    const riesgoUsd = parseFloat((document.getElementById('riesgo-usd') as HTMLInputElement).value) || 0;
+    let riesgoPips = 0;
+    let beneficioPips = 0;
+    if (dir === 'long') {
+      riesgoPips    = Math.max(0, (entrada - sl) * 10000);
+      beneficioPips = Math.max(0, (tp - entrada) * 10000);
+    } else {
+      riesgoPips    = Math.max(0, (sl - entrada) * 10000);
+      beneficioPips = Math.max(0, (entrada - tp) * 10000);
+    }
+    const ratio = riesgoPips > 0 ? beneficioPips / riesgoPips : 0;
+    const gananciaPot = riesgoPips > 0 ? riesgoUsd * ratio : 0;
+    const winRate = ratio > 0 ? 1 / (1 + ratio) * 100 : 0;
+    const card = document.getElementById('card-rr')!;
+    card.style.background = ratio >= 2 ? '#22C55E' : ratio >= 1 ? '#FF8C42' : '#EF4444';
+    document.getElementById('ratio')!.textContent        = '1:' + ratio.toFixed(2);
+    document.getElementById('riesgo-pips')!.textContent  = riesgoPips.toFixed(1) + ' pips';
+    document.getElementById('beneficio-pips')!.textContent = beneficioPips.toFixed(1) + ' pips';
+    document.getElementById('perdida-max')!.textContent  = '$' + riesgoUsd.toFixed(2);
+    document.getElementById('ganancia-pot')!.textContent = '$' + gananciaPot.toFixed(2);
+    document.getElementById('win-rate')!.textContent     = winRate.toFixed(1) + '%';
+    const alerta = document.getElementById('alerta-texto')!;
+    if (ratio >= 2) {
+      alerta.textContent = 'Excelente ratio. Con ' + ratio.toFixed(1) + ':1 solo necesitas acertar el ' + winRate.toFixed(0) + '% de tus operaciones para ser rentable.';
+    } else if (ratio >= 1) {
+      alerta.textContent = 'Ratio aceptable pero mejorable. Considera ampliar el take profit o reducir el stop loss.';
+    } else {
+      alerta.textContent = 'Ratio desfavorable. El riesgo supera el beneficio potencial. Revisa tus niveles antes de operar.';
+    }
+  }
+  ['entrada','sl','tp','direccion','riesgo-usd'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

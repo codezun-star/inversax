@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de CAGR — Inversax" description="Calcula la Tasa de Crecimiento Anual Compuesto (CAGR) de cualquier inversión. Ideal para comparar rendimientos reales.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">CAGR</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de CAGR</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Tasa de Crecimiento Anual Compuesto: la métrica más honesta para comparar inversiones a lo largo del tiempo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Valor inicial de la inversión</label>
+            <input id="vi" type="number" value="10000" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Valor final de la inversión</label>
+            <input id="vf" type="number" value="18000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Período (años)</label>
+            <input id="anos" type="number" value="5" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">CAGR</p>
+          <p id="cagr" style="font-size:42px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Crecimiento total</span>
+            <span id="total-pct" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Factor multiplicador</span>
+            <span id="mult" style="font-size:13px; font-weight:700; color:#FF8C42;">0x</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <p style="font-size:12px; color:#78716C; margin:0; line-height:1.55;">
+            Un CAGR del <strong id="cagr-mini">0%</strong> significa que la inversión creció en promedio ese porcentaje cada año durante <span id="anos-label">0</span> años.
+          </p>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Fórmula: CAGR = (Vf / Vi)^(1/n) − 1. El CAGR suaviza la volatilidad y muestra el crecimiento efectivo anual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const vi   = parseFloat((document.getElementById('vi')   as HTMLInputElement).value) || 0;
+    const vf   = parseFloat((document.getElementById('vf')   as HTMLInputElement).value) || 0;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const cagr = vi > 0 && anos > 0 ? (Math.pow(vf / vi, 1 / anos) - 1) * 100 : 0;
+    const totalPct = vi > 0 ? ((vf - vi) / vi) * 100 : 0;
+    const mult = vi > 0 ? vf / vi : 0;
+    document.getElementById('cagr')!.textContent       = cagr.toFixed(2) + '%';
+    document.getElementById('cagr-mini')!.textContent  = cagr.toFixed(2) + '%';
+    document.getElementById('total-pct')!.textContent  = totalPct.toFixed(2) + '%';
+    document.getElementById('mult')!.textContent       = mult.toFixed(2) + 'x';
+    document.getElementById('anos-label')!.textContent = anos.toFixed(1);
+  }
+  ['vi','vf','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

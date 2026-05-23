@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Regla del 72 — Inversax" description="Calcula en cuántos años se duplica una inversión usando la Regla del 72. También calcula qué tasa necesitas para duplicar en un tiempo dado.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Regla del 72</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Regla del 72</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">La forma más rápida de estimar cuándo se duplica tu dinero, o qué rendimiento necesitas para lograrlo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:24px;">
+
+    <!-- Panel 1: tasa → años -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:15px; font-weight:700; color:#1A1A1A; margin:0 0 18px;">Tengo una tasa, ¿cuándo duplico?</h2>
+        <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de retorno anual (%)</label>
+        <input id="tasa" type="number" value="8" min="0.01" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; justify-content:center;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff; text-align:center;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Se duplica en</p>
+          <p id="anos-resultado" style="font-size:40px; font-weight:800; margin:0;">9 años</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: años → tasa -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:15px; font-weight:700; color:#1A1A1A; margin:0 0 18px;">Quiero duplicar en X años, ¿qué tasa necesito?</h2>
+        <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Años deseados para duplicar</label>
+        <input id="anos-input" type="number" value="5" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; justify-content:center;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff; text-align:center;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tasa necesaria</p>
+          <p id="tasa-resultado" style="font-size:40px; font-weight:800; margin:0;">14.4% /año</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+      <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;"><strong>La Regla del 72:</strong> divide 72 entre la tasa de retorno anual para obtener los años aproximados para duplicar el capital. Ejemplo: al 6% anual → 72/6 = 12 años. Es una aproximación válida para tasas entre 2% y 20%.</p>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const tasa  = parseFloat((document.getElementById('tasa')       as HTMLInputElement).value) || 0;
+    const anos  = parseFloat((document.getElementById('anos-input') as HTMLInputElement).value) || 0;
+    const aRes  = tasa  > 0 ? 72 / tasa  : 0;
+    const tRes  = anos  > 0 ? 72 / anos  : 0;
+    document.getElementById('anos-resultado')!.textContent = aRes.toFixed(1) + ' años';
+    document.getElementById('tasa-resultado')!.textContent = tRes.toFixed(1) + '% /año';
+  }
+  document.getElementById('tasa')?.addEventListener('input', calcular);
+  document.getElementById('anos-input')?.addEventListener('input', calcular);
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

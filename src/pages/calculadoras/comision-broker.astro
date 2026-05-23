@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Comisión de Broker — Inversax" description="Compara el costo real de las comisiones de distintos brokers forex. Calcula cuánto pagas por operación y al año. Soporta todas las monedas.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Comisión de Broker</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Comparador de Comisiones de Broker</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Compara el costo real de operar en distintos brokers y elige el que más te conviene.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:24px;">
+
+    <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+      <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu operativa</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+        <div>
+          <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tamaño de lote</label>
+          <select id="lote-tipo" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 12px; font-size:13px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+            <option value="100000">Estándar (1.0)</option>
+            <option value="10000">Mini (0.1)</option>
+            <option value="1000">Micro (0.01)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Lotes por operación</label>
+          <input id="lotes" type="number" value="1" min="0.01" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+        </div>
+        <div>
+          <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Operaciones por mes</label>
+          <input id="ops-mes" type="number" value="30" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+        </div>
+      </div>
+    </div>
+
+    <div id="brokers-tabla" style="display:flex; flex-direction:column; gap:12px;"></div>
+
+    <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+      <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La comisión se cobra al abrir Y cerrar la posición (round trip). Los spreads variables pueden ser mayores en horario de menor liquidez. Estos valores son orientativos; consulta la página oficial de cada broker.</p>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  interface BrokerData {
+    nombre: string;
+    tipo: string;
+    spread: number;   // pips
+    comision: number; // USD por lote estándar round trip
+    color: string;
+  }
+  const BROKERS: BrokerData[] = [
+    { nombre: 'IC Markets',  tipo: 'Raw Spread',   spread: 0.1,  comision: 7.0,  color: '#1D4ED8' },
+    { nombre: 'Pepperstone', tipo: 'Razor',         spread: 0.1,  comision: 7.0,  color: '#059669' },
+    { nombre: 'Exness',      tipo: 'Zero',          spread: 0.0,  comision: 7.0,  color: '#FF6B35' },
+    { nombre: 'XTB',         tipo: 'Pro',           spread: 0.8,  comision: 0.0,  color: '#DC2626' },
+    { nombre: 'XM',          tipo: 'Ultra Low',     spread: 0.6,  comision: 0.0,  color: '#7C3AED' },
+    { nombre: 'Libertex',    tipo: 'Comisión fija', spread: 0.0,  comision: 10.0, color: '#0EA5E9' },
+  ];
+
+  function calcular() {
+    const loteT   = parseFloat((document.getElementById('lote-tipo') as HTMLSelectElement).value) || 100000;
+    const lotes   = parseFloat((document.getElementById('lotes')     as HTMLInputElement).value) || 1;
+    const opsMes  = parseFloat((document.getElementById('ops-mes')   as HTMLInputElement).value) || 1;
+    const posicion = lotes * loteT;
+    const pipVal   = 0.0001 * 100000; // $10 per pip per standard lot
+
+    const container = document.getElementById('brokers-tabla')!;
+    container.innerHTML = '';
+
+    const costos = BROKERS.map(b => {
+      const spreadCost = b.spread * (pipVal * lotes);
+      const comisionCost = b.comision * lotes;
+      const costoOp = spreadCost + comisionCost;
+      const costoMes = costoOp * opsMes;
+      const costoAno = costoMes * 12;
+      return { ...b, costoOp, costoMes, costoAno };
+    });
+
+    const minCosto = Math.min(...costos.map(c => c.costoOp));
+
+    costos.forEach((b) => {
+      const isBest = b.costoOp === minCosto;
+      const card = document.createElement('div');
+      card.style.cssText = 'background:#fff; border:1px solid ' + (isBest ? '#22C55E' : '#E2DDD8') + '; border-radius:12px; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;';
+      card.innerHTML =
+        '<div style="display:flex; align-items:center; gap:12px;">' +
+          '<div style="width:4px; height:36px; background:' + b.color + '; border-radius:4px;"></div>' +
+          '<div>' +
+            '<p style="font-size:15px; font-weight:700; color:#1A1A1A; margin:0;">' + b.nombre + (isBest ? ' <span style="font-size:11px; background:#22C55E; color:#fff; padding:2px 8px; border-radius:20px; margin-left:6px;">Más barato</span>' : '') + '</p>' +
+            '<p style="font-size:12px; color:#78716C; margin:2px 0 0;">' + b.tipo + ' · Spread: ' + b.spread + ' pips · Com: $' + b.comision + '/lote</p>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex; gap:24px; text-align:right;">' +
+          '<div>' +
+            '<p style="font-size:11px; color:#A8A29E; margin:0;">Por op.</p>' +
+            '<p style="font-size:16px; font-weight:700; color:#EF4444; margin:0;">$' + b.costoOp.toFixed(2) + '</p>' +
+          '</div>' +
+          '<div>' +
+            '<p style="font-size:11px; color:#A8A29E; margin:0;">Mensual</p>' +
+            '<p style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0;">$' + b.costoMes.toFixed(2) + '</p>' +
+          '</div>' +
+          '<div>' +
+            '<p style="font-size:11px; color:#A8A29E; margin:0;">Anual</p>' +
+            '<p style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0;">$' + b.costoAno.toFixed(0) + '</p>' +
+          '</div>' +
+        '</div>';
+      container.appendChild(card);
+    });
+  }
+  ['lote-tipo','lotes','ops-mes'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>
+  @media(max-width:600px){
+    div[style*="grid-template-columns:1fr 1fr 1fr"]{display:flex!important;flex-direction:column!important;}
+  }
+</style>

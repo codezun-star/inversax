@@ -1,0 +1,142 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora FIRE — Independencia Financiera — Inversax" description="Calcula cuánto necesitas para lograr la independencia financiera (FIRE) y vivir de tus inversiones. Soporta todas las monedas de Latinoamérica y España.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Independencia Financiera</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora FIRE</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Financial Independence, Retire Early: calcula el número FIRE y cuándo puedes dejar de trabajar si quieres.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:24px;">
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu situación</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Gastos mensuales en retiro</label>
+            <input id="gastos" type="number" value="2000" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de retiro segura (%)</label>
+            <select id="swr" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="4" selected>4% — Regla del 4% (estándar)</option>
+              <option value="3.5">3.5% — Conservador</option>
+              <option value="3">3% — Muy conservador</option>
+              <option value="5">5% — Agresivo</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Patrimonio actual</label>
+            <input id="patrimonio" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ahorro mensual actual</label>
+            <input id="ahorro" type="number" value="800" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento anual esperado (%)</label>
+            <input id="tasa" type="number" value="8" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tu número FIRE</p>
+          <p id="numero-fire" style="font-size:26px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Gastos anuales en retiro</span>
+            <span id="gastos-anuales" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Progreso actual</span>
+            <span id="progreso" style="font-size:13px; font-weight:700; color:#8B5CF6;">0%</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Años estimados para FIRE</span>
+            <span id="anos-fire" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La Regla del 4% indica que puedes retirar el 4% anual de tu cartera indefinidamente (basado en el estudio Trinity). No incluye inflación ni impuestos locales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m         = (document.getElementById('moneda')    as HTMLSelectElement).value;
+    const swr       = parseFloat((document.getElementById('swr')        as HTMLSelectElement).value) || 4;
+    const gastos    = parseFloat((document.getElementById('gastos')     as HTMLInputElement).value) || 0;
+    const patrimonio = parseFloat((document.getElementById('patrimonio') as HTMLInputElement).value) || 0;
+    const ahorro    = parseFloat((document.getElementById('ahorro')     as HTMLInputElement).value) || 0;
+    const r         = parseFloat((document.getElementById('tasa')       as HTMLInputElement).value) || 0;
+    const gastosAnuales = gastos * 12;
+    const numeroFire = gastosAnuales / (swr / 100);
+    const progreso   = numeroFire > 0 ? Math.min(100, (patrimonio / numeroFire) * 100) : 0;
+    const rm = r / 100 / 12;
+    const faltante = Math.max(0, numeroFire - patrimonio);
+    let anosFire = 0;
+    if (faltante <= 0) {
+      anosFire = 0;
+    } else if (rm === 0 && ahorro > 0) {
+      anosFire = (faltante / ahorro) / 12;
+    } else if (rm > 0 && ahorro > 0) {
+      // n = log(1 + faltante*rm/ahorro) / log(1+rm)  — months
+      const ratio = 1 + (faltante * rm) / ahorro;
+      if (ratio > 0) anosFire = Math.log(ratio) / Math.log(1 + rm) / 12;
+      else anosFire = Infinity;
+    } else {
+      anosFire = Infinity;
+    }
+    document.getElementById('numero-fire')!.textContent   = fmt(numeroFire, m);
+    document.getElementById('gastos-anuales')!.textContent = fmt(gastosAnuales, m);
+    document.getElementById('progreso')!.textContent      = progreso.toFixed(1) + '%';
+    document.getElementById('anos-fire')!.textContent     = isFinite(anosFire) ? anosFire.toFixed(1) + ' años' : '—';
+  }
+  ['moneda','swr','gastos','patrimonio','ahorro','tasa'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

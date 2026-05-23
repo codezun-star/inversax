@@ -50,7 +50,7 @@ const topBrokers = brokers.sort((a, b) => b.calificacion - a.calificacion).slice
     <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
       <span style="font-size:12px; font-weight:700; color:#A8A29E; text-transform:uppercase; letter-spacing:0.07em; white-space:nowrap;">Brokers destacados:</span>
       {topBrokers.map((b) => (
-        <a href={b.afiliado} target="_blank" rel="noopener noreferrer sponsored"
+        <a href={b.afiliado} target="_blank" rel="noopener noreferrer nofollow sponsored"
           style="display:flex; align-items:center; gap:8px; padding:6px 14px; border:1px solid #E2DDD8; border-radius:8px; text-decoration:none; transition:border-color 0.15s;"
           onmouseover={`this.style.borderColor='${b.color}'`}
           onmouseout="this.style.borderColor='#E2DDD8'"
