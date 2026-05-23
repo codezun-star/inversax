@@ -37,8 +37,21 @@ const calculadoras = [
 >
 
 <!-- ── HERO ────────────────────────────────────────── -->
-<section style="background:linear-gradient(135deg, #1A1A1A 0%, #2D2520 100%); padding:72px 20px 64px; border-bottom:1px solid #2D2826;">
-  <div style="max-width:900px; margin:0 auto; text-align:center;">
+<section style="background:linear-gradient(135deg, #1A1A1A 0%, #2D2520 100%); padding:72px 20px 64px; border-bottom:1px solid #2D2826; position:relative; overflow:hidden;">
+
+  <!-- Bitcoin coin image — right side decorative -->
+  <img
+    src="/images/hero-btc.jpg"
+    alt=""
+    aria-hidden="true"
+    class="hero-coin"
+  />
+  <!-- Gradient overlay to blend coin into background -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 72% 50%, transparent 20%, #1A1A1A 68%);pointer-events:none;"></div>
+  <!-- Left fade so coin doesn't bleed into text -->
+  <div style="position:absolute;top:0;left:0;bottom:0;width:50%;background:linear-gradient(to right,#1A1A1A 50%,transparent 100%);pointer-events:none;"></div>
+
+  <div style="max-width:900px; margin:0 auto; text-align:center; position:relative;">
     <div style="display:inline-flex; align-items:center; gap:7px; background:rgba(255,140,66,0.12); border:1px solid rgba(255,140,66,0.3); border-radius:20px; padding:6px 16px; margin-bottom:22px;">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="#FF8C42" stroke="none">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -242,6 +255,23 @@ const calculadoras = [
 </Layout>
 
 <style>
+  .hero-coin {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 560px;
+    height: 560px;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.28;
+    pointer-events: none;
+    user-select: none;
+    filter: saturate(1.1) drop-shadow(0 0 80px rgba(255,140,66,0.35));
+  }
+  @media (max-width: 720px) {
+    .hero-coin { width: 320px; height: 320px; right: -80px; opacity: 0.15; }
+  }
   .broker-mini-card {
     background: linear-gradient(158deg, #ffffff 0%, #fdfcfb 100%);
     box-shadow: 0 2px 6px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
