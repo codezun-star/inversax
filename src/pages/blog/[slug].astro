@@ -1,28 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { db } from '../../db/index';
-import { posts } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { getCollection, getEntry, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const todos = await db
-    .select({ slug: posts.slug })
-    .from(posts)
-    .where(eq(posts.publicado, true))
-    .all();
-  return todos.map((p) => ({ params: { slug: p.slug } }));
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
-
-const [post] = await db
-  .select()
-  .from(posts)
-  .where(eq(posts.slug, slug))
-  .limit(1)
-  .all();
+const post = await getEntry('blog', slug);
 
 if (!post) return Astro.redirect('/blog');
+
+const { Content } = await render(post);
 
 const categorias: Record<string, string> = {
   brokers: 'Brokers',
@@ -34,24 +24,24 @@ const categorias: Record<string, string> = {
 const articleSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: post.titulo,
-  description: post.descripcion ?? '',
-  author: { '@type': 'Organization', name: post.autor ?? 'Equipo Inversax' },
+  headline: post.data.titulo,
+  description: post.data.descripcion ?? '',
+  author: { '@type': 'Organization', name: post.data.autor ?? 'Equipo Inversax' },
   publisher: {
     '@type': 'Organization',
     name: 'Inversax',
     url: 'https://inversax.com',
     logo: { '@type': 'ImageObject', url: 'https://inversax.com/og/home.png' },
   },
-  datePublished: post.fechaPublicacion ?? '',
+  datePublished: post.data.fecha ?? '',
   url: 'https://inversax.com/blog/' + post.slug,
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://inversax.com/blog/' + post.slug },
 });
 ---
 
 <Layout
-  title={`${post.titulo} — Inversax`}
-  description={post.descripcion ?? ''}
+  title={`${post.data.titulo} — Inversax`}
+  description={post.data.descripcion ?? ''}
 >
   <script slot="head" is:inline type="application/ld+json" set:html={articleSchema} />
   <!-- Header artículo -->
@@ -62,36 +52,36 @@ const articleSchema = JSON.stringify({
         <span>›</span>
         <a href="/blog" style="text-decoration:none; color:#A8A29E;">Blog</a>
         <span>›</span>
-        <span style="color:#57534E; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:200px;">{post.titulo}</span>
+        <span style="color:#57534E; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:200px;">{post.data.titulo}</span>
       </div>
 
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
-        {post.categoria && (
+        {post.data.categoria && (
           <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#FFF4EC; color:#FF8C42; padding:3px 10px; border-radius:5px;">
-            {categorias[post.categoria] ?? post.categoria}
+            {categorias[post.data.categoria] ?? post.data.categoria}
           </span>
         )}
-        {post.pais && (
+        {post.data.pais && (
           <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#F0EDE7; color:#78716C; padding:3px 10px; border-radius:5px;">
-            {post.pais.toUpperCase()}
+            {post.data.pais.toUpperCase()}
           </span>
         )}
       </div>
 
       <h1 style="font-size:clamp(22px, 4vw, 34px); font-weight:800; color:#1A1A1A; margin:0 0 12px; line-height:1.2; letter-spacing:-0.4px;">
-        {post.titulo}
+        {post.data.titulo}
       </h1>
 
-      {post.descripcion && (
-        <p style="font-size:16px; color:#57534E; line-height:1.65; margin:0 0 16px;">{post.descripcion}</p>
+      {post.data.descripcion && (
+        <p style="font-size:16px; color:#57534E; line-height:1.65; margin:0 0 16px;">{post.data.descripcion}</p>
       )}
 
       <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
         <span style="font-size:13px; color:#A8A29E;">
-          Por <strong style="color:#57534E;">{post.autor}</strong>
+          Por <strong style="color:#57534E;">{post.data.autor}</strong>
         </span>
-        {post.fechaPublicacion && (
-          <span style="font-size:13px; color:#A8A29E;">{post.fechaPublicacion}</span>
+        {post.data.fecha && (
+          <span style="font-size:13px; color:#A8A29E;">{post.data.fecha}</span>
         )}
       </div>
     </div>
@@ -99,7 +89,7 @@ const articleSchema = JSON.stringify({
 
   <!-- Contenido -->
   <div style="max-width:720px; margin:0 auto; padding:40px 20px 60px;">
-    <div class="prose" set:html={post.contenido ?? ''} />
+    <div class="prose"><Content /></div>
 
     <!-- CTA brokers -->
     <div style="margin-top:40px; background:#FFF4EC; border:1px solid #FFD4A8; border-radius:12px; padding:24px;">

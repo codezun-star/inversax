@@ -1,17 +1,11 @@
 import type { APIRoute } from 'astro';
 import { paises } from '../lib/paises';
-import { db } from '../db/index';
-import { posts } from '../db/schema';
-import { eq } from 'drizzle-orm';
+import { getCollection } from 'astro:content';
 
 const BASE = 'https://inversax.com';
 
 export const GET: APIRoute = async () => {
-  const slugs = await db
-    .select({ slug: posts.slug })
-    .from(posts)
-    .where(eq(posts.publicado, true))
-    .all();
+  const posts = await getCollection('blog', (e) => e.data.publicado !== false);
 
   const staticPages: Array<{ url: string; priority: string; changefreq: string }> = [
     { url: '',                                  priority: '1.0', changefreq: 'weekly'  },
@@ -50,8 +44,8 @@ export const GET: APIRoute = async () => {
     changefreq: 'monthly',
   }));
 
-  const blogPages = slugs.map((s) => ({
-    url: `/blog/${s.slug}`,
+  const blogPages = posts.map((p) => ({
+    url: `/blog/${p.slug}`,
     priority: '0.7',
     changefreq: 'monthly',
   }));
