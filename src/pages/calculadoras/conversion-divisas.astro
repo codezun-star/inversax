@@ -75,6 +75,56 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:600px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo funciona esta calculadora de divisas?</h2>
+    <p>Esta herramienta convierte entre <strong>21 monedas</strong> de Latinoamérica, España, Canadá y el mundo usando tasas de referencia orientativas. Las tasas se basan en el tipo de cambio nominal con respecto al dólar estadounidense (USD) y se actualizan periódicamente para reflejar condiciones generales de mercado.</p>
+    <p><strong>Importante:</strong> estas no son cotizaciones en tiempo real. Para operaciones financieras reales (transferencias, cambio de divisas, inversiones), usa siempre el tipo de cambio actualizado de tu banco, casa de cambio o broker.</p>
+
+    <h2>¿Cómo usar el conversor?</h2>
+    <ul>
+      <li>Ingresa el monto que deseas convertir.</li>
+      <li>Selecciona la moneda de origen y la moneda destino.</li>
+      <li>Usa el botón de intercambio (flechas) para invertir rápidamente origen y destino.</li>
+      <li>El resultado y la tasa de cambio implícita se actualizan al instante.</li>
+    </ul>
+
+    <h2>Monedas disponibles y países cubiertos</h2>
+    <ul>
+      <li><strong>USD</strong> — Dólar americano (Ecuador, Panamá, El Salvador, Puerto Rico)</li>
+      <li><strong>COP</strong> — Peso colombiano (Colombia)</li>
+      <li><strong>MXN</strong> — Peso mexicano (México)</li>
+      <li><strong>ARS</strong> — Peso argentino (Argentina)</li>
+      <li><strong>CLP</strong> — Peso chileno (Chile)</li>
+      <li><strong>PEN</strong> — Sol peruano (Perú)</li>
+      <li><strong>UYU</strong> — Peso uruguayo (Uruguay)</li>
+      <li><strong>BOB</strong> — Boliviano (Bolivia)</li>
+      <li><strong>PYG</strong> — Guaraní paraguayo (Paraguay)</li>
+      <li><strong>VES</strong> — Bolívar venezolano (Venezuela)</li>
+      <li><strong>CRC</strong> — Colón costarricense (Costa Rica)</li>
+      <li><strong>DOP</strong> — Peso dominicano (República Dominicana)</li>
+      <li><strong>GTQ</strong> — Quetzal guatemalteco (Guatemala)</li>
+      <li><strong>HNL</strong> — Lempira hondureño (Honduras)</li>
+      <li><strong>NIO</strong> — Córdoba nicaragüense (Nicaragua)</li>
+      <li><strong>CUP</strong> — Peso cubano (Cuba)</li>
+      <li><strong>BZD</strong> — Dólar de Belice (Belice)</li>
+      <li><strong>CAD</strong> — Dólar canadiense (Canadá)</li>
+      <li><strong>EUR</strong> — Euro (España y zona euro)</li>
+      <li><strong>GBP</strong> — Libra esterlina (Reino Unido)</li>
+      <li><strong>BRL</strong> — Real brasileño (Brasil)</li>
+    </ul>
+
+    <h2>Casos especiales a considerar</h2>
+    <h3>Argentina (ARS)</h3>
+    <p>Argentina tiene múltiples tipos de cambio: el oficial, el blue (mercado informal), el MEP y el CCL. La tasa mostrada es orientativa; el tipo de cambio real depende del canal que uses para cambiar divisas.</p>
+    <h3>Venezuela (VES)</h3>
+    <p>El bolívar venezolano ha sufrido varias reconversiones monetarias. La tasa mostrada corresponde al tipo oficial del BCV (Banco Central de Venezuela).</p>
+    <h3>Cuba (CUP)</h3>
+    <p>Cuba tiene un sistema cambiario complejo. La tasa mostrada es la oficial; el tipo de cambio en el mercado informal puede ser muy diferente.</p>
+
+    <h2>¿Dónde encontrar tasas en tiempo real?</h2>
+    <p>Para tasas actualizadas al minuto, consulta los portales de los bancos centrales de cada país o plataformas como Google Finance o XE.com. Si necesitas operar con divisas latinoamericanas desde tu broker de forex, revisa nuestra <a href="/brokers">comparativa de brokers disponibles en tu país</a>.</p>
+  </div>
 </Layout>
 
 <script>
@@ -165,53 +215,3 @@ import Layout from '../../layouts/Layout.astro';
 
   convertir();
 </script>
-
-  <div style="max-width:600px; margin:0 auto; padding:0 20px 60px;" class="prose">
-    <h2>¿Cómo funciona esta calculadora de divisas?</h2>
-    <p>Esta herramienta convierte entre <strong>21 monedas</strong> de Latinoamérica, España, Canadá y el mundo usando tasas de referencia orientativas. Las tasas se basan en el tipo de cambio nominal con respecto al dólar estadounidense (USD) y se actualizan periódicamente para reflejar condiciones generales de mercado.</p>
-    <p><strong>Importante:</strong> estas no son cotizaciones en tiempo real. Para operaciones financieras reales (transferencias, cambio de divisas, inversiones), usa siempre el tipo de cambio actualizado de tu banco, casa de cambio o broker.</p>
-
-    <h2>¿Cómo usar el conversor?</h2>
-    <ul>
-      <li>Ingresa el monto que deseas convertir.</li>
-      <li>Selecciona la moneda de origen y la moneda destino.</li>
-      <li>Usa el botón de intercambio (flechas) para invertir rápidamente origen y destino.</li>
-      <li>El resultado y la tasa de cambio implícita se actualizan al instante.</li>
-    </ul>
-
-    <h2>Monedas disponibles y países cubiertos</h2>
-    <ul>
-      <li><strong>USD</strong> — Dólar americano (Ecuador, Panamá, El Salvador, Puerto Rico)</li>
-      <li><strong>COP</strong> — Peso colombiano (Colombia)</li>
-      <li><strong>MXN</strong> — Peso mexicano (México)</li>
-      <li><strong>ARS</strong> — Peso argentino (Argentina)</li>
-      <li><strong>CLP</strong> — Peso chileno (Chile)</li>
-      <li><strong>PEN</strong> — Sol peruano (Perú)</li>
-      <li><strong>UYU</strong> — Peso uruguayo (Uruguay)</li>
-      <li><strong>BOB</strong> — Boliviano (Bolivia)</li>
-      <li><strong>PYG</strong> — Guaraní paraguayo (Paraguay)</li>
-      <li><strong>VES</strong> — Bolívar venezolano (Venezuela)</li>
-      <li><strong>CRC</strong> — Colón costarricense (Costa Rica)</li>
-      <li><strong>DOP</strong> — Peso dominicano (República Dominicana)</li>
-      <li><strong>GTQ</strong> — Quetzal guatemalteco (Guatemala)</li>
-      <li><strong>HNL</strong> — Lempira hondureño (Honduras)</li>
-      <li><strong>NIO</strong> — Córdoba nicaragüense (Nicaragua)</li>
-      <li><strong>CUP</strong> — Peso cubano (Cuba)</li>
-      <li><strong>BZD</strong> — Dólar de Belice (Belice)</li>
-      <li><strong>CAD</strong> — Dólar canadiense (Canadá)</li>
-      <li><strong>EUR</strong> — Euro (España y zona euro)</li>
-      <li><strong>GBP</strong> — Libra esterlina (Reino Unido)</li>
-      <li><strong>BRL</strong> — Real brasileño (Brasil)</li>
-    </ul>
-
-    <h2>Casos especiales a considerar</h2>
-    <h3>Argentina (ARS)</h3>
-    <p>Argentina tiene múltiples tipos de cambio: el oficial, el blue (mercado informal), el MEP y el CCL. La tasa mostrada es orientativa; el tipo de cambio real depende del canal que uses para cambiar divisas.</p>
-    <h3>Venezuela (VES)</h3>
-    <p>El bolívar venezolano ha sufrido varias reconversiones monetarias. La tasa mostrada corresponde al tipo oficial del BCV (Banco Central de Venezuela).</p>
-    <h3>Cuba (CUP)</h3>
-    <p>Cuba tiene un sistema cambiario complejo. La tasa mostrada es la oficial; el tipo de cambio en el mercado informal puede ser muy diferente.</p>
-
-    <h2>¿Dónde encontrar tasas en tiempo real?</h2>
-    <p>Para tasas actualizadas al minuto, consulta los portales de los bancos centrales de cada país o plataformas como Google Finance o XE.com. Si necesitas operar con divisas latinoamericanas desde tu broker de forex, revisa nuestra <a href="/brokers">comparativa de brokers disponibles en tu país</a>.</p>
-  </div>
