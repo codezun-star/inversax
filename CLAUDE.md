@@ -8,12 +8,12 @@ Dominio: **inversax.com**
 ## Objetivo del proyecto
 
 Ayudar a inversores de habla hispana a encontrar el mejor broker para su país.
-El modelo de negocio es **afiliados**: cada botón "Abrir cuenta en X" lleva un enlace de afiliado con tracking.
+Modelo de negocio: **afiliados** — cada botón "Abrir cuenta en X" lleva un enlace con tracking.
 
 **Tres pilares:**
-1. **Comparador de brokers por país** — qué brokers están disponibles, cuál es el recomendado, regulación, depósito mínimo, métodos de pago locales
-2. **Calculadoras financieras** — herramientas estáticas con lógica client-side (sin APIs externas)
-3. **Blog** — artículos SEO: brokers por país, guías de inversión, análisis de plataformas
+1. **Comparador de brokers por país** — disponibilidad, regulación, depósito mínimo, métodos de pago locales
+2. **Calculadoras financieras** — herramientas client-side estáticas, sin APIs externas
+3. **Blog** — artículos SEO evergreen: brokers por país, guías de inversión, análisis de plataformas
 
 ---
 
@@ -22,15 +22,11 @@ El modelo de negocio es **afiliados**: cada botón "Abrir cuenta en X" lleva un 
 | Tecnología | Versión | Uso |
 |---|---|---|
 | Astro | ^5.7.0 | Framework principal (`output: static`) |
-| TypeScript | ^5.7.3 | Tipado estricto en todo el proyecto |
+| TypeScript | ^5.7.3 | Tipado estricto |
 | Tailwind CSS | ^3.4.17 | Utilities de layout únicamente |
-| Drizzle ORM | ^0.38.3 | Queries al blog SQLite |
-| better-sqlite3 | ^11.7.0 | Driver SQLite para Node.js (build time) |
-| tsx | ^4.19.2 | Ejecutar scripts TypeScript directamente |
-| drizzle-kit | ^0.29.1 | CLI para gestión del schema |
 
-**Deploy:** Vercel — output estático, sin adaptador Astro. Vercel detecta Astro automáticamente.
-**Base de datos:** SQLite local (`inversax.db`) — solo para el blog, leída en build time via `getStaticPaths()`.
+**Deploy:** Vercel — output estático, sin adaptador `@astrojs/vercel`. Vercel detecta Astro automáticamente.
+**Blog:** Astro Content Collections con archivos `.md` en `src/content/blog/`. Sin base de datos.
 
 ---
 
@@ -39,45 +35,40 @@ El modelo de negocio es **afiliados**: cada botón "Abrir cuenta en X" lleva un 
 ```
 InversaxV2/
 ├── CLAUDE.md
+├── ARTICULOS.md              # Control de artículos publicados y pendientes
 ├── package.json
-├── astro.config.mjs          # output: static, vite.ssr.external: ['better-sqlite3']
+├── astro.config.mjs          # output: static, integrations: [tailwind()]
 ├── tailwind.config.mjs
-├── drizzle.config.ts         # dialect: sqlite, url: ./inversax.db
 ├── tsconfig.json
-├── inversax.db               # SQLite generado por seed (NO se sube al repo con .gitignore)
 └── src/
-    ├── env.d.ts
+    ├── content/
+    │   ├── config.ts         # defineCollection con schema Zod para blog
+    │   └── blog/             # Artículos .md (22 publicados)
     ├── layouts/
     │   └── Layout.astro      # head, DM Sans font, Header, main slot, Footer
     ├── components/
-    │   ├── Header.astro      # Sticky blanco, nav: Brokers | Calculadoras | Blog, CTA naranja
-    │   └── Footer.astro      # Dark (#1A1A1A), links por país, calculadoras, copyright
+    │   ├── Header.astro
+    │   └── Footer.astro
     ├── lib/
     │   ├── brokers.ts        # Array de 7 brokers con links de afiliado reales
-    │   └── paises.ts         # Array de 14 países con moneda y métodos de pago
-    ├── db/
-    │   ├── schema.ts         # Tabla `posts` (Drizzle SQLite)
-    │   ├── index.ts          # Instancia `db` exportada
-    │   └── seed.ts           # Crea la DB e inserta artículos (idempotente con INSERT OR IGNORE)
+    │   └── paises.ts         # Array de 22 países con moneda y métodos de pago
     └── pages/
-        ├── index.astro       # Homepage: hero dark + top brokers + grid países + calculadoras + CTA
+        ├── index.astro
         ├── 404.astro
         ├── brokers/
-        │   ├── index.astro   # Grid de 14 países con broker top por país
-        │   └── [pais].astro  # Página por país: cards premium + tabla comparativa
-        ├── calculadoras/
         │   ├── index.astro
-        │   ├── interes-compuesto.astro
-        │   ├── salario-neto.astro
-        │   └── conversion-divisas.astro
-        ├── privacidad.astro  # Política de privacidad
-        ├── legal.astro       # Aviso legal
-        ├── contacto.astro    # Contacto (codezun@gmail.com)
-        ├── acerca.astro      # Sobre nosotros
-        ├── sitemap.xml.ts    # Generador de sitemap XML (build time)
-        └── blog/
-            ├── index.astro   # Lista de artículos desde SQLite
-            └── [slug].astro  # Artículo individual + CTA brokers al final
+        │   └── [pais].astro
+        ├── calculadoras/     # index + 20 calculadoras individuales
+        ├── blog/
+        │   ├── index.astro   # Lista artículos via getCollection
+        │   └── [slug].astro  # Artículo individual via getEntry + render
+        ├── sitemap.xml.ts    # Índice de sitemaps
+        ├── sitemap-static.xml.ts  # Páginas estáticas + países
+        ├── sitemap-blog.xml.ts    # Artículos del blog
+        ├── privacidad.astro
+        ├── legal.astro
+        ├── contacto.astro
+        └── acerca.astro
 ```
 
 ---
@@ -86,43 +77,39 @@ InversaxV2/
 
 | Token | Valor | Uso |
 |---|---|---|
-| Acento naranja | `#FF8C42` | CTAs, badges top, hover, links activos, hero pills |
+| Acento naranja | `#FF8C42` | CTAs, badges top, hover, links activos |
 | Fondo página | `#F7F7F5` | Background del `<body>` |
-| Fondo tarjetas | `#FFFFFF` | Cards, formularios |
-| Fondo secundario | `#F0EDE7` | Badges inactivos, pills de plataforma |
+| Fondo tarjetas | `#FFFFFF` | Cards |
+| Fondo secundario | `#F0EDE7` | Badges inactivos, pills |
 | Hero / Footer dark | `linear-gradient(135deg, #1A1A1A, #2D2520)` | Secciones oscuras |
-| Texto principal | `#1A1A1A` | Títulos, valores clave |
-| Texto secundario | `#57534E` | Párrafos, descripciones |
+| Texto principal | `#1A1A1A` | Títulos |
+| Texto secundario | `#57534E` | Párrafos |
 | Texto tenue | `#78716C` | Labels, fechas |
 | Texto muy tenue | `#A8A29E` | Breadcrumbs, disclaimers |
-| Texto dark muted | `#A09890` | Subtítulos sobre fondo oscuro |
-| Texto dark muy tenue | `#6B6460` | Labels sobre fondo oscuro |
 | Borde estándar | `#E2DDD8` | Separadores, bordes de card |
 
-**Fuente:** `DM Sans` (300–700) desde Google Fonts — única fuente del proyecto.
+**Fuente:** `DM Sans` (300–700) desde Google Fonts.
 
 ### Colores de nivel de usuario
 | Nivel | Color |
 |---|---|
-| principiante | `#22C55E` (verde) |
-| intermedio | `#3B82F6` (azul) |
-| avanzado | `#8B5CF6` (púrpura) |
-| todos | `#FF8C42` (naranja) |
+| principiante | `#22C55E` |
+| intermedio | `#3B82F6` |
+| avanzado | `#8B5CF6` |
+| todos | `#FF8C42` |
 
 ### Reglas de diseño
 
 - **Sin emojis.** Todo ícono es SVG inline stroke-based (estilo Lucide).
-- Las páginas de broker usan **CSS custom properties** para colores dinámicos por broker: `--bc` (color), `--bcbg` (color fondo), `--nc` (color nivel). Se pasan como `style={'--bc:' + b.color + '; --bcbg:' + b.colorBg}` en el elemento raíz y se usan con `var(--bc)` en el CSS scoped.
-- **No usar template literals con expresiones dentro de atributos JSX** (`style={`...${expr}...`}`). Causa errores en el compilador Astro/esbuild. Pre-computar siempre los valores como variables antes del `return` del JSX.
-- Tailwind solo para utilities de layout: `flex`, `grid`, `gap-*`, `max-w-*`, `p-*`. No para colores ni tipografía.
-- Hover en cards: `border-color → #FF8C42` + `box-shadow` sutil. Se aplica con `onmouseover`/`onmouseout`.
+- CSS custom properties para colores dinámicos de broker: `--bc`, `--bcbg`, `--nc`. Pasar como `style={'--bc:' + b.color + '; --bcbg:' + b.colorBg}`.
+- **No usar template literals con expresiones dentro de atributos JSX.** Pre-computar valores como variables antes del return.
+- Tailwind solo para layout: `flex`, `grid`, `gap-*`, `max-w-*`, `p-*`. No para colores ni tipografía.
+- Hover en cards: `border-color → #FF8C42` + `box-shadow` sutil via `onmouseover`/`onmouseout`.
 - `border-radius` de cards: 12–16px.
 
 ---
 
 ## Brokers (`src/lib/brokers.ts`)
-
-### Brokers activos con links de afiliado reales
 
 | ID | Nombre | Cal. | Nivel | Link afiliado |
 |---|---|---|---|---|
@@ -134,111 +121,86 @@ InversaxV2/
 | `libertex` | Libertex | 4.3 | intermedio | `https://fwd.cx/DMQ5TyRNANPA` |
 | `binance` | Binance | 4.8 | todos | `https://www.binance.com/activity/referral-entry/CPA?ref=CPA_0011ND849R` |
 
-### Interfaz `Broker` (campos relevantes)
+Logos desde `https://icon.horse/icon/{dominio}`, excepto Binance (logo directo bnbstatic.com).
 
-```ts
-{
-  id, nombre, tagline, descripcion,
-  logo: string,          // URL — icon.horse o logo directo
-  color: string,         // Color de marca del broker (hex)
-  colorBg: string,       // Color de fondo suave del broker (hex)
-  badge?: string,        // Texto del badge superior (ej. "Mejor para principiantes")
-  tipo: string,          // "Forex & CFD", "Exchange de Criptomonedas", etc.
-  regulacion: string[],
-  depositoMinimo: number | null,   // null = sin mínimo
-  monedaDeposito: string,
-  spread, comision, apalancamientoMax,
-  plataformas: string[],
-  tiposActivos: string[],
-  cuentas: string[],
-  comisionInactividad: string,
-  paises: string[],      // Códigos de país: ['co', 'mx', 'cl', ...]
-  afiliado: string,      // Link de afiliado real
-  nivelUsuario: 'principiante' | 'intermedio' | 'avanzado' | 'todos',
-  pros: string[],        // 3 ventajas principales
-  contras: string[],     // 2 desventajas principales
-  calificacion: number,  // 0–5
-  fundado: number,
-  sede: string,
-}
-```
-
-### Logos de brokers
-Se cargan dinámicamente desde `https://icon.horse/icon/{dominio}` para todos excepto Binance que usa su logo directo en `bnbstatic.com`.
+Links de afiliado siempre con `target="_blank" rel="noopener noreferrer sponsored"`.
 
 ---
 
 ## Países (`src/lib/paises.ts`)
 
-22 países (todos con comunidad hispanohablante significativa):
+22 países: `co`, `mx`, `ar`, `cl`, `pe`, `ec`, `uy`, `bo`, `py`, `ve`, `cr`, `pa`, `do`, `gt`, `hn`, `sv`, `ni`, `cu`, `pr`, `ca`, `bz`, `es`
 
-`co`, `mx`, `ar`, `cl`, `pe`, `ec`, `uy`, `bo`, `py`, `ve`, `cr`, `pa`, `do`, `gt`, `hn`, `sv`, `ni`, `cu`, `pr`, `ca`, `bz`, `es`
-
-**Casos especiales con banner de advertencia en la página (`[pais].astro`):**
-- `cu` — acceso muy limitado por sanciones OFAC; solo XM
-- `ar` — restricciones cambiarias; solo XM disponible
-- `pr` — territorio de EE.UU. (USD); Exness, XM, Binance
-- `ve` — dolarización informal; Zinli/Zelle como métodos de pago
-- `sv` — economía dolarizada + Bitcoin legal tender
-- `ca` — regulado por IIROC; Pepperstone, IC Markets, XTB, Binance disponibles
-
-Cada país tiene: `codigo`, `nombre`, `moneda`, `metodosPago[]`, `descripcion`.
-
-**Funciones exportadas:**
-- `getPais(codigo)` — retorna el `Pais` por código
-- (en `brokers.ts`) `getBrokersByPais(codigo)` — brokers filtrados por país, ordenados por calificación
-- (en `brokers.ts`) `getBrokerRecomendado(codigo)` — el broker con mayor calificación para ese país
+Casos especiales con banner de advertencia en `[pais].astro`:
+- `cu` — sanciones OFAC; solo XM
+- `ar` — cepo cambiario; solo XM
+- `pr` — territorio EE.UU., USD
+- `ve` — dolarización informal, Zinli/Zelle
+- `sv` — Bitcoin legal tender
+- `ca` — regulado por CIRO (ex-IIROC)
 
 ---
 
-## Blog (SQLite)
+## Blog — Content Collections
 
-### Schema (`src/db/schema.ts`)
+### Schema (`src/content/config.ts`)
 
 ```ts
-posts {
-  id              INTEGER PRIMARY KEY AUTOINCREMENT,
-  titulo          TEXT NOT NULL,
-  slug            TEXT NOT NULL UNIQUE,
-  descripcion     TEXT,
-  contenido       TEXT,     // HTML
-  pais            TEXT,     // código de país o null para artículos generales
-  categoria       TEXT,     // 'brokers' | 'guias' | 'analisis' | 'general'
-  autor           TEXT DEFAULT 'Equipo Inversax',
-  publicado       INTEGER,  // boolean (0/1)
-  fecha_publicacion TEXT,
-  imagen          TEXT,
-  keywords        TEXT,     // comma-separated
+{
+  titulo: string,
+  descripcion?: string,
+  pais?: string,           // código de país o ausente para artículos generales
+  categoria: 'brokers' | 'guias' | 'analisis' | 'general',
+  fecha: string,           // ISO "YYYY-MM-DD" — solo para ordenación interna
+  keywords: string[],      // array de strings
+  autor: string,           // default 'Equipo Inversax'
+  publicado: boolean,      // default true
 }
 ```
 
-### Flujo para agregar artículos
+### Cómo crear un artículo nuevo
 
-1. Editar `src/db/seed.ts` — agregar objeto al array `articulos`
-2. `npm run db:seed` — crea/actualiza `inversax.db` (idempotente con `INSERT OR IGNORE`)
-3. `npm run build` o hacer push a GitHub (Vercel rebuildea automáticamente)
+1. Crear `src/content/blog/[slug].md` donde el nombre del archivo ES el slug de la URL.
+2. Escribir el frontmatter con los campos del schema.
+3. El cuerpo puede ser Markdown o HTML — el contenido HTML pasa sin modificaciones.
+4. Registrar el artículo en `ARTICULOS.md` para control de duplicados.
 
-Los artículos se pre-renderizan como HTML estático en build time via `getStaticPaths()`.
+### Reglas de artículos evergreen (OBLIGATORIO)
 
-### Artículos seed incluidos
+- **NUNCA incluir el año en el slug, título, descripción ni keywords.**
+  - Correcto: `mejores-brokers-colombia`, "Mejores brokers para Colombia"
+  - Incorrecto: `mejores-brokers-colombia-2026`, "Mejores brokers Colombia 2026"
+- El campo `fecha` existe solo para ordenar artículos internamente — no se expone en la URL.
+- Los artículos deben mantenerse válidos en años futuros sin cambiar de URL.
 
-| Slug | País | Categoría |
+### Flujo de publicación
+
+```
+Crear src/content/blog/[slug].md → push a GitHub → Vercel rebuildea automáticamente
+```
+
+No se requieren comandos de seed ni base de datos.
+
+---
+
+## Sitemap (índice escalable)
+
+| Archivo | URL | Contenido |
 |---|---|---|
-| `mejores-brokers-colombia-2025` | co | brokers |
-| `mejores-brokers-mexico-2025` | mx | brokers |
-| `mejores-brokers-chile-2025` | cl | brokers |
-| `como-elegir-un-broker-guia-completa` | — | guias |
-| `etoro-analisis-latinoamerica-2025` | — | analisis |
+| `sitemap.xml.ts` | `/sitemap.xml` | Índice con links a los dos sitemaps |
+| `sitemap-static.xml.ts` | `/sitemap-static.xml` | Páginas estáticas + 22 páginas de país |
+| `sitemap-blog.xml.ts` | `/sitemap-blog.xml` | Un `<url>` por artículo del blog |
+
+`public/robots.txt` apunta a `https://inversax.com/sitemap.xml`.
 
 ---
 
 ## Scripts
 
 ```bash
-npm run dev          # tsx src/db/seed.ts && astro dev
-npm run build        # tsx src/db/seed.ts && astro build
-npm run db:seed      # Solo crea/actualiza inversax.db
-npm run preview      # Preview del build estático
+npm run dev       # astro dev
+npm run build     # astro build
+npm run preview   # preview del build estático
 ```
 
 ---
@@ -246,69 +208,35 @@ npm run preview      # Preview del build estático
 ## Convenciones de código
 
 - TypeScript estricto. Interfaces en los archivos `lib/` que las usan.
-- Sin comentarios obvios. Solo donde el WHY no es evidente.
-- `getStaticPaths()` obligatorio en toda ruta dinámica (output: static).
-- Links de afiliado siempre: `target="_blank" rel="noopener noreferrer sponsored"`.
-- Seed idempotente con `INSERT OR IGNORE INTO`.
-- En páginas con datos dinámicos por item (brokers), pre-computar todos los valores como variables antes del `return` en el `.map()`. No usar template literals dentro de atributos JSX.
-- CSS scoped en `<style>` dentro del `.astro` para componentes complejos como `[pais].astro`.
-- CSS custom properties (`var(--bc)`, `var(--bcbg)`, `var(--nc)`) para pasar colores dinámicos de broker a los estilos scoped.
+- `getStaticPaths()` obligatorio en toda ruta dinámica (`output: static`).
+- En `.map()` con datos dinámicos: pre-computar valores como variables antes del return, no usar template literals en atributos JSX.
+- CSS scoped en `<style>` para componentes complejos. CSS custom properties para colores por broker.
 
 ---
 
-## Decisiones técnicas importantes
+## SEO técnico
 
-### Por qué `output: static` y no SSR
-Todo el contenido se genera en build time. Los datos de brokers son estáticos (TypeScript), el blog es SQLite leído en build. No hay endpoints dinámicos. Vercel sirve HTML puro → carga instantánea, sin cold starts, sin costos de función.
-
-### Por qué SQLite y no Neon/Postgres para el blog
-El blog es simple y de baja frecuencia de actualización. SQLite en el repo elimina toda latencia de red en build time. Para escalar a más writers o edición online se migraría a Neon + D1.
-
-### Por qué no usar el adaptador `@astrojs/vercel`
-Con `output: static`, Vercel detecta Astro nativamente. El adaptador solo añade valor para rutas SSR. Si en el futuro se necesita SSR, se agrega el adaptador y se cambia a `output: hybrid`.
-
-### Problema conocido: template literals en JSX
-El compilador Astro/esbuild lanza `Expected "}" but found ":"` cuando se usan template literals con expresiones complejas dentro de atributos JSX (ej. `style={`color:${obj[key]}18`}`). La solución es pre-computar todos los valores como variables string antes del `return` usando concatenación, y pasar CSS custom properties para los colores dinámicos.
+- Sitemap XML en 3 archivos (índice + estático + blog)
+- `public/robots.txt` permite todo, apunta al sitemap
+- `[pais].astro` — JSON-LD `ItemList` + `FinancialService` en `<head>`
+- `[slug].astro` — JSON-LD `Article` en `<head>`
+- GA4 snippet comentado en `Layout.astro` — buscar `G-XXXXXXXXXX` para activar
 
 ---
 
-## Lo que NO tiene este proyecto (intencional)
+## Lo que NO tiene (intencional)
 
-- Precios en tiempo real ni ticker de cotizaciones
-- Herramientas de acciones/cripto/forex en vivo
+- Precios en tiempo real
 - Selector de país en el header
 - Autenticación de usuarios
-- CMS externo — el blog se gestiona via `seed.ts` + SQLite local
-- Emojis — todo es SVG
+- CMS externo — el blog se gestiona con archivos `.md`
+- Emojis
 
 ---
 
-## Páginas legales
+## Próximos pasos
 
-| Ruta | Descripción |
-|---|---|
-| `/privacidad` | Política de privacidad: cookies, GA4, afiliados, publicidad futura, derechos del usuario |
-| `/legal` | Aviso legal: descargo financiero, política de afiliados, propiedad intelectual |
-| `/contacto` | Página de contacto con email `codezun@gmail.com` y tipos de consulta |
-| `/acerca` | Sobre nosotros: misión, qué hace el sitio, transparencia sobre afiliados, CTA a contacto |
-
----
-
-## SEO técnico implementado
-
-- **Sitemap XML** — `src/pages/sitemap.xml.ts` genera `/sitemap.xml` dinámico en build time con todas las páginas estáticas, países y posts del blog
-- **robots.txt** — `public/robots.txt` permite todo + apunta al sitemap
-- **Schema.org en páginas de broker** — `[pais].astro` incluye `ItemList` + `FinancialService` JSON-LD en el `<head>`
-- **Schema.org en artículos del blog** — `[slug].astro` incluye `Article` JSON-LD en el `<head>`
-- **GA4 placeholder** — `Layout.astro` tiene el snippet comentado listo para descomentar cuando se tenga el Measurement ID (buscar `G-XXXXXXXXXX`)
-
----
-
-## Próximos pasos sugeridos
-
-- Artículos de blog por país: PE, AR, EC, UY, BO (pospuesto — se hará por separado)
-- Artículos de análisis por broker: Exness, Pepperstone, IC Markets, XM, XTB (pospuesto)
-- Más calculadoras: ahorro mensual, ROI, CAGR, inflación, hipoteca
-- Página individual por broker — requiere nueva URL `/brokers/ver/[id]` para no colisionar con `/brokers/[pais]`
-- Activar Google Analytics: reemplazar `G-XXXXXXXXXX` en `Layout.astro` y descomentar el bloque
-- Actualizar links de afiliado en `src/lib/brokers.ts` si cambian los programas
+- Artículos de análisis por broker: Exness, IC Markets vs Pepperstone, XTB, XM (ver ARTICULOS.md)
+- Guías pendientes: cómo elegir broker, trading forex para principiantes (ver ARTICULOS.md)
+- Página individual por broker — URL `/brokers/ver/[id]` para no colisionar con `/brokers/[pais]`
+- Activar Google Analytics: descomentar snippet en `Layout.astro` con el Measurement ID real
