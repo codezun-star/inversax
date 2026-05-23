@@ -59,6 +59,39 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el CAGR?</h2>
+    <p>El <strong>CAGR (Compound Annual Growth Rate)</strong> o Tasa de Crecimiento Anual Compuesto es la métrica más honesta para medir el rendimiento de una inversión a lo largo del tiempo. A diferencia del promedio simple, el CAGR elimina la volatilidad año a año y muestra el crecimiento efectivo anual como si hubiera sido constante.</p>
+    <p>Es la respuesta a la pregunta: "¿A qué tasa anual creció realmente mi inversión?" Usar el promedio simple de rendimientos anuales puede ser engañoso; el CAGR no miente.</p>
+
+    <h2>Fórmula del CAGR</h2>
+    <p><strong>CAGR = (Valor final / Valor inicial) ^ (1 / años) − 1</strong></p>
+    <p>Ejemplo: si invertiste 10.000 y 5 años después tienes 18.000, el CAGR es (18.000/10.000)^(1/5) − 1 = <strong>12.47% anual</strong>. No importa si el año 3 fue un desastre y el año 5 fue brillante; el CAGR suaviza todo eso.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Valor inicial:</strong> el capital con el que empezaste (precio de compra, inversión original, capital inicial).</li>
+      <li><strong>Valor final:</strong> el valor actual o de cierre de tu inversión. Incluye dividendos si los recibiste.</li>
+      <li><strong>Período en años:</strong> cuántos años estuvo activa la inversión. Puedes usar decimales (ej. 2.5 para dos años y medio).</li>
+    </ul>
+
+    <h2>¿Para qué sirve el CAGR?</h2>
+    <ul>
+      <li><strong>Comparar inversiones:</strong> si una acción creció 60% en 4 años y un fondo creció 80% en 6 años, ¿cuál fue mejor? El CAGR lo resuelve en segundos (12.5% vs 10.6% — gana la acción).</li>
+      <li><strong>Evaluar fondos:</strong> los fondos de inversión publican rendimientos a 1, 3 y 5 años en CAGR. Ahora puedes interpretarlos.</li>
+      <li><strong>Proyectar crecimientos:</strong> si una empresa creció sus ventas de 2M a 8M en 5 años, su CAGR de ventas es 31.9% anual.</li>
+    </ul>
+
+    <h2>Limitaciones del CAGR</h2>
+    <p>El CAGR asume que el crecimiento fue uniforme cada año. Esto puede ocultar períodos de alta volatilidad. Dos inversiones con el mismo CAGR pueden haber tenido trayectorias muy distintas. Complementa el CAGR con la <strong>desviación estándar</strong> o el <strong>ratio de Sharpe</strong> para evaluar también el riesgo.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿El CAGR es lo mismo que el ROI anualizado?</h3>
+    <p>Sí, matemáticamente son idénticos. La diferencia es semántica: CAGR se usa más para evaluar rendimiento de inversiones en el tiempo; ROI se usa más para decisiones de negocio (¿valió la pena este gasto?). Nuestra <a href="/calculadoras/roi">calculadora de ROI</a> también calcula el ROI anualizado con la misma fórmula.</p>
+    <h3>¿Un CAGR alto siempre es mejor?</h3>
+    <p>No necesariamente. Un CAGR alto con alta volatilidad puede ser peor que un CAGR moderado y estable, dependiendo de tu tolerancia al riesgo y horizonte de inversión.</p>
+  </div>
 </Layout>
 
 <script>

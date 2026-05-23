@@ -44,6 +44,39 @@ import Layout from '../../layouts/Layout.astro';
       <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La comisión se cobra al abrir Y cerrar la posición (round trip). Los spreads variables pueden ser mayores en horario de menor liquidez. Estos valores son orientativos; consulta la página oficial de cada broker.</p>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Por qué comparar comisiones entre brokers?</h2>
+    <p>La diferencia de costos entre brokers puede parecer pequeña por operación, pero acumulada en un año de trading activo puede ser de <strong>miles de dólares</strong>. Un trader que opera 30 lotes al mes durante 12 meses con un broker caro puede pagar 3.000-5.000 USD más en costos que con uno eficiente, con el mismo resultado de mercado.</p>
+    <p>La comisión es un costo <strong>fijo e inevitable</strong>: no depende de si ganas o pierdes. Minimizarla es la única ventaja que puedes asegurar antes de abrir cualquier posición.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Tamaño de lote:</strong> el tamaño habitual de tus posiciones. Si operas mini lotes (0.1), ajusta a "Mini lote (0.1)".</li>
+      <li><strong>Lotes por operación:</strong> cuántos lotes usas en cada trade.</li>
+      <li><strong>Operaciones por mes:</strong> tu frecuencia de trading mensual. El costo escala linealmente con el número de operaciones.</li>
+    </ul>
+    <p>La tabla se actualiza en tiempo real y ordena los brokers de menor a mayor costo total. El broker más barato para tu perfil queda marcado en verde.</p>
+
+    <h2>¿Cómo se estructura el costo de cada broker?</h2>
+    <ul>
+      <li><strong>IC Markets y Pepperstone (Raw/Razor):</strong> spread casi nulo (~0.1 pips) + 7 USD de comisión round trip por lote estándar. El costo total es predecible y bajo para volúmenes altos.</li>
+      <li><strong>Exness (Zero):</strong> spread 0 pips + 7 USD de comisión. Ideal para scalping donde cada fracción de pip importa.</li>
+      <li><strong>XTB (Pro) y XM (Ultra Low):</strong> sin comisión explícita, pero spread mayor (0.6-0.8 pips). Conveniente para bajos volúmenes o principiantes que prefieren simplicidad.</li>
+      <li><strong>Libertex:</strong> modelo de comisión fija por operación, sin spread. Diferente estructura, útil para ciertos estilos de trading.</li>
+    </ul>
+
+    <h2>¿Cuándo conviene cada tipo de cuenta?</h2>
+    <p>La regla general: si operas <strong>menos de 0.5 lotes por operación</strong>, las cuentas estándar sin comisión (XTB Pro, XM Ultra Low) suelen ser más baratas porque la comisión fija de 7 USD pesa mucho sobre lotes pequeños. A partir de <strong>0.5-1 lote</strong> en adelante, las cuentas Raw/ECN de IC Markets o Pepperstone se vuelven más eficientes.</p>
+
+    <h2>Otros costos a considerar</h2>
+    <ul>
+      <li><strong>Swap (overnight financing):</strong> si mantienes posiciones más de un día, el broker cobra o paga una tasa de financiamiento. Para swing trading y posiciones largas, este costo puede superar al spread.</li>
+      <li><strong>Inactividad:</strong> algunos brokers cobran si no operas durante ciertos meses. XM cobra 15 USD mensuales tras 3 meses inactivo.</li>
+      <li><strong>Depósito y retiro:</strong> algunos brokers cobran por métodos de pago específicos. Verifica siempre las condiciones de tu moneda local.</li>
+    </ul>
+    <p>Para elegir el mejor broker para tu país y estilo de trading, consulta nuestra <a href="/brokers">comparativa completa de brokers</a>.</p>
+  </div>
 </Layout>
 
 <script>

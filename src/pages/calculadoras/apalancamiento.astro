@@ -91,6 +91,38 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el apalancamiento en forex?</h2>
+    <p>El <strong>apalancamiento</strong> te permite controlar una posición mucho mayor que tu capital real. Con un apalancamiento de 1:100, cada 1 USD de tu cuenta controla 100 USD en el mercado. Si operas 1 lote estándar de EUR/USD (100.000 unidades) con 1:100, solo necesitas 1.000 USD de margen, aunque la posición vale 100.000 USD.</p>
+    <p>El apalancamiento <strong>amplifica tanto las ganancias como las pérdidas</strong>. Un movimiento del 1% a tu favor duplica tu margen; un movimiento del 1% en contra lo elimina por completo.</p>
+
+    <h2>¿Qué es el margen?</h2>
+    <p>El <strong>margen</strong> es el depósito de garantía que el broker bloquea mientras tienes una posición abierta. No es un costo (no lo pagas), pero tampoco puedes usarlo para otras operaciones mientras la posición esté activa. El margen libre es el capital disponible para abrir nuevas posiciones o absorber pérdidas flotantes.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Balance de la cuenta:</strong> el capital total que tienes depositado en el broker.</li>
+      <li><strong>Apalancamiento:</strong> el nivel que ofrece tu broker. Exness y XM ofrecen hasta 1:2000; IC Markets y Pepperstone hasta 1:500; los brokers regulados en Europa están limitados a 1:30 para minoristas.</li>
+      <li><strong>Tamaño de la operación:</strong> en unidades de la divisa base. 1 lote estándar = 100.000; 1 mini lote = 10.000; 1 micro lote = 1.000.</li>
+      <li><strong>Precio del par:</strong> el precio actual de mercado, necesario para calcular el valor nocional en tu moneda de cuenta.</li>
+    </ul>
+
+    <h2>Niveles de apalancamiento y riesgo</h2>
+    <ul>
+      <li><strong>1:10 − 1:30:</strong> conservador. Recomendado para principiantes. Un movimiento adverso del 3-10% elimina el margen.</li>
+      <li><strong>1:50 − 1:100:</strong> moderado. Estándar para traders con experiencia. Requiere gestión estricta del stop loss.</li>
+      <li><strong>1:200 − 1:500:</strong> alto. Solo para operadores experimentados con gestión de riesgo probada.</li>
+      <li><strong>1:1000 − 1:2000:</strong> extremo. Un movimiento de 0.05-0.1% puede liquidar la posición. Solo para estrategias de scalping con stops muy ajustados.</li>
+    </ul>
+
+    <h2>La regla del 1-2% por operación</h2>
+    <p>Independientemente del apalancamiento que uses, nunca arriesgues más del <strong>1-2% de tu capital por operación</strong>. Si tienes 1.000 USD, tu pérdida máxima por trade debe ser 10-20 USD. Ajusta el tamaño de la posición (no el stop loss) para que el riesgo en dinero nunca supere ese límite.</p>
+    <p>Para calcular el tamaño de posición correcto, combina esta calculadora con la de <a href="/calculadoras/pips">valor del pip</a> y la de <a href="/calculadoras/riesgo-beneficio">riesgo/beneficio</a>.</p>
+
+    <h2>¿Qué brokers ofrecen los mayores apalancamientos?</h2>
+    <p>Desde Latinoamérica, <a href="/brokers/co">Exness</a> ofrece hasta 1:2000 en condiciones normales. XM hasta 1:1000. IC Markets y Pepperstone hasta 1:500 para clientes fuera de Europa/Australia. Consulta las condiciones exactas de cada broker en nuestra <a href="/brokers">comparativa</a>.</p>
+  </div>
 </Layout>
 
 <script>

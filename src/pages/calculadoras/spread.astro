@@ -84,6 +84,41 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el spread en forex?</h2>
+    <p>El <strong>spread</strong> es la diferencia entre el precio de compra (ask) y el precio de venta (bid) de un par de divisas. Es el principal costo de operar en forex para cuentas sin comisión explícita. Cuando abres una posición, "pagas" el spread instantáneamente: tu operación empieza en negativo por el valor del spread.</p>
+    <p>Si el EUR/USD tiene un spread de 1.2 pips y operas 1 lote estándar, pagas 12 USD cada vez que abres una posición. Si haces 100 operaciones al mes, el spread te cuesta 1.200 USD mensuales, independientemente de si ganas o pierdes.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Spread del broker en pips:</strong> el spread típico que cobra tu broker en condiciones normales de mercado. Puedes encontrarlo en la página de condiciones de tu broker o en la plataforma MT4/MT5.</li>
+      <li><strong>Tipo de lote:</strong> el tamaño de tus posiciones habituales.</li>
+      <li><strong>Número de lotes:</strong> cuántos lotes operas por operación.</li>
+      <li><strong>Operaciones por mes:</strong> tu frecuencia de trading. Un scalper puede hacer 50-100+ operaciones; un swing trader 5-20.</li>
+    </ul>
+
+    <h2>Tipos de spread</h2>
+    <ul>
+      <li><strong>Spread fijo:</strong> siempre el mismo, independientemente de las condiciones del mercado. Más alto en promedio, pero predecible.</li>
+      <li><strong>Spread variable (flotante):</strong> cambia con la liquidez del mercado. Más bajo en horario de alta actividad (sesión de Londres/Nueva York), más alto en aperturas de mercado, fines de semana y noticias importantes.</li>
+      <li><strong>Spread + comisión (Raw/ECN):</strong> spread casi nulo (0.0-0.3 pips) más una comisión fija por lote. Ideal para traders con volumen alto.</li>
+    </ul>
+
+    <h2>Spreads de referencia por par (condiciones normales)</h2>
+    <ul>
+      <li><strong>EUR/USD:</strong> 0.1-1.5 pips (el más líquido, spreads más bajos)</li>
+      <li><strong>GBP/USD:</strong> 0.5-2.0 pips</li>
+      <li><strong>USD/JPY:</strong> 0.5-1.5 pips</li>
+      <li><strong>AUD/USD:</strong> 0.5-2.0 pips</li>
+      <li><strong>Pares exóticos (USD/MXN, USD/COP):</strong> 10-50+ pips</li>
+    </ul>
+
+    <h2>¿Cuándo es rentable una cuenta Raw vs una cuenta estándar?</h2>
+    <p>En una cuenta Raw de IC Markets o Pepperstone, pagas 7 USD de comisión por lote estándar round trip pero el spread es 0.1-0.3 pips. En una cuenta estándar, el spread puede ser 1.2 pips (= 12 USD), sin comisión adicional.</p>
+    <p>Para un lote estándar en EUR/USD: Raw = 0.3 pips × 10 + 7 comisión = 10 USD. Estándar = 1.2 pips × 10 = 12 USD. La cuenta Raw sale más barata con 1 o más lotes. Con 0.1 lotes: Raw = 1 + 0.7 = 1.7 USD vs Estándar = 1.2 USD — la estándar gana. La cuenta Raw conviene a partir de volúmenes medios-altos.</p>
+    <p>Compara el costo total de cada broker con nuestra <a href="/calculadoras/comision-broker">calculadora de comisiones</a>.</p>
+  </div>
 </Layout>
 
 <script>

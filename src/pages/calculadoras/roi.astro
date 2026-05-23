@@ -83,6 +83,47 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el ROI?</h2>
+    <p>El <strong>ROI (Return on Investment)</strong> o retorno sobre la inversión es el indicador más básico y universal para medir si una inversión fue rentable. Expresa en porcentaje cuánto ganaste (o perdiste) en relación con el capital que pusiste.</p>
+    <p>La fórmula es simple: <strong>ROI = (Valor final − Valor inicial) / Valor inicial × 100</strong>. Un ROI positivo significa ganancia; negativo, pérdida. Un ROI del 35% significa que por cada 100 que invertiste, recuperaste 135.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Capital invertido:</strong> el monto que pusiste al inicio (tu inversión original).</li>
+      <li><strong>Valor actual / final:</strong> cuánto vale hoy tu inversión, incluyendo todo lo recibido (dividendos, intereses, precio de venta).</li>
+      <li><strong>Período en años:</strong> cuánto tiempo estuvo invertido el capital. Necesario para calcular el ROI anualizado.</li>
+      <li><strong>Moneda:</strong> elige tu moneda local para ver la ganancia neta formateada correctamente.</li>
+    </ul>
+
+    <h2>ROI total vs ROI anualizado</h2>
+    <p>El <strong>ROI total</strong> te dice cuánto ganaste en todo el período, sin importar cuánto duró. El <strong>ROI anualizado</strong> (que usa la fórmula CAGR) convierte esa ganancia total en un porcentaje equivalente por año, lo que permite comparar inversiones de distintos plazos.</p>
+    <p>Ejemplo: una inversión que duplicó en 10 años tiene un ROI total del 100%, pero un ROI anualizado de solo el 7.2% anual. Otra que subió 50% en 2 años tiene ROI anualizado del 22.5%. La segunda fue mucho más eficiente.</p>
+
+    <h2>¿Cómo interpretar los resultados?</h2>
+    <p>Mira el <strong>ROI anualizado</strong> para comparar inversiones. En términos generales:</p>
+    <ul>
+      <li>Por debajo del 5% anual: probablemente no le gana a la inflación en muchos países de Latinoamérica.</li>
+      <li>Entre 5% y 10% anual: rango razonable para inversiones de riesgo moderado en dólares.</li>
+      <li>Por encima del 15% anual: excelente, pero revisa si es sostenible o fue un año atípico.</li>
+    </ul>
+
+    <h2>Ejemplo práctico</h2>
+    <p>Compraste 10 acciones de una empresa a <strong>50 USD cada una</strong> (inversión: 500 USD). Dos años después valen 74 USD cada una (valor final: 740 USD):</p>
+    <ul>
+      <li>ROI total: (740 − 500) / 500 × 100 = <strong>48%</strong></li>
+      <li>Ganancia neta: <strong>240 USD</strong></li>
+      <li>ROI anualizado: (740/500)^(1/2) − 1 = <strong>21.6% por año</strong></li>
+      <li>Multiplicador: <strong>1.48x</strong></li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿El ROI incluye dividendos?</h3>
+    <p>Sí, si los incluyes en el "valor final". Para un cálculo completo, suma los dividendos cobrados al precio actual de la acción antes de ingresarlo en la calculadora.</p>
+    <h3>¿Qué diferencia hay entre ROI y CAGR?</h3>
+    <p>Son lo mismo cuando el período es de un año. Para períodos más largos, el ROI anualizado de esta calculadora usa la fórmula CAGR (Tasa de Crecimiento Anual Compuesta), que asume que las ganancias se reinvierten cada año. Consulta también nuestra <a href="/calculadoras/cagr">calculadora de CAGR</a> para más detalles.</p>
+  </div>
 </Layout>
 
 <script>

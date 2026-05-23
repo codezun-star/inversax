@@ -89,6 +89,36 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es una tabla de amortización?</h2>
+    <p>Una <strong>tabla de amortización</strong> es el desglose completo, mes a mes, de cómo se reparte cada cuota entre capital e intereses, y cuánto saldo queda pendiente. Es el documento que debería darte tu banco al firmar un préstamo, y que te permite entender exactamente cómo evoluciona tu deuda.</p>
+
+    <h2>¿Cómo leer la tabla?</h2>
+    <ul>
+      <li><strong>Cuota:</strong> el pago total que realizas ese mes. Es fijo durante todo el préstamo (sistema francés).</li>
+      <li><strong>Capital:</strong> la parte de la cuota que reduce tu deuda. En verde porque es lo que va a tu favor.</li>
+      <li><strong>Interés:</strong> la parte que se queda el banco. En rojo porque es el costo del crédito. Es más alto al inicio y cae cada mes.</li>
+      <li><strong>Saldo:</strong> lo que debes al finalizar ese mes, después de aplicar el pago de capital.</li>
+    </ul>
+
+    <h2>¿Por qué el interés baja cada mes?</h2>
+    <p>Porque los intereses se calculan sobre el <strong>saldo pendiente</strong>, no sobre el capital original. Cada mes que pagas, el saldo baja un poco, y el siguiente mes se calculan intereses sobre un número menor. Por eso al inicio casi todo es interés y al final casi todo es capital.</p>
+    <p>Esto también explica por qué los prepagos son tan valiosos en los primeros meses: reducen el saldo sobre el que se calcularán los intereses de todas las cuotas restantes.</p>
+
+    <h2>Caso práctico: 10.000 USD al 12% en 24 meses</h2>
+    <ul>
+      <li>Cuota mensual: 470,73 USD</li>
+      <li>Mes 1: 100 USD de interés, 370,73 USD de capital, saldo 9.629,27 USD</li>
+      <li>Mes 12: 55 USD de interés, 415 USD de capital, saldo 5.517 USD</li>
+      <li>Mes 24: 4,67 USD de interés, 466 USD de capital, saldo 0</li>
+    </ul>
+    <p>Como ves, en el mes 1 el 21% de la cuota es interés. En el mes 24, solo el 1%. La estructura cambia radicalmente.</p>
+
+    <h2>¿Cómo usar esta información para ahorrar dinero?</h2>
+    <p>Identifica en la tabla el mes en el que el saldo supera el 50% del capital original. Si haces un prepago de capital en ese punto, reduces significativamente los intereses restantes. Cada unidad de moneda que reduces del saldo ahorra exactamente esa unidad multiplicada por la tasa mensual durante todos los meses restantes.</p>
+    <p>Para calcular solo la cuota mensual sin el detalle completo, usa nuestra <a href="/calculadoras/prestamo">calculadora de préstamo</a>.</p>
+  </div>
 </Layout>
 
 <script>

@@ -88,6 +88,46 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo funciona el cálculo de un préstamo?</h2>
+    <p>Esta calculadora usa el <strong>sistema de amortización francés</strong> (cuota fija), el más común en créditos de consumo, hipotecas y préstamos personales en Latinoamérica y España. En este sistema, pagas la misma cuota todos los meses, pero la proporción entre capital e intereses cambia: al inicio pagas más intereses y menos capital; al final, más capital y menos intereses.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Monto del préstamo:</strong> el capital que solicitarás o que ya te aprobaron. No incluyas intereses ni costos adicionales.</li>
+      <li><strong>Tasa de interés anual:</strong> la tasa nominal anual que cobra el banco o entidad financiera. Ojo: en algunos países se publica la tasa efectiva anual (TEA) y en otros la tasa nominal anual (TNA). Verifica cuál te están dando.</li>
+      <li><strong>Plazo en meses:</strong> la duración del crédito. Un préstamo a 36 meses = 3 años.</li>
+    </ul>
+
+    <h2>¿Cómo interpretar los resultados?</h2>
+    <p>Los dos números más importantes son la <strong>cuota mensual</strong> y el <strong>total de intereses</strong>. El total de intereses representa el costo real del crédito: es lo que pagas de más por no tener el dinero hoy. El <strong>costo del crédito en %</strong> expresa ese sobrecosto como porcentaje del capital prestado.</p>
+
+    <h2>El impacto del plazo en el costo total</h2>
+    <p>Ampliar el plazo reduce la cuota mensual, pero dispara el costo total. Ejemplo con un préstamo de <strong>10.000 USD al 12% anual</strong>:</p>
+    <ul>
+      <li>A <strong>12 meses:</strong> cuota 888 USD/mes — total intereses: 666 USD</li>
+      <li>A <strong>36 meses:</strong> cuota 332 USD/mes — total intereses: 1.957 USD</li>
+      <li>A <strong>60 meses:</strong> cuota 222 USD/mes — total intereses: 3.347 USD</li>
+    </ul>
+    <p>Un plazo 5 veces mayor paga 5 veces más en intereses. Siempre que puedas, elige el plazo más corto que puedas pagar cómodamente.</p>
+
+    <h2>Tasas de préstamo de referencia por país (2026)</h2>
+    <ul>
+      <li><strong>Colombia:</strong> crédito de consumo ~24-30% E.A.</li>
+      <li><strong>México:</strong> préstamo personal ~25-40% anual</li>
+      <li><strong>Chile:</strong> crédito de consumo ~15-25% anual</li>
+      <li><strong>Perú:</strong> préstamo personal ~30-50% E.A.</li>
+      <li><strong>España:</strong> préstamo personal ~6-10% TAE</li>
+    </ul>
+    <p>Para ver el detalle mes a mes de tu préstamo, visita nuestra <a href="/calculadoras/amortizacion">tabla de amortización</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿La calculadora incluye seguros y comisiones?</h3>
+    <p>No. Los bancos pueden añadir seguros de vida, comisiones de apertura y otros costos que elevan el costo real (APR o CAE). Para comparar préstamos de distintas entidades, pide siempre la <strong>Tasa Efectiva Anual (TEA)</strong> o el <strong>Costo Anual Efectivo (CAE)</strong>, que incluye todos los costos.</p>
+    <h3>¿Puedo hacer pagos anticipados?</h3>
+    <p>Depende del contrato. En muchos países, los prepagos parciales o totales tienen un cargo (penalidad). Si tu banco lo permite sin costo, siempre conviene: cada peso extra de capital que pagas reduce los intereses futuros.</p>
+  </div>
 </Layout>
 
 <script>

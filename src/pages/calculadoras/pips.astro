@@ -86,6 +86,34 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es un pip en forex?</h2>
+    <p>Un <strong>pip</strong> (Price Interest Point) es la unidad mínima de movimiento de precio en un par de divisas. Para la mayoría de pares con 4 decimales (EUR/USD, GBP/USD, etc.), 1 pip = 0,0001. Para pares con JPY (USD/JPY, EUR/JPY), 1 pip = 0,01, porque el yen cotiza con solo 2 decimales.</p>
+    <p>Conocer el valor monetario de cada pip es fundamental en forex: define cuánto ganas o pierdes por cada movimiento del mercado y permite dimensionar correctamente el tamaño de tus posiciones.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Par de divisas:</strong> cada par tiene su propia forma de calcular el valor del pip según si el USD es la divisa base o cotizada.</li>
+      <li><strong>Tipo de lote:</strong> el tamaño estándar es 100.000 unidades (1 lote). Un mini lote es 10.000 unidades (0.1 lotes), y un micro lote es 1.000 unidades (0.01 lotes). La mayoría de brokers para principiantes, como Exness o XM, permiten operar desde 0.01 lotes.</li>
+      <li><strong>Número de lotes:</strong> cuántos lotes operas en esa posición.</li>
+      <li><strong>Precio de mercado:</strong> necesario para calcular el valor del pip en pares donde el USD no es la divisa cotizada (como USD/JPY o USD/CHF).</li>
+    </ul>
+
+    <h2>¿Por qué importa el valor del pip?</h2>
+    <p>Antes de entrar a cualquier operación en forex, debes saber tres cosas: el valor de tu pip, cuántos pips está tu stop loss, y cuánto capital puedes arriesgar. Con estos tres datos, calculas el tamaño correcto de la posición.</p>
+    <p>Ejemplo: tienes 1.000 USD en cuenta, quieres arriesgar el 1% (10 USD) y tu stop loss es de 20 pips. Si cada pip vale 1 USD (0.1 lotes en EUR/USD), puedes operar exactamente 0.5 lotes: 20 pips × 1 USD/pip = 20 USD de pérdida máxima. Si reduces a 0.1 lotes: 20 pips × 0.10 USD = 2 USD. Ajusta el tamaño de lote hasta que el riesgo en USD sea exactamente el que deseas.</p>
+
+    <h2>Valor del pip por par (1 lote estándar, aproximado)</h2>
+    <ul>
+      <li><strong>EUR/USD, GBP/USD, AUD/USD, NZD/USD:</strong> 10 USD por pip</li>
+      <li><strong>USD/JPY:</strong> ~9,20 USD por pip (varía con el precio)</li>
+      <li><strong>USD/CHF:</strong> ~11 USD por pip (varía con el precio)</li>
+      <li><strong>USD/CAD:</strong> ~7,20 USD por pip (varía con el precio)</li>
+      <li><strong>XAU/USD (Oro):</strong> 1 USD por 0.01 de movimiento</li>
+    </ul>
+    <p>Combina esta calculadora con la de <a href="/calculadoras/riesgo-beneficio">riesgo/beneficio</a> para planificar cada operación antes de ejecutarla.</p>
+  </div>
 </Layout>
 
 <script>
