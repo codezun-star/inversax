@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPathsOptions } from 'astro';
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const todos = await getCollection('blog', (e) => e.data.publicado !== false);
+  const articulos = todos.sort((a, b) => b.data.fecha.localeCompare(a.data.fecha));
+  return paginate(articulos, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+
+const categorias: Record<string, string> = {
+  brokers: 'Brokers',
+  guias: 'Guías',
+  analisis: 'Análisis',
+  general: 'General',
+};
+
+const pageNums = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : '';
+---
+
+<Layout
+  title={`Blog de Inversiones${titleSuffix} — Inversax`}
+  description="Artículos sobre brokers, inversiones y finanzas personales para Latinoamérica."
+>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a>
+        <span>›</span>
+        <span style="color:#57534E;">Blog</span>
+      </div>
+      <h1 style="font-size:clamp(24px, 4vw, 36px); font-weight:800; color:#1A1A1A; margin:0 0 10px; letter-spacing:-0.3px;">
+        Blog
+      </h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; max-width:520px; margin:0;">
+        Guías, análisis y recomendaciones de brokers para inversores latinoamericanos.
+      </p>
+    </div>
+  </div>
+
+  <div style="max-width:1100px; margin:0 auto; padding:40px 20px;">
+    <div style="display:flex; flex-direction:column; gap:1px; background:#E2DDD8; border:1px solid #E2DDD8; border-radius:12px; overflow:hidden;">
+      {page.data.map((art) => (
+        <a
+          href={`/blog/${art.slug}`}
+          style="display:flex; align-items:center; gap:20px; background:#fff; padding:20px 24px; text-decoration:none; transition:background 0.1s;"
+          onmouseover="this.style.background='#FAFAF8'"
+          onmouseout="this.style.background='#fff'"
+        >
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+              {art.data.categoria && (
+                <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#FFF4EC; color:#FF8C42; padding:2px 8px; border-radius:4px;">
+                  {categorias[art.data.categoria] ?? art.data.categoria}
+                </span>
+              )}
+              {art.data.pais && (
+                <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#F0EDE7; color:#78716C; padding:2px 8px; border-radius:4px;">
+                  {art.data.pais.toUpperCase()}
+                </span>
+              )}
+              <span style="font-size:12px; color:#A8A29E;">{art.data.fecha}</span>
+            </div>
+            <h2 style="font-size:15px; font-weight:700; color:#1A1A1A; margin:0 0 4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{art.data.titulo}</h2>
+            <p style="font-size:13px; color:#78716C; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{art.data.descripcion}</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C7BFB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      ))}
+    </div>
+
+    {page.data.length === 0 && (
+      <div style="text-align:center; padding:60px 20px; color:#A8A29E;">
+        <p style="font-size:15px; margin:0;">No hay artículos publicados aún.</p>
+      </div>
+    )}
+
+    {page.lastPage > 1 && (
+      <div style="display:flex; align-items:center; justify-content:center; gap:4px; margin-top:32px;">
+        {page.url.prev ? (
+          <a
+            href={page.url.prev}
+            aria-label="Página anterior"
+            style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid #E2DDD8; background:#fff; color:#57534E; text-decoration:none;"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </a>
+        ) : (
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid #E2DDD8; background:#F7F7F5; color:#C7BFB5;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </span>
+        )}
+
+        {pageNums.map((n) => (
+          n === page.currentPage ? (
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:#FF8C42; color:#fff; font-size:14px; font-weight:700;">
+              {n}
+            </span>
+          ) : (
+            <a
+              href={n === 1 ? '/blog' : `/blog/${n}`}
+              style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid #E2DDD8; background:#fff; color:#57534E; font-size:14px; font-weight:600; text-decoration:none;"
+            >
+              {n}
+            </a>
+          )
+        ))}
+
+        {page.url.next ? (
+          <a
+            href={page.url.next}
+            aria-label="Página siguiente"
+            style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid #E2DDD8; background:#fff; color:#57534E; text-decoration:none;"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        ) : (
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid #E2DDD8; background:#F7F7F5; color:#C7BFB5;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        )}
+      </div>
+    )}
+  </div>
+</Layout>
