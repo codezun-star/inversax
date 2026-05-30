@@ -28,6 +28,10 @@ Modelo de negocio: **afiliados** — cada botón "Abrir cuenta en X" lleva un en
 **Deploy:** Vercel — output estático, sin adaptador `@astrojs/vercel`. Vercel detecta Astro automáticamente.
 **Blog:** Astro Content Collections con archivos `.md` en `src/content/blog/`. Sin base de datos.
 
+### URLs: trailing slash
+
+`astro.config.mjs` tiene `trailingSlash: 'never'`. `vercel.json` tiene `trailingSlash: false` y `cleanUrls: true`. Todas las URLs son sin barra final: `/blog`, `/calculadoras`, `/brokers/co`.
+
 ---
 
 ## Estructura de archivos
@@ -35,15 +39,25 @@ Modelo de negocio: **afiliados** — cada botón "Abrir cuenta en X" lleva un en
 ```
 InversaxV2/
 ├── CLAUDE.md
-├── ARTICULOS.md              # Control de artículos publicados y pendientes
+├── ARTICULOS.md              # Índice general de 32 artículos
+├── ARTICULOS-BROKERS.md      # 22 artículos de brokers por país
+├── ARTICULOS-ANALISIS.md     # 5 análisis de brokers
+├── ARTICULOS-GUIAS.md        # 4 guías
+├── ARTICULOS-GENERAL.md      # 1 artículo general
+├── CALCULADORAS.md           # Índice de 52 calculadoras
+├── CALCULADORAS-INVERSION.md
+├── CALCULADORAS-PLANIFICACION.md
+├── CALCULADORAS-FOREX.md
+├── CALCULADORAS-DIVISAS.md
+├── vercel.json               # cleanUrls: true, trailingSlash: false
 ├── package.json
-├── astro.config.mjs          # output: static, integrations: [tailwind()]
+├── astro.config.mjs          # output: static, trailingSlash: never, integrations: [tailwind()]
 ├── tailwind.config.mjs
 ├── tsconfig.json
 └── src/
     ├── content/
     │   ├── config.ts         # defineCollection con schema Zod para blog
-    │   └── blog/             # Artículos .md (22 publicados)
+    │   └── blog/             # 32 artículos .md publicados
     ├── layouts/
     │   └── Layout.astro      # head, DM Sans font, Header, main slot, Footer
     ├── components/
@@ -51,20 +65,24 @@ InversaxV2/
     │   └── Footer.astro
     ├── lib/
     │   ├── brokers.ts        # Array de 7 brokers con links de afiliado reales
-    │   └── paises.ts         # Array de 22 países con moneda y métodos de pago
+    │   ├── paises.ts         # Array de 22 países con moneda, métodos de pago y brokerRecomendado
+    │   └── calculadoras.ts   # Array de 4 grupos con 52 calculadoras totales
     └── pages/
         ├── index.astro
         ├── 404.astro
         ├── brokers/
         │   ├── index.astro
         │   └── [pais].astro
-        ├── calculadoras/     # index + 20 calculadoras individuales
+        ├── calculadoras/
+        │   ├── index.astro          # Listing con tags de filtro, máx 12 por categoría
+        │   ├── [categoria].astro    # Páginas de categoría: /calculadoras/inversion, etc.
+        │   └── [52 archivos .astro individuales]
         ├── blog/
-        │   ├── index.astro   # Lista artículos via getCollection
-        │   └── [slug].astro  # Artículo individual via getEntry + render
-        ├── sitemap.xml.ts    # Índice de sitemaps
-        ├── sitemap-static.xml.ts  # Páginas estáticas + países
-        ├── sitemap-blog.xml.ts    # Artículos del blog
+        │   ├── [...page].astro  # Listado paginado (10/página): /blog, /blog/2, /blog/3...
+        │   └── [slug].astro     # Artículo individual con botones de compartir
+        ├── sitemap.xml.ts
+        ├── sitemap-static.xml.ts
+        ├── sitemap-blog.xml.ts
         ├── privacidad.astro
         ├── legal.astro
         ├── contacto.astro
@@ -131,13 +149,58 @@ Links de afiliado siempre con `target="_blank" rel="noopener noreferrer sponsore
 
 22 países: `co`, `mx`, `ar`, `cl`, `pe`, `ec`, `uy`, `bo`, `py`, `ve`, `cr`, `pa`, `do`, `gt`, `hn`, `sv`, `ni`, `cu`, `pr`, `ca`, `bz`, `es`
 
-Casos especiales con banner de advertencia en `[pais].astro`:
+### Interfaz `Pais`
+
+```ts
+interface Pais {
+  codigo: string;
+  nombre: string;
+  moneda: string;
+  metodosPago: string[];
+  descripcion: string;
+  brokerRecomendado: string;  // ID del broker recomendado para ese país
+}
+```
+
+### Broker recomendado por país
+
+| Países | brokerRecomendado |
+|--------|-------------------|
+| `co`, `mx`, `cl`, `pe`, `ec`, `uy`, `bo`, `py`, `do`, `pr` | `'exness'` |
+| `ar`, `cu`, `ve`, `cr`, `pa`, `gt`, `hn`, `sv`, `ni`, `bz` | `'xm'` |
+| `ca`, `es` | `'ic-markets'` |
+
+La lógica en `[pais].astro` busca en el array filtrado el broker cuyo `id` coincide con `pais.brokerRecomendado`. Si no lo encuentra (broker no disponible en ese país), usa `todos[0]` como fallback.
+
+### Casos especiales con banner de advertencia en `[pais].astro`
 - `cu` — sanciones OFAC; solo XM
 - `ar` — cepo cambiario; solo XM
 - `pr` — territorio EE.UU., USD
 - `ve` — dolarización informal, Zinli/Zelle
 - `sv` — Bitcoin legal tender
 - `ca` — regulado por CIRO (ex-IIROC)
+
+---
+
+## Calculadoras (`src/lib/calculadoras.ts`)
+
+**52 calculadoras** en 4 categorías. Fuente única de datos compartida entre `index.astro` y `[categoria].astro`.
+
+| Categoría | slug | Color | Calculadoras |
+|---|---|---|---|
+| Inversión | `inversion` | `#FF8C42` | 15 |
+| Planificación personal | `planificacion` | `#22C55E` | 15 |
+| Forex y trading | `forex` | `#3B82F6` | 13 |
+| Divisas | `divisas` | `#8B5CF6` | 9 |
+
+Ver lista completa en [CALCULADORAS.md](CALCULADORAS.md).
+
+### Comportamiento del listado `/calculadoras`
+
+- Tags de categoría como pills; primer tag activo por defecto al cargar
+- Secciones ocultas con `display:none` en HTML; JS toglea visibilidad
+- Máximo 12 calculadoras visibles por categoría; botón "Ver más" aparece cuando hay más de 12
+- Contador dinámico en el hero: `grupos.reduce((sum, g) => sum + g.calculadoras.length, 0)`
 
 ---
 
@@ -158,12 +221,27 @@ Casos especiales con banner de advertencia en `[pais].astro`:
 }
 ```
 
+### Paginación
+
+El listado del blog usa `src/pages/blog/[...page].astro` con `paginate()` de Astro:
+- Página 1: `/blog` (10 artículos más recientes)
+- Página 2+: `/blog/2`, `/blog/3`, etc.
+- `pageSize: 10`
+- Navegación con números de página y flechas prev/next
+
+### Botones de compartir en artículos
+
+Cada artículo individual (`[slug].astro`) incluye botones de compartir al final del contenido:
+- **WhatsApp:** `https://wa.me/?text=TITULO — URL`
+- **X (Twitter):** `https://x.com/intent/tweet?url=URL&text=TITULO`
+- **Copiar link:** `navigator.clipboard.writeText(window.location.href)` con feedback visual "Copiado" (2s)
+
 ### Cómo crear un artículo nuevo
 
 1. Crear `src/content/blog/[slug].md` donde el nombre del archivo ES el slug de la URL.
 2. Escribir el frontmatter con los campos del schema.
 3. El cuerpo puede ser Markdown o HTML — el contenido HTML pasa sin modificaciones.
-4. Registrar el artículo en `ARTICULOS.md` para control de duplicados.
+4. Registrar en `ARTICULOS.md` (índice) y en el archivo de categoría correspondiente.
 
 ### Reglas de artículos evergreen (OBLIGATORIO)
 
@@ -221,6 +299,7 @@ npm run preview   # preview del build estático
 - `[pais].astro` — JSON-LD `ItemList` + `FinancialService` en `<head>`
 - `[slug].astro` — JSON-LD `Article` en `<head>`
 - GA4 snippet comentado en `Layout.astro` — buscar `G-XXXXXXXXXX` para activar
+- Favicon: `/favicon.svg` (no `/logo.svg`)
 
 ---
 
@@ -236,7 +315,10 @@ npm run preview   # preview del build estático
 
 ## Próximos pasos
 
-- Artículos de análisis por broker: Exness, IC Markets vs Pepperstone, XTB, XM (ver ARTICULOS.md)
-- Guías pendientes: cómo elegir broker, trading forex para principiantes (ver ARTICULOS.md)
 - Página individual por broker — URL `/brokers/ver/[id]` para no colisionar con `/brokers/[pais]`
 - Activar Google Analytics: descomentar snippet en `Layout.astro` con el Measurement ID real
+- Artículo: XTB análisis completo para acciones/ETFs desde LATAM
+- Artículo: Libertex — modelo zero spread explicado
+- Artículo: Cómo retirar dinero de Exness / XM (muy buscado)
+- Artículo: Gestión del riesgo en forex: guía completa
+- Agregar más brokers al comparador (con o sin afiliado — usar homepage como link directo si no hay afiliado)
