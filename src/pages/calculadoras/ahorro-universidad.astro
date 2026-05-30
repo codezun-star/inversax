@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Ahorro para Universidad — Inversax" description="Calcula cuánto debes ahorrar mensualmente para cubrir los estudios universitarios de tus hijos. Incluye inflación educativa y rendimiento de inversión.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Ahorro para Universidad</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Ahorro para Universidad</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Proyecta el costo futuro de la universidad y calcula el ahorro mensual necesario para llegar con el capital completo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de proyección</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Costo anual actual de la universidad</label>
+            <input id="costo" type="number" value="5000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Duración de la carrera (años)</label>
+            <input id="duracion" type="number" value="5" min="1" max="10" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Años hasta el ingreso</label>
+            <input id="anos" type="number" value="10" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Inflación universitaria anual (%)</label>
+            <input id="inflacion" type="number" value="5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento anual del ahorro (%)</label>
+            <input id="rendimiento" type="number" value="7" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Ahorro mensual necesario</p>
+          <p id="ahorro-mensual" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo total proyectado</span>
+            <span id="costo-total" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo primer año (futuro)</span>
+            <span id="costo-primer" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Total aportado</span>
+            <span id="total-aportado" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">La inflación universitaria suele superar la inflación general. En Latinoamérica oscila entre 4% y 8% anual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Por qué ahorrar desde temprano</h2>
+    <p>El costo de la educación universitaria crece a una tasa mayor que la inflación general. Empezar a ahorrar cuando el niño tiene pocos años permite que el interés compuesto trabaje a tu favor. Esperar hasta los 15 años puede triplicar el ahorro mensual necesario en comparación con empezar a los 5 años.</p>
+    <h2>Cómo usar la calculadora</h2>
+    <p>Ingresa el costo anual actual de la universidad que tienes en mente. La calculadora proyecta ese costo al futuro aplicando la inflación universitaria, suma todos los años de carrera, y calcula el ahorro mensual necesario considerando que ese ahorro también rinde intereses.</p>
+    <p>Para maximizar el ahorro, considera instrumentos con rendimiento real positivo (por encima de la inflación). Combina esta proyección con la <a href="/calculadoras/independencia-financiera">calculadora FIRE</a> para planificar tanto la educación de tus hijos como tu propio retiro.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const costo = parseFloat((document.getElementById('costo') as HTMLInputElement).value) || 0;
+    const dur = parseFloat((document.getElementById('duracion') as HTMLInputElement).value) || 5;
+    const n = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 0;
+    const inf = parseFloat((document.getElementById('inflacion') as HTMLInputElement).value) / 100 || 0;
+    const rend = parseFloat((document.getElementById('rendimiento') as HTMLInputElement).value) / 100 || 0;
+    // Costo en el año de ingreso
+    const costoInicio = costo * Math.pow(1 + inf, n);
+    // Costo total sumando los años de carrera con inflación
+    let costoTotal = 0;
+    for (let i = 0; i < dur; i++) costoTotal += costoInicio * Math.pow(1 + inf, i);
+    // Ahorro mensual necesario (aporte fijo mensual que alcanza costoTotal al inicio de la carrera)
+    const r = rend / 12;
+    const meses = n * 12;
+    const ahorro = r > 0 && meses > 0 ? costoTotal * r / (Math.pow(1 + r, meses) - 1) : (meses > 0 ? costoTotal / meses : 0);
+    document.getElementById('ahorro-mensual')!.textContent = fmt(ahorro, m);
+    document.getElementById('costo-total')!.textContent = fmt(costoTotal, m);
+    document.getElementById('costo-primer')!.textContent = fmt(costoInicio, m);
+    document.getElementById('total-aportado')!.textContent = fmt(ahorro * meses, m);
+  }
+  ['moneda','costo','duracion','anos','inflacion','rendimiento'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

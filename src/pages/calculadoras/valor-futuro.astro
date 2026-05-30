@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Valor Futuro — Inversax" description="Proyecta cuánto valdrá tu inversión en el futuro con interés compuesto. Calcula el valor futuro de cualquier capital a una tasa anual.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Valor Futuro</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Valor Futuro</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Cuánto valdrá tu dinero en el futuro? Proyecta el crecimiento de un capital único a interés compuesto.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="PYG">PYG — Guaraní</option><option value="VES">VES — Bolívar</option><option value="CRC">CRC — Colón</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option><option value="HNL">HNL — Lempira</option><option value="NIO">NIO — Córdoba</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial</label>
+            <input id="capital" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de interés anual (%)</label>
+            <input id="tasa" type="number" value="8" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de años</label>
+            <input id="anos" type="number" value="10" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Valor futuro</p>
+          <p id="vf" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Capital inicial</span>
+            <span id="cap-display" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancia total</span>
+            <span id="ganancia" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Multiplicador</span>
+            <span id="mult" style="font-size:13px; font-weight:700; color:#1A1A1A;">0x</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Fórmula: VF = Capital × (1 + tasa)^años. No incluye aportes adicionales ni impuestos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el Valor Futuro?</h2>
+    <p>El <strong>Valor Futuro (VF)</strong> es el monto al que crecerá una inversión hoy si se mantiene durante un período a una tasa de rendimiento constante. Es la base del interés compuesto: las ganancias generan nuevas ganancias.</p>
+    <p>La fórmula es: <strong>VF = Capital × (1 + tasa)^años</strong>. Si inviertes 10.000 USD al 8% anual durante 10 años, obtienes 21.589 USD, más del doble, sin agregar un peso adicional.</p>
+    <h2>Cómo interpretar los resultados</h2>
+    <p>El <strong>multiplicador</strong> indica cuántas veces creció tu dinero. Un multiplicador de 2x significa que duplicaste el capital; 3x que lo triplicaste. Cuanto mayor la tasa y el período, mayor el multiplicador — esta es la magia del interés compuesto.</p>
+    <p>Para incluir aportes mensuales adicionales, usa nuestra <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>. Para comparar dos tasas diferentes, usa el <a href="/calculadoras/comparador-inversiones">comparador de inversiones</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const c = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const t = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) / 100 || 0;
+    const n = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 0;
+    const vf = c * Math.pow(1 + t, n);
+    document.getElementById('vf')!.textContent = fmt(vf, m);
+    document.getElementById('cap-display')!.textContent = fmt(c, m);
+    document.getElementById('ganancia')!.textContent = fmt(vf - c, m);
+    document.getElementById('mult')!.textContent = (c > 0 ? vf / c : 0).toFixed(2) + 'x';
+  }
+  ['moneda','capital','tasa','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

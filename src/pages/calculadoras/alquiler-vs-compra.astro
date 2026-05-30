@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora Alquiler vs Compra de Vivienda — Inversax" description="Compara si conviene más alquilar o comprar vivienda. Considera cuota del préstamo, valorización del inmueble, costo de oportunidad y plazo de análisis.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Alquiler vs Compra</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora Alquiler vs Compra</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Es mejor comprar o seguir alquilando? Compara el costo total real de cada opción considerando valorización y costo de oportunidad.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros de comparación</h2>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div style="background:#F7F7F5; padding:12px; border-radius:8px;">
+            <p style="font-size:11px; font-weight:700; color:#57534E; text-transform:uppercase; margin:0 0 8px;">Escenario Compra</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Precio del inmueble</label>
+                <input id="precio" type="number" value="200000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Cuota mensual préstamo</label>
+                <input id="cuota" type="number" value="1200" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Valorización anual del inmueble (%)</label>
+                <input id="valorizacion" type="number" value="4" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Gastos anuales (mantenimiento, impuestos) %</label>
+                <input id="gastos-compra" type="number" value="1.5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+            </div>
+          </div>
+          <div style="background:#F7F7F5; padding:12px; border-radius:8px;">
+            <p style="font-size:11px; font-weight:700; color:#57534E; text-transform:uppercase; margin:0 0 8px;">Escenario Alquiler</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Alquiler mensual</label>
+                <input id="alquiler" type="number" value="800" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Incremento anual del alquiler (%)</label>
+                <input id="incr-alquiler" type="number" value="5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; color:#78716C; display:block; margin-bottom:4px;">Rendimiento inversión con diferencia (%)</label>
+                <input id="rend" type="number" value="7" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Horizonte de análisis (años)</label>
+            <input id="anos" type="number" value="10" min="1" max="30" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="result-card" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Resultado</p>
+          <p id="veredicto" style="font-size:20px; font-weight:800; margin:0; letter-spacing:-0.3px;">—</p>
+          <p id="ventaja" style="font-size:13px; margin:6px 0 0; opacity:0.9;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo neto total — Compra</span>
+            <span id="costo-compra" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo total — Alquiler</span>
+            <span id="costo-alquiler" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor del inmueble al final</span>
+            <span id="val-final" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">Este modelo simplifica. Considera también: seguridad de tenencia, flexibilidad geográfica y acceso a crédito hipotecario.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Alquiler vs compra: no hay respuesta universal</h2>
+    <p>La decisión depende de tu situación personal: cuánto tiempo piensas quedarte, si tienes capital para el enganche, la diferencia entre cuota e alquiler, y qué podrías hacer con ese dinero si lo invirtieras. En mercados con alta valorización, comprar suele ganar en el largo plazo. En mercados estables o cuando el alquiler es muy barato vs la cuota, alquilar e invertir la diferencia puede ser superior.</p>
+    <p>El modelo compara el costo neto de comprar (cuotas + gastos − valorización del inmueble) contra el costo de alquilar (alquiler acumulado − lo que crece la diferencia invertida). Ningún modelo captura todo, pero da una buena aproximación.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const cuota = parseFloat((document.getElementById('cuota') as HTMLInputElement).value) || 0;
+    const valPct = parseFloat((document.getElementById('valorizacion') as HTMLInputElement).value) / 100 || 0;
+    const gastosPct = parseFloat((document.getElementById('gastos-compra') as HTMLInputElement).value) / 100 || 0;
+    const alquiler = parseFloat((document.getElementById('alquiler') as HTMLInputElement).value) || 0;
+    const incrAlq = parseFloat((document.getElementById('incr-alquiler') as HTMLInputElement).value) / 100 || 0;
+    const rend = parseFloat((document.getElementById('rend') as HTMLInputElement).value) / 100 || 0;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+
+    // Costo compra: cuotas totales + gastos - (valor final - precio)
+    const cuotasTotal = cuota * 12 * anos;
+    const gastosTotal = precio * gastosPct * anos;
+    const valorFinal = precio * Math.pow(1 + valPct, anos);
+    const costoCompraNeto = cuotasTotal + gastosTotal - (valorFinal - precio);
+
+    // Costo alquiler: suma de alquileres con incremento anual - patrimonio acumulado por invertir la diferencia
+    let alqTotal = 0, alqActual = alquiler;
+    let patrimonioInv = 0;
+    for (let i = 0; i < anos; i++) {
+      alqTotal += alqActual * 12;
+      const dif = Math.max(0, cuota - alqActual);
+      patrimonioInv = (patrimonioInv + dif * 12) * (1 + rend);
+      alqActual *= (1 + incrAlq);
+    }
+    const costoAlquilNet = alqTotal - patrimonioInv;
+
+    const card = document.getElementById('result-card')!;
+    const diff = costoAlquilNet - costoCompraNeto;
+    if (Math.abs(diff) < precio * 0.05) {
+      card.style.background = '#8B5CF6';
+      document.getElementById('veredicto')!.textContent = 'Resultado muy similar';
+      document.getElementById('ventaja')!.textContent = 'Decide según tu situación personal';
+    } else if (diff > 0) {
+      card.style.background = '#22C55E';
+      document.getElementById('veredicto')!.textContent = 'Comprar es más conveniente';
+      document.getElementById('ventaja')!.textContent = 'Ahorro vs alquiler: ' + fmt(diff, m);
+    } else {
+      card.style.background = '#3B82F6';
+      document.getElementById('veredicto')!.textContent = 'Alquilar e invertir es más conveniente';
+      document.getElementById('ventaja')!.textContent = 'Ventaja vs compra: ' + fmt(-diff, m);
+    }
+    document.getElementById('costo-compra')!.textContent = fmt(costoCompraNeto, m);
+    document.getElementById('costo-alquiler')!.textContent = fmt(alqTotal, m);
+    document.getElementById('val-final')!.textContent = fmt(valorFinal, m);
+  }
+  ['moneda','precio','cuota','valorizacion','gastos-compra','alquiler','incr-alquiler','rend','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

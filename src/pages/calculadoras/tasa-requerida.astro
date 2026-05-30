@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Tasa de Rendimiento Requerida — Inversax" description="¿Qué tasa anual necesitas para que tu inversión llegue a una meta específica? Calcula la tasa de rendimiento requerida dado un capital inicial, meta y plazo.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Tasa Requerida</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Tasa de Rendimiento Requerida</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Qué tasa anual necesitas para convertir tu capital inicial en tu meta? Encuentra el rendimiento exacto que debes buscar.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu objetivo</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial</label>
+            <input id="capital" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Meta (valor futuro deseado)</label>
+            <input id="meta" type="number" value="50000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (años)</label>
+            <input id="anos" type="number" value="10" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tasa anual requerida</p>
+          <p id="tasa" style="font-size:40px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Multiplicador necesario</span>
+            <span id="mult" style="font-size:13px; font-weight:700; color:#1A1A1A;">0x</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancia total esperada</span>
+            <span id="ganancia" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equivalente mensual (aprox.)</span>
+            <span id="mensual" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Fórmula: Tasa = (Meta / Capital)^(1/años) − 1. El resultado es la tasa de crecimiento anual compuesto (CAGR) requerida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Para qué sirve conocer la tasa requerida?</h2>
+    <p>Antes de elegir dónde invertir tu dinero, debes saber qué rendimiento necesitas para alcanzar tu objetivo. Si tu meta requiere el 18% anual pero solo encuentras instrumentos al 8%, sabes que debes ajustar el capital inicial, ampliar el plazo o revisar la meta.</p>
+    <p>Esta calculadora usa la misma fórmula del CAGR invertida: si conoces el punto de partida y el de llegada, te dice a qué velocidad debe crecer tu dinero. Compárala con los rendimientos históricos de los activos que te interesan.</p>
+    <h2>Tasas de referencia</h2>
+    <p>Como referencia general: un depósito a plazo fijo en dólares rinde 3-5% anual, un índice bursátil global (S&amp;P 500) ha rendido ~10% histórico, y un portafolio diversificado suele estar entre 6-9%. Tasas superiores al 15% son posibles pero implican mayor riesgo. Usa la <a href="/calculadoras/comparador-inversiones">calculadora de comparador de inversiones</a> para ver el impacto de cada escenario.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const c = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const meta = parseFloat((document.getElementById('meta') as HTMLInputElement).value) || 0;
+    const n = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const tasa = c > 0 && meta > 0 ? (Math.pow(meta / c, 1 / n) - 1) * 100 : 0;
+    const mult = c > 0 ? meta / c : 0;
+    const mensual = tasa > 0 ? (Math.pow(1 + tasa / 100, 1 / 12) - 1) * 100 : 0;
+    document.getElementById('tasa')!.textContent = tasa.toFixed(2) + '%';
+    document.getElementById('mult')!.textContent = mult.toFixed(2) + 'x';
+    document.getElementById('ganancia')!.textContent = fmt(meta - c, m);
+    document.getElementById('mensual')!.textContent = mensual.toFixed(3) + '%';
+  }
+  ['moneda','capital','meta','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

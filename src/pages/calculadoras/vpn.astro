@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de VPN — Valor Presente Neto — Inversax" description="Calcula el Valor Presente Neto (VPN/NPV) de un proyecto de inversión. Descuenta flujos de caja futuros para evaluar si vale la pena invertir.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">VPN</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de VPN</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Valor Presente Neto: descuenta los flujos de caja futuros de un proyecto para saber si es rentable hoy.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Flujos del proyecto</h2>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Inversión inicial (negativa)</label>
+            <input id="inv" type="number" value="50000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de descuento anual (%)</label>
+            <input id="tasa" type="number" value="10" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <p style="font-size:12px; color:#78716C; margin:0;">Flujos de caja anuales esperados:</p>
+          {[1,2,3,4,5].map(i => (
+            <div>
+              <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Año {i}</label>
+              <input id={`f${i}`} type="number" value={String(i === 1 ? 15000 : i === 2 ? 18000 : i === 3 ? 20000 : i === 4 ? 22000 : 25000)} style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="vpn-card" style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">VPN</p>
+          <p id="vpn-val" style="font-size:32px; font-weight:800; margin:0 0 8px; letter-spacing:-0.5px;">0</p>
+          <p id="vpn-verdict" style="font-size:13px; font-weight:700; margin:0; opacity:0.9;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Suma flujos sin descontar</span>
+            <span id="suma-bruta" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Suma flujos descontados</span>
+            <span id="suma-desc" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Inversión inicial</span>
+            <span id="inv-display" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">VPN = −Inversión + Σ(Flujo_i / (1+tasa)^i). VPN positivo indica que el proyecto crea valor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el VPN?</h2>
+    <p>El <strong>Valor Presente Neto (VPN)</strong> es la diferencia entre el valor actual de los flujos de caja futuros de un proyecto y su inversión inicial. Es la herramienta más rigurosa para evaluar si una inversión crea o destruye valor.</p>
+    <p>Si el <strong>VPN es positivo</strong>, el proyecto genera más valor del que cuesta: es rentable. Si es negativo, destruye valor. Si es cero, la inversión exactamente recupera el costo del capital.</p>
+    <h2>La tasa de descuento</h2>
+    <p>La tasa de descuento representa el costo de oportunidad del capital: la rentabilidad mínima que exiges. Si puedes invertir en algo seguro al 8% anual, usa esa cifra como mínimo. Tasas más altas son más exigentes y reducen el VPN.</p>
+    <p>Combina este análisis con el <a href="/calculadoras/roi">ROI</a> y el <a href="/calculadoras/cagr">CAGR</a> para una evaluación completa.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const inv = parseFloat((document.getElementById('inv') as HTMLInputElement).value) || 0;
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) / 100 || 0;
+    let sumaBruta = 0;
+    let sumaDesc = 0;
+    for (let i = 1; i <= 5; i++) {
+      const fi = parseFloat((document.getElementById('f' + i) as HTMLInputElement).value) || 0;
+      sumaBruta += fi;
+      sumaDesc += fi / Math.pow(1 + tasa, i);
+    }
+    const vpn = sumaDesc - inv;
+    const card = document.getElementById('vpn-card')!;
+    card.style.background = vpn >= 0 ? '#22C55E' : '#EF4444';
+    document.getElementById('vpn-val')!.textContent = fmt(vpn, m);
+    document.getElementById('vpn-verdict')!.textContent = vpn >= 0 ? 'Proyecto rentable' : 'Proyecto no rentable';
+    document.getElementById('suma-bruta')!.textContent = fmt(sumaBruta, m);
+    document.getElementById('suma-desc')!.textContent = fmt(sumaDesc, m);
+    document.getElementById('inv-display')!.textContent = fmt(inv, m);
+  }
+  const ids = ['moneda','inv','tasa','f1','f2','f3','f4','f5'];
+  ids.forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

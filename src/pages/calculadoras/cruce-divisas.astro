@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Cruce de Divisas — Inversax" description="Calcula el tipo de cambio cruzado entre dos monedas que no tienen cotización directa. Convierte entre cualquier par de divisas usando el USD como moneda puente.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Cruce de Divisas</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Cruce de Divisas</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el tipo de cambio cruzado entre dos monedas usando el USD como moneda puente. Por ejemplo: COP a CLP.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Monedas y tasas vs USD</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <p style="font-size:12px; color:#78716C; margin:0;">Ingresa cuántas unidades de cada moneda equivalen a 1 USD.</p>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda A — nombre / código</label>
+            <input id="nombreA" type="text" value="COP" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de Moneda A por 1 USD</label>
+            <input id="tasaA" type="number" value="4200" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda B — nombre / código</label>
+            <input id="nombreB" type="text" value="CLP" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de Moneda B por 1 USD</label>
+            <input id="tasaB" type="number" value="950" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto en Moneda A a convertir</label>
+            <input id="monto" type="number" value="1000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p id="titulo-result" style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Resultado en Moneda B</p>
+          <p id="resultado" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span id="lbl-cruce" style="font-size:13px; color:#57534E;">Tipo de cambio cruzado A/B</span>
+            <span id="cruce" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equivalente en USD</span>
+            <span id="en-usd" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span id="lbl-inv" style="font-size:13px; color:#57534E;">Tipo de cambio inverso B/A</span>
+            <span id="inverso" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Cruce A/B = Tasa A / Tasa B. Ambas tasas expresadas como unidades por 1 USD.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es un tipo de cambio cruzado?</h2>
+    <p>Un <strong>tipo de cambio cruzado</strong> es el tipo de cambio entre dos monedas que se calcula a través de una tercera (normalmente el USD), ya que no tienen cotización directa en los mercados. Por ejemplo, para convertir pesos colombianos (COP) a pesos chilenos (CLP), primero se convierte COP a USD y luego USD a CLP.</p>
+    <p>Fórmula: <strong>Tasa A/B = Tasa A (por USD) / Tasa B (por USD)</strong>. Si 1 USD = 4.200 COP y 1 USD = 950 CLP, entonces 1 COP = 950/4200 CLP ≈ 0.226 CLP.</p>
+    <h2>Para qué sirve</h2>
+    <p>Esta calculadora es útil cuando necesitas saber el equivalente entre dos monedas latinoamericanas sin pasar explícitamente por el dólar, o cuando quieres verificar si el tipo de cambio que ofrece un proveedor es justo respecto al tipo de cambio cruzado real.</p>
+    <p>Complementa esta calculadora con la <a href="/calculadoras/conversion-divisas">conversión de divisas</a> y la <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const nA = (document.getElementById('nombreA') as HTMLInputElement).value || 'A';
+    const nB = (document.getElementById('nombreB') as HTMLInputElement).value || 'B';
+    const tA = parseFloat((document.getElementById('tasaA') as HTMLInputElement).value) || 0;
+    const tB = parseFloat((document.getElementById('tasaB') as HTMLInputElement).value) || 0;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const crucePorA = tA > 0 ? tB / tA : 0;
+    const resultado = monto * crucePorA;
+    const enUsd = tA > 0 ? monto / tA : 0;
+    const inverso = crucePorA > 0 ? 1 / crucePorA : 0;
+    document.getElementById('titulo-result')!.textContent = 'Resultado en ' + nB;
+    document.getElementById('resultado')!.textContent = resultado.toLocaleString('es', {maximumFractionDigits:4});
+    document.getElementById('lbl-cruce')!.textContent = '1 ' + nA + ' = ? ' + nB;
+    document.getElementById('cruce')!.textContent = crucePorA.toLocaleString('es', {minimumFractionDigits:4, maximumFractionDigits:6}) + ' ' + nB;
+    document.getElementById('en-usd')!.textContent = '$' + enUsd.toLocaleString('es', {maximumFractionDigits:4});
+    document.getElementById('lbl-inv')!.textContent = '1 ' + nB + ' = ? ' + nA;
+    document.getElementById('inverso')!.textContent = inverso.toLocaleString('es', {minimumFractionDigits:4, maximumFractionDigits:6}) + ' ' + nA;
+  }
+  ['nombreA','tasaA','nombreB','tasaB','monto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

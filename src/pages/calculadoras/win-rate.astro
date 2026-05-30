@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Win Rate Mínimo Forex — Inversax" description="Calcula el porcentaje de operaciones ganadoras mínimo para ser rentable en forex dado un ratio riesgo/beneficio. Incluye expectativa matemática por operación.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Win Rate Mínimo</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Win Rate Mínimo</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Cuántas operaciones debes ganar para ser rentable? Calcula el win rate mínimo según tu ratio riesgo/beneficio.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu sistema de trading</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ganancia por operación ganadora (R)</label>
+            <input id="ganancia" type="number" value="2" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Pérdida por operación perdedora (R)</label>
+            <input id="perdida" type="number" value="1" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tu win rate actual (%)</label>
+            <input id="wr-actual" type="number" value="50" min="1" max="99" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Riesgo por operación (USD)</label>
+            <input id="riesgo-usd" type="number" value="100" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="wr-card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Win rate mínimo requerido</p>
+          <p id="wr-min" style="font-size:40px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ratio R:R</span>
+            <span id="rr" style="font-size:13px; font-weight:700; color:#3B82F6;">0:1</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Expectativa por operación</span>
+            <span id="expectativa" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Resultado por 100 operaciones</span>
+            <span id="resultado-100" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tu sistema es</span>
+            <span id="sistema" style="font-size:13px; font-weight:700; color:#22C55E;">—</span>
+          </div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">Con ratio 2:1 solo necesitas ganar 1 de cada 3 operaciones para ser rentable. El R:R importa tanto como el win rate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Win rate y ratio riesgo/beneficio</h2>
+    <p>Muchos traders se obsesionan con el win rate (porcentaje de operaciones ganadoras) cuando el dato que realmente importa es la <strong>expectativa matemática</strong>: el resultado promedio por operación. Un sistema con 40% de win rate y ratio 3:1 gana más dinero que uno con 60% de win rate y ratio 1:1.</p>
+    <p>Fórmula: <strong>Expectativa = (Win Rate × Ganancia) − ((1 − Win Rate) × Pérdida)</strong>. Si la expectativa es positiva, el sistema es rentable a largo plazo.</p>
+    <h2>El win rate mínimo</h2>
+    <p>El win rate mínimo para no perder dinero es: <strong>1 / (1 + R:R ratio)</strong>. Con un ratio 2:1, el mínimo es 33.3%. Con 1:1, el mínimo es 50%. Con 0.5:1, necesitas ganar el 66.7% — muy difícil de sostener.</p>
+    <p>Por eso los traders profesionales buscan ratios R:R superiores a 2:1: reducen la presión sobre el win rate y mejoran la tolerancia a rachas perdedoras. Combina con la <a href="/calculadoras/riesgo-beneficio">calculadora de riesgo/beneficio</a> para evaluar cada operación antes de entrar.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const g = parseFloat((document.getElementById('ganancia') as HTMLInputElement).value) || 0;
+    const p = parseFloat((document.getElementById('perdida') as HTMLInputElement).value) || 1;
+    const wrActual = parseFloat((document.getElementById('wr-actual') as HTMLInputElement).value) / 100 || 0;
+    const riesgoUsd = parseFloat((document.getElementById('riesgo-usd') as HTMLInputElement).value) || 0;
+    const rr = g / p;
+    const wrMin = 1 / (1 + rr);
+    const gananciaDolar = riesgoUsd * g;
+    const perdidaDolar = riesgoUsd * p;
+    const expectativa = wrActual * gananciaDolar - (1 - wrActual) * perdidaDolar;
+    const resultado100 = expectativa * 100;
+    const card = document.getElementById('wr-card')!;
+    const esProfitable = expectativa > 0;
+    card.style.background = esProfitable ? '#22C55E' : '#EF4444';
+    document.getElementById('wr-min')!.textContent = (wrMin * 100).toFixed(1) + '%';
+    document.getElementById('rr')!.textContent = rr.toFixed(2) + ':1';
+    document.getElementById('expectativa')!.textContent = (expectativa >= 0 ? '+' : '') + '$' + expectativa.toFixed(2);
+    document.getElementById('resultado-100')!.textContent = (resultado100 >= 0 ? '+' : '') + '$' + resultado100.toFixed(2);
+    document.getElementById('sistema')!.textContent = esProfitable ? 'Rentable' : 'No rentable';
+    (document.getElementById('sistema') as HTMLElement).style.color = esProfitable ? '#22C55E' : '#EF4444';
+  }
+  ['ganancia','perdida','wr-actual','riesgo-usd'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

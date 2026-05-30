@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Paridad de Poder Adquisitivo (PPA) — Inversax" description="Calcula la Paridad de Poder Adquisitivo entre dos países. Compara si una moneda está subvalorada o sobrevalorada respecto al tipo de cambio oficial.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Paridad de Poder Adquisitivo</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Paridad de Poder Adquisitivo</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Compara el precio del mismo bien en dos países para determinar si una moneda está sub o sobrevalorada respecto al tipo de cambio oficial.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Precios del mismo bien</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:10px;">
+            <p style="font-size:11px; color:#166534; margin:0; line-height:1.5;">Elige un bien comparable: una hamburguesa, un café, una noche de hotel, una suscripción a Netflix, o cualquier producto estandarizado.</p>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Nombre del bien de referencia</label>
+            <input id="bien" type="text" value="Big Mac" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <p style="font-size:12px; font-weight:700; color:#57534E; margin:0;">País A (referencia: USA en USD)</p>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio en País A (USD)</label>
+            <input id="precio-a" type="number" value="5.58" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <p style="font-size:12px; font-weight:700; color:#57534E; margin:0;">País B (tu país)</p>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda País B</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="VES">VES — Bolívar</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio en País B (moneda local)</label>
+            <input id="precio-b" type="number" value="17500" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio oficial (1 USD = X moneda local)</label>
+            <input id="tc-oficial" type="number" value="4200" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="ppa-card" style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Tipo de cambio PPA</p>
+          <p id="tc-ppa" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p id="ppa-verdict" style="font-size:13px; font-weight:700; margin:8px 0 0; opacity:0.9;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tipo de cambio oficial</span>
+            <span id="tc-of-display" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Diferencia PPA vs oficial</span>
+            <span id="diferencia" style="font-size:13px; font-weight:700; color:#8B5CF6;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span id="lbl-precio-b-usd" style="font-size:13px; color:#57534E;">Precio local en USD (oficial)</span>
+            <span id="precio-b-usd" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">PPA = Precio B / Precio A. Si el PPA &gt; tipo oficial, la moneda local está subvalorada y los bienes locales son "baratos" en dólares.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la Paridad de Poder Adquisitivo?</h2>
+    <p>La <strong>PPA (Paridad de Poder Adquisitivo)</strong> es una teoría económica que plantea que, en ausencia de fricciones comerciales, el mismo bien debería costar lo mismo en dos países al convertir al mismo tipo de cambio. Si un Big Mac cuesta 5.58 USD en EE.UU. y 17.500 COP en Colombia, el tipo de cambio PPA implicado es 17.500 / 5.58 ≈ 3.136 COP/USD.</p>
+    <p>Si el tipo de cambio oficial es 4.200 COP/USD, el peso colombiano está <em>subvalorado</em> respecto a la PPA: los bienes en Colombia son "baratos" cuando se miden en dólares al tipo oficial.</p>
+    <h2>El Big Mac Index</h2>
+    <p>El <em>Big Mac Index</em> de The Economist es la aplicación más famosa de este concepto: usa el precio del Big Mac en más de 50 países para evaluar si las monedas están sub o sobrevaloradas. Es un indicador aproximado pero útil para entender tendencias cambiarias a largo plazo.</p>
+    <p>Cuando la moneda local está muy subvalorada, los exportadores ganan competitividad pero los importadores y quienes ahorran en moneda local pierden poder. Complementa este análisis con la <a href="/calculadoras/equivalencia-salario">calculadora de equivalencia de salario</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,VES:2,DOP:2,GTQ:2};
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precioA = parseFloat((document.getElementById('precio-a') as HTMLInputElement).value) || 0;
+    const precioB = parseFloat((document.getElementById('precio-b') as HTMLInputElement).value) || 0;
+    const tcOficial = parseFloat((document.getElementById('tc-oficial') as HTMLInputElement).value) || 1;
+    const bien = (document.getElementById('bien') as HTMLInputElement).value || 'el bien';
+    const tcPPA = precioA > 0 ? precioB / precioA : 0;
+    const diferenciaPct = tcOficial > 0 ? ((tcPPA - tcOficial) / tcOficial) * 100 : 0;
+    const precioBusd = tcOficial > 0 ? precioB / tcOficial : 0;
+    const card = document.getElementById('ppa-card')!;
+    let verdict = '';
+    if (Math.abs(diferenciaPct) < 5) {
+      card.style.background = '#8B5CF6'; verdict = 'Moneda en línea con PPA';
+    } else if (diferenciaPct > 0) {
+      card.style.background = '#22C55E'; verdict = 'Moneda local subvalorada — bienes baratos en USD';
+    } else {
+      card.style.background = '#EF4444'; verdict = 'Moneda local sobrevalorada — bienes caros en USD';
+    }
+    const d = DEC[m] ?? 2;
+    document.getElementById('tc-ppa')!.textContent = tcPPA.toLocaleString('es', {minimumFractionDigits:d, maximumFractionDigits:d}) + ' ' + m + '/USD';
+    document.getElementById('ppa-verdict')!.textContent = verdict;
+    document.getElementById('tc-of-display')!.textContent = tcOficial.toLocaleString('es', {maximumFractionDigits:d}) + ' ' + m + '/USD';
+    document.getElementById('diferencia')!.textContent = (diferenciaPct >= 0 ? '+' : '') + diferenciaPct.toFixed(1) + '%';
+    document.getElementById('lbl-precio-b-usd')!.textContent = 'Precio de ' + bien + ' en USD (oficial)';
+    document.getElementById('precio-b-usd')!.textContent = '$' + precioBusd.toFixed(2);
+  }
+  ['moneda','precio-a','precio-b','tc-oficial','bien'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

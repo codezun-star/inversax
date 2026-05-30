@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Remesas — Inversax" description="Calcula cuánto dinero llega realmente en una transferencia internacional. Compara el costo real de enviar remesas incluyendo comisiones y tipo de cambio.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Calculadora de Remesas</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Remesas</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto dinero llega a destino después de todas las comisiones y el tipo de cambio aplicado.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de la transferencia</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto a enviar</label>
+            <input id="monto" type="number" value="500" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda de envío</label>
+            <select id="origen" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar estadounidense</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="GBP">GBP — Libra esterlina</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio (1 unidad origen = X destino)</label>
+            <input id="tc" type="number" value="4200" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Comisión del servicio (%)</label>
+            <input id="comPct" type="number" value="3" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Comisión fija adicional</label>
+            <input id="comFija" type="number" value="4.99" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Dinero que llega</p>
+          <p id="llega" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p style="font-size:12px; margin:6px 0 0; opacity:0.85;">en moneda destino</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Monto neto convertido</span>
+            <span id="neto" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Comisión total pagada</span>
+            <span id="costo-total" style="font-size:13px; font-weight:700; color:#EF4444;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo efectivo del envío</span>
+            <span id="costo-pct" style="font-size:13px; font-weight:700; color:#8B5CF6;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Sin comisiones llegarían</span>
+            <span id="sin-costo" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">El costo de las remesas varía mucho. Compara siempre antes de enviar: puede ahorrarte el 3-7% del monto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>El costo oculto de las remesas</h2>
+    <p>Latinoamérica recibe más de 140.000 millones de USD en remesas anuales. Cada punto porcentual de comisión representa 1.400 millones de dólares que no llegan a las familias. Entender el costo real de cada transferencia puede marcar una diferencia significativa.</p>
+    <p>El costo de una remesa tiene dos componentes: la <strong>comisión explícita</strong> (lo que ves en pantalla) y el <strong>margen en el tipo de cambio</strong> (la diferencia entre el tipo de cambio real y el que aplica el servicio). Muchos servicios anuncian "cero comisión" pero aplican tipos de cambio muy desfavorables.</p>
+    <h2>Cómo comparar servicios</h2>
+    <p>Para comparar correctamente dos servicios de remesas, mira siempre cuánto <strong>dinero llega en moneda destino</strong>, no cuánto cobran de comisión. Un servicio con 0% de comisión pero tipo de cambio 4% peor que el mercado es más caro que otro que cobra 2% de comisión con tipo de cambio justo.</p>
+    <p>Servicios populares para latinoamericanos: Wise, Remitly, Western Union, MoneyGram, Remessa Online. Las plataformas fintech suelen ser hasta 5 veces más baratas que los bancos tradicionales.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const tc = parseFloat((document.getElementById('tc') as HTMLInputElement).value) || 0;
+    const comPct = parseFloat((document.getElementById('comPct') as HTMLInputElement).value) / 100 || 0;
+    const comFija = parseFloat((document.getElementById('comFija') as HTMLInputElement).value) || 0;
+    const costoTotal = monto * comPct + comFija;
+    const montoNeto = Math.max(0, monto - costoTotal);
+    const llega = montoNeto * tc;
+    const sinCosto = monto * tc;
+    const costoPct = monto > 0 ? (costoTotal / monto) * 100 : 0;
+    document.getElementById('llega')!.textContent = llega.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('neto')!.textContent = montoNeto.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('costo-total')!.textContent = costoTotal.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('costo-pct')!.textContent = costoPct.toFixed(2) + '%';
+    document.getElementById('sin-costo')!.textContent = sinCosto.toLocaleString('es', {maximumFractionDigits:2});
+  }
+  ['monto','origen','tc','comPct','comFija'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

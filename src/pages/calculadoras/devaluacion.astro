@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Impacto de la Devaluación — Inversax" description="Calcula cuánto pierde valor tu ahorro en moneda local por la devaluación cambiaria frente al dólar. Proyecta el equivalente en USD en el futuro.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Impacto de la Devaluación</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Impacto de la Devaluación</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Cuánto valdrán en dólares tus ahorros en moneda local si la divisa sigue devaluándose? Proyecta el impacto real.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de tu ahorro</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="VES">VES — Bolívar venezolano</option><option value="BOB">BOB — Boliviano</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ahorro en moneda local</label>
+            <input id="ahorro" type="number" value="10000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio actual (1 USD = X moneda local)</label>
+            <input id="tc-actual" type="number" value="4200" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Devaluación anual esperada (%)</label>
+            <input id="deval" type="number" value="8" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Horizonte (años)</label>
+            <input id="anos" type="number" value="5" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Equivalente en USD — Futuro</p>
+          <p id="usd-futuro" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">$0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equivalente en USD — Hoy</span>
+            <span id="usd-hoy" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tipo de cambio proyectado</span>
+            <span id="tc-futuro" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pérdida de valor en USD</span>
+            <span id="perdida-usd" style="font-size:13px; font-weight:700; color:#EF4444;">-$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pérdida porcentual en USD</span>
+            <span id="perdida-pct" style="font-size:13px; font-weight:700; color:#EF4444;">0%</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Tasas históricas de devaluación: Colombia ~6%, México ~5%, Chile ~4%, Argentina 50%+, Venezuela 100%+.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>La devaluación y tus ahorros</h2>
+    <p>La <strong>devaluación cambiaria</strong> es la pérdida de valor de una moneda frente a otras, principalmente el dólar estadounidense. Para los latinoamericanos que ahorran en moneda local, una devaluación sistemática del 8% anual significa que en 10 años tu ahorro vale menos de la mitad en términos de dólares, aunque el número en pesos sea el mismo.</p>
+    <p>Esto es independiente de la inflación interna: incluso si el poder de compra local se mantiene, si la moneda se devalúa, tu riqueza medida en activos internacionales (dólares, bienes importados) se reduce.</p>
+    <h2>Estrategias de protección</h2>
+    <p>Diversificar una parte del ahorro en dólares u otras monedas duras es la estrategia más directa. Instrumentos como cuentas en USD, ETFs internacionales, inversiones en brokers regulados offshore, o activos reales (inmuebles en zonas dolarizadas) también sirven como cobertura. Combina este análisis con la <a href="/calculadoras/inflacion-divisa">calculadora de inflación en divisas</a> para ver el impacto combinado de inflación y devaluación.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,VES:2,BOB:2,DOP:2,GTQ:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const ahorro = parseFloat((document.getElementById('ahorro') as HTMLInputElement).value) || 0;
+    const tcActual = parseFloat((document.getElementById('tc-actual') as HTMLInputElement).value) || 1;
+    const deval = parseFloat((document.getElementById('deval') as HTMLInputElement).value) / 100 || 0;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const usdHoy = tcActual > 0 ? ahorro / tcActual : 0;
+    const tcFuturo = tcActual * Math.pow(1 + deval, anos);
+    const usdFuturo = tcFuturo > 0 ? ahorro / tcFuturo : 0;
+    const perdidaUsd = usdHoy - usdFuturo;
+    const perdidaPct = usdHoy > 0 ? (perdidaUsd / usdHoy) * 100 : 0;
+    document.getElementById('usd-futuro')!.textContent = '$' + usdFuturo.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('usd-hoy')!.textContent = '$' + usdHoy.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('tc-futuro')!.textContent = tcFuturo.toLocaleString('es', {maximumFractionDigits:2}) + ' ' + m + '/USD';
+    document.getElementById('perdida-usd')!.textContent = '-$' + perdidaUsd.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('perdida-pct')!.textContent = '-' + perdidaPct.toFixed(1) + '%';
+  }
+  ['moneda','ahorro','tc-actual','deval','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

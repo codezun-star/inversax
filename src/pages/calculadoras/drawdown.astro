@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Drawdown — Inversax" description="Calcula el drawdown máximo de tu cuenta forex tras una racha perdedora y cuánto necesitas recuperar para volver al capital inicial.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Drawdown y Recuperación</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Drawdown y Recuperación</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Cuánto puedes perder y cuánto necesitas ganar para recuperarte? El drawdown es la métrica de riesgo más ignorada.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Racha perdedora</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial (USD)</label>
+            <input id="capital" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Pérdida por operación (%)</label>
+            <input id="pct" type="number" value="2" min="0.1" max="100" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de pérdidas consecutivas</label>
+            <input id="perdidas" type="number" value="10" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="dd-card" style="background:#EF4444; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Drawdown total</p>
+          <p id="dd-pct" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Capital restante</span>
+            <span id="capital-final" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pérdida en USD</span>
+            <span id="perdida-usd" style="font-size:13px; font-weight:700; color:#EF4444;">$0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Recuperación necesaria</span>
+            <span id="recuperacion" style="font-size:13px; font-weight:700; color:#3B82F6;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Operaciones p/ recuperar (2% ganancia)</span>
+            <span id="ops" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">Un drawdown del 50% requiere ganar el 100% para recuperarse. Por eso limitar el riesgo por operación es fundamental.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el drawdown?</h2>
+    <p>El <strong>drawdown</strong> es la caída desde el máximo de capital hasta el mínimo durante un período. Si tu cuenta llega a 15.000 USD y luego baja a 9.000 USD, el drawdown es del 40%. Es la métrica de riesgo más importante para evaluar la solidez de un sistema de trading.</p>
+    <h2>La asimetría del drawdown</h2>
+    <p>La trampa del drawdown es su asimetría: una pérdida del 20% requiere ganar el 25% para recuperarse. Una pérdida del 50% requiere ganar el 100%. Una pérdida del 80% requiere ganar el 400%. Por eso los traders profesionales protegen el capital ante todo y aceptan rentabilidades moderadas.</p>
+    <p>Con un riesgo del 2% por operación y 10 pérdidas consecutivas (algo estadísticamente posible en cualquier sistema), el drawdown es solo del 18%. Con el 5% por operación, sería del 40%. La diferencia es enorme.</p>
+    <p>Combina esta calculadora con la de <a href="/calculadoras/tamano-posicion">tamaño de posición</a> para encontrar el balance correcto entre riesgo y rentabilidad esperada.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const capital = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const pct = parseFloat((document.getElementById('pct') as HTMLInputElement).value) / 100 || 0;
+    const n = parseFloat((document.getElementById('perdidas') as HTMLInputElement).value) || 0;
+    const capitalFinal = capital * Math.pow(1 - pct, n);
+    const perdidaUsd = capital - capitalFinal;
+    const ddPct = capital > 0 ? (perdidaUsd / capital) * 100 : 0;
+    const recuperacion = capitalFinal > 0 ? ((capital / capitalFinal) - 1) * 100 : 0;
+    const ganPorOp = 0.02;
+    const ops = capitalFinal > 0 ? Math.ceil(Math.log(capital / capitalFinal) / Math.log(1 + ganPorOp)) : 0;
+    const card = document.getElementById('dd-card')!;
+    card.style.background = ddPct < 20 ? '#22C55E' : ddPct < 40 ? '#FF8C42' : '#EF4444';
+    document.getElementById('dd-pct')!.textContent = ddPct.toFixed(1) + '%';
+    document.getElementById('capital-final')!.textContent = '$' + capitalFinal.toFixed(2);
+    document.getElementById('perdida-usd')!.textContent = '$' + perdidaUsd.toFixed(2);
+    document.getElementById('recuperacion')!.textContent = recuperacion.toFixed(1) + '%';
+    document.getElementById('ops')!.textContent = ops.toLocaleString('es') + ' operaciones';
+  }
+  ['capital','pct','perdidas'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

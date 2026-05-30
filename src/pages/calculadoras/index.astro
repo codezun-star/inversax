@@ -1,54 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { grupos } from '../../lib/calculadoras';
 
-const grupos = [
-  {
-    categoria: 'Inversión',
-    color: '#FF8C42',
-    calculadoras: [
-      { titulo: 'Interés Compuesto', descripcion: 'Calcula el crecimiento de tu inversión con reinversión de ganancias a lo largo del tiempo.', href: '/calculadoras/interes-compuesto', svgPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-      { titulo: 'ROI', descripcion: 'Retorno sobre la inversión: cuánto ganaste respecto a lo que pusiste. Con ROI anualizado.', href: '/calculadoras/roi', svgPath: 'M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6' },
-      { titulo: 'CAGR', descripcion: 'Tasa de Crecimiento Anual Compuesto: la métrica más honesta para comparar inversiones.', href: '/calculadoras/cagr', svgPath: 'M23 6l-9.5 9.5-5-5L1 18' },
-      { titulo: 'Regla del 72', descripcion: '¿En cuántos años se duplica tu dinero? Calcula también qué tasa necesitas para duplicar en X años.', href: '/calculadoras/regla-del-72', svgPath: 'M12 22V12m0 0V2m0 10h10m-10 0H2' },
-      { titulo: 'Inflación', descripcion: 'Descubre cómo la inflación erosiona el poder adquisitivo de tus ahorros a lo largo del tiempo.', href: '/calculadoras/inflacion', svgPath: 'M12 20V10m-6 10l6-6 6 6' },
-      { titulo: 'Dividendos', descripcion: 'Calcula el dividend yield y tus ingresos pasivos estimados a partir de tus acciones.', href: '/calculadoras/dividendos', svgPath: 'M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6' },
-      { titulo: 'DCA', descripcion: 'Dollar Cost Averaging: proyecta el resultado de invertir una cantidad fija cada mes.', href: '/calculadoras/dca', svgPath: 'M3 3v18h18M7 16l4-4 4 4 5-5' },
-    ],
-  },
-  {
-    categoria: 'Planificación personal',
-    color: '#22C55E',
-    calculadoras: [
-      { titulo: 'Meta de Ahorro', descripcion: 'Calcula cuánto debes ahorrar al mes para alcanzar tu objetivo en el plazo deseado.', href: '/calculadoras/meta-ahorro', svgPath: 'M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z' },
-      { titulo: 'Fondo de Emergencia', descripcion: 'Calcula el colchón financiero que necesitas para estar protegido ante cualquier imprevisto.', href: '/calculadoras/fondo-emergencia', svgPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
-      { titulo: 'Préstamo', descripcion: 'Calcula la cuota mensual de tu crédito y el total de intereses que pagarás.', href: '/calculadoras/prestamo', svgPath: 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' },
-      { titulo: 'Amortización', descripcion: 'Genera la tabla de amortización completa de tu préstamo mes a mes con detalle de capital e interés.', href: '/calculadoras/amortizacion', svgPath: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
-      { titulo: 'Jubilación', descripcion: 'Planifica tu retiro: calcula cuánto debes ahorrar hoy para vivir como quieres mañana.', href: '/calculadoras/jubilacion', svgPath: 'M3 9a2 2 0 012-2h14a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M8 9V7a4 4 0 018 0v2' },
-      { titulo: 'Independencia Financiera', descripcion: 'Calculadora FIRE: calcula tu número y cuándo puedes dejar de trabajar si así lo deseas.', href: '/calculadoras/independencia-financiera', svgPath: 'M5 3l14 9-14 9V3z' },
-      { titulo: 'Salario Neto', descripcion: 'Estima cuánto recibes realmente después de deducciones. Cubre 22 países de Latinoamérica y España.', href: '/calculadoras/salario-neto', svgPath: 'M21 15V19a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12' },
-    ],
-  },
-  {
-    categoria: 'Forex y trading',
-    color: '#3B82F6',
-    calculadoras: [
-      { titulo: 'Valor del Pip', descripcion: 'Calcula exactamente cuánto vale cada pip según tu par de divisas y tamaño de posición.', href: '/calculadoras/pips', svgPath: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-      { titulo: 'Apalancamiento y Margen', descripcion: 'Calcula el margen requerido para operar con apalancamiento y el capital en riesgo.', href: '/calculadoras/apalancamiento', svgPath: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
-      { titulo: 'Riesgo / Beneficio', descripcion: 'Evalúa si una operación tiene sentido antes de entrar: calcula el ratio R/R y el win rate mínimo.', href: '/calculadoras/riesgo-beneficio', svgPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
-      { titulo: 'Costo del Spread', descripcion: 'Calcula cuánto te cuesta el spread por operación y qué impacto tiene en tu operativa mensual.', href: '/calculadoras/spread', svgPath: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 100 6 3 3 0 000-6z' },
-      { titulo: 'Comisión de Broker', descripcion: 'Compara el costo real de operar con distintos brokers y descubre cuál te conviene más.', href: '/calculadoras/comision-broker', svgPath: 'M3 6h18M3 12h18M3 18h18' },
-    ],
-  },
-  {
-    categoria: 'Divisas',
-    color: '#8B5CF6',
-    calculadoras: [
-      { titulo: 'Conversión de Divisas', descripcion: 'Convierte entre 21 monedas de Latinoamérica, España y el mundo con tasas de referencia.', href: '/calculadoras/conversion-divisas', svgPath: 'M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3' },
-    ],
-  },
-];
+const MAX_SHOWN = 12;
+const total = grupos.reduce((sum, g) => sum + g.calculadoras.length, 0);
 ---
-<Layout title="Calculadoras Financieras — Inversax" description="20 calculadoras financieras gratuitas: interés compuesto, ROI, CAGR, jubilación, FIRE, amortización, pips forex, spread y más. Soporta todas las monedas de Latinoamérica y España.">
+
+<Layout
+  title="Calculadoras Financieras — Inversax"
+  description={`${total} calculadoras financieras gratuitas: interés compuesto, ROI, CAGR, jubilación, FIRE, amortización, pips forex, remesas, cruce de divisas y más. Soporta todas las monedas de Latinoamérica y España.`}
+>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:1100px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px;">
@@ -56,23 +17,43 @@ const grupos = [
         <span>›</span>
         <span style="color:#57534E;">Calculadoras</span>
       </div>
-      <h1 style="font-size:clamp(24px,4vw,36px); font-weight:800; color:#1A1A1A; margin:0 0 10px; letter-spacing:-0.3px;">Calculadoras financieras</h1>
-      <p style="font-size:15px; color:#57534E; line-height:1.65; max-width:560px; margin:0;">20 herramientas gratuitas para invertir mejor, planificar tu dinero y operar en forex. Todas con soporte para las monedas de los 22 países que cubrimos.</p>
+      <h1 style="font-size:clamp(24px,4vw,36px); font-weight:800; color:#1A1A1A; margin:0 0 10px; letter-spacing:-0.3px;">
+        Calculadoras financieras
+      </h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; max-width:560px; margin:0 0 24px;">
+        {total} herramientas gratuitas para invertir mejor, planificar tu dinero y operar en forex.
+      </p>
+
+      <!-- Tags de categoría -->
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        {grupos.map((g, i) => (
+          <button
+            data-tag={g.slug}
+            style={i === 0
+              ? 'font-family:\'DM Sans\',sans-serif; font-size:13px; font-weight:600; padding:7px 16px; border-radius:20px; border:1px solid #FF8C42; background:#FF8C42; color:#fff; cursor:pointer;'
+              : 'font-family:\'DM Sans\',sans-serif; font-size:13px; font-weight:600; padding:7px 16px; border-radius:20px; border:1px solid transparent; background:#F0EDE7; color:#57534E; cursor:pointer;'}
+          >
+            {g.tagLabel}
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 
-  <div style="max-width:1100px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:40px;">
-    {grupos.map((grupo) => {
-      const colorBg = grupo.color + '18';
+  <div style="max-width:1100px; margin:0 auto; padding:40px 20px; display:flex; flex-direction:column; gap:48px;">
+    {grupos.map((grupo, i) => {
+      const shown = grupo.calculadoras.slice(0, MAX_SHOWN);
+      const hasMore = grupo.calculadoras.length > MAX_SHOWN;
       return (
-        <div>
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <div data-section={grupo.slug} style={i !== 0 ? 'display:none;' : ''}>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
             <div style={'width:3px; height:22px; background:' + grupo.color + '; border-radius:2px;'}></div>
             <h2 style="font-size:18px; font-weight:700; color:#1A1A1A; margin:0;">{grupo.categoria}</h2>
             <span style="font-size:12px; color:#A8A29E; font-weight:500;">{grupo.calculadoras.length} calculadoras</span>
           </div>
+
           <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px;">
-            {grupo.calculadoras.map((c) => {
+            {shown.map((c) => {
               const hoverColor = grupo.color;
               const iconBg = grupo.color + '18';
               return (
@@ -100,8 +81,47 @@ const grupos = [
               );
             })}
           </div>
+
+          {hasMore && (
+            <div style="margin-top:16px; text-align:center;">
+              <a
+                href={'/calculadoras/' + grupo.slug}
+                style={'display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color:' + grupo.color + '; text-decoration:none; padding:10px 20px; border:1px solid ' + grupo.color + '; border-radius:8px;'}
+              >
+                Ver más de {grupo.tagLabel}
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       );
     })}
   </div>
 </Layout>
+
+<script is:inline>
+  var tags = document.querySelectorAll('[data-tag]');
+  var sections = document.querySelectorAll('[data-section]');
+
+  tags.forEach(function (tag) {
+    tag.addEventListener('click', function () {
+      var selected = tag.dataset.tag;
+
+      tags.forEach(function (t) {
+        t.style.background = '#F0EDE7';
+        t.style.color = '#57534E';
+        t.style.borderColor = 'transparent';
+      });
+      tag.style.background = '#FF8C42';
+      tag.style.color = '#fff';
+      tag.style.borderColor = '#FF8C42';
+
+      sections.forEach(function (s) {
+        s.style.display = (selected === 'todas' || s.dataset.section === selected) ? '' : 'none';
+      });
+    });
+  });
+</script>

@@ -1,0 +1,120 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Equivalencia de Salario entre Países — Inversax" description="Compara salarios entre dos países considerando tipo de cambio y costo de vida. Descubre si un salario en el extranjero equivale realmente a lo que ganas.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Equivalencia de Salario</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Equivalencia de Salario</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Compara salarios entre dos países ajustando por tipo de cambio y costo de vida. Útil para evaluar ofertas laborales en el extranjero.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de los dos países</h2>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <p style="font-size:12px; font-weight:700; color:#57534E; text-transform:uppercase; letter-spacing:0.04em; margin:0;">País de origen</p>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Salario mensual (en moneda local)</label>
+            <input id="salOrigen" type="number" value="5000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio (1 USD = X moneda origen)</label>
+            <input id="tcOrigen" type="number" value="4200" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <p style="font-size:12px; font-weight:700; color:#57534E; text-transform:uppercase; letter-spacing:0.04em; margin:0;">País destino</p>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Salario ofrecido (en moneda destino)</label>
+            <input id="salDestino" type="number" value="2000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio (1 USD = X moneda destino)</label>
+            <input id="tcDestino" type="number" value="1" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Costo de vida en destino vs origen (100% = igual)</label>
+            <input id="costoVida" type="number" value="150" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="equiv-card" style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Veredicto</p>
+          <p id="veredicto" style="font-size:20px; font-weight:800; margin:0; letter-spacing:-0.3px;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Salario origen en USD</span>
+            <span id="sal-orig-usd" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Salario destino en USD</span>
+            <span id="sal-dest-usd" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equivalente ajustado por costo de vida</span>
+            <span id="ajustado" style="font-size:13px; font-weight:700; color:#8B5CF6;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Diferencia real</span>
+            <span id="diferencia" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Un salario en el extranjero puede parecer alto pero si el costo de vida es 2x mayor, el poder real puede ser menor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Cómo comparar salarios entre países</h2>
+    <p>Comparar salarios entre países requiere dos ajustes: primero convertir ambos a una moneda común (USD), y luego ajustar por el costo de vida. Un sueldo de 3.000 USD en Estados Unidos y otro de 3.000 USD en Colombia tienen el mismo valor nominal, pero el poder adquisitivo real es muy diferente porque los precios son distintos.</p>
+    <p>El <strong>factor de costo de vida</strong> indica qué tan caro es vivir en el país destino comparado con el origen. Si el destino es 50% más caro (factor 150%), necesitas ganar un 50% más en términos nominales para mantener el mismo estilo de vida.</p>
+    <h2>Más allá del salario</h2>
+    <p>Al evaluar una oferta laboral en el extranjero, considera también: beneficios adicionales (salud, pensión, vacaciones), carga impositiva (impuesto a la renta varía mucho entre países), costo de visa y mudanza, posibilidad de ahorro y remesas. A veces un salario nominalmente menor en un país con alta calidad de vida y bajos impuestos supera a uno más alto en un lugar más caro.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const salOrigen = parseFloat((document.getElementById('salOrigen') as HTMLInputElement).value) || 0;
+    const tcOrigen = parseFloat((document.getElementById('tcOrigen') as HTMLInputElement).value) || 1;
+    const salDestino = parseFloat((document.getElementById('salDestino') as HTMLInputElement).value) || 0;
+    const tcDestino = parseFloat((document.getElementById('tcDestino') as HTMLInputElement).value) || 1;
+    const costoVida = parseFloat((document.getElementById('costoVida') as HTMLInputElement).value) / 100 || 1;
+    const salOrigUsd = tcOrigen > 0 ? salOrigen / tcOrigen : 0;
+    const salDestUsd = tcDestino > 0 ? salDestino / tcDestino : 0;
+    const ajustado = costoVida > 0 ? salDestUsd / costoVida : 0;
+    const dif = ajustado - salOrigUsd;
+    const card = document.getElementById('equiv-card')!;
+    let veredicto = '';
+    if (Math.abs(dif) < salOrigUsd * 0.05) {
+      veredicto = 'Salarios equivalentes';
+      card.style.background = '#8B5CF6';
+    } else if (dif > 0) {
+      veredicto = 'Oferta más ventajosa (+' + ((dif / salOrigUsd) * 100).toFixed(0) + '% real)';
+      card.style.background = '#22C55E';
+    } else {
+      veredicto = 'Oferta menos ventajosa (' + ((dif / salOrigUsd) * 100).toFixed(0) + '% real)';
+      card.style.background = '#EF4444';
+    }
+    document.getElementById('veredicto')!.textContent = veredicto;
+    document.getElementById('sal-orig-usd')!.textContent = '$' + salOrigUsd.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('sal-dest-usd')!.textContent = '$' + salDestUsd.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('ajustado')!.textContent = '$' + ajustado.toLocaleString('es', {maximumFractionDigits:2}) + ' equiv.';
+    document.getElementById('diferencia')!.textContent = (dif >= 0 ? '+' : '') + '$' + dif.toLocaleString('es', {maximumFractionDigits:2});
+  }
+  ['salOrigen','tcOrigen','salDestino','tcDestino','costoVida'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

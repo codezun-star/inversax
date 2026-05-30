@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Rendimiento de Cartera — Inversax" description="Calcula el rendimiento ponderado de tu portafolio de inversiones con múltiples activos. Soporta hasta 5 activos con diferentes montos y tasas.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Rendimiento de Cartera</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Rendimiento de Cartera</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el rendimiento ponderado de tu portafolio con hasta 5 activos de diferentes pesos y tasas.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Activos del portafolio</h2>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box; margin-bottom:14px;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          {[1,2,3,4,5].map(i => (
+            <div style="background:#F7F7F5; border-radius:10px; padding:12px; margin-bottom:8px;">
+              <p style="font-size:12px; font-weight:700; color:#57534E; margin:0 0 8px; text-transform:uppercase; letter-spacing:0.04em;">Activo {i}</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <div>
+                  <label style="font-size:11px; color:#78716C; display:block; margin-bottom:4px;">Monto invertido</label>
+                  <input id={`m${i}`} type="number" value={String(i === 1 ? 5000 : i === 2 ? 3000 : i === 3 ? 2000 : 0)} min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+                </div>
+                <div>
+                  <label style="font-size:11px; color:#78716C; display:block; margin-bottom:4px;">Rendimiento anual (%)</label>
+                  <input id={`r${i}`} type="number" value={String(i === 1 ? 12 : i === 2 ? 7 : i === 3 ? 5 : 0)} step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:6px; padding:8px 10px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Rendimiento ponderado</p>
+          <p id="rend-pond" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Capital total</span>
+            <span id="cap-total" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor al año</span>
+            <span id="val-anio" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancia anual</span>
+            <span id="ganancia" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Activos con capital</span>
+            <span id="n-activos" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El rendimiento ponderado es la media de las tasas pesada por el capital de cada activo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Por qué importa el rendimiento ponderado?</h2>
+    <p>Una cartera con múltiples activos no rinde lo mismo que el promedio simple de sus tasas. Si tienes 9.000 USD en un activo al 5% y 1.000 USD en otro al 20%, el rendimiento ponderado es 6,5%, no 12,5%. El capital de cada activo determina cuánto "pesa" en el total.</p>
+    <p>Este dato es fundamental para comparar tu portafolio contra un benchmark (índice de referencia) y decidir si vale la pena mantener activos de bajo rendimiento o reasignar capital.</p>
+    <h2>Cómo usar la calculadora</h2>
+    <p>Ingresa el monto invertido y el rendimiento anual esperado (o histórico) de cada activo. Si un activo no aplica, déjalo en 0. La calculadora calcula automáticamente el rendimiento ponderado, el valor proyectado a un año y la ganancia esperada.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    let totalCap = 0, totalGanancia = 0, nActivos = 0;
+    for (let i = 1; i <= 5; i++) {
+      const mi = parseFloat((document.getElementById('m' + i) as HTMLInputElement).value) || 0;
+      const ri = parseFloat((document.getElementById('r' + i) as HTMLInputElement).value) / 100 || 0;
+      if (mi > 0) { totalCap += mi; totalGanancia += mi * ri; nActivos++; }
+    }
+    const rendPond = totalCap > 0 ? (totalGanancia / totalCap) * 100 : 0;
+    const valAnio = totalCap + totalGanancia;
+    document.getElementById('rend-pond')!.textContent = rendPond.toFixed(2) + '%';
+    document.getElementById('cap-total')!.textContent = fmt(totalCap, m);
+    document.getElementById('val-anio')!.textContent = fmt(valAnio, m);
+    document.getElementById('ganancia')!.textContent = fmt(totalGanancia, m);
+    document.getElementById('n-activos')!.textContent = nActivos.toString();
+  }
+  ['moneda','m1','r1','m2','r2','m3','r3','m4','r4','m5','r5'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Capacidad de Endeudamiento — Inversax" description="Calcula cuánto crédito puedes asumir de forma responsable según tus ingresos y deudas actuales. Conoce tu cuota disponible mensual.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Capacidad de Endeudamiento</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Capacidad de Endeudamiento</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Descubre cuánta deuda mensual puedes asumir de forma responsable sin comprometer tu estabilidad financiera.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu situación financiera</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ingreso mensual neto</label>
+            <input id="ingreso" type="number" value="2000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Deudas mensuales actuales</label>
+            <input id="deudas" type="number" value="300" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Endeudamiento máximo recomendado (%)</label>
+            <input id="pct" type="number" value="30" min="1" max="100" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="cap-card" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Cuota disponible</p>
+          <p id="disponible" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p style="font-size:12px; margin:6px 0 0; opacity:0.9;">para nueva deuda / mes</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Cuota máxima total</span>
+            <span id="max-total" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Deudas actuales</span>
+            <span id="deu-display" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">% endeudamiento actual</span>
+            <span id="pct-actual" style="font-size:13px; font-weight:700; color:#22C55E;">0%</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">La mayoría de bancos en Latinoamérica aprueban créditos cuando la deuda total no supera el 30-35% del ingreso neto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la capacidad de endeudamiento?</h2>
+    <p>La <strong>capacidad de endeudamiento</strong> es el monto máximo de deuda mensual que una persona puede asumir sin comprometer su estabilidad financiera. Se calcula como un porcentaje del ingreso neto, generalmente entre el 25% y el 35%.</p>
+    <p>Si ya tienes deudas existentes (tarjeta de crédito, préstamos, cuotas de arriendo con opción de compra), estas se restan del tope para calcular cuánto espacio adicional tienes.</p>
+    <h2>Reglas por tipo de crédito</h2>
+    <p>Para hipotecas, muchos bancos aplican el límite del 30% del ingreso neto solo para esa cuota. Para créditos de consumo, tarjetas y vehículos combinados, el total no debería superar el 35-40%. Un nivel de endeudamiento superior al 50% se considera de alto riesgo y suele resultar en rechazo de solicitudes.</p>
+    <p>Una vez conoces tu capacidad, usa la <a href="/calculadoras/prestamo">calculadora de préstamos</a> para ver qué monto y plazo se ajustan a tu cuota disponible.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const ing = parseFloat((document.getElementById('ingreso') as HTMLInputElement).value) || 0;
+    const deu = parseFloat((document.getElementById('deudas') as HTMLInputElement).value) || 0;
+    const pct = parseFloat((document.getElementById('pct') as HTMLInputElement).value) / 100 || 0.3;
+    const maxTotal = ing * pct;
+    const disponible = Math.max(0, maxTotal - deu);
+    const pctActual = ing > 0 ? (deu / ing) * 100 : 0;
+    const card = document.getElementById('cap-card')!;
+    card.style.background = disponible > 0 ? '#22C55E' : '#EF4444';
+    document.getElementById('disponible')!.textContent = fmt(disponible, m);
+    document.getElementById('max-total')!.textContent = fmt(maxTotal, m);
+    document.getElementById('deu-display')!.textContent = fmt(deu, m);
+    const pctEl = document.getElementById('pct-actual')!;
+    pctEl.textContent = pctActual.toFixed(1) + '%';
+    pctEl.style.color = pctActual > (pct * 100) ? '#EF4444' : '#22C55E';
+  }
+  ['moneda','ingreso','deudas','pct'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

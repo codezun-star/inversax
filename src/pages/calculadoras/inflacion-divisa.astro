@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Inflación en Divisas — Inversax" description="Calcula cómo la inflación erosiona el poder adquisitivo de tu moneda local. Proyecta cuánto valdrá realmente tu dinero en el futuro.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Inflación en Divisas</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Inflación en Divisas</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Cuánto valdrá realmente tu dinero en el futuro? Proyecta la pérdida de poder adquisitivo de tu moneda local.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="PYG">PYG — Guaraní</option><option value="VES">VES — Bolívar</option><option value="CRC">CRC — Colón</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option><option value="HNL">HNL — Lempira</option><option value="NIO">NIO — Córdoba</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto actual</label>
+            <input id="monto" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de inflación anual (%)</label>
+            <input id="inflacion" type="number" value="6" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de años</label>
+            <input id="anos" type="number" value="10" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Poder adquisitivo real</p>
+          <p id="poder-real" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p style="font-size:12px; margin:6px 0 0; opacity:0.85;">en valores de hoy</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pérdida de poder adquisitivo</span>
+            <span id="perdida" style="font-size:13px; font-weight:700; color:#EF4444;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Pérdida porcentual</span>
+            <span id="perdida-pct" style="font-size:13px; font-weight:700; color:#EF4444;">0%</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Para mantener el mismo poder necesitarás</span>
+            <span id="necesitas" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Inflación típica en Latinoamérica: Colombia 6-8%, México 4-5%, Chile 4-6%, Argentina 50%+, Venezuela 100%+.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>La inflación y el valor del dinero</h2>
+    <p>La <strong>inflación</strong> es el aumento sostenido del nivel general de precios. Su efecto inmediato es que el mismo dinero compra menos cosas con el paso del tiempo. Una inflación del 6% anual durante 10 años reduce el poder adquisitivo de tus ahorros en casi un 44%.</p>
+    <p>Esto significa que 10.000 pesos de hoy tendrán el poder de compra de apenas 5.584 pesos en 10 años (en términos reales). Si ese dinero está en una cuenta de ahorro sin rendimiento, estás perdiendo poder adquisitivo cada día.</p>
+    <h2>Cómo protegerse de la inflación</h2>
+    <p>La única forma de proteger el valor real de tus ahorros es invertir a una tasa superior a la inflación. Si la inflación es del 6% y tu inversión rinde el 6%, te quedas igual. Solo por encima del 6% empiezas a crecer en términos reales.</p>
+    <p>Instrumentos como acciones, bienes raíces, ETFs y algunos bonos indexados a la inflación han superado históricamente la inflación en el largo plazo. Usa la <a href="/calculadoras/inflacion">calculadora de inflación</a> para ver el impacto en una compra específica, y la <a href="/calculadoras/valor-futuro">calculadora de valor futuro</a> para proyectar tu inversión.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const inf = parseFloat((document.getElementById('inflacion') as HTMLInputElement).value) / 100 || 0;
+    const n = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 0;
+    const poderReal = monto / Math.pow(1 + inf, n);
+    const perdida = monto - poderReal;
+    const perdidaPct = monto > 0 ? (perdida / monto) * 100 : 0;
+    const necesitas = monto * Math.pow(1 + inf, n);
+    document.getElementById('poder-real')!.textContent = fmt(poderReal, m);
+    document.getElementById('perdida')!.textContent = fmt(perdida, m);
+    document.getElementById('perdida-pct')!.textContent = perdidaPct.toFixed(1) + '%';
+    document.getElementById('necesitas')!.textContent = fmt(necesitas, m);
+  }
+  ['moneda','monto','inflacion','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

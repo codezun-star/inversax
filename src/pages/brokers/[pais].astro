@@ -12,7 +12,7 @@ const pais = getPais(codigoPais);
 if (!pais) return Astro.redirect('/brokers');
 
 const todos = getBrokersByPais(codigoPais);
-const recomendado = todos[0];
+const recomendado = todos.find((b) => b.id === pais.brokerRecomendado) ?? todos[0];
 const brokersList = [
   recomendado,
   ...todos.filter((b) => b.id !== recomendado?.id).sort((a, b) => b.calificacion - a.calificacion),

@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Tipo de Cambio Efectivo — Inversax" description="Calcula cuánto recibes realmente al cambiar divisas incluyendo el spread y las comisiones del banco o casa de cambio.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Tipo de Cambio Efectivo</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Tipo de Cambio Efectivo</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Descubre cuánto recibes realmente después de las comisiones y el spread al cambiar divisas.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Detalles del cambio</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto a cambiar</label>
+            <input id="monto" type="number" value="1000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio de referencia (por 1 unidad origen)</label>
+            <input id="tasa" type="number" value="4200" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Spread del banco / casa de cambio (%)</label>
+            <input id="spread" type="number" value="2.5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Comisión fija adicional (en moneda origen)</label>
+            <input id="comision" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Monto recibido</p>
+          <p id="recibido" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tipo de cambio efectivo</span>
+            <span id="tc-efectivo" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Sin comisiones recibirías</span>
+            <span id="sin-com" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Costo total del cambio</span>
+            <span id="costo" style="font-size:13px; font-weight:700; color:#EF4444;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">% de costo sobre el monto</span>
+            <span id="costo-pct" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Los bancos suelen aplicar spreads del 2-5%. Las casas de cambio online suelen ser más baratas (0.5-1.5%).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Tipo de cambio de referencia vs efectivo</h2>
+    <p>El <strong>tipo de cambio de referencia</strong> (o interbancario) es el precio "real" al que los bancos se intercambian divisas entre sí. El <strong>tipo de cambio efectivo</strong> es el que tú realmente recibes después de que el banco o casa de cambio aplica su margen (spread) y comisiones.</p>
+    <p>La diferencia puede ser significativa: un spread del 3% en un cambio de 5.000 USD equivale a 150 USD perdidos solo en el cambio. Comparar proveedores puede ahorrarte cientos de dólares al año si cambias divisas con frecuencia.</p>
+    <h2>Cómo reducir el costo de cambio</h2>
+    <p>Las casas de cambio online suelen ofrecer tipos de cambio más cercanos al interbancario que los bancos tradicionales. Plataformas de envío de remesas también compiten por este mercado. Para montos grandes, siempre cotiza en al menos tres lugares diferentes antes de realizar el cambio.</p>
+    <p>Si eres inversor o trader, usa la <a href="/calculadoras/conversion-divisas">calculadora de conversión de divisas</a> para estimar el tipo de cambio de referencia.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0;
+    const spread = parseFloat((document.getElementById('spread') as HTMLInputElement).value) / 100 || 0;
+    const comision = parseFloat((document.getElementById('comision') as HTMLInputElement).value) || 0;
+    const montoNeto = monto - comision;
+    const tcEfectivo = tasa * (1 - spread);
+    const recibido = montoNeto * tcEfectivo;
+    const sinCom = monto * tasa;
+    const costo = sinCom - recibido;
+    const costoPct = sinCom > 0 ? (costo / sinCom) * 100 : 0;
+    document.getElementById('recibido')!.textContent = recibido.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('tc-efectivo')!.textContent = tcEfectivo.toLocaleString('es', {minimumFractionDigits:4, maximumFractionDigits:4});
+    document.getElementById('sin-com')!.textContent = sinCom.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('costo')!.textContent = costo.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('costo-pct')!.textContent = costoPct.toFixed(2) + '%';
+  }
+  ['monto','tasa','spread','comision'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

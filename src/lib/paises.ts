@@ -4,6 +4,7 @@ export interface Pais {
   moneda: string;
   metodosPago: string[];
   descripcion: string;
+  brokerRecomendado: string;
 }
 
 export const paises: Pais[] = [
@@ -13,6 +14,7 @@ export const paises: Pais[] = [
     moneda: 'COP',
     metodosPago: ['PSE', 'Nequi', 'Daviplata', 'Tarjeta de crédito'],
     descripcion: 'Mercado financiero en crecimiento con alta adopción de inversión digital.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'mx',
@@ -20,6 +22,7 @@ export const paises: Pais[] = [
     moneda: 'MXN',
     metodosPago: ['SPEI', 'OXXO', 'Tarjeta de crédito/débito'],
     descripcion: 'La economía más grande de habla hispana con acceso a mercados globales.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'ar',
@@ -27,6 +30,7 @@ export const paises: Pais[] = [
     moneda: 'ARS',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Mercado con restricciones cambiarias; opciones de brokers internacionales limitadas.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'cl',
@@ -34,6 +38,7 @@ export const paises: Pais[] = [
     moneda: 'CLP',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito/débito'],
     descripcion: 'Uno de los mercados financieros más estables y regulados de Latinoamérica.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'pe',
@@ -41,6 +46,7 @@ export const paises: Pais[] = [
     moneda: 'PEN',
     metodosPago: ['Transferencia bancaria', 'Yape', 'Plin', 'Tarjeta de crédito'],
     descripcion: 'Economía en expansión con creciente interés en inversiones internacionales.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'ec',
@@ -48,6 +54,7 @@ export const paises: Pais[] = [
     moneda: 'USD',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Economía dolarizada que facilita el acceso a brokers internacionales.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'uy',
@@ -55,6 +62,7 @@ export const paises: Pais[] = [
     moneda: 'UYU',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito/débito'],
     descripcion: 'País con excelente regulación financiera y alta bancarización.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'bo',
@@ -62,6 +70,7 @@ export const paises: Pais[] = [
     moneda: 'BOB',
     metodosPago: ['Transferencia bancaria', 'Tigo Money'],
     descripcion: 'Mercado emergente con acceso limitado pero creciente a inversión internacional.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'py',
@@ -69,6 +78,7 @@ export const paises: Pais[] = [
     moneda: 'PYG',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Economía de bajo costo con creciente adopción de herramientas financieras.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'cr',
@@ -76,6 +86,7 @@ export const paises: Pais[] = [
     moneda: 'CRC',
     metodosPago: ['SINPE Móvil', 'Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Alta estabilidad política y económica; buen acceso a mercados internacionales.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'pa',
@@ -83,6 +94,7 @@ export const paises: Pais[] = [
     moneda: 'USD',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Centro financiero regional, economía dolarizada con acceso amplio a brokers.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'do',
@@ -90,6 +102,7 @@ export const paises: Pais[] = [
     moneda: 'DOP',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Economía caribeña en expansión con creciente interés en inversión.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'gt',
@@ -97,6 +110,7 @@ export const paises: Pais[] = [
     moneda: 'GTQ',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Economía más grande de Centroamérica con mercado financiero en desarrollo.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 've',
@@ -104,6 +118,7 @@ export const paises: Pais[] = [
     moneda: 'USD',
     metodosPago: ['Zinli', 'Zelle', 'Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Alta adopción de criptomonedas y dolarización informal; brokers internacionales accesibles via Zinli y Zelle.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'hn',
@@ -111,6 +126,7 @@ export const paises: Pais[] = [
     moneda: 'HNL',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito/débito'],
     descripcion: 'Mercado centroamericano en crecimiento con acceso a los principales brokers internacionales.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'sv',
@@ -118,6 +134,7 @@ export const paises: Pais[] = [
     moneda: 'USD',
     metodosPago: ['Transferencia bancaria', 'Bitcoin', 'Tarjeta de crédito/débito'],
     descripcion: 'Economía dolarizada y primer país con Bitcoin como moneda de curso legal; ideal para cripto e inversión internacional.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'ni',
@@ -125,6 +142,7 @@ export const paises: Pais[] = [
     moneda: 'NIO',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Mercado emergente con acceso a brokers internacionales no sujetos a restricciones locales.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'cu',
@@ -132,6 +150,7 @@ export const paises: Pais[] = [
     moneda: 'CUP',
     metodosPago: ['Transferencia bancaria'],
     descripcion: 'Acceso muy limitado a brokers internacionales por restricciones regulatorias; opciones disponibles son escasas.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'pr',
@@ -139,6 +158,7 @@ export const paises: Pais[] = [
     moneda: 'USD',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito/débito', 'PayPal'],
     descripcion: 'Territorio de EE.UU. con dólar y acceso a brokers internacionales y plataformas del mercado estadounidense.',
+    brokerRecomendado: 'exness',
   },
   {
     codigo: 'ca',
@@ -146,6 +166,7 @@ export const paises: Pais[] = [
     moneda: 'CAD',
     metodosPago: ['Interac e-Transfer', 'Transferencia bancaria', 'Tarjeta de crédito/débito'],
     descripcion: 'Comunidad hispanohablante en rápido crecimiento. Regulado por IIROC; varios brokers internacionales aceptan residentes canadienses.',
+    brokerRecomendado: 'ic-markets',
   },
   {
     codigo: 'bz',
@@ -153,6 +174,7 @@ export const paises: Pais[] = [
     moneda: 'BZD',
     metodosPago: ['Transferencia bancaria', 'Tarjeta de crédito'],
     descripcion: 'Comunidad hispanohablante significativa. Acceso a brokers internacionales similar al resto de Centroamérica.',
+    brokerRecomendado: 'xm',
   },
   {
     codigo: 'es',
@@ -160,6 +182,7 @@ export const paises: Pais[] = [
     moneda: 'EUR',
     metodosPago: ['Transferencia SEPA', 'Bizum', 'Tarjeta de crédito/débito'],
     descripcion: 'Acceso al mercado europeo con amplia oferta regulada de brokers.',
+    brokerRecomendado: 'ic-markets',
   },
 ];
 

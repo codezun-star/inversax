@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Margen Libre Forex — Inversax" description="Calcula el margen libre disponible en tu cuenta forex y el nivel de margen. Evita margin calls conociendo tu exposición en tiempo real.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Margen Libre</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Margen Libre en Forex</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto margen libre tienes disponible para nuevas posiciones y cuál es tu nivel de margen actual.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Estado de tu cuenta</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Saldo de la cuenta (USD)</label>
+            <input id="saldo" type="number" value="5000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">P&L flotante de posiciones abiertas (USD)</label>
+            <input id="pyl" type="number" value="-150" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Margen utilizado en posiciones abiertas (USD)</label>
+            <input id="margen-usado" type="number" value="1000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Nivel de margin call del broker (%)</label>
+            <input id="mc-nivel" type="number" value="50" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="ml-card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Margen libre</p>
+          <p id="margen-libre" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">$0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equity (saldo + P&L flotante)</span>
+            <span id="equity" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Nivel de margen actual</span>
+            <span id="nivel-margen" style="font-size:13px; font-weight:700; color:#3B82F6;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Distancia al margin call</span>
+            <span id="dist-mc" style="font-size:13px; font-weight:700; color:#1A1A1A;">$0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Estado</span>
+            <span id="estado" style="font-size:13px; font-weight:700;">—</span>
+          </div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">Nivel de margen = Equity / Margen usado × 100. Por debajo del nivel del broker se dispara el margin call.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el margen libre?</h2>
+    <p>El <strong>margen libre</strong> es el capital disponible en tu cuenta para abrir nuevas posiciones. Se calcula como: <strong>Margen libre = Equity − Margen usado</strong>. El <em>equity</em> es tu saldo más o menos el P&amp;L flotante de las posiciones abiertas.</p>
+    <p>Si el margen libre llega a cero, no puedes abrir nuevas posiciones. Si el nivel de margen (equity / margen usado × 100) baja del umbral del broker, se produce un <strong>margin call</strong>: el broker empieza a cerrar posiciones automáticamente.</p>
+    <h2>Cómo evitar un margin call</h2>
+    <p>Mantén el nivel de margen siempre por encima del 200% — muchos traders profesionales mantienen el 300-500%. Esto significa no sobreoperar: si tienes 5.000 USD en cuenta, no uses más de 1.000-1.500 USD en margen. Combina esta calculadora con la de <a href="/calculadoras/tamano-posicion">tamaño de posición</a> para dimensionar tus trades correctamente.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const saldo = parseFloat((document.getElementById('saldo') as HTMLInputElement).value) || 0;
+    const pyl = parseFloat((document.getElementById('pyl') as HTMLInputElement).value) || 0;
+    const margenUsado = parseFloat((document.getElementById('margen-usado') as HTMLInputElement).value) || 0;
+    const mcNivel = parseFloat((document.getElementById('mc-nivel') as HTMLInputElement).value) || 50;
+    const equity = saldo + pyl;
+    const margenLibre = Math.max(0, equity - margenUsado);
+    const nivelMargen = margenUsado > 0 ? (equity / margenUsado) * 100 : 999;
+    const equityMC = margenUsado * mcNivel / 100;
+    const distMC = equity - equityMC;
+    const card = document.getElementById('ml-card')!;
+    const nivelEl = document.getElementById('nivel-margen')!;
+    if (nivelMargen < mcNivel) {
+      card.style.background = '#EF4444';
+      document.getElementById('estado')!.textContent = 'MARGIN CALL';
+      (document.getElementById('estado') as HTMLElement).style.color = '#EF4444';
+    } else if (nivelMargen < mcNivel * 2) {
+      card.style.background = '#FF8C42';
+      document.getElementById('estado')!.textContent = 'Precaución';
+      (document.getElementById('estado') as HTMLElement).style.color = '#FF8C42';
+    } else {
+      card.style.background = '#3B82F6';
+      document.getElementById('estado')!.textContent = 'Normal';
+      (document.getElementById('estado') as HTMLElement).style.color = '#22C55E';
+    }
+    document.getElementById('margen-libre')!.textContent = '$' + margenLibre.toFixed(2);
+    document.getElementById('equity')!.textContent = '$' + equity.toFixed(2);
+    nivelEl.textContent = nivelMargen > 999 ? '∞' : nivelMargen.toFixed(0) + '%';
+    nivelEl.style.color = nivelMargen < mcNivel * 2 ? '#EF4444' : '#3B82F6';
+    document.getElementById('dist-mc')!.textContent = (distMC >= 0 ? '+' : '') + '$' + distMC.toFixed(2);
+  }
+  ['saldo','pyl','margen-usado','mc-nivel'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

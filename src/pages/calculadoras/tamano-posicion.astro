@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Tamaño de Posición Forex — Inversax" description="Calcula el tamaño óptimo de posición en forex según tu capital, porcentaje de riesgo y stop loss en pips. Gestión de riesgo profesional.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Tamaño de Posición</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Tamaño de Posición</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuántos lotes operar según tu capital, el riesgo que aceptas y el stop loss de la operación.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros de la operación</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Par de divisas</label>
+            <select id="par" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="10">EUR/USD — 10 USD/pip</option>
+              <option value="10">GBP/USD — 10 USD/pip</option>
+              <option value="10">AUD/USD — 10 USD/pip</option>
+              <option value="10">NZD/USD — 10 USD/pip</option>
+              <option value="9.2">USD/JPY — ~9.2 USD/pip</option>
+              <option value="11">USD/CHF — ~11 USD/pip</option>
+              <option value="7.2">USD/CAD — ~7.2 USD/pip</option>
+              <option value="1">XAU/USD — 1 USD/0.01</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital en cuenta (USD)</label>
+            <input id="capital" type="number" value="5000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Riesgo por operación (%)</label>
+            <input id="riesgo" type="number" value="1" min="0.1" max="10" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Stop loss (pips)</label>
+            <input id="sl" type="number" value="30" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tamaño de posición</p>
+          <p id="lotes" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p style="font-size:13px; margin:4px 0 0; opacity:0.9;">lotes estándar</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Riesgo en USD</span>
+            <span id="riesgo-usd" style="font-size:13px; font-weight:700; color:#3B82F6;">$ 0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equivalente en mini lotes</span>
+            <span id="mini" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Equivalente en micro lotes</span>
+            <span id="micro" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor por pip</span>
+            <span id="pip-val" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0.00</span>
+          </div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">Regla de oro: no arriesgues más del 1-2% de tu capital por operación. Así sobrevives a rachas perdedoras.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Por qué calcular el tamaño de posición?</h2>
+    <p>El <strong>tamaño de posición</strong> es la cantidad de lotes que operas en cada trade. Determinarlo correctamente es la base de la gestión de riesgo en forex: si operas demasiado grande, un stop loss normal puede destruir una porción significativa de tu cuenta. Si operas demasiado pequeño, no maximizas el potencial del sistema.</p>
+    <p>La fórmula es simple: <strong>Lotes = (Capital × % riesgo) / (Stop loss en pips × Valor del pip por lote)</strong>.</p>
+    <h2>El 1% de oro</h2>
+    <p>Los traders profesionales suelen arriesgar entre el 0.5% y el 2% por operación. Con el 1%, puedes perder 100 operaciones consecutivas y aún conservar el 37% de tu capital. Esto te da tiempo para ajustar tu estrategia sin un drawdown catastrófico.</p>
+    <p>Combina esta calculadora con la de <a href="/calculadoras/riesgo-beneficio">riesgo/beneficio</a> para evaluar si cada operación vale la pena antes de entrar.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const pipVal = parseFloat((document.getElementById('par') as HTMLSelectElement).value) || 10;
+    const capital = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const riesgoPct = parseFloat((document.getElementById('riesgo') as HTMLInputElement).value) / 100 || 0;
+    const sl = parseFloat((document.getElementById('sl') as HTMLInputElement).value) || 1;
+    const riesgoUsd = capital * riesgoPct;
+    const lotes = riesgoUsd / (sl * pipVal);
+    const pipPorLote = pipVal * lotes;
+    document.getElementById('lotes')!.textContent = lotes.toFixed(2);
+    document.getElementById('riesgo-usd')!.textContent = '$ ' + riesgoUsd.toFixed(2);
+    document.getElementById('mini')!.textContent = (lotes * 10).toFixed(1) + ' mini lotes';
+    document.getElementById('micro')!.textContent = (lotes * 100).toFixed(0) + ' micro lotes';
+    document.getElementById('pip-val')!.textContent = '$ ' + (pipVal * lotes).toFixed(2) + ' / pip';
+  }
+  ['par','capital','riesgo','sl'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

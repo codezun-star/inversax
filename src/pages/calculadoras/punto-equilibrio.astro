@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Punto de Equilibrio — Inversax" description="Calcula el punto de equilibrio (break-even) de tu negocio o inversión. Cuántas unidades o cuántos ingresos necesitas para cubrir todos los costos.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Punto de Equilibrio</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Punto de Equilibrio</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuántas unidades debes vender para cubrir todos tus costos. El punto donde dejas de perder.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Estructura de costos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Costos fijos mensuales</label>
+            <input id="fijos" type="number" value="5000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de venta por unidad</label>
+            <input id="precio" type="number" value="50" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Costo variable por unidad</label>
+            <input id="variable" type="number" value="20" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Unidades de equilibrio</p>
+          <p id="unidades-be" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p style="font-size:12px; margin:6px 0 0; opacity:0.85;">unidades / mes</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ingresos de equilibrio</span>
+            <span id="ingresos-be" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Margen de contribución</span>
+            <span id="margen" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">% Margen sobre precio</span>
+            <span id="margen-pct" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">BE = Costos fijos / (Precio − Costo variable). Por encima del punto de equilibrio hay ganancia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el punto de equilibrio?</h2>
+    <p>El <strong>punto de equilibrio (break-even)</strong> es el nivel de ventas en el que los ingresos igualan exactamente a los costos totales. Por debajo de ese punto hay pérdidas; por encima, hay ganancias.</p>
+    <p>Fórmula: <strong>BE = Costos fijos / (Precio − Costo variable por unidad)</strong>. El denominador es el <em>margen de contribución</em>: cuánto aporta cada unidad vendida a cubrir los costos fijos.</p>
+    <h2>Costos fijos vs variables</h2>
+    <p>Los <strong>costos fijos</strong> no cambian con el volumen: alquiler, salarios base, seguros, suscripciones. Los <strong>costos variables</strong> sí cambian: materia prima, comisiones por venta, empaque, envío. Separar ambos correctamente es clave para obtener un break-even preciso.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const fijos = parseFloat((document.getElementById('fijos') as HTMLInputElement).value) || 0;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const variable = parseFloat((document.getElementById('variable') as HTMLInputElement).value) || 0;
+    const margen = precio - variable;
+    const be = margen > 0 ? fijos / margen : 0;
+    const ingresosBe = be * precio;
+    const margenPct = precio > 0 ? (margen / precio) * 100 : 0;
+    document.getElementById('unidades-be')!.textContent = Math.ceil(be).toLocaleString('es');
+    document.getElementById('ingresos-be')!.textContent = fmt(ingresosBe, m);
+    document.getElementById('margen')!.textContent = fmt(margen, m) + ' / unidad';
+    document.getElementById('margen-pct')!.textContent = margenPct.toFixed(1) + '%';
+  }
+  ['moneda','fijos','precio','variable'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

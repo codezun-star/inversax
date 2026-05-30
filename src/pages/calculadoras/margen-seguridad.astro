@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Margen de Seguridad — Inversax" description="Calcula el margen de seguridad de una inversión en value investing. Compara el precio de mercado con el valor intrínseco estimado para decidir si vale la pena comprar.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Margen de Seguridad</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Margen de Seguridad</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">El concepto central del value investing: compra solo cuando el precio de mercado está suficientemente por debajo del valor real.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Valoración</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Valor intrínseco estimado (por acción / unidad)</label>
+            <input id="intrinseco" type="number" value="100" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de mercado actual</label>
+            <input id="mercado" type="number" value="70" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Margen de seguridad mínimo deseado (%)</label>
+            <input id="minimo" type="number" value="30" min="0" max="90" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="ms-card" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Margen de seguridad actual</p>
+          <p id="ms-val" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+          <p id="ms-verdict" style="font-size:13px; font-weight:700; margin:8px 0 0; opacity:0.9;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Descuento sobre valor real</span>
+            <span id="descuento" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Precio máximo de compra (con margen mínimo)</span>
+            <span id="precio-max" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Potencial de revalorización</span>
+            <span id="potencial" style="font-size:13px; font-weight:700; color:#22C55E;">0%</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Benjamin Graham recomendaba un margen del 33%. Warren Buffett aplica márgenes del 25-50% según la certeza de la valoración.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el margen de seguridad?</h2>
+    <p>El <strong>margen de seguridad</strong> es la diferencia porcentual entre el precio de mercado de un activo y su valor intrínseco estimado. Si un negocio vale 100 USD por acción pero puedes comprarlo a 70 USD, tienes un margen de seguridad del 30%. Este colchón protege al inversor de errores en la valoración y eventos imprevistos.</p>
+    <p>El concepto fue popularizado por Benjamin Graham en <em>El Inversor Inteligente</em> y es la base del value investing. Warren Buffett lo describió como "las tres palabras más importantes en la inversión".</p>
+    <h2>Cómo calcular el valor intrínseco</h2>
+    <p>El valor intrínseco puede estimarse con diferentes métodos: múltiplos de beneficios (P/E), descuento de flujos de caja (DCF), valor en libros ajustado, o comparables sectoriales. Ningún método es perfecto, por eso el margen de seguridad existe: te protege cuando tu estimación está algo equivocada.</p>
+    <p>Cuanto más incierta sea tu valoración, mayor debería ser el margen que exiges. Una empresa simple y predecible puede comprarse con un 25% de margen; una empresa compleja o cíclica debería requerir el 40-50%.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const iv = parseFloat((document.getElementById('intrinseco') as HTMLInputElement).value) || 0;
+    const pm = parseFloat((document.getElementById('mercado') as HTMLInputElement).value) || 0;
+    const minPct = parseFloat((document.getElementById('minimo') as HTMLInputElement).value) / 100 || 0;
+    const ms = iv > 0 ? ((iv - pm) / iv) * 100 : 0;
+    const descuento = iv - pm;
+    const precioMax = iv * (1 - minPct);
+    const potencial = pm > 0 ? ((iv / pm) - 1) * 100 : 0;
+    const card = document.getElementById('ms-card')!;
+    const cumple = ms >= minPct * 100;
+    card.style.background = ms <= 0 ? '#EF4444' : cumple ? '#22C55E' : '#FF8C42';
+    document.getElementById('ms-val')!.textContent = ms.toFixed(1) + '%';
+    document.getElementById('ms-verdict')!.textContent = ms <= 0 ? 'Caro — no comprar' : cumple ? 'Compra con margen suficiente' : 'Margen insuficiente — esperar mejor precio';
+    document.getElementById('descuento')!.textContent = fmt(descuento, m) + ' / unidad';
+    document.getElementById('precio-max')!.textContent = fmt(precioMax, m);
+    document.getElementById('potencial')!.textContent = '+' + potencial.toFixed(1) + '%';
+  }
+  ['moneda','intrinseco','mercado','minimo'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

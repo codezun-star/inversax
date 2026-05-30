@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Comparador de Plazos de Préstamo — Inversax" description="Compara dos plazos diferentes para el mismo préstamo. Descubre cuánto ahorras en intereses al elegir un plazo más corto o cuánto reduces la cuota con uno más largo.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Comparador de Plazos</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Comparador de Plazos de Préstamo</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">¿Plazo corto o largo? Compara dos opciones y decide cuánto pagas de más en intereses por bajar la cuota mensual.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros del préstamo</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto del préstamo</label>
+            <input id="monto" type="number" value="20000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de interés anual (%)</label>
+            <input id="tasa" type="number" value="12" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo A (meses)</label>
+            <input id="plazoA" type="number" value="24" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#FFF4EC; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo B (meses)</label>
+            <input id="plazoB" type="number" value="60" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#EFF6FF; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:20px; color:#fff;">
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Plazo A — <span id="lbl-a">0 meses</span></p>
+          <p id="cuota-a" style="font-size:28px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p id="int-a" style="font-size:12px; margin:4px 0 0; opacity:0.9;">Interés total: 0</p>
+        </div>
+        <div style="background:#3B82F6; border-radius:14px; padding:20px; color:#fff;">
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Plazo B — <span id="lbl-b">0 meses</span></p>
+          <p id="cuota-b" style="font-size:28px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p id="int-b" style="font-size:12px; margin:4px 0 0; opacity:0.9;">Interés total: 0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Diferencia de cuota</span>
+            <span id="dif-cuota" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Interés extra por plazo largo</span>
+            <span id="dif-int" style="font-size:13px; font-weight:700; color:#EF4444;">0</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">Plazo más corto = cuota mayor pero mucho menos interés total. Elige según tu capacidad de pago mensual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Plazo corto vs plazo largo</h2>
+    <p>Elegir el plazo de un préstamo es una decisión de equilibrio. Un <strong>plazo más corto</strong> tiene cuotas más altas pero pagas mucho menos interés total. Un <strong>plazo más largo</strong> reduce la cuota mensual pero el banco cobra el doble o más en intereses acumulados.</p>
+    <p>Ejemplo: un préstamo de 20.000 USD al 12% a 24 meses tiene cuota de ~940 USD y pagas ~2.500 USD en intereses. A 60 meses la cuota baja a ~445 USD pero pagas ~6.600 USD en intereses, más del doble.</p>
+    <h2>Cómo elegir</h2>
+    <p>Usa la <a href="/calculadoras/capacidad-endeudamiento">calculadora de capacidad de endeudamiento</a> para saber cuánto puedes pagar al mes. Si la cuota del plazo corto cabe en tu presupuesto, el plazo corto casi siempre es la mejor opción financiera. Si no cabe, el plazo largo es preferible a endeudarte por encima de tu capacidad.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function cuota(P: number, r: number, n: number) {
+    if (r === 0) return n > 0 ? P / n : 0;
+    return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const P = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) / 100 / 12 || 0;
+    const nA = parseFloat((document.getElementById('plazoA') as HTMLInputElement).value) || 1;
+    const nB = parseFloat((document.getElementById('plazoB') as HTMLInputElement).value) || 1;
+    const cA = cuota(P, tasa, nA);
+    const cB = cuota(P, tasa, nB);
+    const intA = cA * nA - P;
+    const intB = cB * nB - P;
+    (document.getElementById('lbl-a')!).textContent = nA + ' meses';
+    (document.getElementById('lbl-b')!).textContent = nB + ' meses';
+    document.getElementById('cuota-a')!.textContent = fmt(cA, m);
+    document.getElementById('int-a')!.textContent = 'Interés total: ' + fmt(intA, m);
+    document.getElementById('cuota-b')!.textContent = fmt(cB, m);
+    document.getElementById('int-b')!.textContent = 'Interés total: ' + fmt(intB, m);
+    document.getElementById('dif-cuota')!.textContent = fmt(Math.abs(cA - cB), m);
+    document.getElementById('dif-int')!.textContent = fmt(Math.abs(intA - intB), m);
+  }
+  ['moneda','monto','tasa','plazoA','plazoB'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

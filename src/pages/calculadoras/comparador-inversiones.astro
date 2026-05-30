@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Comparador de Inversiones — Inversax" description="Compara el resultado de dos inversiones a diferentes tasas de rendimiento. Calcula cuánto más ganas eligiendo una opción sobre otra.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Comparador de Inversiones</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Comparador de Inversiones</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Enfrenta dos opciones de inversión con distintas tasas y comprueba cuánto marca la diferencia en el tiempo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial</label>
+            <input id="capital" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Años de inversión</label>
+            <input id="anos" type="number" value="10" min="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa Inversión A (%)</label>
+            <input id="tasaA" type="number" value="8" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#FFF4EC; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa Inversión B (%)</label>
+            <input id="tasaB" type="number" value="5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#EFF6FF; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:20px; color:#fff;">
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Inversión A</p>
+          <p id="vfA" style="font-size:28px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p id="ganA" style="font-size:12px; margin:4px 0 0; opacity:0.9;">Ganancia: 0</p>
+        </div>
+        <div style="background:#3B82F6; border-radius:14px; padding:20px; color:#fff;">
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Inversión B</p>
+          <p id="vfB" style="font-size:28px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p id="ganB" style="font-size:12px; margin:4px 0 0; opacity:0.9;">Ganancia: 0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Diferencia (A − B)</span>
+            <span id="diferencia" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Mejor opción</span>
+            <span id="mejor" style="font-size:13px; font-weight:700; color:#FF8C42;">—</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Una diferencia de apenas 3% anual puede significar decenas de miles de diferencia en 10 años.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Por qué comparar tasas de rendimiento</h2>
+    <p>Una diferencia pequeña en la tasa anual parece insignificante al inicio, pero el interés compuesto la amplifica con el tiempo. Invertir 10.000 USD al 8% en lugar del 5% durante 10 años produce 21.589 vs 16.289: una diferencia de más de 5.000 USD sin poner un peso adicional.</p>
+    <p>Usa esta calculadora antes de elegir entre un depósito a plazo fijo, un fondo de inversión, ETF o cualquier instrumento financiero. El tiempo juega a tu favor si eliges la tasa correcta.</p>
+    <h2>Qué tener en cuenta además de la tasa</h2>
+    <p>La tasa más alta no siempre es la mejor opción si conlleva mayor riesgo, menor liquidez o comisiones elevadas. Compara también el <a href="/calculadoras/roi">ROI</a> histórico y los costos de cada instrumento con la <a href="/calculadoras/comision-broker">calculadora de comisiones</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const c = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const n = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 0;
+    const tA = parseFloat((document.getElementById('tasaA') as HTMLInputElement).value) / 100 || 0;
+    const tB = parseFloat((document.getElementById('tasaB') as HTMLInputElement).value) / 100 || 0;
+    const vfA = c * Math.pow(1 + tA, n);
+    const vfB = c * Math.pow(1 + tB, n);
+    const diff = vfA - vfB;
+    document.getElementById('vfA')!.textContent = fmt(vfA, m);
+    document.getElementById('ganA')!.textContent = 'Ganancia: ' + fmt(vfA - c, m);
+    document.getElementById('vfB')!.textContent = fmt(vfB, m);
+    document.getElementById('ganB')!.textContent = 'Ganancia: ' + fmt(vfB - c, m);
+    document.getElementById('diferencia')!.textContent = fmt(Math.abs(diff), m);
+    document.getElementById('mejor')!.textContent = diff > 0 ? 'Inversión A' : diff < 0 ? 'Inversión B' : 'Iguales';
+  }
+  ['moneda','capital','anos','tasaA','tasaB'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

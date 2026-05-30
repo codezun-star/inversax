@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Conversor de Lotes Forex — Inversax" description="Convierte entre lotes estándar, mini lotes, micro lotes y nano lotes. Calcula también el tamaño en unidades de cada tipo de lote.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Conversor de Lotes</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Conversor de Lotes Forex</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Convierte entre lotes estándar, mini, micro y nano. Visualiza cuántas unidades de divisa controlas con cada tamaño.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Cantidad a convertir</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de lote origen</label>
+            <select id="tipo" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="100000">Lote estándar (100,000 unidades)</option>
+              <option value="10000">Mini lote (10,000 unidades)</option>
+              <option value="1000">Micro lote (1,000 unidades)</option>
+              <option value="100">Nano lote (100 unidades)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Cantidad</label>
+            <input id="cantidad" type="number" value="1" min="0.01" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de mercado actual</label>
+            <input id="precio" type="number" value="1.0850" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+            <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">El precio de mercado se usa para calcular el valor nocional total de la posición en USD.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:#3B82F6; border-radius:14px; padding:20px; color:#fff;">
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 4px; opacity:0.85;">Unidades totales</p>
+          <p id="unidades" style="font-size:28px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Lotes estándar</span>
+            <span id="estandar" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Mini lotes</span>
+            <span id="mini" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Micro lotes</span>
+            <span id="micro" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Nano lotes</span>
+            <span id="nano" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Valor nocional (USD aprox.)</span>
+            <span id="nocional" style="font-size:13px; font-weight:700; color:#3B82F6;">$0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Tipos de lotes en forex</h2>
+    <p>En forex, un <strong>lote estándar</strong> equivale a 100.000 unidades de la divisa base. Es el tamaño que usan los traders institucionales y profesionales. Para traders con cuentas más pequeñas, los brokers ofrecen tamaños menores:</p>
+    <ul>
+      <li><strong>Mini lote (0.1 lotes):</strong> 10.000 unidades. El pip vale ~1 USD.</li>
+      <li><strong>Micro lote (0.01 lotes):</strong> 1.000 unidades. El pip vale ~0.10 USD. Ideal para principiantes.</li>
+      <li><strong>Nano lote (0.001 lotes):</strong> 100 unidades. El pip vale ~0.01 USD. Solo algunos brokers lo ofrecen.</li>
+    </ul>
+    <p>Brokers como <a href="/brokers/mx">Exness</a> y XM permiten operar desde 0.01 lotes (micro lotes), lo que reduce el capital mínimo necesario para hacer una gestión de riesgo correcta. Combina este conversor con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const tipo = parseFloat((document.getElementById('tipo') as HTMLSelectElement).value) || 100000;
+    const cant = parseFloat((document.getElementById('cantidad') as HTMLInputElement).value) || 0;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 1;
+    const unidades = tipo * cant;
+    document.getElementById('unidades')!.textContent = unidades.toLocaleString('es');
+    document.getElementById('estandar')!.textContent = (unidades / 100000).toFixed(4) + ' lotes';
+    document.getElementById('mini')!.textContent = (unidades / 10000).toFixed(3) + ' mini lotes';
+    document.getElementById('micro')!.textContent = (unidades / 1000).toFixed(2) + ' micro lotes';
+    document.getElementById('nano')!.textContent = (unidades / 100).toFixed(1) + ' nano lotes';
+    document.getElementById('nocional')!.textContent = '$' + (unidades * precio).toLocaleString('es', {maximumFractionDigits:2});
+  }
+  ['tipo','cantidad','precio'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

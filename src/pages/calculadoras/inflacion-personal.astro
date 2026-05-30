@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Inflación Personal — Inversax" description="Calcula tu inflación personal real basada en tus propios gastos. Compara si tus ingresos están creciendo más o menos que tu costo de vida.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Inflación Personal</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Inflación Personal</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">La inflación oficial no es la tuya. Calcula cuánto subieron realmente tus gastos según tu canasta personal.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tus categorías de gasto</h2>
+        <p style="font-size:12px; color:#78716C; margin:0 0 14px; line-height:1.5;">Ingresa el gasto de hace 12 meses y el gasto actual para cada categoría. Ajusta el peso (%) según cuánto representa del total.</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          {['Vivienda (arriendo/hipoteca)', 'Alimentación', 'Transporte', 'Salud', 'Educación'].map((cat, i) => (
+            <div style="background:#F7F7F5; border-radius:8px; padding:10px;">
+              <p style="font-size:11px; font-weight:700; color:#57534E; margin:0 0 6px;">{cat}</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr 60px; gap:6px;">
+                <div>
+                  <label style="font-size:10px; color:#A8A29E; display:block; margin-bottom:2px;">Hace 12 meses</label>
+                  <input id={`ant-${i}`} type="number" value={String([800,400,200,150,200][i])} min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:5px; padding:6px 8px; font-size:13px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+                </div>
+                <div>
+                  <label style="font-size:10px; color:#A8A29E; display:block; margin-bottom:2px;">Ahora</label>
+                  <input id={`act-${i}`} type="number" value={String([870,445,215,165,210][i])} min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:5px; padding:6px 8px; font-size:13px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+                </div>
+                <div>
+                  <label style="font-size:10px; color:#A8A29E; display:block; margin-bottom:2px;">Peso %</label>
+                  <input id={`peso-${i}`} type="number" value={String([35,20,10,10,10][i])} min="0" max="100" style="width:100%; border:1px solid #E2DDD8; border-radius:5px; padding:6px 8px; font-size:13px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="inf-card" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tu inflación personal</p>
+          <p id="inf-personal" style="font-size:40px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Gasto total hace 12 meses</span>
+            <span id="total-ant" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Gasto total ahora</span>
+            <span id="total-act" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Categoría que más subió</span>
+            <span id="mayor" style="font-size:13px; font-weight:700; color:#EF4444;">—</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Peso utilizado total</span>
+            <span id="peso-total" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">Si tu inflación personal supera tu aumento de ingresos, tu poder adquisitivo real está cayendo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Por qué tu inflación es diferente a la oficial?</h2>
+    <p>El índice de inflación oficial (IPC) mide el cambio de precio de una canasta genérica de bienes y servicios representativa del promedio de la población. Pero tus gastos son distintos: si gastas más en vivienda y salud que en entretenimiento, tu inflación real puede ser muy diferente a la publicada.</p>
+    <p>Una persona con hijos en colegio privado en Colombia puede tener una inflación personal del 14% aunque el IPC oficial marque el 8%. Un joven soltero que arrienda un cuarto pequeño y come en casa puede estar mucho más cerca de la cifra oficial.</p>
+    <h2>Cómo usar este dato</h2>
+    <p>Compara tu inflación personal con tu último aumento de salario. Si subiste el 6% y tu inflación personal es el 10%, perdiste poder adquisitivo. Usa esta información para negociar tu próximo aumento o para priorizar gastos. Complementa con el <a href="/calculadoras/presupuesto-503020">presupuesto 50/30/20</a> para estructurar mejor tus finanzas.</p>
+  </div>
+</Layout>
+
+<script>
+  const cats = ['Vivienda', 'Alimentación', 'Transporte', 'Salud', 'Educación'];
+  function calcular() {
+    let totalAnt = 0, totalAct = 0, infPonderada = 0, pesoTotal = 0;
+    let mayorCat = '', mayorPct = -Infinity;
+    for (let i = 0; i < 5; i++) {
+      const ant = parseFloat((document.getElementById('ant-' + i) as HTMLInputElement).value) || 0;
+      const act = parseFloat((document.getElementById('act-' + i) as HTMLInputElement).value) || 0;
+      const peso = parseFloat((document.getElementById('peso-' + i) as HTMLInputElement).value) || 0;
+      totalAnt += ant;
+      totalAct += act;
+      pesoTotal += peso;
+      const cambio = ant > 0 ? ((act - ant) / ant) * 100 : 0;
+      infPonderada += cambio * (peso / 100);
+      if (cambio > mayorPct) { mayorPct = cambio; mayorCat = cats[i]; }
+    }
+    const card = document.getElementById('inf-card')!;
+    card.style.background = infPonderada > 10 ? '#EF4444' : infPonderada > 5 ? '#FF8C42' : '#22C55E';
+    document.getElementById('inf-personal')!.textContent = infPonderada.toFixed(1) + '%';
+    document.getElementById('total-ant')!.textContent = totalAnt.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('total-act')!.textContent = totalAct.toLocaleString('es', {maximumFractionDigits:2});
+    document.getElementById('mayor')!.textContent = mayorCat + ' (+' + (mayorPct > 0 ? mayorPct.toFixed(1) : '0') + '%)';
+    document.getElementById('peso-total')!.textContent = pesoTotal.toFixed(0) + '%';
+  }
+  for (let i = 0; i < 5; i++) {
+    ['ant-' + i, 'act-' + i, 'peso-' + i].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  }
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
