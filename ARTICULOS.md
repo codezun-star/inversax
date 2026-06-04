@@ -1,7 +1,7 @@
 # Inversax — Registro de Artículos
 
 > Índice general. El detalle por categoría está en su archivo propio.
-> **Total: 32 artículos publicados**
+> **Total: 42 artículos publicados**
 
 ## Archivos de detalle
 
