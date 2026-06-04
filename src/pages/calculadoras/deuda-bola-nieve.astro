@@ -1,0 +1,197 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora Avalancha vs Bola de Nieve para Pagar Deudas — Inversax" description="Compara los métodos avalancha y bola de nieve para pagar tus deudas más rápido. Calcula cuántos meses tardarás y cuánto pagarás de intereses con cada estrategia.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Avalancha vs Bola de Nieve</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora para Pagar Deudas — Avalancha vs Bola de Nieve</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Ingresa tus deudas y un pago adicional mensual para ver qué método te libera más rápido y a menor costo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 4px;">Tus deudas</h2>
+        <p style="font-size:12px; color:#A8A29E; margin:0 0 18px;">Deja en 0 las deudas que no tengas</p>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+
+          <div style="background:#F7F7F5; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+            <p style="font-size:12px; font-weight:700; color:#57534E; margin:0; text-transform:uppercase; letter-spacing:0.05em;">Deuda 1</p>
+            <div>
+              <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Saldo pendiente</label>
+              <input id="s1" type="number" value="5000" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div>
+                <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Tasa anual (%)</label>
+                <input id="t1" type="number" value="24" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Pago mínimo</label>
+                <input id="m1" type="number" value="150" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#F7F7F5; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+            <p style="font-size:12px; font-weight:700; color:#57534E; margin:0; text-transform:uppercase; letter-spacing:0.05em;">Deuda 2</p>
+            <div>
+              <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Saldo pendiente</label>
+              <input id="s2" type="number" value="2000" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div>
+                <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Tasa anual (%)</label>
+                <input id="t2" type="number" value="36" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Pago mínimo</label>
+                <input id="m2" type="number" value="80" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#F7F7F5; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+            <p style="font-size:12px; font-weight:700; color:#57534E; margin:0; text-transform:uppercase; letter-spacing:0.05em;">Deuda 3 (opcional)</p>
+            <div>
+              <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Saldo pendiente</label>
+              <input id="s3" type="number" value="0" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div>
+                <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Tasa anual (%)</label>
+                <input id="t3" type="number" value="18" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:600; color:#57534E; display:block; margin-bottom:4px;">Pago mínimo</label>
+                <input id="m3" type="number" value="0" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#fff; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Pago adicional mensual</label>
+            <input id="extra" type="number" value="200" min="0" step="10" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="hero-card" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Método recomendado</p>
+          <p id="recomendacion" style="font-size:22px; font-weight:800; margin:0; letter-spacing:-0.3px;">—</p>
+          <p id="ahorro-label" style="font-size:13px; margin:6px 0 0; opacity:0.9;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; align-items:center;">
+            <span style="font-size:11px; color:#A8A29E;"></span>
+            <span style="font-size:12px; font-weight:700; color:#3B82F6; text-align:center;">Avalancha</span>
+            <span style="font-size:12px; font-weight:700; color:#22C55E; text-align:center;">Bola de Nieve</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; align-items:center;">
+            <span style="font-size:12px; color:#57534E;">Meses</span>
+            <span id="aval-meses" style="font-size:13px; font-weight:700; color:#1A1A1A; text-align:center;">—</span>
+            <span id="snow-meses" style="font-size:13px; font-weight:700; color:#1A1A1A; text-align:center;">—</span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; align-items:center;">
+            <span style="font-size:12px; color:#57534E;">Interés total</span>
+            <span id="aval-int" style="font-size:12px; font-weight:700; color:#1A1A1A; text-align:center;">—</span>
+            <span id="snow-int" style="font-size:12px; font-weight:700; color:#1A1A1A; text-align:center;">—</span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; align-items:center;">
+            <span style="font-size:12px; color:#57534E;">Libre en</span>
+            <span id="aval-fecha" style="font-size:12px; font-weight:700; color:#3B82F6; text-align:center;">—</span>
+            <span id="snow-fecha" style="font-size:12px; font-weight:700; color:#22C55E; text-align:center;">—</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #86EFAC; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">Avalancha ahorra más en intereses. Bola de nieve da victorias psicológicas rápidas al liquidar deudas pequeñas primero. Ambas funcionan si eres consistente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Método Avalancha vs Método Bola de Nieve</h2>
+    <p>Ambos métodos comparten la misma mecánica base: pagas el mínimo en todas las deudas y destinas el dinero extra a una deuda prioritaria. La diferencia está en cómo se define esa prioridad:</p>
+    <ul>
+      <li><strong>Avalancha:</strong> primero la deuda con la tasa de interés más alta. Matemáticamente óptimo: pagas menos intereses en total y terminas antes.</li>
+      <li><strong>Bola de Nieve:</strong> primero la deuda con el saldo más pequeño. Psicológicamente más satisfactorio: las primeras deudas se liquidan rápido y eso genera motivación para seguir.</li>
+    </ul>
+    <p>La diferencia en intereses totales entre ambos métodos suele ser pequeña (5–15% según el escenario). Si necesitas motivación para mantenerte en el plan, la bola de nieve puede ser la mejor opción aunque sea ligeramente más cara.</p>
+
+    <h2>¿Qué incluir como pago adicional?</h2>
+    <p>El pago adicional mensual es la clave. Cualquier dinero extra que puedas destinar a deudas acelera drásticamente el proceso. Fuentes comunes: reducir suscripciones, vender artículos que no usas, ingresos extra de freelance, o simplemente redirigir gastos hormiga. Incluso 50–100 dólares extra al mes pueden acortar el plan varios meses.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué pasa si se cancela una deuda antes de lo esperado?</h3>
+    <p>La calculadora redistribuye automáticamente el pago: cuando una deuda se liquida, su pago mínimo más el extra se suman y se aplican a la siguiente deuda en la lista. Esto acelera cada deuda subsiguiente, creando el efecto "bola de nieve" o "avalancha" característico de cada método.</p>
+    <h3>¿Debo incluir la hipoteca?</h3>
+    <p>Generalmente no. La hipoteca tiene tasas bajas y ventajas fiscales en muchos países. Estos métodos están pensados para deudas de consumo (tarjetas de crédito, créditos personales, préstamos de vehículo) con tasas altas. La hipoteca se maneja mejor con su propia estrategia de amortización.</p>
+  </div>
+</Layout>
+
+<script>
+  function simular(deudas: {s:number,t:number,m:number}[], extra: number): {meses:number,interes:number} {
+    const ds = deudas.filter(d => d.s > 0).map(d => ({s:d.s,t:d.t,m:d.m}));
+    if (ds.length === 0) return {meses:0,interes:0};
+    let meses = 0, totalInteres = 0;
+    const MAX = 600;
+    while (ds.some(d => d.s > 0.01) && meses < MAX) {
+      meses++;
+      for (const d of ds) {
+        if (d.s <= 0) continue;
+        const int = d.s * (d.t / 100 / 12);
+        totalInteres += int;
+        d.s += int;
+        d.s = Math.max(0, d.s - Math.min(d.m, d.s));
+      }
+      let rem = extra;
+      for (const d of ds) {
+        if (d.s <= 0 || rem <= 0) continue;
+        const pago = Math.min(rem, d.s);
+        d.s = Math.max(0, d.s - pago);
+        rem -= pago;
+      }
+    }
+    return {meses, interes: totalInteres};
+  }
+  function mesAFecha(meses: number): string {
+    const d = new Date();
+    d.setMonth(d.getMonth() + meses);
+    return d.toLocaleDateString('es', {month:'short', year:'numeric'});
+  }
+  function calcular() {
+    const get = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0;
+    const deudas = [
+      {s:get('s1'),t:get('t1'),m:get('m1')},
+      {s:get('s2'),t:get('t2'),m:get('m2')},
+      {s:get('s3'),t:get('t3'),m:get('m3')},
+    ];
+    const extra = get('extra');
+    const avalancha = simular([...deudas].sort((a,b) => b.t - a.t), extra);
+    const bola = simular([...deudas].sort((a,b) => a.s - b.s), extra);
+    const fmt = (n: number) => '$ ' + n.toLocaleString('es', {maximumFractionDigits:0});
+    document.getElementById('aval-meses')!.textContent = avalancha.meses + ' meses';
+    document.getElementById('snow-meses')!.textContent = bola.meses + ' meses';
+    document.getElementById('aval-int')!.textContent = fmt(avalancha.interes);
+    document.getElementById('snow-int')!.textContent = fmt(bola.interes);
+    document.getElementById('aval-fecha')!.textContent = mesAFecha(avalancha.meses);
+    document.getElementById('snow-fecha')!.textContent = mesAFecha(bola.meses);
+    const ahorro = Math.abs(avalancha.interes - bola.interes);
+    const mejor = avalancha.interes <= bola.interes ? 'Avalancha' : 'Bola de Nieve';
+    document.getElementById('recomendacion')!.textContent = mejor;
+    document.getElementById('ahorro-label')!.textContent = 'Ahorra ' + fmt(ahorro) + ' en intereses vs la alternativa';
+    document.getElementById('hero-card')!.style.background = mejor === 'Avalancha' ? '#3B82F6' : '#22C55E';
+  }
+  ['s1','t1','m1','s2','t2','m2','s3','t3','m3','extra'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

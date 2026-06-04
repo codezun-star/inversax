@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora del Criterio de Kelly — Inversax" description="Calcula el porcentaje óptimo de tu capital a arriesgar por operación usando el Criterio de Kelly. Evita el sobredimensionamiento y protege tu cuenta de trading.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Criterio de Kelly</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora del Criterio de Kelly</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el tamaño de posición óptimo según tu historial de operaciones para maximizar el crecimiento a largo plazo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Estadísticas de tu estrategia</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Win rate — porcentaje de operaciones ganadoras (%)</label>
+            <input id="winrate" type="number" value="55" min="1" max="99" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ganancia media por operación ganadora (USD)</label>
+            <input id="avg-win" type="number" value="100" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Pérdida media por operación perdedora (USD)</label>
+            <input id="avg-loss" type="number" value="60" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital total de la cuenta (USD)</label>
+            <input id="capital" type="number" value="10000" min="0" step="100" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="hero-card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Fracción de Kelly</p>
+          <p id="kelly-pct" style="font-size:40px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+          <p id="kelly-status" style="font-size:13px; margin:4px 0 0; opacity:0.9;">del capital por operación</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Fracción de medio Kelly (recomendada)</span>
+            <span id="half-kelly-pct" style="font-size:13px; font-weight:700; color:#3B82F6;">0%</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Monto Kelly completo</span>
+            <span id="monto-kelly" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Monto Medio Kelly</span>
+            <span id="monto-half" style="font-size:13px; font-weight:700; color:#3B82F6;">$ 0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ratio ganancia/pérdida (b)</span>
+            <span id="ratio-b" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Esperanza por operación</span>
+            <span id="esperanza" style="font-size:13px; font-weight:700; color:#22C55E;">$ 0</span>
+          </div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">Usa siempre Medio Kelly o menos. El Kelly completo maximiza matemáticamente el crecimiento pero con volatilidad extrema que pocos pueden tolerar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el Criterio de Kelly?</h2>
+    <p>El <strong>Criterio de Kelly</strong> es una fórmula matemática desarrollada por John L. Kelly Jr. en 1956 que calcula el porcentaje óptimo de capital a arriesgar en cada apuesta o inversión para maximizar el crecimiento geométrico del capital a largo plazo. Es ampliamente usado por traders profesionales, gestores de fondos y apostadores deportivos.</p>
+    <p>La fórmula es: <strong>f* = (b × p − q) / b</strong>, donde b es el ratio ganancia/pérdida, p es la probabilidad de ganar y q = 1 − p es la probabilidad de perder.</p>
+
+    <h2>Kelly completo vs Medio Kelly</h2>
+    <p>El Kelly completo es la fracción que maximiza el crecimiento esperado, pero implica una volatilidad enorme en el camino. Con Kelly completo, las rachas perdedoras pueden reducir la cuenta un 50–70% antes de la recuperación. Por eso la mayoría de traders profesionales usan el <strong>Medio Kelly</strong> (la mitad del porcentaje recomendado), que captura aproximadamente el 75% del crecimiento óptimo con mucho menos riesgo.</p>
+    <p>Algunos gestores incluso usan un cuarto del Kelly (25%) para carteras donde la preservación de capital es prioritaria.</p>
+
+    <h2>Cómo obtener tus estadísticas</h2>
+    <p>Los datos de entrada deben venir de un historial real de operaciones, no de expectativas. Necesitas al menos 30–50 operaciones para tener estadísticas significativas. Revisa tu plataforma de trading o diario de trading para calcular:</p>
+    <ul>
+      <li><strong>Win rate:</strong> número de operaciones ganadoras / total de operaciones × 100.</li>
+      <li><strong>Ganancia media:</strong> suma de todas las ganancias / número de operaciones ganadoras.</li>
+      <li><strong>Pérdida media:</strong> suma del valor absoluto de todas las pérdidas / número de operaciones perdedoras.</li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué significa Kelly negativo o cero?</h3>
+    <p>Si el Criterio de Kelly da negativo o cero, la estrategia no es rentable en su configuración actual. No deberías operar con esos parámetros. Un resultado negativo significa que las pérdidas superan las ganancias en términos esperados.</p>
+    <h3>¿Puedo usar Kelly con acciones o solo con forex?</h3>
+    <p>Kelly funciona con cualquier activo donde puedas estimar la probabilidad de ganancia y los montos promedio. Se usa en forex, acciones, opciones e incluso en carteras de largo plazo para decidir el peso de cada activo.</p>
+    <h3>¿Cómo combino Kelly con otras calculadoras?</h3>
+    <p>Usa primero la <a href="/calculadoras/riesgo-beneficio" style="color:#3B82F6;">calculadora de riesgo/beneficio</a> para evaluar cada operación, y luego Kelly para decidir el tamaño. También complementa bien con la <a href="/calculadoras/tamano-posicion" style="color:#3B82F6;">calculadora de tamaño de posición</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const winrate = parseFloat((document.getElementById('winrate') as HTMLInputElement).value) / 100 || 0;
+    const avgWin = parseFloat((document.getElementById('avg-win') as HTMLInputElement).value) || 0;
+    const avgLoss = parseFloat((document.getElementById('avg-loss') as HTMLInputElement).value) || 1;
+    const capital = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const p = winrate;
+    const q = 1 - p;
+    const b = avgLoss > 0 ? avgWin / avgLoss : 0;
+    const kelly = b > 0 ? (b * p - q) / b : 0;
+    const halfKelly = kelly / 2;
+    const montoKelly = Math.max(0, capital * kelly);
+    const montoHalf = Math.max(0, capital * halfKelly);
+    const esperanza = p * avgWin - q * avgLoss;
+    const hero = document.getElementById('hero-card')!;
+    const fmt2 = (n: number) => '$ ' + n.toLocaleString('es', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const fmt0 = (n: number) => '$ ' + n.toLocaleString('es', {maximumFractionDigits:0});
+    document.getElementById('kelly-pct')!.textContent = kelly > 0 ? (kelly * 100).toFixed(1) + '%' : '0%';
+    document.getElementById('half-kelly-pct')!.textContent = halfKelly > 0 ? (halfKelly * 100).toFixed(1) + '%' : '0%';
+    document.getElementById('monto-kelly')!.textContent = fmt0(montoKelly);
+    document.getElementById('monto-half')!.textContent = fmt0(montoHalf);
+    document.getElementById('ratio-b')!.textContent = b.toFixed(2) + 'x';
+    document.getElementById('esperanza')!.textContent = fmt2(esperanza);
+    document.getElementById('esperanza')!.style.color = esperanza >= 0 ? '#22C55E' : '#EF4444';
+    if (kelly <= 0) {
+      hero.style.background = '#EF4444';
+      document.getElementById('kelly-status')!.textContent = 'Estrategia no rentable';
+    } else if (kelly < 0.05) {
+      hero.style.background = '#78716C';
+      document.getElementById('kelly-status')!.textContent = 'Fracción muy baja — revisar estadísticas';
+    } else {
+      hero.style.background = '#3B82F6';
+      document.getElementById('kelly-status')!.textContent = 'del capital por operación';
+    }
+  }
+  ['winrate','avg-win','avg-loss','capital'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

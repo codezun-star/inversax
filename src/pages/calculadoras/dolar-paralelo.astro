@@ -1,0 +1,138 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Dólar Paralelo y Brecha Cambiaria — Inversax" description="Calcula la brecha entre el tipo de cambio oficial y el paralelo o blue. Especial para Argentina, Venezuela y Cuba. Convierte montos entre el tipo oficial y el informal.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Dólar Paralelo y Brecha Cambiaria</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Dólar Paralelo y Brecha Cambiaria</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula la diferencia real entre el tipo de cambio oficial y el paralelo, y convierte montos entre ambas cotizaciones.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tipos de cambio</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">País / Moneda</label>
+            <select id="pais" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="ARS">Argentina — Peso (ARS)</option>
+              <option value="VES">Venezuela — Bolívar (VES)</option>
+              <option value="CUP">Cuba — Peso (CUP)</option>
+              <option value="otro">Otro país / Moneda personalizada</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio oficial (moneda local por 1 USD)</label>
+            <input id="tc-oficial" type="number" value="1000" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio paralelo / blue (moneda local por 1 USD)</label>
+            <input id="tc-paralelo" type="number" value="1350" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto a convertir (en moneda local)</label>
+            <input id="monto" type="number" value="100000" min="0" step="1000" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Brecha cambiaria</p>
+          <p id="brecha" style="font-size:40px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+          <p style="font-size:13px; margin:4px 0 0; opacity:0.9;">entre oficial y paralelo</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Al tipo oficial</span>
+            <span id="val-oficial" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0.00 USD</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Al tipo paralelo</span>
+            <span id="val-paralelo" style="font-size:13px; font-weight:700; color:#8B5CF6;">$ 0.00 USD</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Diferencia en USD</span>
+            <span id="diferencia" style="font-size:13px; font-weight:700; color:#EF4444;">$ 0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">1 USD al tipo oficial vale</span>
+            <span id="oficial-label" style="font-size:13px; font-weight:700; color:#1A1A1A;">—</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">1 USD al tipo paralelo vale</span>
+            <span id="paralelo-label" style="font-size:13px; font-weight:700; color:#8B5CF6;">—</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Los tipos de cambio paralelos son referenciales. Verifica siempre los valores actualizados antes de realizar operaciones. Esta calculadora es solo orientativa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la brecha cambiaria?</h2>
+    <p>La <strong>brecha cambiaria</strong> es la diferencia porcentual entre el tipo de cambio oficial fijado por el banco central y el tipo de cambio que se forma en el mercado informal o paralelo. Cuando el tipo oficial está artificialmente contenido, surge inevitablemente un mercado informal que refleja el precio de equilibrio real de la moneda.</p>
+    <p>Argentina, Venezuela y Cuba son los casos más conocidos en Latinoamérica, pero la dualidad cambiaria ha existido históricamente en muchos países cuando aplican controles de capital.</p>
+
+    <h2>Argentina: el dólar blue</h2>
+    <p>En Argentina, el <strong>dólar blue</strong> es el tipo de cambio que surge de transacciones informales fuera del sistema bancario. Junto al blue existen otras cotizaciones: el dólar MEP (se obtiene comprando y vendiendo bonos en el mercado de capitales), el contado con liquidación (CCL) y el dólar cripto. Cada uno tiene sus propias restricciones y usos. La brecha entre el oficial y el blue puede superar el 50–100% en períodos de alta inflación o incertidumbre política.</p>
+
+    <h2>¿Por qué importa la brecha para inversores?</h2>
+    <p>La brecha cambiaria afecta directamente a quien recibe ingresos en dólares y los convierte a moneda local (o viceversa). También importa para calcular el poder adquisitivo real, comparar sueldos entre países, evaluar el costo de importaciones y exportaciones, y tomar decisiones de ahorro. Un salario en pesos argentinos equivale a cantidades muy distintas en USD según el tipo de cambio que se use.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Dónde consulto los tipos de cambio actualizados?</h3>
+    <p>Para Argentina: dolarito.ar o ambito.com muestran todas las cotizaciones en tiempo real. Para Venezuela: monitordolarvenezuela.com. Para Cuba: el tipo informal varía mucho; ONEI publica el oficial. Siempre verifica en múltiples fuentes.</p>
+    <h3>¿Cómo afecta la brecha al envío de remesas?</h3>
+    <p>En países con alta brecha cambiaria, las remesas pueden valer significativamente más si el destinatario las recibe en moneda extranjera y las convierte al tipo paralelo. Usa la <a href="/calculadoras/remesas" style="color:#8B5CF6;">calculadora de remesas</a> para calcular el monto que llega considerando el tipo de cambio real.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEFAULTS: Record<string,{oficial:number,paralelo:number,monto:number}> = {
+    ARS: {oficial:1000, paralelo:1350, monto:100000},
+    VES: {oficial:40, paralelo:55, monto:200},
+    CUP: {oficial:24, paralelo:300, monto:1000},
+    otro: {oficial:1, paralelo:1.2, monto:1000},
+  };
+  document.getElementById('pais')?.addEventListener('change', () => {
+    const pais = (document.getElementById('pais') as HTMLSelectElement).value;
+    const d = DEFAULTS[pais] || DEFAULTS.otro;
+    (document.getElementById('tc-oficial') as HTMLInputElement).value = String(d.oficial);
+    (document.getElementById('tc-paralelo') as HTMLInputElement).value = String(d.paralelo);
+    (document.getElementById('monto') as HTMLInputElement).value = String(d.monto);
+    calcular();
+  });
+  function calcular() {
+    const pais = (document.getElementById('pais') as HTMLSelectElement).value;
+    const monedaLabel = pais === 'ARS' ? 'ARS' : pais === 'VES' ? 'VES' : pais === 'CUP' ? 'CUP' : '';
+    const tcOficial = parseFloat((document.getElementById('tc-oficial') as HTMLInputElement).value) || 1;
+    const tcParalelo = parseFloat((document.getElementById('tc-paralelo') as HTMLInputElement).value) || 1;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const brecha = ((tcParalelo - tcOficial) / tcOficial) * 100;
+    const valOficial = monto / tcOficial;
+    const valParalelo = monto / tcParalelo;
+    const diferencia = Math.abs(valOficial - valParalelo);
+    const fmt = (n: number) => '$ ' + n.toLocaleString('es', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' USD';
+    const fmtLocal = (n: number) => n.toLocaleString('es', {maximumFractionDigits:2}) + (monedaLabel ? ' ' + monedaLabel : '');
+    document.getElementById('brecha')!.textContent = brecha.toFixed(1) + '%';
+    document.getElementById('val-oficial')!.textContent = fmt(valOficial);
+    document.getElementById('val-paralelo')!.textContent = fmt(valParalelo);
+    document.getElementById('diferencia')!.textContent = '$ ' + diferencia.toLocaleString('es', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' USD';
+    document.getElementById('oficial-label')!.textContent = fmtLocal(tcOficial);
+    document.getElementById('paralelo-label')!.textContent = fmtLocal(tcParalelo);
+  }
+  ['tc-oficial','tc-paralelo','monto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

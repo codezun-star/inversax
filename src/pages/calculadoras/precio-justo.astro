@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Precio Justo de una Acción (Número de Graham) — Inversax" description="Calcula el precio justo de una acción usando el Número de Graham. Descubre si una acción está infravalorada o sobrevalorada antes de invertir.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Precio Justo de una Acción</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Precio Justo — Número de Graham</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el precio intrínseco de una acción con la fórmula de Benjamin Graham y aplica tu margen de seguridad deseado.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de la acción</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">EPS — Ganancias por acción (USD)</label>
+            <input id="eps" type="number" value="5.00" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">BVPS — Valor contable por acción (USD)</label>
+            <input id="bvps" type="number" value="40.00" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio actual de la acción (USD)</label>
+            <input id="precio" type="number" value="80.00" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Margen de seguridad deseado (%)</label>
+            <input id="margen" type="number" value="20" min="0" max="60" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+        <div style="background:#F7F7F5; border-radius:10px; padding:12px 14px; margin-top:18px;">
+          <p style="font-size:11px; color:#78716C; margin:0; line-height:1.6;">Fórmula: Graham Number = sqrt(22.5 × EPS × BVPS). EPS y BVPS se obtienen en los estados financieros o en Yahoo Finance / Macrotrends.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="hero-card" style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Precio justo (Graham Number)</p>
+          <p id="graham-num" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">$ 0.00</p>
+          <p id="valoracion-label" style="font-size:13px; margin:6px 0 0; opacity:0.9;">—</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Precio con margen de seguridad</span>
+            <span id="precio-margen" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Precio actual</span>
+            <span id="precio-actual-label" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0.00</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Diferencia vs precio actual</span>
+            <span id="diferencia" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">PER implícito</span>
+            <span id="per" style="font-size:13px; font-weight:700; color:#FF8C42;">0x</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Graham Number es un punto de partida, no una señal de compra garantizada. Úsalo junto con el análisis del negocio y la industria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el Número de Graham?</h2>
+    <p>El <strong>Número de Graham</strong> es una fórmula desarrollada por Benjamin Graham, el padre del value investing, para estimar el precio máximo que un inversor conservador debería pagar por una acción. La fórmula es:</p>
+    <p><strong>Graham Number = sqrt(22.5 × EPS × BVPS)</strong></p>
+    <p>El factor 22.5 proviene de la regla de Graham de que el P/E de una acción no debería superar 15 y el P/B no debería superar 1.5 (15 × 1.5 = 22.5). Una acción que cotiza por debajo del Graham Number puede ser candidata a análisis más profundo.</p>
+
+    <h2>¿Cómo obtener EPS y BVPS?</h2>
+    <ul>
+      <li><strong>EPS (Earnings Per Share):</strong> Ganancia neta dividida entre el número de acciones en circulación. Se encuentra en el estado de resultados o en Yahoo Finance buscando el ticker de la empresa.</li>
+      <li><strong>BVPS (Book Value Per Share):</strong> Patrimonio neto dividido entre el número de acciones. También disponible en Yahoo Finance, en la sección "Balance Sheet".</li>
+    </ul>
+    <p>Usa el EPS de los últimos 12 meses (TTM) para mayor actualidad.</p>
+
+    <h2>El margen de seguridad</h2>
+    <p>Graham insistía en comprar siempre con un <strong>margen de seguridad</strong>: un descuento adicional sobre el precio justo para protegerse de errores en los datos o cambios imprevistos. Un margen del 20–30% es el rango típico que los value investors aplican. Si el Graham Number de una acción es $100, con un margen del 20% solo comprarías si cotiza a $80 o menos.</p>
+
+    <h2>Limitaciones de la fórmula</h2>
+    <p>El Graham Number funciona mejor para empresas industriales y financieras maduras. No aplica bien a empresas tecnológicas de alto crecimiento (que pueden tener EPS bajo pero valoración alta por expectativas futuras), empresas con pérdidas (EPS negativo hace el número inválido) o negocios donde el valor contable no refleja el valor real de los activos intangibles.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué pasa si el Graham Number es negativo o cero?</h3>
+    <p>Si EPS o BVPS son negativos, la fórmula no produce un resultado válido. Esto generalmente indica que la empresa tiene pérdidas o deuda neta, lo que en cualquier caso señala mayor riesgo y requiere análisis más profundo.</p>
+    <h3>¿Puedo usarlo para acciones de LATAM?</h3>
+    <p>Sí, aunque debes usar EPS y BVPS en la misma moneda que el precio de la acción. Para acciones en pesos colombianos, argentinos o soles peruanos, los resultados son directamente comparables en esa moneda.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const eps = parseFloat((document.getElementById('eps') as HTMLInputElement).value) || 0;
+    const bvps = parseFloat((document.getElementById('bvps') as HTMLInputElement).value) || 0;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const margenPct = parseFloat((document.getElementById('margen') as HTMLInputElement).value) || 0;
+    const producto = 22.5 * eps * bvps;
+    const grahamNum = producto > 0 ? Math.sqrt(producto) : 0;
+    const precioMargen = grahamNum * (1 - margenPct / 100);
+    const diferenciaPct = precio > 0 && grahamNum > 0 ? ((precio - grahamNum) / grahamNum) * 100 : 0;
+    const per = eps > 0 ? grahamNum / eps : 0;
+    const fmt = (n: number) => '$ ' + n.toLocaleString('es', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('graham-num')!.textContent = grahamNum > 0 ? fmt(grahamNum) : 'N/A';
+    document.getElementById('precio-margen')!.textContent = precioMargen > 0 ? fmt(precioMargen) : 'N/A';
+    document.getElementById('precio-actual-label')!.textContent = fmt(precio);
+    document.getElementById('per')!.textContent = per > 0 ? per.toFixed(1) + 'x' : 'N/A';
+    const hero = document.getElementById('hero-card')!;
+    const label = document.getElementById('valoracion-label')!;
+    if (grahamNum > 0 && precio > 0) {
+      if (precio < precioMargen) {
+        hero.style.background = '#22C55E';
+        label.textContent = 'Infravalorada: por debajo del precio con margen';
+        document.getElementById('diferencia')!.textContent = diferenciaPct.toFixed(1) + '%';
+        document.getElementById('diferencia')!.style.color = '#22C55E';
+      } else if (precio < grahamNum) {
+        hero.style.background = '#FF8C42';
+        label.textContent = 'En rango justo: debajo del Graham Number';
+        document.getElementById('diferencia')!.textContent = diferenciaPct.toFixed(1) + '%';
+        document.getElementById('diferencia')!.style.color = '#FF8C42';
+      } else {
+        hero.style.background = '#EF4444';
+        label.textContent = 'Sobrevalorada: por encima del precio justo';
+        document.getElementById('diferencia')!.textContent = '+' + diferenciaPct.toFixed(1) + '%';
+        document.getElementById('diferencia')!.style.color = '#EF4444';
+      }
+    } else {
+      hero.style.background = '#78716C';
+      label.textContent = 'Datos insuficientes';
+      document.getElementById('diferencia')!.textContent = '—';
+    }
+  }
+  ['eps','bvps','precio','margen'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

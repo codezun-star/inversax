@@ -1,0 +1,154 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Salario por Hora — Inversax" description="Convierte tu salario mensual, anual o semanal a salario por hora real. Calcula cuánto ganas por hora, por día y por semana según tus horas de trabajo.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Salario por Hora</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Salario por Hora</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Descubre cuánto vales realmente por hora. Útil para comparar ofertas, calcular tarifas freelance o evaluar un nuevo empleo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu salario</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BRL">BRL — Real brasileño</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto del salario</label>
+            <input id="salario" type="number" value="3000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Período del salario</label>
+            <select id="periodo" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="mensual">Mensual</option>
+              <option value="anual">Anual</option>
+              <option value="quincenal">Quincenal (2 veces al mes)</option>
+              <option value="semanal">Semanal</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Horas de trabajo por semana</label>
+            <input id="horas" type="number" value="40" min="1" max="80" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Semanas de vacaciones al año</label>
+            <input id="vacaciones" type="number" value="2" min="0" max="20" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Salario por hora</p>
+          <p id="por-hora" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+          <p id="moneda-label" style="font-size:13px; margin:4px 0 0; opacity:0.9;">por hora trabajada</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Por día (8 h)</span>
+            <span id="por-dia" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Por semana</span>
+            <span id="por-semana" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Por mes</span>
+            <span id="por-mes" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Por año</span>
+            <span id="por-anio" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Horas anuales trabajadas</span>
+            <span id="horas-anuales" style="font-size:13px; font-weight:700; color:#78716C;">0</span>
+          </div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #86EFAC; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#166534; line-height:1.6; margin:0;">Para calcular tu tarifa freelance, añade al menos un 30–40% sobre tu salario de empleado para cubrir impuestos, vacaciones y tiempo sin proyectos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Por qué calcular tu salario por hora</h2>
+    <p>El salario mensual puede ser engañoso. Dos personas con el mismo salario mensual pueden ganar importes muy distintos por hora si una trabaja 40 horas semanales y la otra trabaja 55. Conocer tu tarifa horaria real te permite <strong>comparar ofertas de trabajo con honestidad</strong>, calcular cuánto cobrar como freelance o decidir si un extra de horas vale la pena económicamente.</p>
+    <p>También es clave para comparar empleos en países con distintas jornadas laborales: en España la jornada estándar es 40 horas/semana, en México puede ser hasta 48 horas y en varios países de LATAM varía entre 44 y 48 horas.</p>
+
+    <h2>Cómo calcular la tarifa freelance</h2>
+    <p>Si eres o quieres ser freelance, tu tarifa mínima no puede ser igual a tu salario de empleado por hora. Debes considerar:</p>
+    <ul>
+      <li><strong>Tiempo no facturable:</strong> Administración, búsqueda de clientes, formación. En promedio representa el 20–30% del tiempo total.</li>
+      <li><strong>Impuestos adicionales:</strong> Como autónomo o independiente, pagas más impuestos que un empleado.</li>
+      <li><strong>Sin prestaciones:</strong> Sin vacaciones pagadas, sin seguridad social del empleador, sin cesantías.</li>
+      <li><strong>Variabilidad de ingresos:</strong> Los meses sin proyectos exigen un colchón financiero.</li>
+    </ul>
+    <p>La regla práctica es multiplicar tu salario de empleado por hora por 1.5 a 2 para obtener una tarifa freelance sostenible.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cómo se calculan las horas anuales?</h3>
+    <p>Se calcula como: (52 semanas — semanas de vacaciones) × horas por semana. Por ejemplo: (52 — 2) × 40 = 2.000 horas anuales. El salario anual dividido entre 2.000 da el valor por hora real.</p>
+    <h3>¿Debo incluir el salario en 13° mes o aguinaldo?</h3>
+    <p>Si cobras aguinaldo, suma ese monto al total anual antes de calcular. En muchos países de LATAM el aguinaldo equivale a un mes de salario adicional, lo que incrementa aproximadamente un 8% el salario efectivo por hora.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BRL:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const moneda = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const salario = parseFloat((document.getElementById('salario') as HTMLInputElement).value) || 0;
+    const periodo = (document.getElementById('periodo') as HTMLSelectElement).value;
+    const horasSemana = parseFloat((document.getElementById('horas') as HTMLInputElement).value) || 40;
+    const vacaciones = parseFloat((document.getElementById('vacaciones') as HTMLInputElement).value) || 0;
+    const semanasTrabajadas = 52 - vacaciones;
+    const horasAnuales = horasSemana * semanasTrabajadas;
+    let salarioAnual = 0;
+    if (periodo === 'mensual') salarioAnual = salario * 12;
+    else if (periodo === 'anual') salarioAnual = salario;
+    else if (periodo === 'quincenal') salarioAnual = salario * 24;
+    else if (periodo === 'semanal') salarioAnual = salario * semanasTrabajadas;
+    const porHora = horasAnuales > 0 ? salarioAnual / horasAnuales : 0;
+    const porDia = porHora * 8;
+    const porSemana = porHora * horasSemana;
+    const porMes = salarioAnual / 12;
+    document.getElementById('por-hora')!.textContent = fmt(porHora, moneda);
+    document.getElementById('por-dia')!.textContent = fmt(porDia, moneda);
+    document.getElementById('por-semana')!.textContent = fmt(porSemana, moneda);
+    document.getElementById('por-mes')!.textContent = fmt(porMes, moneda);
+    document.getElementById('por-anio')!.textContent = fmt(salarioAnual, moneda);
+    document.getElementById('horas-anuales')!.textContent = horasAnuales.toLocaleString('es') + ' h/año';
+    document.getElementById('moneda-label')!.textContent = moneda + ' por hora trabajada';
+  }
+  ['moneda','salario','periodo','horas','vacaciones'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  ['moneda','periodo'].forEach(id => document.getElementById(id)?.addEventListener('change', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

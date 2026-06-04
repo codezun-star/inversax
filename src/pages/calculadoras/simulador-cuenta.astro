@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Simulador de Cuenta de Trading — Inversax" description="Proyecta el crecimiento esperado de tu cuenta de trading según tu win rate, ratio riesgo-beneficio, riesgo por operación y número de trades.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Simulador de Cuenta de Trading</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Simulador de Cuenta de Trading</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Proyecta el crecimiento esperado de tu cuenta según los parámetros reales de tu estrategia de trading.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros de la estrategia</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial (USD)</label>
+            <input id="capital" type="number" value="10000" min="100" step="100" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Win rate (%)</label>
+            <input id="winrate" type="number" value="50" min="1" max="99" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ratio Riesgo : Beneficio (R:R)</label>
+            <input id="rr" type="number" value="1.5" min="0.1" max="10" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Riesgo por operación (% del capital)</label>
+            <input id="riesgo" type="number" value="1" min="0.1" max="10" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de operaciones a simular</label>
+            <input id="ops" type="number" value="100" min="10" max="1000" step="10" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="hero-card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Capital final esperado</p>
+          <p id="capital-final" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">$ 0</p>
+          <p id="retorno-label" style="font-size:13px; margin:4px 0 0; opacity:0.9;">+0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancia / Pérdida neta</span>
+            <span id="pnl" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Operaciones ganadoras esperadas</span>
+            <span id="wins" style="font-size:13px; font-weight:700; color:#22C55E;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Operaciones perdedoras esperadas</span>
+            <span id="losses" style="font-size:13px; font-weight:700; color:#EF4444;">0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Esperanza matemática por trade</span>
+            <span id="esperanza" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Break-even win rate mínimo</span>
+            <span id="breakeven" style="font-size:13px; font-weight:700; color:#78716C;">0%</span>
+          </div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#1e40af; line-height:1.6; margin:0;">Proyección basada en valor esperado geométrico. Los resultados reales varían por la secuencia de operaciones. La distribución real requiere simulación Monte Carlo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Cómo interpretar la simulación</h2>
+    <p>Este simulador calcula el <strong>valor esperado geométrico</strong> de tu cuenta: el capital que deberías tener en promedio después de N operaciones si tu estrategia tiene los parámetros indicados. No simula una secuencia aleatoria de operaciones (eso requiere Monte Carlo), sino el resultado matemáticamente esperado dado el edge estadístico de la estrategia.</p>
+    <p>Si el capital final esperado es mayor al inicial, tienes una <strong>estrategia con edge positivo</strong>. Si es menor, la estrategia destruye capital a largo plazo independientemente de que algunas operaciones individuales sean ganadoras.</p>
+
+    <h2>La importancia del R:R y el win rate</h2>
+    <p>La rentabilidad de una estrategia de trading depende de dos factores combinados: cuántas veces aciertas y cuánto ganas cuando aciertas vs cuánto pierdes cuando fallas. Un trader con 40% de win rate puede ser rentable si su R:R es 2:1 o superior. Por el contrario, un trader con 70% de win rate puede perder dinero si su R:R es 0.3:1.</p>
+    <p>El <strong>break-even win rate</strong> que muestra la calculadora es el mínimo de aciertos necesarios para que tu estrategia sea rentable dado tu R:R actual. Si tu win rate real está por encima, tienes edge positivo.</p>
+
+    <h2>El efecto del riesgo por operación</h2>
+    <p>El riesgo por operación (1%, 2%, etc.) tiene un impacto enorme en el crecimiento compuesto. Arriesgar un 2% en lugar de un 1% no duplica el resultado: lo puede cuadruplicar o más gracias al compounding. Pero también amplifica las pérdidas durante rachas malas. La mayoría de traders profesionales operan con 0.5%–2% por operación.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué el resultado puede ser menor con más operaciones incluso con edge positivo?</h3>
+    <p>Con riesgo alto por operación, el efecto de las pérdidas en compounding puede superar las ganancias incluso con edge positivo. Esto ocurre cuando el porcentaje de riesgo es mayor que el Kelly óptimo. La solución es reducir el riesgo por operación. Usa la <a href="/calculadoras/kelly" style="color:#3B82F6;">calculadora de Kelly</a> para encontrar el tamaño óptimo.</p>
+    <h3>¿Cómo sé si mis estadísticas son representativas?</h3>
+    <p>Necesitas un mínimo de 30–50 operaciones para tener significancia estadística. Con menos operaciones, la variabilidad de los resultados es tan alta que las estadísticas no son predictivas del futuro.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const capital = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const wr = parseFloat((document.getElementById('winrate') as HTMLInputElement).value) / 100 || 0;
+    const rr = parseFloat((document.getElementById('rr') as HTMLInputElement).value) || 0;
+    const riesgo = parseFloat((document.getElementById('riesgo') as HTMLInputElement).value) / 100 || 0;
+    const ops = parseFloat((document.getElementById('ops') as HTMLInputElement).value) || 0;
+    const p = wr, q = 1 - p;
+    const winFactor = 1 + riesgo * rr;
+    const lossFactor = 1 - riesgo;
+    const geoMean = Math.pow(winFactor, p) * Math.pow(lossFactor, q);
+    const capitalFinal = capital * Math.pow(geoMean, ops);
+    const pnl = capitalFinal - capital;
+    const retornoPct = capital > 0 ? (pnl / capital) * 100 : 0;
+    const esperanza = (p * (riesgo * rr) - q * riesgo) * 100;
+    const breakeven = rr > 0 ? 1 / (1 + rr) * 100 : 0;
+    const winsExp = ops * p, lossesExp = ops * q;
+    const fmt0 = (n: number) => '$ ' + Math.round(n).toLocaleString('es');
+    const hero = document.getElementById('hero-card')!;
+    hero.style.background = capitalFinal >= capital ? '#3B82F6' : '#EF4444';
+    document.getElementById('capital-final')!.textContent = fmt0(capitalFinal);
+    document.getElementById('retorno-label')!.textContent = (pnl >= 0 ? '+' : '') + retornoPct.toFixed(1) + '% retorno total';
+    document.getElementById('pnl')!.textContent = (pnl >= 0 ? '+' : '') + fmt0(pnl);
+    document.getElementById('pnl')!.style.color = pnl >= 0 ? '#22C55E' : '#EF4444';
+    document.getElementById('wins')!.textContent = winsExp.toFixed(0) + ' trades';
+    document.getElementById('losses')!.textContent = lossesExp.toFixed(0) + ' trades';
+    document.getElementById('esperanza')!.textContent = (esperanza >= 0 ? '+' : '') + esperanza.toFixed(3) + '% por trade';
+    document.getElementById('esperanza')!.style.color = esperanza >= 0 ? '#22C55E' : '#EF4444';
+    document.getElementById('breakeven')!.textContent = breakeven.toFixed(1) + '%';
+  }
+  ['capital','winrate','rr','riesgo','ops'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

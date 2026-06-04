@@ -1,0 +1,148 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Ahorrar en Dólares vs Moneda Local — Inversax" description="Compara cuánto vale tu ahorro mensual en dólares vs en moneda local considerando inflación y devaluación. Esencial para inversores de Latinoamérica.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Ahorrar en Dólares vs Moneda Local</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora: Ahorrar en Dólares vs Moneda Local</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Compara el valor real de tus ahorros en dólares frente a la moneda local, considerando inflación, devaluación y rendimiento.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ahorro mensual (en moneda local)</label>
+            <input id="ahorro" type="number" value="500000" min="0" step="1000" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio actual (moneda local por 1 USD)</label>
+            <input id="tc" type="number" value="4200" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Inflación local anual (%)</label>
+            <input id="inflacion" type="number" value="8" min="0" max="200" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Devaluación anual esperada de la moneda (%)</label>
+            <input id="devaluacion" type="number" value="10" min="0" max="200" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento en USD anual (%) — ej. 4% T-bills</label>
+            <input id="rendimiento" type="number" value="4" min="0" max="30" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (años)</label>
+            <input id="anos" type="number" value="5" min="1" max="30" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="hero-card" style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Ventaja de ahorrar en USD</p>
+          <p id="ventaja" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">$ 0</p>
+          <p id="ventaja-label" style="font-size:13px; margin:4px 0 0; opacity:0.9;">más en dólares al final</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:13px; color:#57534E;">Escenario USD (al finalizar)</span>
+            <span id="total-usd" style="font-size:13px; font-weight:700; color:#8B5CF6;">$ 0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:13px; color:#57534E;">Escenario local (en USD al TC final)</span>
+            <span id="total-local-usd" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:13px; color:#57534E;">TC final estimado</span>
+            <span id="tc-final" style="font-size:13px; font-weight:700; color:#78716C;">—</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:13px; color:#57534E;">Pérdida real por inflación (local)</span>
+            <span id="perdida-inf" style="font-size:13px; font-weight:700; color:#EF4444;">—</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:13px; color:#57534E;">Ahorro nominal acumulado (local)</span>
+            <span id="nominal-local" style="font-size:13px; font-weight:700; color:#1A1A1A;">—</span>
+          </div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#5b21b6; line-height:1.6; margin:0;">Proyección simplificada. La devaluación no es constante y el rendimiento en USD puede variar. Usa los datos como referencia de tendencia, no como predicción exacta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Por qué los latinoamericanos ahorran en dólares?</h2>
+    <p>La <strong>dolarización de los ahorros</strong> es una estrategia histórica en Latinoamérica para protegerse de la inflación y la devaluación de las monedas locales. Países como Argentina, Venezuela, Perú y Colombia han visto episodios de alta inflación que erosionaron el poder adquisitivo de quienes ahorraron en moneda local.</p>
+    <p>El razonamiento es simple: si tu moneda local pierde valor frente al dólar más rápido que la inflación en dólares, ahorrar en USD preserva mejor tu patrimonio en términos reales.</p>
+
+    <h2>¿Cuándo conviene la moneda local?</h2>
+    <p>Ahorrar en moneda local puede ser preferible cuando la tasa de rendimiento local (cuentas de ahorro, CDTs, bonos del gobierno) supera ampliamente la suma de inflación y devaluación esperada. En países con estabilidad macroeconómica y tasas de interés reales positivas, los instrumentos en moneda local pueden ser más rentables que el dólar.</p>
+    <p>Por ejemplo, si la tasa local en CDTs es del 12% anual y la inflación + devaluación esperada es 8%, la tasa real es positiva y la moneda local puede ser mejor opción a corto plazo.</p>
+
+    <h2>Formas de ahorrar en dólares desde LATAM</h2>
+    <ul>
+      <li><strong>Cuenta en dólares local:</strong> muchos bancos de la región ofrecen cuentas en USD. Ventaja: facilidad. Desventaja: riesgo bancario y de confiscación en algunos países.</li>
+      <li><strong>Bróker internacional:</strong> a través de brokers como <a href="/brokers/co" style="color:#8B5CF6;">Exness o XTB</a> puedes mantener y hacer crecer tu capital en USD invirtiendo en ETFs o mercados globales.</li>
+      <li><strong>Stablecoins:</strong> USDT, USDC y similares permiten mantenerse en dólares sin banco. Riesgo: regulatorio y de la plataforma.</li>
+      <li><strong>T-Bills y ETFs de deuda corta:</strong> instrumentos como BIL o SHY pagan rendimientos a corto plazo en USD con bajo riesgo.</li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué el escenario local se expresa en USD?</h3>
+    <p>Comparar en USD es la forma más honesta de medir el poder adquisitivo real a largo plazo. Si el dinero local se devalúa significativamente, su equivalente en USD será mucho menor aunque el monto nominal en moneda local parezca grande.</p>
+    <h3>¿Qué rendimiento en USD es razonable usar?</h3>
+    <p>Para cálculos conservadores usa 3–5% (equivalente a T-Bills o ETFs de bonos cortos). Para carteras diversificadas en acciones, 7–9% histórico. Para cálculos de "seguridad" (solo preservar valor) usa 3–4%.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const ahorro = parseFloat((document.getElementById('ahorro') as HTMLInputElement).value) || 0;
+    const tc = parseFloat((document.getElementById('tc') as HTMLInputElement).value) || 1;
+    const inflacion = parseFloat((document.getElementById('inflacion') as HTMLInputElement).value) / 100 || 0;
+    const devaluacion = parseFloat((document.getElementById('devaluacion') as HTMLInputElement).value) / 100 || 0;
+    const rendUsd = parseFloat((document.getElementById('rendimiento') as HTMLInputElement).value) / 100 || 0;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const n = anos * 12;
+    const tcFinal = tc * Math.pow(1 + devaluacion, anos);
+    const nominalLocal = ahorro * n;
+    const rMensualUsd = Math.pow(1 + rendUsd, 1/12) - 1;
+    const totalUsd = rMensualUsd > 0
+      ? (ahorro / tc) * ((Math.pow(1 + rMensualUsd, n) - 1) / rMensualUsd) * (1 + rMensualUsd)
+      : (ahorro / tc) * n;
+    const totalLocalUsd = nominalLocal / tcFinal;
+    const perdidaInf = nominalLocal * (1 - 1 / Math.pow(1 + inflacion, anos));
+    const ventaja = totalUsd - totalLocalUsd;
+    const fmtUsd = (v: number) => '$ ' + Math.round(v).toLocaleString('es') + ' USD';
+    const fmtLocal = (v: number) => Math.round(v).toLocaleString('es');
+    document.getElementById('ventaja')!.textContent = fmtUsd(Math.abs(ventaja));
+    const hero = document.getElementById('hero-card')!;
+    if (ventaja > 0) {
+      hero.style.background = '#8B5CF6';
+      document.getElementById('ventaja-label')!.textContent = 'más en USD que en moneda local';
+    } else {
+      hero.style.background = '#22C55E';
+      document.getElementById('ventaja-label')!.textContent = 'más en moneda local que en USD (con este rendimiento)';
+    }
+    document.getElementById('total-usd')!.textContent = fmtUsd(totalUsd);
+    document.getElementById('total-local-usd')!.textContent = fmtUsd(totalLocalUsd);
+    document.getElementById('tc-final')!.textContent = Math.round(tcFinal).toLocaleString('es') + ' / USD';
+    document.getElementById('perdida-inf')!.textContent = fmtLocal(perdidaInf) + ' (nominal)';
+    document.getElementById('nominal-local')!.textContent = fmtLocal(nominalLocal);
+  }
+  ['ahorro','tc','inflacion','devaluacion','rendimiento','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>

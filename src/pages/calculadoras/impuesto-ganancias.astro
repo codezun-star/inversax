@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Impuesto sobre Ganancias de Capital — Inversax" description="Calcula cuánto pagarás de impuesto al vender acciones, ETFs o criptomonedas. Tasas para Colombia, México, Argentina, Chile, Perú, Uruguay y España.">
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Impuesto sobre Ganancias de Capital</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Impuesto sobre Ganancias de Capital</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto pagarás de impuesto al vender acciones, ETFs o criptomonedas según el país donde tributas.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de la operación</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">País donde tributas</label>
+            <select id="pais" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="10">Colombia — 10%</option>
+              <option value="10">México — 10% (dividendos/bolsa)</option>
+              <option value="15">Argentina — 15%</option>
+              <option value="10">Chile — 10%</option>
+              <option value="5">Perú — 5% (BVL)</option>
+              <option value="12">Uruguay — 12%</option>
+              <option value="19">España — 19%</option>
+              <option value="15">Otro / General — 15%</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de impuesto (%) — editable</label>
+            <input id="tasa" type="number" value="10" min="0" max="60" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de compra por acción (USD)</label>
+            <input id="compra" type="number" value="100" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de venta por acción (USD)</label>
+            <input id="venta" type="number" value="150" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Cantidad de acciones / unidades</label>
+            <input id="cantidad" type="number" value="10" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Ganancia neta (después de impuesto)</p>
+          <p id="ganancia-neta" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">$ 0.00</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Ganancia bruta</span>
+            <span id="ganancia-bruta" style="font-size:13px; font-weight:700; color:#1A1A1A;">$ 0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Impuesto estimado</span>
+            <span id="impuesto" style="font-size:13px; font-weight:700; color:#EF4444;">$ 0.00</span>
+          </div>
+          <div style="height:1px; background:#E2DDD8;"></div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">Tasa efectiva aplicada</span>
+            <span id="tasa-efectiva" style="font-size:13px; font-weight:700; color:#FF8C42;">0%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:#57534E;">ROI neto de impuestos</span>
+            <span id="roi-neto" style="font-size:13px; font-weight:700; color:#22C55E;">0%</span>
+          </div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Estimación orientativa. Las tasas varían según tipo de activo, tiempo de tenencia y situación personal. Consulta a un contador.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Impuesto sobre ganancias de capital en Latinoamérica</h2>
+    <p>El <strong>impuesto sobre las ganancias de capital</strong> grava la diferencia positiva entre el precio de venta y el precio de compra de un activo financiero. No todos los países de LATAM lo tienen, y los que lo tienen aplican tasas y condiciones muy distintas según el tipo de activo y el tiempo de tenencia.</p>
+    <p>Conocer tu carga tributaria real antes de vender te permite tomar mejores decisiones: ¿vale la pena vender ahora o esperar? ¿Puedes compensar con pérdidas en otras posiciones? ¿Conviene el activo considerando el impuesto?</p>
+
+    <h2>Tasas por país (referencia)</h2>
+    <ul>
+      <li><strong>Colombia:</strong> 10% sobre rentas de capital (dividendos y ganancias de activos en el exterior incluidos).</li>
+      <li><strong>México:</strong> 10% sobre dividendos de acciones en bolsa nacional. Las ganancias por venta de acciones extranjeras pueden tributar como ingreso ordinario (hasta 35%).</li>
+      <li><strong>Argentina:</strong> 15% sobre ganancias de activos del exterior para personas físicas.</li>
+      <li><strong>Chile:</strong> 10% de impuesto único a las ganancias de capital para acciones no exentas (Ley 20.630).</li>
+      <li><strong>Perú:</strong> 5% para acciones negociadas en la BVL. 30% para bolsas extranjeras.</li>
+      <li><strong>Uruguay:</strong> 12% de IRPF categoría II sobre rentas de capital.</li>
+      <li><strong>España:</strong> 19% (primeros 6.000 EUR), 21% (hasta 50.000 EUR), 23% (más de 50.000 EUR).</li>
+    </ul>
+
+    <h2>Tax-loss harvesting: la estrategia más útil</h2>
+    <p>En la mayoría de países puedes compensar las ganancias de capital con pérdidas del mismo período. Si tienes posiciones en pérdida, venderlas antes de cerrar el año fiscal puede reducir o eliminar el impuesto sobre otras ganancias. Esta estrategia se llama <strong>tax-loss harvesting</strong> y es legal en prácticamente todos los países de LATAM.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Se paga impuesto si reinvierto los dividendos?</h3>
+    <p>Depende del país. En Colombia y México los dividendos tienen retención en origen. En ETFs acumulativos (sin distribución de dividendos), el impuesto puede diferirse hasta la venta, aunque la regulación local determina exactamente cómo tributa para residentes de LATAM.</p>
+    <h3>¿Las criptomonedas tienen el mismo impuesto que las acciones?</h3>
+    <p>En la mayoría de países de LATAM, las criptomonedas tributan como activos de capital a tasas similares a las acciones. México, Colombia y Argentina han publicado lineamientos específicos. La regulación evoluciona rápidamente: siempre verifica con un contador local.</p>
+    <h3>¿En qué brokers puedo invertir desde LATAM?</h3>
+    <p>Brokers como <a href="/brokers/co" style="color:#FF8C42;">Exness, XTB o Interactive Brokers</a> permiten acceder a mercados globales. La obligación tributaria es del inversor independientemente del broker utilizado.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) / 100 || 0;
+    const compra = parseFloat((document.getElementById('compra') as HTMLInputElement).value) || 0;
+    const venta = parseFloat((document.getElementById('venta') as HTMLInputElement).value) || 0;
+    const cantidad = parseFloat((document.getElementById('cantidad') as HTMLInputElement).value) || 0;
+    const gananciaBruta = (venta - compra) * cantidad;
+    const impuesto = gananciaBruta > 0 ? gananciaBruta * tasa : 0;
+    const gananciaNeta = gananciaBruta - impuesto;
+    const inversion = compra * cantidad;
+    const roiNeto = inversion > 0 ? (gananciaNeta / inversion) * 100 : 0;
+    const fmt = (n: number) => '$ ' + n.toLocaleString('es', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('ganancia-neta')!.textContent = fmt(gananciaNeta);
+    document.getElementById('ganancia-bruta')!.textContent = fmt(gananciaBruta);
+    document.getElementById('impuesto')!.textContent = fmt(impuesto);
+    document.getElementById('tasa-efectiva')!.textContent = (tasa * 100).toFixed(1) + '%';
+    document.getElementById('roi-neto')!.textContent = roiNeto.toFixed(2) + '%';
+  }
+  document.getElementById('pais')?.addEventListener('change', () => {
+    const pais = document.getElementById('pais') as HTMLSelectElement;
+    (document.getElementById('tasa') as HTMLInputElement).value = pais.value;
+    calcular();
+  });
+  ['tasa','compra','venta','cantidad'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
