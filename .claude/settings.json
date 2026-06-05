@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Jose\\\\InversaxV2\" -Recurse -Directory -Filter \"blog\")",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Jose\\\\calcfit-astro\" -Force | Select-Object -Property Name, @{Name=\"Type\";Expression={if\\($_.PSIsContainer\\){\"Directory\"}else{\"File\"}}} | Format-Table -AutoSize)",
+      "Bash(find /c/Users/Jose/calcfit-astro/src -type f -o -type d | head -100)",
+      "Read(//c/Users/Jose/calcfit-astro/src/**)",
+      "Bash(cd /c/Users/Jose/calcfit-astro && find src -type d | sort)",
+      "Read(//c/Users/Jose/calcfit-astro/**)",
+      "Bash(del \"C:\\\\Users\\\\Jose\\\\calcfit-astro\\\\src\\\\content\\\\config.ts\")",
+      "Bash(git commit -m ' *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Jose\\calcfit-astro\\src\\content",
+      "C:\\Users\\Jose\\calcfit-astro\\src\\pages\\blog",
+      "C:\\Users\\Jose\\calcfit-astro\\src",
+      "C:\\Users\\Jose\\calcfit-astro"
+    ]
+  }
+}
