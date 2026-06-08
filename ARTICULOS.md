@@ -1,15 +1,15 @@
 # Inversax — Registro de Artículos
 
 > Índice general. El detalle por categoría está en su archivo propio.
-> **Total: 42 artículos publicados**
+> **Total: 54 artículos publicados**
 
 ## Archivos de detalle
 
 | Categoría | Archivo | Artículos publicados |
 |---|---|---|
 | Brokers | [ARTICULOS-BROKERS.md](ARTICULOS-BROKERS.md) | 22 |
-| Análisis | [ARTICULOS-ANALISIS.md](ARTICULOS-ANALISIS.md) | 5 |
-| Guías | [ARTICULOS-GUIAS.md](ARTICULOS-GUIAS.md) | 4 |
+| Análisis | [ARTICULOS-ANALISIS.md](ARTICULOS-ANALISIS.md) | 8 |
+| Guías | [ARTICULOS-GUIAS.md](ARTICULOS-GUIAS.md) | 11 |
 | General | [ARTICULOS-GENERAL.md](ARTICULOS-GENERAL.md) | 1 |
 
 ---
@@ -43,7 +43,7 @@
 | `mejores-brokers-canada-hispanohablantes` | Canadá | ✅ |
 | `mejores-brokers-belize` | Belice | ✅ |
 
-### Análisis de brokers (5)
+### Análisis de brokers (8)
 
 | Slug | Broker / Tema | Estado |
 |------|--------------|--------|
@@ -52,8 +52,11 @@
 | `xm-vs-exness` | XM vs Exness — comparativa | ✅ |
 | `ic-markets-analisis` | IC Markets — análisis avanzado | ✅ |
 | `pepperstone-analisis` | Pepperstone — análisis completo | ✅ |
+| `libertex-analisis` | Libertex — análisis completo | ✅ |
+| `binance-analisis` | Binance — análisis para LATAM | ✅ |
+| `xtb-vs-pepperstone` | XTB vs Pepperstone — comparativa | ✅ |
 
-### Guías (4)
+### Guías (11)
 
 | Slug | Tema | Estado |
 |------|------|--------|
@@ -61,6 +64,17 @@
 | `forex-para-principiantes` | Forex para principiantes: primeros pasos | ✅ |
 | `que-es-el-apalancamiento-forex` | Qué es el apalancamiento y cómo usarlo | ✅ |
 | `cuenta-demo-broker-gratis` | Cuentas demo gratuitas: cómo aprovecharlas | ✅ |
+| `impuestos-trading-colombia` | Impuestos trading Colombia (DIAN) | ✅ |
+| `impuestos-trading-mexico` | Impuestos trading México (SAT) | ✅ |
+| `impuestos-trading-chile` | Impuestos trading Chile (SII) | ✅ |
+| `impuestos-trading-argentina` | Impuestos trading Argentina (ARCA) | ✅ |
+| `que-es-un-cfd` | Qué es un CFD: guía completa | ✅ |
+| `gestion-del-riesgo-forex` | Gestión del riesgo en forex | ✅ |
+| `como-abrir-cuenta-broker-internacional` | Cómo abrir cuenta en broker internacional | ✅ |
+| `que-es-el-spread-forex` | Qué es el spread en forex | ✅ |
+| `como-detectar-estafas-trading` | Cómo detectar estafas de trading | ✅ |
+| `trading-criptomonedas-latam` | Trading de criptomonedas desde LATAM | ✅ |
+| `como-invertir-en-oro` | Cómo invertir en oro desde LATAM | ✅ |
 
 ### General (1)
 
