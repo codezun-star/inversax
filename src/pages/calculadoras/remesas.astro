@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Remesas — Inversax" description="Calcula cuánto dinero llega realmente en una transferencia internacional. Compara el costo real de enviar remesas incluyendo comisiones y tipo de cambio.">
+<Layout title="Calculadora de Remesas — Cuánto Llega Realmente a LATAM | Inversax" description="Calcula cuánto dinero llega a destino después de comisiones y tipo de cambio al enviar remesas a Colombia, México, Chile, Perú y el resto de América Latina. Compara Wise, Remitly, Western Union y más.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuáles son los servicios de remesas más baratos hacia Colombia, México o Perú?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las plataformas fintech como Wise (Transferwise) y Remitly suelen ser 3-5 veces más baratas que los bancos tradicionales. Wise cobra una comisión fija pequeña (~1-2%) y usa el tipo de cambio interbancario real. Western Union y MoneyGram son más caros pero tienen amplia red presencial, lo que vale para destinatarios sin cuenta bancaria. Para colombianos, Nequi y Bancolombia tienen acuerdos con servicios internacionales. Para México, Remesa.mx y similares compiten con tarifas bajas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo el costo real total de una remesa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El costo real tiene dos componentes: (1) la comisión explícita — el porcentaje o monto fijo que cobra el servicio — y (2) el margen sobre el tipo de cambio — la diferencia entre el tipo de cambio real del mercado y el que aplica el servicio. Para calcular el costo total, compara cuánto dinero llega en moneda destino con lo que llegaría al tipo de cambio interbancario sin ningún costo. La diferencia total (en porcentaje) es el costo real del envío."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El margen del tipo de cambio se considera una comisión?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, es un costo real aunque no aparezca como 'comisión' en pantalla. Muchos servicios anuncian '0% de comisión' pero aplican tipos de cambio 2-4% peores que el mercado. En la práctica, pagar 0% de comisión con tipo de cambio 3% peor es más caro que pagar 1.5% de comisión con tipo de cambio real. Siempre mira cuánto dinero llega en moneda destino para comparar correctamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Con qué frecuencia conviene enviar remesas para minimizar los costos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los envíos grandes y poco frecuentes suelen ser más baratos si la comisión incluye una tarifa fija por envío. Por ejemplo, si hay una comisión fija de 5 USD por transferencia, enviar 500 USD una vez al mes cuesta 1% en comisión fija; enviar 100 USD cinco veces al mes cuesta 5%. Sin embargo, algunos servicios tienen comisiones solo porcentuales, donde la frecuencia no importa. Calcula el costo total mensual para tu patrón habitual de envíos."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

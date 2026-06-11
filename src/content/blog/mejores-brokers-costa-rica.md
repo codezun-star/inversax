@@ -12,6 +12,15 @@ keywords:
   - "plataforma trading centroamerica"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Pepperstone o IC Markets: cuál elegir para trading avanzado desde Costa Rica?"
+    respuesta: "Ambos tienen condiciones muy similares: spreads ECN desde 0.0 pips, regulación ASIC y FCA, y plataformas MT4/MT5/cTrader. Pepperstone destaca por mejor soporte en español y recursos educativos; IC Markets es preferido por scalpers y traders algorítmicos por su mayor profundidad de mercado. Si recién empiezas a escalar, ambos son excelentes opciones."
+  - pregunta: "¿El colón costarricense (CRC) se acepta para depósitos en brokers internacionales?"
+    respuesta: "No directamente. Los brokers internacionales trabajan en USD o EUR. El depósito con tarjeta costarricense realiza la conversión de CRC a USD automáticamente al tipo de cambio del día más el recargo por transacción internacional del banco (1-3%). Para evitar el recargo, algunos traders abren cuentas USD en su banco local o usan Wise para convertir antes del depósito."
+  - pregunta: "¿Las ganancias de trading en brokers extranjeros están gravadas en Costa Rica?"
+    respuesta: "Sí. Las ganancias de capital de fuente extranjera deben declararse ante el Ministerio de Hacienda como rentas del exterior. Costa Rica reformó su sistema tributario con la Ley de Fortalecimiento de las Finanzas Públicas (2018), ampliando la base imponible a rentas extranjeras. La tasa depende de tu nivel de ingresos total. Consulta con un contador para determinar el tratamiento exacto de tus ganancias de trading."
+  - pregunta: "¿Cuál es el depósito mínimo recomendado para empezar desde Costa Rica?"
+    respuesta: "Exness permite abrir cuenta desde $10 USD, aunque lo práctico para operar con gestión de riesgo adecuada es un mínimo de $200-500 USD. Con XM el depósito mínimo es $5 USD para cuenta Micro. Pepperstone e IC Markets requieren $200 USD mínimo. Siempre comienza con la cuenta demo gratuita antes de depositar capital real."
 ---
 
 <h2>Costa Rica: el mercado más estable de Centroamérica para el inversor</h2>
@@ -28,3 +37,13 @@ publicado: true
 
 <h2>La oportunidad real para el inversor costarricense</h2>
 <p>Con una economía cada vez más orientada a servicios y tecnología, Costa Rica tiene las condiciones para convertirse en uno de los mercados de retail trading más activos de Centroamérica. Si estás evaluando comenzar, <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> con su cuenta demo gratuita es el punto de partida ideal antes de depositar capital real.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Pepperstone o IC Markets: cuál elegir para trading avanzado desde Costa Rica?</h3>
+<p>Ambos tienen condiciones muy similares: spreads ECN desde 0.0 pips, regulación ASIC y FCA, y plataformas MT4/MT5/cTrader. Pepperstone destaca por mejor soporte en español y recursos educativos; IC Markets es preferido por scalpers y traders algorítmicos por su mayor profundidad de mercado. Si recién empiezas a escalar, ambos son excelentes opciones.</p>
+<h3>¿El colón costarricense (CRC) se acepta para depósitos en brokers internacionales?</h3>
+<p>No directamente. Los brokers internacionales trabajan en USD o EUR. El depósito con tarjeta costarricense realiza la conversión de CRC a USD automáticamente al tipo de cambio del día más el recargo por transacción internacional del banco (1-3%). Para evitar el recargo, algunos traders abren cuentas USD en su banco local o usan Wise para convertir antes del depósito.</p>
+<h3>¿Las ganancias de trading en brokers extranjeros están gravadas en Costa Rica?</h3>
+<p>Sí. Las ganancias de capital de fuente extranjera deben declararse ante el Ministerio de Hacienda como rentas del exterior. Costa Rica reformó su sistema tributario con la Ley de Fortalecimiento de las Finanzas Públicas (2018), ampliando la base imponible a rentas extranjeras. La tasa depende de tu nivel de ingresos total. Consulta con un contador para determinar el tratamiento exacto de tus ganancias de trading.</p>
+<h3>¿Cuál es el depósito mínimo recomendado para empezar desde Costa Rica?</h3>
+<p>Exness permite abrir cuenta desde $10 USD, aunque lo práctico para operar con gestión de riesgo adecuada es un mínimo de $200-500 USD. Con XM el depósito mínimo es $5 USD para cuenta Micro. Pepperstone e IC Markets requieren $200 USD mínimo. Siempre comienza con la cuenta demo gratuita antes de depositar capital real.</p>

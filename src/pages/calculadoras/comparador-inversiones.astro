@@ -1,7 +1,41 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Comparador de Inversiones — Inversax" description="Compara el resultado de dos inversiones a diferentes tasas de rendimiento. Calcula cuánto más ganas eligiendo una opción sobre otra.">
+<Layout title="Comparador de Inversiones — Dos Opciones, Una Decisión | Inversax" description="Comparador de inversiones online: enfrenta dos opciones a distintas tasas y comprueba la diferencia a 10, 20 o 30 años. Para inversores de Colombia, México y toda Latinoamérica.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué comparar tasas de rendimiento antes de invertir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una diferencia pequeña en la tasa anual parece insignificante al inicio, pero el interés compuesto la amplifica con el tiempo. Invertir 10.000 USD al 8% en lugar del 5% durante 10 años produce 21.589 vs 16.289: más de 5.000 USD de diferencia sin capital adicional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué instrumentos de inversión conviene comparar en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compara depósitos a plazo fijo (3-5% anual), fondos mutuos locales (5-9%), ETFs globales como el S&P 500 (~10% histórico), acciones individuales y bienes raíces. Usa la calculadora para ver el impacto real de cada diferencia de tasa en tu plazo de inversión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Solo la tasa importa al comparar inversiones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. La tasa más alta no siempre es la mejor opción si conlleva mayor riesgo, menor liquidez o comisiones elevadas. Evalúa también el riesgo histórico (volatilidad), los costos de comisión del broker, el horizonte temporal y la liquidez del instrumento."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +56,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -79,6 +131,21 @@ import Layout from '../../layouts/Layout.astro';
     <p>Usa esta calculadora antes de elegir entre un depósito a plazo fijo, un fondo de inversión, ETF o cualquier instrumento financiero. El tiempo juega a tu favor si eliges la tasa correcta.</p>
     <h2>Qué tener en cuenta además de la tasa</h2>
     <p>La tasa más alta no siempre es la mejor opción si conlleva mayor riesgo, menor liquidez o comisiones elevadas. Compara también el <a href="/calculadoras/roi">ROI</a> histórico y los costos de cada instrumento con la <a href="/calculadoras/comision-broker">calculadora de comisiones</a>.</p>
+
+    <h2>Comparativa típica para inversores en Latinoamérica</h2>
+    <ul>
+      <li><strong>CDT/depósito a plazo fijo (Colombia, Chile, Perú):</strong> 4-7% anual en moneda local; bajo riesgo pero expuesto a inflación.</li>
+      <li><strong>ETF S&P 500 (en USD):</strong> ~10% histórico; accesible desde cualquier país con un broker internacional como XTB, Exness o Pepperstone.</li>
+      <li><strong>Fondo mutuo local:</strong> Varía por país y fondo; compara el CAGR a 3 y 5 años publicado por el fondo.</li>
+      <li><strong>Cuenta remunerada en dólares:</strong> 4-5% en USD actualmente; muy líquida y sin riesgo de crédito significativo.</li>
+    </ul>
+    <p>Usa esta calculadora para enfrentar cualquier par de opciones: el impacto de 3-4 puntos porcentuales durante 15-20 años supera en miles de dólares a cualquier diferencia en comisiones.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Puedo comparar inversiones en distintas monedas?</h3>
+    <p>Para comparar inversiones en monedas distintas necesitas convertir todo a la misma moneda y ajustar por la depreciación esperada de cada moneda. Lo más sencillo es comparar en USD usando tasas en dólares, que ya descuentan la inflación y la devaluación implícita.</p>
+    <h3>¿Cuánto impacta un 1% de diferencia de tasa en 20 años?</h3>
+    <p>Con 10.000 USD, la diferencia entre 7% y 8% anual durante 20 años es: 38.697 vs 46.610 — casi 8.000 USD de diferencia por un solo punto porcentual. A mayor plazo, el efecto se amplifica exponencialmente. Por eso elegir el instrumento correcto es más importante que intentar hacer timing del mercado.</p>
   </div>
 </Layout>
 

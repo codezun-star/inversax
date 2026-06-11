@@ -12,6 +12,15 @@ keywords:
   - "impuestos trading chile SII"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Pepperstone o IC Markets: cuál es mejor para operar desde Chile?"
+    respuesta: "Ambos tienen condiciones muy similares: regulación ASIC y FCA, spreads ECN desde 0.0 pips en cuentas raw y plataformas MT4/MT5/cTrader. La principal diferencia: Pepperstone tiene mejor soporte en español y recursos educativos; IC Markets tiene mayor liquidez en sus pools ECN y es preferido por traders algorítmicos. Si priorizas soporte, elige Pepperstone; si priorizas ejecución y profundidad de mercado, IC Markets."
+  - pregunta: "¿El SII puede cruzar información de mis operaciones con brokers extranjeros?"
+    respuesta: "Sí. Chile es parte del CRS (Common Reporting Standard) de la OCDE desde 2020. Brokers regulados en países participantes están obligados a reportar información de cuentas de residentes chilenos al SII. La recomendación es declarar siempre las rentas de fuente extranjera independientemente del monto, para evitar sanciones futuras."
+  - pregunta: "¿Cuánto tardan los retiros de brokers a cuentas bancarias en Chile?"
+    respuesta: "Con transferencia bancaria internacional (SWIFT), los retiros tardan 2-5 días hábiles e incluyen comisiones del banco intermediario de $15-30 USD. Con retiro a tarjeta Visa/Mastercard, el plazo es de 2-3 días generalmente sin comisión adicional. IC Markets y Pepperstone procesan las solicitudes en 24 horas desde su lado; el tiempo restante depende de la cadena bancaria."
+  - pregunta: "¿Qué es la exención de 10 UTA para ganancias de capital en Chile?"
+    respuesta: "Las ganancias de capital habituales de personas no dedicadas habitualmente al trading tienen una exención anual de 10 UTA (aproximadamente $10,000,000 CLP). Si tus ganancias anuales de trading no superan ese umbral, podrías quedar exento. Consulta con un contador tributario para verificar si tu actividad es considerada habitual por el SII, ya que eso cambia el tratamiento fiscal."
 ---
 
 <h2>Chile: estabilidad macroeconómica y apetito creciente por inversiones internacionales</h2>
@@ -32,3 +41,13 @@ publicado: true
 
 <h2>¿Por dónde empezar?</h2>
 <p>Si buscas trading activo con los spreads más competitivos del mercado, <a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a> e <a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">IC Markets</a> son las opciones más robustas disponibles en Chile. Si prefieres empezar con montos pequeños y una curva de aprendizaje más suave, <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> permite comenzar desde $10 USD con cuenta demo ilimitada.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Pepperstone o IC Markets: cuál es mejor para operar desde Chile?</h3>
+<p>Ambos tienen condiciones muy similares: regulación ASIC y FCA, spreads ECN desde 0.0 pips en cuentas raw y plataformas MT4/MT5/cTrader. La principal diferencia: Pepperstone tiene mejor soporte en español y recursos educativos; IC Markets tiene mayor liquidez en sus pools ECN y es preferido por traders algorítmicos. Si priorizas soporte, elige Pepperstone. Si priorizas ejecución y profundidad de mercado, IC Markets.</p>
+<h3>¿El SII puede cruzar información de mis operaciones con brokers extranjeros?</h3>
+<p>Sí. Chile es parte del CRS de la OCDE desde 2020. Brokers regulados en países participantes están obligados a reportar información de cuentas de residentes chilenos al SII. La recomendación es declarar siempre las rentas de fuente extranjera independientemente del monto, para evitar sanciones futuras.</p>
+<h3>¿Cuánto tardan los retiros de brokers a cuentas bancarias en Chile?</h3>
+<p>Con transferencia bancaria internacional (SWIFT), los retiros tardan 2-5 días hábiles con comisiones del banco intermediario de $15-30 USD. Con retiro a tarjeta Visa/Mastercard, el plazo es 2-3 días generalmente sin comisión adicional. IC Markets y Pepperstone procesan solicitudes en 24 horas desde su lado; el tiempo restante depende de la cadena bancaria.</p>
+<h3>¿Qué es la exención de 10 UTA para ganancias de capital en Chile?</h3>
+<p>Las ganancias de capital de personas no dedicadas habitualmente al trading tienen una exención anual de 10 UTA (aproximadamente $10,000,000 CLP). Si tus ganancias anuales no superan ese umbral, podrías quedar exento de impuesto. Consulta con un contador para verificar si tu actividad es considerada habitual por el SII, ya que eso cambia el tratamiento fiscal.</p>

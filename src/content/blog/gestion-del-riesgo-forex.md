@@ -18,6 +18,15 @@ keywords:
   - "como no perder dinero en forex"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué es la regla del 1% en trading y por qué es tan importante?"
+    respuesta: "La regla del 1% establece que nunca debes arriesgar más del 1% de tu capital total en una sola operación. Si tienes $1,000 USD, tu pérdida máxima por operación es $10 USD. No es una cifra arbitraria — es el resultado de la matemática de la ruina financiera: con riesgo del 1% necesitarías 100 pérdidas consecutivas para perder todo el capital. En la práctica, ninguna estrategia razonable tiene 100 pérdidas seguidas. Esto te da el tiempo necesario para aprender, ajustar y sobrevivir rachas negativas sin quedar fuera del mercado."
+  - pregunta: "¿Cómo calculo el tamaño de posición correcto en forex para no superar el 1% de riesgo?"
+    respuesta: "Fórmula: Tamaño de lote = Riesgo en USD ÷ (Distancia del stop en pips × Valor por pip). Ejemplo: cuenta de $2,000, riesgo 1% = $20 USD, stop a 40 pips en EUR/USD. Con micro loto (0.01), 1 pip = $0.10. Cálculo: $20 ÷ (40 × $0.10) = $20 ÷ $4 = 5 micro lotes (0.05 lot). Eso es lo máximo que puedes operar para no superar $20 de riesgo con ese stop. Usa la calculadora de tamaño de posición de Inversax para hacer este cálculo automáticamente antes de cada operación."
+  - pregunta: "¿Dónde debo colocar el stop loss en una operación de forex?"
+    respuesta: "El stop loss debe estar en el nivel donde el mercado demostraría que tu análisis estaba equivocado — no en un número redondo de pips. Si compraste EUR/USD porque esperabas que el soporte en 1.0850 resistiera, pon el stop en 1.0830-1.0835 (debajo del soporte, fuera del ruido del mercado). Si el precio cae hasta allí, la tesis de compra es incorrecta y la posición debe cerrarse. Los stops arbitrarios (20 pips fijos) son los que más frecuentemente el mercado activa antes de revertir en tu dirección."
+  - pregunta: "¿Qué ratio riesgo/beneficio mínimo debo usar en cada operación?"
+    respuesta: "El mínimo recomendado para la mayoría de estrategias es 1:1.5 (arriesgas 1 para ganar 1.5). Con ese ratio, necesitas solo el 40% de operaciones ganadoras para ser rentable. Con 1:2, el punto de equilibrio baja al 33%. Con 1:3, puedes ganar dinero teniendo razón apenas el 25% de las veces. En la práctica: no abras ninguna operación donde el potencial de ganancia sea menor que el riesgo asumido. Calcula el ratio antes de entrar con la calculadora de riesgo/beneficio — si el ratio no da al menos 1:1.5, busca una entrada mejor o no abras la operación."
 ---
 
 <h2>Por qué la gestión de riesgo es más importante que tu estrategia de entrada</h2>
@@ -97,4 +106,18 @@ publicado: true
 <h2>Practica la gestión de riesgo en cuenta demo primero</h2>
 <p>La gestión de riesgo no es solo intelectual — es también psicológica. Es fácil respetar las reglas cuando no hay dinero real de por medio. El verdadero desafío es mantener la disciplina cuando hay $200 reales en juego y el mercado se mueve en tu contra.</p>
 <p>Practica durante al menos 3 meses en una <a href="/blog/cuenta-demo-broker-gratis">cuenta demo</a> aplicando todas las reglas de gestión de riesgo descritas aquí. Trata el dinero demo como si fuera real. Registra cada operación, tus razones para entrar y salir, y el cumplimiento de tu plan de gestión de riesgo. Solo cuando tu proceso sea consistente en demo, pasa a dinero real.</p>
-<p>Los brokers con mejores cuentas demo para practicar desde LATAM: <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> (demo ilimitada), <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a> (demo con $100,000 virtuales), <a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a> (demo con plataformas múltiples incluyendo TradingView).</p>
+<p>Los brokers con mejores cuentas demo para practicar desde LATAM: <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> (demo ilimitada), <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a> (demo con $100,000 virtuales), <a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a> (demo con plataformas múltiples incluyendo TradingView).
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Qué es la regla del 1% en trading y por qué es tan importante?</h3>
+<p>La regla del 1% establece que nunca debes arriesgar más del 1% de tu capital total en una sola operación. Si tienes $1,000 USD, tu pérdida máxima por operación es $10 USD. No es una cifra arbitraria — es el resultado de la matemática de la ruina financiera: con riesgo del 1% necesitarías 100 pérdidas consecutivas para perder todo el capital. En la práctica, ninguna estrategia razonable tiene 100 pérdidas seguidas. Esto te da el tiempo necesario para aprender, ajustar y sobrevivir rachas negativas sin quedar fuera del mercado.</p>
+
+<h3>¿Cómo calculo el tamaño de posición correcto en forex para no superar el 1% de riesgo?</h3>
+<p>Fórmula: Tamaño de lote = Riesgo en USD ÷ (Distancia del stop en pips × Valor por pip). Ejemplo: cuenta de $2,000, riesgo 1% = $20 USD, stop a 40 pips en EUR/USD. Con micro lote (0.01), 1 pip = $0.10. Cálculo: $20 ÷ (40 × $0.10) = $20 ÷ $4 = 5 micro lotes (0.05 lot). Eso es lo máximo que puedes operar para no superar $20 de riesgo con ese stop. Usa la calculadora de tamaño de posición de Inversax para hacer este cálculo automáticamente antes de cada operación.</p>
+
+<h3>¿Dónde debo colocar el stop loss en una operación de forex?</h3>
+<p>El stop loss debe estar en el nivel donde el mercado demostraría que tu análisis estaba equivocado — no en un número redondo de pips. Si compraste EUR/USD porque esperabas que el soporte en 1.0850 resistiera, pon el stop en 1.0830-1.0835 (debajo del soporte, fuera del ruido del mercado). Si el precio cae hasta allí, la tesis de compra es incorrecta y la posición debe cerrarse. Los stops arbitrarios (20 pips fijos) son los que más frecuentemente el mercado activa antes de revertir en tu dirección.</p>
+
+<h3>¿Qué ratio riesgo/beneficio mínimo debo usar en cada operación?</h3>
+<p>El mínimo recomendado para la mayoría de estrategias es 1:1.5 (arriesgas 1 para ganar 1.5). Con ese ratio, necesitas solo el 40% de operaciones ganadoras para ser rentable. Con 1:2, el punto de equilibrio baja al 33%. Con 1:3, puedes ganar dinero teniendo razón apenas el 25% de las veces. En la práctica: no abras ninguna operación donde el potencial de ganancia sea menor que el riesgo asumido. Calcula el ratio antes de entrar con la calculadora de riesgo/beneficio — si el ratio no da al menos 1:1.5, busca una entrada mejor o no abras la operación.</p></p>

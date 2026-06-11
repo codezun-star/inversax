@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Fondo de Emergencia — Inversax" description="Calcula cuánto dinero necesitas en tu fondo de emergencia según tus gastos mensuales. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Fondo de Emergencia — ¿Cuánto Necesito? | Inversax" description="Calcula cuánto dinero necesitas en tu fondo de emergencia según tus gastos reales. 3, 6, 9 o 12 meses de cobertura. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuántos meses de gastos debe tener un fondo de emergencia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La regla general es 3-6 meses de gastos esenciales. Con trabajo estable y sin dependientes, 3 meses es el mínimo recomendado. Si eres independiente, tienes hijos o trabajo inestable, apunta a 6-12 meses. El fondo cubre: renta/hipoteca, alimentación, servicios, transporte y cuotas de deudas comprometidas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde guardar el fondo de emergencia en Colombia, México o Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En un instrumento líquido y de bajo riesgo. Colombia: cuenta de ahorro de alto rendimiento o CDT a 30 días. México: CETES a 28 días. Chile: depósito a plazo corto o cuenta de ahorro. En general: nunca en acciones ni criptomonedas. La regla es acceso inmediato sin riesgo de pérdida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El fondo de emergencia debe estar en dólares o en moneda local?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En países con inflación alta o moneda volátil (Argentina, Venezuela) mantener parte en dólares es prudente. En países con inflación moderada (Colombia, México, Chile, Perú) puede estar en moneda local en un instrumento que rinda por encima de la inflación. Lo más importante es la liquidez inmediata."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué gastos incluyo en el cálculo del fondo de emergencia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Solo los gastos esenciales que debes pagar aunque no tengas ingresos: renta o hipoteca, alimentación básica, servicios (agua, luz, internet mínimo), transporte necesario, seguros de salud, medicamentos y cuotas de deudas comprometidas. Excluye entretenimiento, ropa y restaurantes."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Capacidad de Endeudamiento — Inversax" description="Calcula cuánto crédito puedes asumir de forma responsable según tus ingresos y deudas actuales. Conoce tu cuota disponible mensual.">
+<Layout title="Calculadora de Capacidad de Endeudamiento — ¿Cuánto Puedo Pedir? | Inversax" description="Calcula cuánta deuda mensual puedes asumir de forma responsable. Límite del 30-35% del ingreso neto. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánta deuda mensual puedo asumir de forma responsable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La regla general en Latinoamérica es que el total de cuotas de deuda no debe superar el 30-35% del ingreso neto mensual. Si ganas 3.000 USD netos, tu tope de deuda total es 900-1.050 USD/mes. Si ya tienes 300 USD en cuotas existentes, puedes asumir solo 600-750 USD adicionales de nueva deuda."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculan los bancos si puedo pagar un crédito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los bancos en Colombia, México, Chile y Perú usan la relación deuda-ingreso (DTI): total de cuotas mensuales / ingreso mensual neto. Un DTI del 30-35% suele ser el límite para aprobación. Con DTI superior al 40-50% la mayoría de entidades rechazan la solicitud o exigen garantías adicionales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué deudas debo incluir en el cálculo de capacidad de endeudamiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todas las obligaciones financieras mensuales: cuotas de préstamos personales, cuota mínima de tarjetas de crédito, cuota de vehículo, arrendamiento con opción de compra, y cuotas de crédito hipotecario. No incluyas gastos corrientes como arriendo puro, servicios o alimentación, ya que no son deuda financiera."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto puedo pedir prestado con un ingreso neto de 2.000 USD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con 2.000 USD netos, tu cuota máxima total de deudas es 600-700 USD/mes (30-35%). Si ya no tienes otras deudas, esa es tu cuota disponible. Usando la calculadora de préstamos, eso equivale aproximadamente a un crédito de 15.000-18.000 USD a 36 meses al 10% anual, dependiendo de la tasa."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -69,11 +129,34 @@ import Layout from '../../layouts/Layout.astro';
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Qué es la capacidad de endeudamiento?</h2>
-    <p>La <strong>capacidad de endeudamiento</strong> es el monto máximo de deuda mensual que una persona puede asumir sin comprometer su estabilidad financiera. Se calcula como un porcentaje del ingreso neto, generalmente entre el 25% y el 35%.</p>
-    <p>Si ya tienes deudas existentes (tarjeta de crédito, préstamos, cuotas de arriendo con opción de compra), estas se restan del tope para calcular cuánto espacio adicional tienes.</p>
+    <p>La <strong>capacidad de endeudamiento</strong> es el monto máximo de deuda mensual que una persona puede asumir sin comprometer su estabilidad financiera. Se calcula como un porcentaje del ingreso neto mensual, generalmente entre el 25% y el 35%. Si ya tienes deudas existentes, estas reducen el espacio disponible para nueva deuda.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Ingreso mensual neto:</strong> lo que recibes en tu cuenta después de impuestos y deducciones. No uses el bruto.</li>
+      <li><strong>Deudas mensuales actuales:</strong> la suma de todas las cuotas que ya pagas: préstamos personales, cuota mínima de tarjetas, crédito de vehículo, etc.</li>
+      <li><strong>Endeudamiento máximo (%):</strong> 30% es el estándar recomendado. 35% es el tope que la mayoría de bancos aceptan. Usar el 25% es más conservador y te deja margen de maniobra.</li>
+    </ul>
+
     <h2>Reglas por tipo de crédito</h2>
-    <p>Para hipotecas, muchos bancos aplican el límite del 30% del ingreso neto solo para esa cuota. Para créditos de consumo, tarjetas y vehículos combinados, el total no debería superar el 35-40%. Un nivel de endeudamiento superior al 50% se considera de alto riesgo y suele resultar en rechazo de solicitudes.</p>
-    <p>Una vez conoces tu capacidad, usa la <a href="/calculadoras/prestamo">calculadora de préstamos</a> para ver qué monto y plazo se ajustan a tu cuota disponible.</p>
+    <p>Para hipotecas, muchos bancos aplican el límite del 30% del ingreso neto solo para esa cuota. Para créditos de consumo, tarjetas y vehículos combinados, el total no debería superar el 35-40%. Un nivel de endeudamiento superior al 50% se considera de alto riesgo y suele resultar en rechazo o tasas penalizadoras.</p>
+
+    <h2>Ejemplo práctico: Colombia</h2>
+    <p>Con un salario neto de <strong>4.000.000 COP</strong>:</p>
+    <ul>
+      <li>Cuota máxima total al 30%: <strong>1.200.000 COP/mes</strong></li>
+      <li>Si ya pagas 500.000 COP de un crédito de vehículo, solo puedes asumir <strong>700.000 COP adicionales</strong> de nueva deuda.</li>
+      <li>Con 700.000 COP de cuota disponible al 24% E.A. a 36 meses, podrías solicitar aproximadamente <strong>18-20 millones de COP</strong> de crédito nuevo.</li>
+    </ul>
+
+    <h2>¿Qué pasa si supero el 35%?</h2>
+    <p>Un nivel de endeudamiento superior al 40-50% no solo dificulta la aprobación de créditos: también aumenta el estrés financiero y el riesgo ante cualquier reducción de ingresos. Si ya estás por encima del 35%, prioriza pagar las deudas de mayor tasa antes de adquirir nuevos créditos. Usa la <a href="/calculadoras/prestamo">calculadora de préstamo</a> para ver cuánto ahorras pagando anticipadamente.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿El arriendo va dentro de las deudas para este cálculo?</h3>
+    <p>No, el arriendo puro no es deuda financiera (no genera reporte crediticio negativo si lo pagas). Solo incluye cuotas de obligaciones financieras: préstamos, tarjetas, leasing, etc. Sin embargo, al planificar un nuevo crédito sí debes asegurarte de que el arriendo + las deudas + los gastos básicos no comprometan tu liquidez total.</p>
+    <h3>¿Puedo mejorar mi capacidad de endeudamiento?</h3>
+    <p>Sí. Hay dos caminos: aumentar el ingreso o reducir las deudas existentes. Cancelar primero las deudas de mayor costo (tarjetas de crédito) libera capacidad más rápido. Complementa con la <a href="/calculadoras/fondo-emergencia">calculadora de fondo de emergencia</a> para planificar finanzas más sólidas antes de adquirir nueva deuda.</p>
   </div>
 </Layout>
 

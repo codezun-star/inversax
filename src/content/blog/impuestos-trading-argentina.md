@@ -19,6 +19,15 @@ keywords:
   - "arca trading inversiones extranjeras"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿A qué tasa tributan las ganancias de trading en Argentina bajo el Impuesto a las Ganancias?"
+    respuesta: "Las ganancias de trading en moneda extranjera (forex, CFDs, acciones extranjeras) tributan al 15% como impuesto cedular bajo el artículo 98 de la Ley del Impuesto a las Ganancias. Es una alícuota fija, independiente de tu nivel total de ingresos — no progresiva. Esta tasa cedular del 15% aplica a rendimientos financieros en moneda extranjera y ganancias por venta de acciones extranjeras. El problema práctico es la base imponible expresada en pesos: dado la devaluación del peso, la ganancia en pesos puede ser muy alta aunque en dólares sea moderada."
+  - pregunta: "¿Cómo afecta el cepo cambiario a mis posibilidades de depositar en un broker internacional desde Argentina?"
+    respuesta: "El cepo prohíbe comprar dólares a través del mercado oficial (MULC) para invertir en el exterior sin autorización del BCRA. No prohíbe usar dólares que ya tengas fuera del sistema bancario formal (dólares en efectivo, ahorros ya dolarizados) ni usar criptomonedas como puente. El flujo más común: comprar USDT con pesos en un exchange P2P → transferir USDT al broker internacional. Algunos brokers también aceptan depósitos desde cuentas bancarias de argentinos en el exterior o a través de intermediarios. El broker más accesible para argentinos en el contexto del cepo es XM, disponible vía cripto."
+  - pregunta: "¿Las criptomonedas también pagan Bienes Personales en Argentina?"
+    respuesta: "Sí. ARCA (ex AFIP) considera las criptomonedas como bienes personales ubicados en el exterior. Al 31 de diciembre de cada año, el valor de mercado de tus criptomonedas se incluye en el cálculo de Bienes Personales. La valuación se hace al precio de mercado en USD al cierre del 31/12, convertido a pesos al tipo de cambio oficial del Banco Nación. Si el total de tu patrimonio (incluyendo bienes en Argentina y en el exterior) supera el mínimo no imponible vigente, pagas Bienes Personales sobre el excedente. Las alícuotas y el MNI cambian frecuentemente — verifica los valores del año fiscal en el sitio de ARCA."
+  - pregunta: "¿Qué tipo de cambio usa ARCA para calcular mis ganancias de trading en dólares?"
+    respuesta: "ARCA establece el uso del tipo de cambio del Banco de la Nación Argentina al cierre de cada período para convertir las ganancias en USD a pesos. Esto crea el problema del 'quebranto inflacionario': si el dólar oficial pasó de $350 a $1,050 durante el año y tus ganancias fueron $3,000 USD, tu ganancia expresada en pesos al precio de compra versus venta puede ser enorme por el efecto cambiario, aunque en poder adquisitivo real sea modesta. Este problema no tiene solución legal dentro del sistema vigente y es la principal razón por la que se recomienda asesoramiento contable especializado antes de declarar."
 ---
 
 <h2>Trading desde Argentina: complejo pero completamente legal</h2>
@@ -77,4 +86,18 @@ ARCA considera las criptomonedas como activos financieros. Las ganancias por su 
 <h2>Recomendación práctica</h2>
 <p>Dada la complejidad del sistema tributario argentino y sus cambios frecuentes, la asesoría de un contador con experiencia en activos del exterior y rentas de fuente extranjera es prácticamente obligatoria para cualquier trader con actividad significativa. El costo (típicamente $30,000-100,000 ARS por declaración) es marginal comparado con las consecuencias de una omisión.</p>
 <p>Lleva un registro detallado de cada operación con fecha, precio de compra en USD, precio de venta en USD, y el tipo de cambio oficial de cada fecha. Guarda los extractos mensuales de tu broker y consérvales por al menos 5 años.</p>
-<p>Ver los brokers disponibles para Argentina: <a href="/brokers/ar">comparador de brokers para Argentina</a>. Para entender las limitaciones del cepo en detalle: <a href="/blog/brokers-argentina-cepo-cambiario">brokers en Argentina con cepo cambiario</a>.</p>
+<p>Ver los brokers disponibles para Argentina: <a href="/brokers/ar">comparador de brokers para Argentina</a>. Para entender las limitaciones del cepo en detalle: <a href="/blog/brokers-argentina-cepo-cambiario">brokers en Argentina con cepo cambiario</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿A qué tasa tributan las ganancias de trading en Argentina bajo el Impuesto a las Ganancias?</h3>
+<p>Las ganancias de trading en moneda extranjera (forex, CFDs, acciones extranjeras) tributan al 15% como impuesto cedular bajo el artículo 98 de la Ley del Impuesto a las Ganancias. Es una alícuota fija, independiente de tu nivel total de ingresos — no progresiva. Esta tasa cedular del 15% aplica a rendimientos financieros en moneda extranjera y ganancias por venta de acciones extranjeras. El problema práctico es la base imponible expresada en pesos: dado la devaluación del peso, la ganancia en pesos puede ser muy alta aunque en dólares sea moderada.</p>
+
+<h3>¿Cómo afecta el cepo cambiario a mis posibilidades de depositar en un broker internacional desde Argentina?</h3>
+<p>El cepo prohíbe comprar dólares a través del mercado oficial (MULC) para invertir en el exterior sin autorización del BCRA. No prohíbe usar dólares que ya tengas fuera del sistema bancario formal (dólares en efectivo, ahorros ya dolarizados) ni usar criptomonedas como puente. El flujo más común: comprar USDT con pesos en un exchange P2P → transferir USDT al broker internacional. Algunos brokers también aceptan depósitos desde cuentas bancarias de argentinos en el exterior o a través de intermediarios. El broker más accesible para argentinos en el contexto del cepo es XM, disponible vía cripto.</p>
+
+<h3>¿Las criptomonedas también pagan Bienes Personales en Argentina?</h3>
+<p>Sí. ARCA (ex AFIP) considera las criptomonedas como bienes personales ubicados en el exterior. Al 31 de diciembre de cada año, el valor de mercado de tus criptomonedas se incluye en el cálculo de Bienes Personales. La valuación se hace al precio de mercado en USD al cierre del 31/12, convertido a pesos al tipo de cambio oficial del Banco Nación. Si el total de tu patrimonio (incluyendo bienes en Argentina y en el exterior) supera el mínimo no imponible vigente, pagas Bienes Personales sobre el excedente. Las alícuotas y el MNI cambian frecuentemente — verifica los valores del año fiscal en el sitio de ARCA.</p>
+
+<h3>¿Qué tipo de cambio usa ARCA para calcular mis ganancias de trading en dólares?</h3>
+<p>ARCA establece el uso del tipo de cambio del Banco de la Nación Argentina al cierre de cada período para convertir las ganancias en USD a pesos. Esto crea el problema del 'quebranto inflacionario': si el dólar oficial pasó de $350 a $1,050 durante el año y tus ganancias fueron $3,000 USD, tu ganancia expresada en pesos al precio de compra versus venta puede ser enorme por el efecto cambiario, aunque en poder adquisitivo real sea modesta. Este problema no tiene solución legal dentro del sistema vigente y es la principal razón por la que se recomienda asesoramiento contable especializado antes de declarar.</p></p>

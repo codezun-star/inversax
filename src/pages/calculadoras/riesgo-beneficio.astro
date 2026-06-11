@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Riesgo/Beneficio — Inversax" description="Calcula la relación riesgo/beneficio de tus operaciones en forex y bolsa. Descubre si tu operación tiene sentido estadístico.">
+<Layout title="Calculadora de Riesgo/Beneficio Forex — Stop Loss y Take Profit | Inversax" description="Calcula el ratio riesgo/beneficio de tus operaciones forex antes de ejecutarlas. Descubre el win rate mínimo para ser rentable y el beneficio potencial por operación. Herramienta gratuita para traders de LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el ratio riesgo/beneficio mínimo recomendado en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El mínimo recomendado es 1:2 — arriesgas 1 para ganar 2. Con este ratio, solo necesitas acertar el 34% de tus operaciones para ser rentable. Un ratio de 1:3 reduce aún más la presión: basta con ganar 1 de cada 4 operaciones (25% win rate). Evita operar con ratios inferiores a 1:1, donde arriesgas más de lo que puedes ganar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El ratio R/R cambia si opero pares más volátiles como GBP/JPY o pares exóticos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El ratio R/R en sí no cambia — es simplemente la relación entre la distancia al stop loss y la distancia al take profit. Sin embargo, en pares volátiles como GBP/JPY necesitas stops más amplios para evitar ser sacado por el ruido del mercado, lo que puede dificultar conseguir ratios 1:2 con take profits razonables. En general, es más difícil mantener buenos ratios en pares muy volátiles o con alta correlación con noticias."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo coloco correctamente el stop loss para maximizar el ratio R/R?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El stop loss debe ir en el nivel que invalida tu análisis técnico — por ejemplo, justo debajo de un soporte clave o por encima de una resistencia. Si el stop lo colocas arbitrariamente apretado solo para mejorar el ratio, el mercado te sacará con frecuencia antes de alcanzar el take profit. La regla es: primero determina dónde va el stop (por análisis), luego busca un take profit que dé ratio 1:2 o superior. Si no existe ese nivel, no operes esa configuración."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es posible ser rentable con un ratio R/R de 1:1?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, pero requiere un win rate superior al 50% de forma consistente, lo cual es difícil de mantener en el tiempo. Con 1:1 y 55% de win rate tienes expectativa positiva, pero cualquier racha perdedora te pone en negativo rápidamente. Los sistemas con ratio 1:1 son más vulnerables a comisiones y spreads, que reducen la expectativa real. En general, un ratio mayor al 1:1.5 da más margen de seguridad."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

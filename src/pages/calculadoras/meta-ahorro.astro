@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Meta de Ahorro — Inversax" description="Calcula cuánto debes ahorrar por mes para alcanzar tu meta financiera en el tiempo deseado. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Meta de Ahorro — ¿Cuánto Ahorrar al Mes? | Inversax" description="Calcula cuánto debes ahorrar mensualmente para alcanzar tu meta financiera. Con interés compuesto incluido. Para Colombia, México, Argentina y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo cuánto debo ahorrar al mes para alcanzar una meta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sin rendimiento: Ahorro mensual = (Meta − Capital inicial) / Meses. Con rendimiento: A = Faltante × r / ((1+r)^n − 1), donde r = tasa mensual. Ejemplo: para 10.000 USD en 36 meses al 5% anual necesitas ahorrar ~249 USD/mes. La calculadora hace el cálculo automáticamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afecta el ahorro inicial a la cuota mensual necesaria?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El capital inicial reduce el faltante que cubres con cuotas mensuales. Con rendimiento, ese capital también crece con interés compuesto durante el plazo, reduciendo aún más el ahorro mensual. Si ya tienes 5.000 USD y tu meta es 20.000 USD, la calculadora calcula cómo acumular solo los 15.000 USD restantes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué rendimiento anual usar para calcular una meta de ahorro en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para metas a corto plazo (1-2 años) usa 3-5%: CDTs, cuentas de ahorro de alto rendimiento o CETES. Para metas a largo plazo (+5 años) considera 6-8% con portafolios en ETFs. Si guardas en efectivo, ingresa 0% para un cálculo conservador y realista."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo tarda en alcanzarse una meta de 50.000 USD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ahorrando 500 USD/mes al 7% anual alcanzas 50.000 USD en ~6,5 años. Con 1.000 USD/mes al mismo rendimiento, ~3,5 años. Sin rendimiento (0%), 500 USD/mes tarda 100 meses exactos. El interés compuesto reduce el plazo significativamente si inviertes el ahorro mensual."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

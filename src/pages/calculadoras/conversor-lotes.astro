@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Conversor de Lotes Forex — Inversax" description="Convierte entre lotes estándar, mini lotes, micro lotes y nano lotes. Calcula también el tamaño en unidades de cada tipo de lote.">
+<Layout title="Conversor de Lotes Forex — Estándar, Mini, Micro y Nano Lotes | Inversax" description="Convierte entre lotes estándar, mini lotes, micro lotes y nano lotes en forex. Calcula el valor nocional total de tu posición. Herramienta gratuita para traders de Colombia, México, Chile, Perú y toda América Latina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuántas unidades tiene un lote estándar en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un lote estándar equivale a 100.000 unidades de la divisa base del par. Un mini lote son 10.000 unidades (0.1 lotes). Un micro lote son 1.000 unidades (0.01 lotes). Un nano lote son 100 unidades (0.001 lotes). La nomenclatura en la plataforma MT4/MT5 usa la notación decimal: 1.0 = lote estándar, 0.1 = mini, 0.01 = micro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el tamaño mínimo de lote que ofrecen los brokers en LATAM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mayoría de brokers disponibles en América Latina permiten operar desde 0.01 lotes (micro lotes = 1.000 unidades). Exness y XM permiten 0.01 en todas sus cuentas. Algunos brokers especializados en principiantes permiten 0.001 lotes (nano). IC Markets y Pepperstone también permiten 0.01 como mínimo en cuentas Raw y estándar. El mínimo de 0.01 es suficiente para hacer una gestión de riesgo correcta con cuentas desde 200-500 USD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afecta el tamaño de lote al valor nocional y al margen requerido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El valor nocional escala linealmente: 1 lote de EUR/USD a 1.0850 controla 108.500 USD. 0.1 lotes controla 10.850 USD. 0.01 lotes controla 1.085 USD. El margen requerido es el valor nocional dividido por el apalancamiento: con 1:100 y 1 lote de EUR/USD, el margen requerido es ~1.085 USD. Con 0.01 lotes y el mismo apalancamiento, el margen es solo ~10.85 USD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué los brokers usan lotes y no simplemente unidades?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Históricamente, el mercado interbancario de forex operaba en lotes estándar de 100.000 unidades por razones de eficiencia y liquidez. Con el tiempo, los brokers minoristas introdujeron mini y micro lotes para permitir que traders con menor capital accedieran al mercado. La nomenclatura en lotes se mantiene por convención y facilita la comparación entre plataformas y brokers."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -78,11 +120,25 @@ import Layout from '../../layouts/Layout.astro';
     <h2>Tipos de lotes en forex</h2>
     <p>En forex, un <strong>lote estándar</strong> equivale a 100.000 unidades de la divisa base. Es el tamaño que usan los traders institucionales y profesionales. Para traders con cuentas más pequeñas, los brokers ofrecen tamaños menores:</p>
     <ul>
-      <li><strong>Mini lote (0.1 lotes):</strong> 10.000 unidades. El pip vale ~1 USD.</li>
-      <li><strong>Micro lote (0.01 lotes):</strong> 1.000 unidades. El pip vale ~0.10 USD. Ideal para principiantes.</li>
-      <li><strong>Nano lote (0.001 lotes):</strong> 100 unidades. El pip vale ~0.01 USD. Solo algunos brokers lo ofrecen.</li>
+      <li><strong>Lote estándar (1.0 en MT4):</strong> 100.000 unidades. El pip vale 10 USD en EUR/USD.</li>
+      <li><strong>Mini lote (0.1):</strong> 10.000 unidades. El pip vale 1 USD. Típico para cuentas de 1.000-5.000 USD.</li>
+      <li><strong>Micro lote (0.01):</strong> 1.000 unidades. El pip vale 0.10 USD. Ideal para cuentas pequeñas y principiantes.</li>
+      <li><strong>Nano lote (0.001):</strong> 100 unidades. El pip vale 0.01 USD. Solo algunos brokers especializados lo ofrecen.</li>
     </ul>
-    <p>Brokers como <a href="/brokers/mx">Exness</a> y XM permiten operar desde 0.01 lotes (micro lotes), lo que reduce el capital mínimo necesario para hacer una gestión de riesgo correcta. Combina este conversor con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>.</p>
+
+    <h2>¿Qué lote es el adecuado para mi capital?</h2>
+    <p>El tamaño de lote no debe elegirse "por costumbre" sino calcularse según tu capital y el riesgo que quieres asumir. Referencia aproximada para arriesgar el 1% con un stop loss de 20 pips en EUR/USD:</p>
+    <ul>
+      <li><strong>200 USD en cuenta:</strong> 0.01 lotes (micro)</li>
+      <li><strong>500 USD en cuenta:</strong> 0.02-0.03 lotes</li>
+      <li><strong>1.000 USD en cuenta:</strong> 0.05 lotes</li>
+      <li><strong>5.000 USD en cuenta:</strong> 0.25 lotes</li>
+      <li><strong>10.000 USD en cuenta:</strong> 0.5 lotes</li>
+    </ul>
+    <p>Estos valores cambian si cambias el stop loss o el porcentaje de riesgo. Usa siempre la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a> para el cálculo exacto en cada operación.</p>
+
+    <h2>El mínimo accesible desde LATAM</h2>
+    <p>Brokers populares en Colombia, México, Chile y Perú como <a href="/brokers/co">Exness</a> y XM permiten operar desde 0.01 lotes (micro lotes). Esto significa que con un capital de 50-100 USD puedes hacer una gestión de riesgo mínimamente correcta: 1 USD de riesgo por operación con stop de 10 pips = 0.01 lotes. Con menos de 50 USD, el control de riesgo se vuelve muy limitado porque el micro lote ya representa un porcentaje alto del capital.</p>
   </div>
 </Layout>
 

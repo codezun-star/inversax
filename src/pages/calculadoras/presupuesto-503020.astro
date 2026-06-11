@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora Regla 50/30/20 — Inversax" description="Aplica la regla del presupuesto 50/30/20 a tu ingreso mensual. Divide automáticamente entre necesidades, deseos y ahorro.">
+<Layout title="Calculadora Regla 50/30/20 — Presupuesto Mensual | Inversax" description="Aplica la regla del presupuesto 50/30/20 a tu ingreso mensual. Necesidades, deseos y ahorro calculados al instante. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿En qué consiste la regla del presupuesto 50/30/20?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La regla 50/30/20 divide el ingreso neto mensual en tres categorías: 50% para necesidades (vivienda, alimentación, transporte, salud, servicios básicos), 30% para deseos (entretenimiento, restaurantes, viajes, suscripciones opcionales) y 20% para ahorro e inversión (fondo de emergencia, retiro, inversiones). Fue popularizada por Elizabeth Warren."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se puede aplicar la regla 50/30/20 en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, aunque en países con costo de vida alto o inflación elevada puede ser necesario ajustar los porcentajes. En ciudades como Bogotá, Ciudad de México o Santiago, el 50% para necesidades puede quedarse corto si el alquiler supera el 30% del ingreso. En ese caso, ajusta a 60/20/20 o prioriza reducir gastos fijos para respetar la proporción de ahorro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre necesidades y deseos en la regla 50/30/20?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una necesidad es algo sin lo cual no puedes funcionar: vivienda, servicios básicos, alimentación esencial, transporte al trabajo, medicamentos. Un deseo es algo que mejora tu vida pero no es indispensable: Netflix, salidas a restaurantes, ropa de moda, gym (si no es por salud), vacaciones. Internet de alta velocidad puede ser necesidad para algunos y deseo para otros."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si mi ingreso no alcanza para el 50% en necesidades?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si tus necesidades superan el 50% del ingreso neto, hay dos caminos: reducir gastos fijos (mudarte a vivienda más barata, renegociar servicios) o aumentar ingresos. El 20% de ahorro es prioritario; si hay que recortar, recorta primero los deseos. No sacrifiques el ahorro mínimo porque eso compromete tu seguridad financiera futura."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="PYG">PYG — Guaraní</option><option value="VES">VES — Bolívar</option><option value="CRC">CRC — Colón</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option><option value="HNL">HNL — Lempira</option><option value="NIO">NIO — Córdoba</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -58,10 +118,36 @@ import Layout from '../../layouts/Layout.astro';
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>La regla 50/30/20</h2>
     <p>Popularizada por la senadora Elizabeth Warren en su libro <em>All Your Worth</em>, la regla 50/30/20 divide el presupuesto mensual en tres categorías: <strong>50% para necesidades</strong> (gastos fijos e indispensables), <strong>30% para deseos</strong> (gastos variables no esenciales) y <strong>20% para ahorro e inversión</strong>.</p>
-    <p>Su fortaleza está en la simplicidad: no requiere seguir cada gasto al centavo. Cada mes revisas si los tres bloques están equilibrados y ajustas según sea necesario.</p>
+    <p>Su fortaleza está en la simplicidad: no requiere seguir cada gasto al centavo. Cada mes revisas si los tres bloques están equilibrados y ajustas según sea necesario. Es el punto de partida ideal si nunca has tenido un presupuesto formal.</p>
+
     <h2>Necesidades vs deseos</h2>
-    <p>La distinción entre necesidad y deseo puede ser subjetiva. Una <strong>necesidad</strong> es algo sin lo cual no puedes funcionar: vivienda, servicios básicos, alimentación esencial, transporte al trabajo, salud. Un <strong>deseo</strong> es algo que mejora tu vida pero no es indispensable: Netflix, salidas a restaurantes, ropa de moda, vacaciones.</p>
-    <p>Complementa este presupuesto con la <a href="/calculadoras/fondo-emergencia">calculadora de fondo de emergencia</a> para saber cuánto necesitas ahorrar antes de empezar a invertir.</p>
+    <p>La distinción entre necesidad y deseo puede ser subjetiva. Una <strong>necesidad</strong> es algo sin lo cual no puedes funcionar: vivienda, servicios básicos, alimentación esencial, transporte al trabajo, salud. Un <strong>deseo</strong> es algo que mejora tu vida pero no es indispensable: Netflix, salidas a restaurantes, ropa de moda, vacaciones. Internet de alta velocidad puede ser necesidad para un freelancer y deseo para alguien con datos móviles suficientes.</p>
+
+    <h2>Ejemplo práctico en pesos colombianos</h2>
+    <p>Con un ingreso neto de <strong>3.000.000 COP</strong> al mes:</p>
+    <ul>
+      <li><strong>50% = 1.500.000 COP</strong> para necesidades: arriendo 900.000, alimentación 400.000, transporte 100.000, servicios 100.000.</li>
+      <li><strong>30% = 900.000 COP</strong> para deseos: restaurantes 300.000, entretenimiento 200.000, ropa 200.000, gym 200.000.</li>
+      <li><strong>20% = 600.000 COP</strong> para ahorro: fondo de emergencia 300.000, pensión voluntaria 200.000, inversión 100.000.</li>
+    </ul>
+    <p>Si el arriendo cuesta más, ajusta recortando los deseos. Nunca sacrifiques el 20% de ahorro por debajo de un mínimo de emergencia.</p>
+
+    <h2>¿Qué hacer con el 20% de ahorro?</h2>
+    <p>Prioridad recomendada para el bloque de ahorro:</p>
+    <ul>
+      <li><strong>Primero:</strong> construir un fondo de emergencia de 3-6 meses de gastos. Úsalo con la <a href="/calculadoras/fondo-emergencia">calculadora de fondo de emergencia</a>.</li>
+      <li><strong>Segundo:</strong> cancelar deudas de alto costo (tarjetas de crédito con tasas altas).</li>
+      <li><strong>Tercero:</strong> invertir para el retiro a largo plazo (ETFs globales, AFP voluntaria, CETES, CDTs).</li>
+    </ul>
+
+    <h2>Adaptaciones regionales de la regla</h2>
+    <p>En ciudades con costo de vida alto como Ciudad de México, Bogotá o Santiago, el alquiler puede consumir más del 30% del ingreso solo. Si las necesidades superan el 50%, hay dos caminos: reducir gastos fijos (buscar vivienda más barata, refinanciar deudas) o aumentar ingresos. Algunos expertos sugieren ajustar a <strong>60/20/20</strong> para ciudades costosas, nunca reduciendo el ahorro por debajo del 10% del ingreso neto.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Debo usar el ingreso bruto o neto?</h3>
+    <p>Siempre el <strong>ingreso neto</strong>: lo que realmente recibes en tu cuenta después de impuestos y deducciones obligatorias. Si tienes ingresos variables (freelancer, comisiones), usa el promedio de los últimos 3 meses como referencia conservadora.</p>
+    <h3>¿El ahorro de emergencia y el de inversión van en el mismo 20%?</h3>
+    <p>Sí, todo el bloque del 20% es para construir patrimonio. La distribución dentro del 20% depende de tu etapa financiera: si no tienes fondo de emergencia, dedícale todo. Una vez construido, divide entre inversiones y retiro según tus metas. Usa la <a href="/calculadoras/meta-ahorro">calculadora de meta de ahorro</a> para saber en cuántos meses alcanzas cada objetivo.</p>
   </div>
 </Layout>
 

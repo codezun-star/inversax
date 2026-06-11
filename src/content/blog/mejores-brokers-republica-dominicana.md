@@ -12,6 +12,15 @@ keywords:
   - "plataforma inversion dominicana"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuánto impuesto pago sobre ganancias de trading en República Dominicana?"
+    respuesta: "Las ganancias de capital obtenidas en brokers extranjeros están sujetas al ISR bajo la normativa de la DGII. La tasa para personas físicas es progresiva: 0% hasta RD$416,220 anuales, 15% hasta RD$624,329, 20% hasta RD$867,123 y 25% por encima. Las rentas de fuente extranjera deben incluirse en la declaración anual. Consulta con un contador dominicano para el tratamiento específico de las ganancias de trading."
+  - pregunta: "¿Las tarjetas de Banreservas o Popular funcionan para depositar en brokers internacionales?"
+    respuesta: "Sí, las tarjetas Visa y Mastercard de Banreservas, Popular, BHD León y Banco Santa Cruz generalmente funcionan para depósitos en brokers internacionales. Sin embargo, algunos bancos dominicanos pueden bloquear transacciones hacia plataformas clasificadas como trading o gambling. Si la tarjeta es bloqueada, contacta a tu banco para autorizar el comercio específico, o usa una tarjeta prepago recargable."
+  - pregunta: "¿XM acepta cédula dominicana para verificación KYC?"
+    respuesta: "Sí. XM acepta la cédula de identidad y electoral dominicana junto con un comprobante de domicilio reciente (factura de electricidad, agua o estado de cuenta bancario). El proceso de verificación se completa en 1-3 días hábiles. Exness también acepta documentación dominicana sin problemas."
+  - pregunta: "¿Las remesas que recibo del exterior pueden usarse para fondear un broker?"
+    respuesta: "Sí, una vez que las remesas están en tu cuenta bancaria dominicana o en USD en efectivo, puedes usarlas para fondear un broker. Los dominicanos con cuentas USD locales pueden hacer transferencias SWIFT directas. Con efectivo en dólares, la vía más práctica es comprar USDT en un exchange P2P y depositar en el broker vía criptomonedas."
 ---
 
 <h2>República Dominicana: economía en crecimiento y mayor acceso financiero</h2>
@@ -28,3 +37,13 @@ publicado: true
 
 <h2>La perspectiva a largo plazo</h2>
 <p>Con un sistema bancario cada vez más digitalizado y el crecimiento sostenido de la clase media dominicana, el mercado de retail trading en RD tiene un potencial importante. Si estás comenzando, <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a> con su cuenta demo gratuita y sus recursos educativos en español es probablemente el mejor punto de entrada desde República Dominicana.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Cuánto impuesto pago sobre ganancias de trading en República Dominicana?</h3>
+<p>Las ganancias de capital obtenidas en brokers extranjeros están sujetas al ISR bajo la normativa de la DGII. La tasa para personas físicas es progresiva: 0% hasta RD$416,220 anuales, 15% hasta RD$624,329, 20% hasta RD$867,123 y 25% por encima. Las rentas de fuente extranjera deben incluirse en la declaración anual. Consulta con un contador dominicano para el tratamiento específico de las ganancias de trading.</p>
+<h3>¿Las tarjetas de Banreservas o Popular funcionan para depositar en brokers internacionales?</h3>
+<p>Sí, las tarjetas Visa y Mastercard de Banreservas, Popular, BHD León y Banco Santa Cruz generalmente funcionan para depósitos en brokers internacionales. Sin embargo, algunos bancos dominicanos pueden bloquear transacciones hacia plataformas clasificadas como trading o gambling. Si la tarjeta es bloqueada, contacta a tu banco para autorizar el comercio específico, o usa una tarjeta prepago recargable.</p>
+<h3>¿XM acepta cédula dominicana para verificación KYC?</h3>
+<p>Sí. XM acepta la cédula de identidad y electoral dominicana junto con un comprobante de domicilio reciente (factura de electricidad, agua o estado de cuenta bancario). El proceso de verificación se completa en 1-3 días hábiles. Exness también acepta documentación dominicana sin problemas.</p>
+<h3>¿Las remesas que recibo del exterior pueden usarse para fondear un broker?</h3>
+<p>Sí, una vez que las remesas están en tu cuenta bancaria dominicana o en USD en efectivo, puedes usarlas para fondear un broker. Los dominicanos con cuentas USD locales pueden hacer transferencias SWIFT directas. Con efectivo en dólares, la vía más práctica es comprar USDT en un exchange P2P y depositar en el broker vía criptomonedas.</p>

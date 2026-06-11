@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Spread — Inversax" description="Calcula el costo real del spread en tus operaciones forex. Compara spreads entre brokers y conoce cuánto pagas por abrir cada posición.">
+<Layout title="Calculadora de Costo del Spread Forex — Cuánto Pagas por Operar | Inversax" description="Calcula el costo real del spread en forex por operación, por mes y por año. Descubre cuánto te cobran IC Markets, Pepperstone, Exness y XM. Herramienta para traders de Colombia, México, Chile, Perú y toda América Latina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿El spread es el único costo de operar en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Además del spread hay tres costos adicionales: (1) comisión explícita en cuentas Raw/ECN, que suele ser 7 USD por lote estándar round trip; (2) swap overnight, el costo de mantener posiciones abiertas más de 24 horas; (3) slippage, la diferencia entre el precio pedido y el precio ejecutado, más común en horarios de baja liquidez o durante noticias importantes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo es más alto el spread en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El spread variable sube en momentos de baja liquidez: apertura de la sesión asiática (23:00-01:00 GMT), cierre de la sesión de Nueva York (22:00 GMT), fines de semana, y durante publicaciones de datos económicos importantes (NFP de EE.UU., decisiones de tasas del BCE o Fed). El spread más bajo ocurre durante el solapamiento de las sesiones de Londres y Nueva York (13:00-17:00 GMT), cuando el volumen es máximo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué spread es normal para EUR/USD en un broker de calidad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En condiciones normales de mercado, un broker competitivo ofrece 0.0-0.3 pips en cuentas Raw/ECN (más comisión fija) o 0.6-1.5 pips en cuentas estándar sin comisión. IC Markets y Pepperstone suelen estar en 0.0-0.1 pips Raw. Exness Standard en torno a 0.8-1.0 pips. XM Ultra Low en torno a 0.6 pips. Spreads superiores a 2 pips en EUR/USD en condiciones normales indican un broker caro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo conviene una cuenta Raw frente a una cuenta estándar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La cuenta Raw (spread ultra-bajo + comisión fija) conviene cuando operas 0.5 lotes o más por operación. Con lotes más pequeños, la comisión fija (normalmente 3.5 USD por lado = 7 USD round trip por lote estándar) pesa más que el ahorro en spread. Ejemplo: con 0.1 lotes en EUR/USD, Raw cuesta 0.7 USD de comisión vs 0.8-1.2 USD de spread estándar — la diferencia es mínima. A partir de 0.5-1 lote, Raw siempre es más barata."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

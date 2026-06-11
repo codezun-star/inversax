@@ -16,6 +16,15 @@ keywords:
   - "problemas retiro exness"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Por qué Exness pide verificar la tarjeta con la que deposité antes de dejarme retirar?"
+    respuesta: "Es una medida antilavado de dinero (AML) estándar en todos los brokers regulados. Exness aplica la regla de 'retorno al mismo origen': el dinero debe volver al mismo canal por donde entró, hasta el monto depositado por ese canal. Al mostrar que la tarjeta es tuya, verifican que el dinero se devuelve al mismo dueño. Sin esta verificación, el sistema no puede confirmar que no estás usando fondos de terceros. El proceso toma 1-2 días hábiles y solo se hace una vez por tarjeta."
+  - pregunta: "¿Puedo retirar mis ganancias en pesos colombianos o mexicanos directamente desde Exness?"
+    respuesta: "No directamente en moneda local a cuenta bancaria en todos los casos. Exness opera en USD y otras divisas, y el proceso de conversión ocurre en el banco receptor. Para Colombia, la transferencia llega en USD y el banco convierte a COP según su tasa de cambio (generalmente menos favorable que el mercado). Para México con SPEI, el proceso puede ser más directo. La mejor alternativa para evitar la conversión desfavorable: retirar a Skrill o Neteller en USD y desde allí convertir a la tasa de mercado."
+  - pregunta: "¿Cuánto tarda un retiro de Exness por transferencia bancaria a Colombia o México?"
+    respuesta: "La solicitud la procesa Exness en minutos (es automática las 24 horas). El tiempo de acreditación en el banco receptor es de 1-5 días hábiles para Colombia y 1-3 días hábiles para México, dependiendo del banco. Bancolombia y Davivienda suelen ser más lentos que bancos digitales. En México, BBVA y HSBC típicamente acreditan en 1-2 días hábiles. Si pasan 5 días hábiles sin que el dinero llegue, pide el comprobante SWIFT a Exness para reclamarlo en tu banco."
+  - pregunta: "¿Hay límite mínimo y máximo para retirar de Exness?"
+    respuesta: "Mínimo: $1 USD para métodos electrónicos (Skrill, Neteller, USDT), y $50-100 USD para transferencias bancarias según el país. Máximo: Exness no establece un límite máximo en la mayoría de métodos. Para retiros superiores a $10,000 USD, puede solicitarse documentación adicional de origen de fondos, que es un requisito regulatorio estándar en brokers con licencia FCA. Las criptomonedas tampoco tienen límite máximo definido, aunque montos muy grandes (>$50,000) suelen requerir verificación adicional."
 ---
 
 <h2>Exness procesa retiros automáticamente las 24 horas — incluso fines de semana</h2>
@@ -64,4 +73,18 @@ publicado: true
 
 <h2>Límites de retiro</h2>
 <p>Exness no tiene límite máximo de retiro en la mayoría de métodos. Los retiros superiores a ciertos montos (generalmente $10,000+) pueden requerir una verificación adicional de fuente de fondos. El mínimo varía por método: $1 USD para la mayoría de métodos electrónicos, $50-100 para transferencias bancarias.</p>
-<p>Si tienes dudas sobre los costos antes de retirar, usa nuestra <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a> para estimar cuánto recibirás después de las conversiones. Para comparar Exness con otros brokers disponibles en tu país: <a href="/brokers/co">ver comparador</a>.</p>
+<p>Si tienes dudas sobre los costos antes de retirar, usa nuestra <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a> para estimar cuánto recibirás después de las conversiones. Para comparar Exness con otros brokers disponibles en tu país: <a href="/brokers/co">ver comparador</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Por qué Exness pide verificar la tarjeta con la que deposité antes de dejarme retirar?</h3>
+<p>Es una medida antilavado de dinero (AML) estándar en todos los brokers regulados. Exness aplica la regla de 'retorno al mismo origen': el dinero debe volver al mismo canal por donde entró, hasta el monto depositado por ese canal. Al mostrar que la tarjeta es tuya, verifican que el dinero se devuelve al mismo dueño. Sin esta verificación, el sistema no puede confirmar que no estás usando fondos de terceros. El proceso toma 1-2 días hábiles y solo se hace una vez por tarjeta.</p>
+
+<h3>¿Puedo retirar mis ganancias en pesos colombianos o mexicanos directamente desde Exness?</h3>
+<p>No directamente en moneda local a cuenta bancaria en todos los casos. Exness opera en USD y otras divisas, y el proceso de conversión ocurre en el banco receptor. Para Colombia, la transferencia llega en USD y el banco convierte a COP según su tasa de cambio (generalmente menos favorable que el mercado). Para México con SPEI, el proceso puede ser más directo. La mejor alternativa para evitar la conversión desfavorable: retirar a Skrill o Neteller en USD y desde allí convertir a la tasa de mercado.</p>
+
+<h3>¿Cuánto tarda un retiro de Exness por transferencia bancaria a Colombia o México?</h3>
+<p>La solicitud la procesa Exness en minutos (es automática las 24 horas). El tiempo de acreditación en el banco receptor es de 1-5 días hábiles para Colombia y 1-3 días hábiles para México, dependiendo del banco. Bancolombia y Davivienda suelen ser más lentos que bancos digitales. En México, BBVA y HSBC típicamente acreditan en 1-2 días hábiles. Si pasan 5 días hábiles sin que el dinero llegue, pide el comprobante SWIFT a Exness para reclamarlo en tu banco.</p>
+
+<h3>¿Hay límite mínimo y máximo para retirar de Exness?</h3>
+<p>Mínimo: $1 USD para métodos electrónicos (Skrill, Neteller, USDT), y $50-100 USD para transferencias bancarias según el país. Máximo: Exness no establece un límite máximo en la mayoría de métodos. Para retiros superiores a $10,000 USD, puede solicitarse documentación adicional de origen de fondos, que es un requisito regulatorio estándar en brokers con licencia FCA. Las criptomonedas tampoco tienen límite máximo definido, aunque montos muy grandes (>$50,000) suelen requerir verificación adicional.</p></p>

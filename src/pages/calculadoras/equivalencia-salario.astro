@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Equivalencia de Salario entre Países — Inversax" description="Compara salarios entre dos países considerando tipo de cambio y costo de vida. Descubre si un salario en el extranjero equivale realmente a lo que ganas.">
+<Layout title="Calculadora de Equivalencia de Salario entre Países — LATAM vs USA | Inversax" description="Compara salarios entre dos países ajustando por tipo de cambio y costo de vida. Evalúa si una oferta laboral en USA, España o Canadá equivale realmente a lo que ganas en Colombia, México, Chile o Perú.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si un salario en Estados Unidos o España equivale a mi sueldo actual?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El proceso es: (1) convierte ambos salarios a USD usando el tipo de cambio actual; (2) ajusta el salario del país destino por el factor de costo de vida. Si el costo de vida en el destino es 60% más alto que en tu país (factor 160%), divide el salario destino en USD entre 1.6 para obtener el equivalente real. Si ese equivalente supera tu salario actual en USD, la oferta es financieramente mejor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué factor de costo de vida usar para Colombia, México o Perú vs USA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Referencia aproximada: vivir en Estados Unidos cuesta en promedio 2.5-3x más que en Colombia o Perú (factor 250-300%), 2-2.5x más que en México o Ecuador (factor 200-250%), y 2-2.5x más que en Chile (factor 200-250%). España es aproximadamente 1.3-1.5x más cara que Colombia (factor 130-150%). Estos son promedios; las ciudades grandes de LATAM como Bogotá, Ciudad de México o Santiago son más caras que el promedio nacional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Esta calculadora considera los impuestos sobre la renta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No directamente. La calculadora trabaja con el salario bruto que ingresas. Para un análisis completo, ingresa el salario neto después de impuestos en cada país. La carga impositiva varía significativamente: en USA, un salario de 60.000 USD puede tener una tasa efectiva del 20-25%; en Colombia un salario equivalente puede tributar al 10-15%. Esta diferencia puede cambiar el resultado del análisis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué otros factores debo considerar además del salario al evaluar una oferta en el extranjero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Además del salario ajustado por costo de vida: beneficios adicionales (seguro médico, pensión, vacaciones — que varían mucho entre países), posibilidad de ahorro mensual (un salario mayor en un país caro puede ahorrar menos que uno menor en un país barato), capacidad de enviar remesas a la familia, costo de visa y mudanza, y el impacto en tu carrera profesional a largo plazo. A veces un salario nominalmente menor en un país con sistema de salud público y alta calidad de vida supera económicamente a uno mayor con altos gastos fijos."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Tipo de Cambio Efectivo — Inversax" description="Calcula cuánto recibes realmente al cambiar divisas incluyendo el spread y las comisiones del banco o casa de cambio.">
+<Layout title="Calculadora de Tipo de Cambio Efectivo — Spread y Comisiones | Inversax" description="Calcula cuánto recibes realmente al cambiar divisas después del spread y las comisiones del banco o casa de cambio. Compara el costo de cambiar en Colombia, México, Chile, Perú y el resto de América Latina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre el tipo de cambio oficial, interbancario y efectivo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El tipo de cambio interbancario (o de referencia) es el precio al que los bancos se intercambian divisas entre sí — es el tipo 'real' del mercado. El tipo de cambio oficial es el que publica el banco central del país. El tipo de cambio efectivo es el que realmente recibes tú como cliente, después de que el banco o casa de cambio aplica su spread (margen) y comisiones. El efectivo siempre es peor para el cliente que el interbancario."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué spread aplica un banco latinoamericano típico al cambio de divisas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los bancos tradicionales en Colombia, México, Chile y Perú suelen aplicar spreads del 2-5% sobre el tipo de cambio de referencia. Las casas de cambio físicas suelen estar entre 1-3%. Las plataformas digitales y fintechs (Wise, Remitly, algunas apps bancarias) ofrecen spreads de 0.3-1.5%. Los aeropuertos y hoteles son los más caros: spreads del 8-15%. Siempre consulta cuántas unidades de la moneda destino recibirías por tu monto antes de confirmar cualquier cambio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si una casa de cambio me está dando un buen tipo de cambio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compara el tipo de cambio que te ofrecen con el tipo de referencia del día (disponible en Google, XE.com o el banco central de tu país). Calcula el porcentaje de diferencia: (tasa referencia - tasa ofrecida) / tasa referencia × 100. Si la diferencia supera el 3%, busca otra opción. Recuerda que los bancos compran divisas más baratas (tasa compra) y las venden más caras (tasa venta) — si tú vendes USD, te aplican la tasa compra, que es menor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo conviene cambiar divisas en un banco vs una fintech o casa de cambio online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para montos pequeños (menos de 200-500 USD), la diferencia en pesos o pesos locales puede ser menor que la molestia de buscar la mejor opción. A partir de 500 USD, la comparación vale: un spread del 2% vs 0.5% en 1.000 USD son 15 USD de diferencia. Para montos grandes (más de 5.000 USD), la diferencia puede ser significativa y justifica cotizar en 2-3 lugares. Las fintechs son generalmente las más baratas para montos medianos; los bancos son convenientes pero costosos."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -70,11 +112,22 @@ import Layout from '../../layouts/Layout.astro';
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>Tipo de cambio de referencia vs efectivo</h2>
-    <p>El <strong>tipo de cambio de referencia</strong> (o interbancario) es el precio "real" al que los bancos se intercambian divisas entre sí. El <strong>tipo de cambio efectivo</strong> es el que tú realmente recibes después de que el banco o casa de cambio aplica su margen (spread) y comisiones.</p>
-    <p>La diferencia puede ser significativa: un spread del 3% en un cambio de 5.000 USD equivale a 150 USD perdidos solo en el cambio. Comparar proveedores puede ahorrarte cientos de dólares al año si cambias divisas con frecuencia.</p>
+    <p>El <strong>tipo de cambio de referencia</strong> (o interbancario) es el precio "real" al que los bancos se intercambian divisas entre sí — es el que ves en Google o XE.com. El <strong>tipo de cambio efectivo</strong> es el que tú realmente recibes después de que el banco o casa de cambio aplica su margen (spread) y comisiones.</p>
+    <p>La diferencia puede ser significativa: un spread del 3% en un cambio de 5.000 USD equivale a 150 USD perdidos solo en la transacción. Si cambias divisas con frecuencia, comparar proveedores puede ahorrarte varios cientos de dólares al año.</p>
+
+    <h2>Ejemplo: cambiar 2.000 USD en Colombia</h2>
+    <p>Supón que el tipo de cambio de referencia es 4.200 COP/USD y quieres cambiar 2.000 USD:</p>
+    <ul>
+      <li><strong>Al tipo de referencia:</strong> recibirías 8.400.000 COP</li>
+      <li><strong>Banco tradicional (spread 3.5%):</strong> tipo efectivo ≈ 4.053 COP/USD → recibes 8.106.000 COP — diferencia: 294.000 COP (~70 USD menos)</li>
+      <li><strong>Casa de cambio online (spread 1%):</strong> tipo efectivo ≈ 4.158 COP/USD → recibes 8.316.000 COP — diferencia: 84.000 COP (~20 USD menos)</li>
+      <li><strong>Fintech tipo Wise (spread 0.5%):</strong> tipo efectivo ≈ 4.179 COP/USD → recibes 8.358.000 COP — diferencia: 42.000 COP (~10 USD menos)</li>
+    </ul>
+    <p>En este ejemplo, elegir la fintech sobre el banco ahorra 252.000 COP (~60 USD) en una sola transacción.</p>
+
     <h2>Cómo reducir el costo de cambio</h2>
-    <p>Las casas de cambio online suelen ofrecer tipos de cambio más cercanos al interbancario que los bancos tradicionales. Plataformas de envío de remesas también compiten por este mercado. Para montos grandes, siempre cotiza en al menos tres lugares diferentes antes de realizar el cambio.</p>
-    <p>Si eres inversor o trader, usa la <a href="/calculadoras/conversion-divisas">calculadora de conversión de divisas</a> para estimar el tipo de cambio de referencia.</p>
+    <p>Las casas de cambio online y las plataformas fintech (Wise, Remitly, algunas apps bancarias digitales) suelen ofrecer tipos de cambio mucho más cercanos al interbancario que los bancos tradicionales. Los aeropuertos y hoteles tienen los peores tipos — evítalos para montos significativos. Para montos grandes, cotiza en al menos tres lugares antes de realizar el cambio y compara siempre cuántas unidades de la moneda destino recibirías, no el porcentaje de comisión anunciado.</p>
+    <p>Si eres inversor o trader, usa la <a href="/calculadoras/conversion-divisas">calculadora de conversión de divisas</a> para el tipo de referencia y la <a href="/calculadoras/remesas">calculadora de remesas</a> para comparar costos de envío internacional.</p>
   </div>
 </Layout>
 

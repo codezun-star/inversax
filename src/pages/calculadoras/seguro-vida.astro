@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Seguro de Vida — Inversax" description="Estima el capital asegurado que necesita tu familia en caso de fallecimiento. Calcula la cobertura ideal según ingresos, deudas y dependientes.">
+<Layout title="Calculadora de Seguro de Vida — ¿Cuánta Cobertura Necesito? | Inversax" description="Calcula el capital de seguro de vida que necesita tu familia. Método DIME. Para Colombia, México, Chile y toda Latinoamérica. Ajustado por ingresos, deudas y dependientes. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto seguro de vida necesito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una regla rápida es 10-12 veces tu ingreso anual neto. El método DIME es más preciso: suma Deudas (hipoteca, préstamos), Ingreso (años de sustitución × ingreso anual), Hipoteca (si no la incluiste en deudas) y Educación de los hijos. El resultado es el capital mínimo que tu familia necesita para mantener su nivel de vida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por cuántos años debo cubrir la sustitución de ingresos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de tu situación familiar. Si tienes hijos pequeños, cubre hasta que sean independientes económicamente (15-20 años). Si tu pareja trabaja, quizás baste con 5-8 años para que se estabilice. Si tienes padres o hijos con necesidades especiales que dependen de ti, aumenta el período. El rango más común es 10-20 años."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tipo de seguro de vida elegir en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El seguro de término (o temporal) es el más económico y recomendado para la mayoría: pagas una prima fija durante X años a cambio de una suma asegurada. El seguro de vida universal o de ahorro mezcla cobertura con inversión pero tiene costos más altos. Para proteger a tu familia, el de término puro suele ser la opción de mayor valor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta un seguro de vida en Colombia, México o Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para una persona de 30-35 años sin enfermedades preexistentes, un seguro de término de 500.000 USD por 20 años puede costar entre 30-80 USD/mes dependiendo del país, aseguradora y perfil de salud. En Colombia, aseguradoras como Sura, Bolívar y Liberty ofrecen coberturas competitivas. En México: GNP, MetLife, AXA. Cotiza en al menos 3 compañías."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -76,10 +136,34 @@ import Layout from '../../layouts/Layout.astro';
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Cuánto seguro de vida necesito?</h2>
-    <p>El capital de un seguro de vida debe ser suficiente para que tu familia mantenga su nivel de vida durante el período en que dependen de tus ingresos. Esta calculadora usa el <strong>método DIME</strong> (Deudas, Ingreso, Hipoteca, Educación) simplificado: suma la cancelación de deudas, la sustitución de ingresos por los años necesarios, y un fondo de emergencia.</p>
-    <h2>Cuánto tiempo de ingresos cubrir</h2>
-    <p>Si tienes hijos pequeños, necesitarás cubrir hasta que sean independientes económicamente. Si tu pareja trabaja, quizás baste con 5-8 años. Si tienes padres dependientes o hijos con necesidades especiales, aumenta el período. El rango más común es de 10 a 20 años.</p>
-    <p>Revisa esta estimación cada 3-5 años o cuando cambie tu situación familiar o económica: nacimiento de hijos, compra de vivienda, cambio de empleo.</p>
+    <p>El capital de un seguro de vida debe ser suficiente para que tu familia mantenga su nivel de vida durante el período en que dependen de tus ingresos. Esta calculadora usa el <strong>método DIME</strong> simplificado: suma la cancelación de deudas, la sustitución de ingresos por los años que sean necesarios, y un fondo de emergencia para gastos inmediatos.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Ingreso anual neto:</strong> lo que realmente llevas a casa después de impuestos. Es la base para calcular cuánto necesita tu familia para reemplazar tus ingresos.</li>
+      <li><strong>Años de apoyo a dependientes:</strong> cuántos años necesitará tu familia tus ingresos. Si tienes hijos pequeños, considera hasta que sean independientes (15-20 años). Si tu pareja trabaja, puede ser menos.</li>
+      <li><strong>Deudas totales:</strong> hipoteca pendiente, préstamos personales, crédito de vehículo. El seguro debería cubrir estas deudas para no dejarlas como carga.</li>
+      <li><strong>Fondo de emergencia:</strong> meses de gastos para que tu familia tenga liquidez inmediata sin necesidad de liquidar activos.</li>
+    </ul>
+
+    <h2>Ejemplo práctico: Chile</h2>
+    <p>Persona de 38 años, ingreso anual neto <strong>18.000 USD</strong>, dos hijos menores, hipoteca pendiente de <strong>80.000 USD</strong>, 15 años de apoyo necesario, fondo de 12 meses de gastos (2.000 USD/mes):</p>
+    <ul>
+      <li>Sustitución de ingresos: 18.000 × 15 = <strong>270.000 USD</strong></li>
+      <li>Deudas: <strong>80.000 USD</strong></li>
+      <li>Fondo de emergencia: 2.000 × 12 = <strong>24.000 USD</strong></li>
+      <li><strong>Capital asegurado recomendado: 374.000 USD</strong></li>
+    </ul>
+    <p>La regla rápida de 10× el ingreso anual daría 180.000 USD — claramente insuficiente con hipoteca e hijos. El método DIME es siempre más preciso.</p>
+
+    <h2>¿Cuándo revisar el seguro de vida?</h2>
+    <p>Revisa el capital asegurado cada 3-5 años o ante cambios importantes: nacimiento de hijos, compra de vivienda, aumento de ingresos, cancelación de deudas o cuando los hijos lleguen a la independencia económica. A medida que las deudas bajan y los hijos crecen, la cobertura necesaria disminuye.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Seguro de vida temporal o de vida entera?</h3>
+    <p>El seguro de término (temporal) cubre un período fijo a menor costo. Es ideal para las décadas de mayor dependencia (cuando tienes hijos y deudas). El de vida entera tiene un componente de ahorro/inversión pero costos más altos. Para la mayoría, el de término es la opción de mayor valor: cubre el riesgo real y el excedente lo inviertes tú directamente.</p>
+    <h3>¿Necesito seguro de vida si no tengo dependientes?</h3>
+    <p>Si nadie depende económicamente de ti, el seguro de vida no es prioritario. Enfócate en un fondo de emergencia y en seguro de invalidez o incapacidad laboral, que protege tus ingresos si te incapacitas pero sigues vivo. El seguro de vida se vuelve relevante en el momento en que tienes pareja, hijos o padres que dependen de tus ingresos.</p>
   </div>
 </Layout>
 

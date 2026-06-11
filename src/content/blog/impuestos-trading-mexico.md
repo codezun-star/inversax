@@ -17,6 +17,15 @@ keywords:
   - "retencion isr acciones extranjeras mexico"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué tasa de ISR pago por ganancias de trading de forex desde México?"
+    respuesta: "Las ganancias de forex y CFDs no caen en la categoría de enajenación de acciones (10% fijo). El SAT las clasifica como 'otros ingresos' sujetos a las tasas progresivas del ISR: desde el 1.92% hasta el 35% según tu nivel de ingresos totales anuales. Si tu ingreso anual total (salario + trading) no supera los $316,000 MXN, la tasa marginal es del 21.36%. Por encima de $750,000 MXN anuales, aplica el 32-35%. Las ganancias de acciones y ETFs vendidos a través de bolsas reconocidas tienen trato especial al 10% — consulta con un contador si tu broker aplica."
+  - pregunta: "¿El SAT puede saber que tengo cuenta en un broker internacional desde México?"
+    respuesta: "Sí. México está adherido al CRS (Common Reporting Standard) de la OCDE desde 2017. Los brokers regulados en países miembros — incluyendo Chipre (XM), Reino Unido (FCA), Australia (ASIC) — están obligados a reportar información de cuentas de residentes mexicanos a sus autoridades locales, quienes la comparten automáticamente con el SAT. Además, México tiene más de 60 convenios de doble imposición que facilitan el intercambio de información. El riesgo de omitir ingresos de brokers extranjeros frente al SAT es real."
+  - pregunta: "¿Puedo deducir mis pérdidas de trading al declarar ante el SAT?"
+    respuesta: "Sí, con condiciones. Las pérdidas en enajenación de acciones pueden compensarse contra ganancias del mismo tipo en el mismo ejercicio fiscal. Las pérdidas en forex u 'otros ingresos' también pueden compensarse contra ganancias de la misma categoría. Las pérdidas no deducidas en un ejercicio pueden aplicarse en los 10 ejercicios siguientes. Para documentar pérdidas deducibles necesitas el historial de operaciones de tu broker con los resultados negativos claramente identificados. Un contador puede estructurar correctamente esta compensación en tu declaración."
+  - pregunta: "¿Debo presentar pagos provisionales al SAT si hago trading regularmente?"
+    respuesta: "Posiblemente. Si tus ganancias de trading son recurrentes y significativas, el SAT puede requerir pagos provisionales mensuales o bimestrales de ISR, similar a una persona física con actividad empresarial. El umbral no está definido con precisión para traders individuales. En la práctica, si tus ganancias de trading anuales superan $200,000-300,000 MXN y no tienes retención de un empleador que cubra tu obligación, considera consultar con un contador sobre si conviene registrarse con actividad empresarial para estructurar mejor los pagos provisionales."
 ---
 
 <h2>Trading desde México es legal — el SAT quiere saber tus ganancias</h2>
@@ -58,4 +67,18 @@ El SAT emitió criterios específicos para criptomonedas: se consideran activos 
 
 <h2>Consejo práctico</h2>
 <p>Guarda los estados de cuenta mensuales de tu broker en una carpeta organizada por año. Al hacer la declaración anual, tendrás todo listo y será mucho más sencillo calcular la ganancia neta. Si operas forex o CFDs regularmente, considera registrarte como persona física con actividad empresarial — puede abrirte deducciones adicionales. Consulta con un contador que conozca el tratamiento fiscal de activos internacionales.</p>
-<p>Para comparar brokers disponibles en México con sus condiciones de depósito y retiro: <a href="/brokers/mx">comparador de brokers para México</a>.</p>
+<p>Para comparar brokers disponibles en México con sus condiciones de depósito y retiro: <a href="/brokers/mx">comparador de brokers para México</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Qué tasa de ISR pago por ganancias de trading de forex desde México?</h3>
+<p>Las ganancias de forex y CFDs no caen en la categoría de enajenación de acciones (10% fijo). El SAT las clasifica como 'otros ingresos' sujetos a las tasas progresivas del ISR: desde el 1.92% hasta el 35% según tu nivel de ingresos totales anuales. Si tu ingreso anual total (salario + trading) no supera los $316,000 MXN, la tasa marginal es del 21.36%. Por encima de $750,000 MXN anuales, aplica el 32-35%. Las ganancias de acciones y ETFs vendidos a través de bolsas reconocidas tienen trato especial al 10% — consulta con un contador si tu broker aplica.</p>
+
+<h3>¿El SAT puede saber que tengo cuenta en un broker internacional desde México?</h3>
+<p>Sí. México está adherido al CRS (Common Reporting Standard) de la OCDE desde 2017. Los brokers regulados en países miembros — incluyendo Chipre (XM), Reino Unido (FCA), Australia (ASIC) — están obligados a reportar información de cuentas de residentes mexicanos a sus autoridades locales, quienes la comparten automáticamente con el SAT. Además, México tiene más de 60 convenios de doble imposición que facilitan el intercambio de información. El riesgo de omitir ingresos de brokers extranjeros frente al SAT es real.</p>
+
+<h3>¿Puedo deducir mis pérdidas de trading al declarar ante el SAT?</h3>
+<p>Sí, con condiciones. Las pérdidas en enajenación de acciones pueden compensarse contra ganancias del mismo tipo en el mismo ejercicio fiscal. Las pérdidas en forex u 'otros ingresos' también pueden compensarse contra ganancias de la misma categoría. Las pérdidas no deducidas en un ejercicio pueden aplicarse en los 10 ejercicios siguientes. Para documentar pérdidas deducibles necesitas el historial de operaciones de tu broker con los resultados negativos claramente identificados. Un contador puede estructurar correctamente esta compensación en tu declaración.</p>
+
+<h3>¿Debo presentar pagos provisionales al SAT si hago trading regularmente?</h3>
+<p>Posiblemente. Si tus ganancias de trading son recurrentes y significativas, el SAT puede requerir pagos provisionales mensuales o bimestrales de ISR, similar a una persona física con actividad empresarial. El umbral no está definido con precisión para traders individuales. En la práctica, si tus ganancias de trading anuales superan $200,000-300,000 MXN y no tienes retención de un empleador que cubra tu obligación, considera consultar con un contador sobre si conviene registrarse con actividad empresarial para estructurar mejor los pagos provisionales.</p></p>

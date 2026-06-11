@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Margen de Seguridad — Inversax" description="Calcula el margen de seguridad de una inversión en value investing. Compara el precio de mercado con el valor intrínseco estimado para decidir si vale la pena comprar.">
+<Layout title="Calculadora de Margen de Seguridad — Value Investing | Inversax" description="Calculadora de margen de seguridad para value investing: compara precio de mercado vs valor intrínseco. Señal de compra según Benjamin Graham. Para inversores latinoamericanos.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el margen de seguridad en el value investing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El margen de seguridad es la diferencia porcentual entre el valor intrínseco estimado de un activo y su precio de mercado. Fórmula: Margen = (Valor intrínseco − Precio mercado) / Valor intrínseco × 100. Si una empresa vale 100 pero cotiza a 70, el margen de seguridad es 30%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué margen de seguridad recomienda Benjamin Graham?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Benjamin Graham recomendaba un margen mínimo del 33% para protegerse de errores en la valoración. Warren Buffett aplica márgenes del 25-50% según la certeza de su estimación. Para empresas complejas o cíclicas, el margen debería ser mayor que para negocios simples y predecibles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calcular el valor intrínseco de una acción?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El valor intrínseco puede estimarse con diferentes métodos: múltiplos de beneficios (P/E), descuento de flujos de caja (DCF), valor en libros ajustado, o comparables sectoriales. Ningún método es perfecto, por eso existe el margen de seguridad: te protege cuando tu estimación está algo equivocada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El margen de seguridad aplica solo a acciones o también a otros activos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aplica a cualquier activo con un valor intrínseco estimable: acciones, bonos, bienes raíces, negocios privados. En general, cualquier activo que compres por debajo de su valor real tiene un margen de seguridad integrado. El concepto es universal en las finanzas."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -74,6 +134,26 @@ import Layout from '../../layouts/Layout.astro';
     <h2>Cómo calcular el valor intrínseco</h2>
     <p>El valor intrínseco puede estimarse con diferentes métodos: múltiplos de beneficios (P/E), descuento de flujos de caja (DCF), valor en libros ajustado, o comparables sectoriales. Ningún método es perfecto, por eso el margen de seguridad existe: te protege cuando tu estimación está algo equivocada.</p>
     <p>Cuanto más incierta sea tu valoración, mayor debería ser el margen que exiges. Una empresa simple y predecible puede comprarse con un 25% de margen; una empresa compleja o cíclica debería requerir el 40-50%.</p>
+
+    <h2>Ejemplo práctico de margen de seguridad</h2>
+    <p>Analizas una empresa peruana. Calculas su valor intrínseco en <strong>25 USD por acción</strong> usando un modelo de flujos descontados. El precio de mercado actual es <strong>16,50 USD</strong>. Margen de seguridad = (25 − 16,50) / 25 = <strong>34%</strong>. Como supera tu umbral mínimo del 30%, es una oportunidad de compra según los criterios de Graham.</p>
+    <p>Si el precio sube a 20 USD, el margen cae al 20%: insuficiente para comprar más, pero posiblemente para mantener la posición existente. Si el precio llega a 25 USD o más, el margen es cero: es momento de evaluar venta.</p>
+
+    <h2>Métodos para estimar el valor intrínseco</h2>
+    <ul>
+      <li><strong>Múltiplo P/E:</strong> Compara el P/E actual con el histórico y el del sector. Si la empresa históricamente cotiza a 15× beneficios y hoy cotiza a 10×, hay un descuento potencial.</li>
+      <li><strong>Descuento de flujos de caja (DCF):</strong> Proyecta los flujos de caja libres futuros y los descuenta a valor presente. Requiere más trabajo pero es el más riguroso.</li>
+      <li><strong>Valor en libros:</strong> Para empresas financieras, el ratio Precio/Valor en libros (P/B) es una referencia clásica. P/B por debajo de 1 puede indicar descuento.</li>
+      <li><strong>Comparables sectoriales:</strong> Compara los múltiplos de la empresa con los de competidores similares en la misma industria y región.</li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿El margen de seguridad aplica solo a acciones de bolsa?</h3>
+    <p>No. Aplica a cualquier activo con un valor intrínseco estimable: bienes raíces (comprar por debajo del valor de mercado comparable), negocios privados (adquirir a un múltiplo bajo respecto a los flujos), bonos (comprar con descuento al valor facial). El principio es universal.</p>
+    <h3>¿Cómo accedo a acciones internacionales desde Colombia, México o Perú para aplicar value investing?</h3>
+    <p>Brokers internacionales como <a href="/brokers/co">XTB, Exness o IC Markets</a> permiten comprar acciones de EE.UU., Europa y mercados emergentes directamente desde Latinoamérica. Necesitas una cuenta en dólares y completar el proceso KYC del broker.</p>
+    <h3>¿Qué margen de seguridad debo exigir a empresas latinoamericanas?</h3>
+    <p>Para empresas en economías emergentes o volátiles (como las latinoamericanas) se recomienda un margen más alto, de al menos 40-50%, debido a mayor incertidumbre regulatoria, riesgo cambiario y menor transparencia informativa que los mercados desarrollados.</p>
   </div>
 </Layout>
 

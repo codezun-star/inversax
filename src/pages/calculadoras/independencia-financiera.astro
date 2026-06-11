@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora FIRE — Independencia Financiera — Inversax" description="Calcula cuánto necesitas para lograr la independencia financiera (FIRE) y vivir de tus inversiones. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora FIRE — Independencia Financiera y Retiro Temprano | Inversax" description="Calcula tu número FIRE y cuántos años faltan para la independencia financiera. Regla del 4% incluida. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el número FIRE y cómo se calcula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El número FIRE es el capital total que necesitas invertido para vivir indefinidamente de las rentas sin agotar el capital. Se calcula como: Número FIRE = Gastos anuales / Tasa de retiro segura. Con la Regla del 4%: Número FIRE = Gastos anuales / 0.04. Si gastas 2.000 USD/mes (24.000 al año), tu número FIRE es 600.000 USD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la Regla del 4% y si aplica en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Regla del 4% surge del Estudio Trinity (1998): retirar el 4% anual de una cartera diversificada tiene alta probabilidad de que el dinero dure 30 años. En Latinoamérica, con inflaciones locales más altas, se recomienda ser conservador y usar 3-3.5% si el patrimonio está en moneda local, o 4% si está en USD con ETFs globales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo tarda en alcanzarse la independencia financiera?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de tu tasa de ahorro. Si ahorras el 50% de tu ingreso, puedes alcanzar FIRE en aproximadamente 17 años. Si ahorras el 25%, tardas ~32 años. Si ahorras el 75%, solo ~7 años. El porcentaje de ahorro sobre el ingreso es el factor más determinante, más que el rendimiento de las inversiones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuáles son las variantes del movimiento FIRE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fat FIRE: independencia con gastos altos (+4.000 USD/mes), requiere mayor capital. Lean FIRE: retiro con gastos mínimos y frugalidad extrema. Barista FIRE: semi-retiro, trabajas parcialmente en algo que te gusta. Coast FIRE: has acumulado suficiente para que el interés compuesto llegue solo al número FIRE sin más aportes."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

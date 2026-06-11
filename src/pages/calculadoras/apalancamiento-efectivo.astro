@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Apalancamiento Efectivo Forex — Inversax" description="Calcula el apalancamiento efectivo real de tus posiciones abiertas en forex. Diferencia entre el apalancamiento máximo del broker y el que realmente estás usando.">
+<Layout title="Calculadora de Apalancamiento Efectivo Forex — El que Realmente Usas | Inversax" description="Calcula el apalancamiento efectivo real de tus posiciones abiertas en forex. Descubre la diferencia entre el apalancamiento máximo del broker y el que realmente estás usando. Para traders de Colombia, México, Chile, Perú y toda LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre apalancamiento máximo y apalancamiento efectivo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El apalancamiento máximo es lo que el broker te permite usar (ej. 1:500 en Exness). El apalancamiento efectivo es el que realmente estás usando según tus posiciones abiertas: Apalancamiento efectivo = Valor nocional total / Equity. Si tienes 5.000 USD en equity y posiciones abiertas por 50.000 USD en valor nocional, tu apalancamiento efectivo es 1:10, aunque el broker te permita 1:500."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué apalancamiento efectivo usan los traders profesionales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traders profesionales con sistemas probados raramente superan el 1:10-1:20 de apalancamiento efectivo, aunque el broker ofrezca 1:500 o más. Hedge funds institucionales suelen operar entre 1:3 y 1:10. El apalancamiento máximo del broker es un techo de seguridad, no una recomendación de uso. Usar consistentemente más del 1:20 efectivo es una de las causas más comunes de cuentas fundidas en LATAM."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo reduzco mi apalancamiento efectivo sin cerrar posiciones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La forma más directa es depositar más capital en la cuenta (aumenta el equity sin cambiar el nocional). La alternativa es cerrar parcialmente posiciones para reducir el nocional. Si tienes 0.5 lotes abiertos y quieres reducir el apalancamiento a la mitad, cierra 0.25 lotes. También puedes reducir el tamaño de futuros trades hasta que el apalancamiento efectivo agregado baje al nivel deseado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Desde qué nivel de apalancamiento efectivo existe riesgo de margin call?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El riesgo de margin call no depende solo del apalancamiento efectivo sino también de cuánto puede moverse el mercado contra ti. Con 1:10 efectivo, una caída del 10% del mercado eliminaría el 100% de tu equity (sin considerar stops). Con stops ajustados, el riesgo real es mucho menor. En general: 1:1-1:5 = muy seguro; 1:5-1:20 = moderado con stops; 1:20-1:50 = requiere stops muy ajustados; más de 1:50 = riesgo de margin call ante movimientos normales del mercado."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -85,11 +127,21 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
-    <h2>Apalancamiento máximo vs efectivo</h2>
-    <p>El <strong>apalancamiento máximo</strong> es lo que el broker te ofrece (1:500 significa que por cada 1 USD en cuenta puedes controlar 500 USD). El <strong>apalancamiento efectivo</strong> es el que realmente estás usando según tus posiciones abiertas en este momento.</p>
-    <p>Un broker con 1:500 no significa que debas usar 1:500. Usar todo el apalancamiento disponible equivale a apostar todo el capital con un riesgo de quiebra extremo. El apalancamiento efectivo recomendado para traders con sistema probado es entre 5:1 y 20:1.</p>
-    <h2>Cómo usarlo</h2>
-    <p>Combina este dato con la <a href="/calculadoras/margen-libre">calculadora de margen libre</a> para saber tu exposición total. Si tu apalancamiento efectivo supera 1:50, estás tomando un riesgo significativo y deberías reducir el tamaño de tus posiciones o cerrar algunas. Usa la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a> para planificar correctamente antes de abrir cualquier trade.</p>
+    <h2>Apalancamiento máximo vs efectivo: la distinción clave</h2>
+    <p>El <strong>apalancamiento máximo</strong> es lo que el broker te permite usar (1:500 en Exness, 1:1000 en XM). El <strong>apalancamiento efectivo</strong> es el que realmente estás usando según tus posiciones abiertas: Valor nocional total / Equity. Son dos números completamente distintos y el segundo es el que importa para gestionar el riesgo real.</p>
+    <p>Un broker con 1:500 no significa que debas usar 1:500. Usar todo el apalancamiento disponible equivale a apostar el 100% del capital con un margen de error casi nulo — un movimiento del 0.2% en tu contra liquida la cuenta.</p>
+
+    <h2>Escala de riesgo por apalancamiento efectivo</h2>
+    <ul>
+      <li><strong>1:1 − 1:5 (verde):</strong> muy conservador. Un movimiento del 20% en tu contra para perder todo el capital. Ideal para inversores o traders muy principiantes.</li>
+      <li><strong>1:5 − 1:20 (azul):</strong> moderado. Estándar entre traders con sistema probado. Un movimiento del 5-20% puede ser catastrófico sin stops.</li>
+      <li><strong>1:20 − 1:50 (naranja):</strong> agresivo. Requiere stops muy ajustados y monitoreo constante. Riesgo elevado de margin call en días volátiles.</li>
+      <li><strong>Más de 1:50 (rojo):</strong> muy agresivo. Movimientos normales del mercado pueden liquidar posiciones. Solo apto para scalping con stops de 2-5 pips máximo.</li>
+    </ul>
+
+    <h2>El error más común en traders de LATAM</h2>
+    <p>La mayoría de cuentas fundidas en traders principiantes de Colombia, México, Chile y Perú se explican por este error: abrir múltiples posiciones sin calcular el apalancamiento efectivo agregado. Pueden tener 3 posiciones de 0.5 lotes cada una pensando que "cada una es pequeña", sin darse cuenta de que el nocional total es 1.5 lotes sobre un equity de 1.000 USD — apalancamiento efectivo de 1:162.</p>
+    <p>Revisa tu apalancamiento efectivo total antes de abrir cada nueva posición. Si supera 1:20, reduce o no abras más. Combina este dato con la <a href="/calculadoras/margen-libre">calculadora de margen libre</a> y la de <a href="/calculadoras/tamano-posicion">tamaño de posición</a> para operar con control real sobre tu riesgo.</p>
   </div>
 </Layout>
 

@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Inflación — Inversax" description="Calcula cómo la inflación erosiona el poder adquisitivo de tu dinero. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Inflación — Poder Adquisitivo en Latinoamérica | Inversax" description="Calculadora de inflación para Colombia, México, Argentina, Chile y toda Latinoamérica. Descubre cuánto pierde tu dinero en poder adquisitivo cada año. Soporta 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo el efecto de la inflación en mis ahorros?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usa la fórmula: Poder adquisitivo futuro = Monto actual / (1 + tasa de inflación)^años. Por ejemplo, 10.000 USD con inflación del 5% anual durante 10 años solo tendrá el poder adquisitivo de 6.139 USD de hoy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la inflación actual en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las tasas varían mucho: Argentina supera el 100% anual en regímenes de alta inflación; Venezuela ha vivido hiperinflación. Colombia y México rondan el 5-7% anual; Chile 3-5%; Perú 3-4%. Ecuador y El Salvador (dolarizados) tienen 2-4% importado desde EE.UU."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo proteger los ahorros de la inflación en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las principales estrategias son: invertir en acciones y ETFs que históricamente superan la inflación, diversificar en dólares (USD) si tu moneda local se deprecia rápidamente, y usar bonos indexados a la inflación cuando estén disponibles en tu país."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa debo ingresar en la calculadora de inflación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usa la inflación oficial de tu banco central, o una tasa conservadora si sospechas que la real es mayor. Para Colombia usa 5-7%; México 4-5%; Chile 3-5%; Argentina puede superar el 100% en años de alta inflación."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Inflación en Divisas — Inversax" description="Calcula cómo la inflación erosiona el poder adquisitivo de tu moneda local. Proyecta cuánto valdrá realmente tu dinero en el futuro.">
+<Layout title="Calculadora de Inflación en Divisas — Poder Adquisitivo LATAM | Inversax" description="Calcula cómo la inflación erosiona el poder adquisitivo de tus ahorros en moneda local. Proyecta cuánto valdrá realmente tu dinero en Colombia, México, Chile, Perú y toda América Latina en 5, 10 o 20 años.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la inflación histórica promedio en Colombia, México, Chile y Perú?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Referencia histórica aproximada: Colombia 5-9% anual (últimos 10 años), México 4-8% anual, Chile 3-7% anual, Perú 3-6% anual, Uruguay 7-9%, Bolivia 2-5%, Paraguay 3-5%. Argentina y Venezuela son casos extremos con inflación de dos o tres dígitos. Usa siempre la inflación reciente del DANE (Colombia), INEGI (México), INE (Chile) o INEI (Perú) como referencia para tus proyecciones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afecta la inflación del 6% anual a mis ahorros en 10 años?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con inflación del 6% anual, el poder adquisitivo de tus ahorros cae un 44% en 10 años: 10.000 pesos de hoy equivalen a solo 5.584 pesos en términos reales. En 20 años caería un 69%: 10.000 pesos equivaldrían a 3.118 pesos reales. Esto ocurre aunque el número en tu cuenta bancaria sea el mismo — el problema es que los precios de lo que compras sube, mientras tu saldo no."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa de retorno necesito para superar la inflación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Necesitas que tu inversión rinda más que la inflación. Si la inflación es del 6%, cualquier rendimiento por encima del 6% anual te hace crecer en términos reales. Un CDT o depósito a plazo fijo que rinde el 10% con inflación del 7% te da solo un 3% real de ganancia (la tasa real se calcula aproximadamente como tasa nominal menos inflación). Las acciones y ETFs han superado históricamente la inflación en LATAM con retornos reales del 4-8% anual en el largo plazo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué diferencia hay entre inflación en divisas e inflación personal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La calculadora de inflación en divisas usa la tasa de inflación general del IPC (Índice de Precios al Consumidor) para proyectar el poder adquisitivo de un monto de dinero. La inflación personal es tu tasa de inflación específica, basada en tu canasta de gastos real — que puede ser muy diferente del IPC si tu perfil de consumo difiere del promedio. Una persona con hijos en colegio privado o con gastos altos en salud puede tener una inflación personal del 12% aunque el IPC marque 7%."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

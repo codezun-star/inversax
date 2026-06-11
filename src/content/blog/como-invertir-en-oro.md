@@ -18,6 +18,15 @@ keywords:
   - "oro portafolio latinoamerica"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuál es la forma más barata de invertir en oro desde Colombia o México?"
+    respuesta: "Para inversión de largo plazo (meses o años), el ETF IAU (iShares Gold Trust) a través de XTB es la opción más barata: comisión de gestión anual del 0.25%, sin costo de swap overnight, sin premium sobre el precio spot. IAU cotiza ~$18-22 USD por participación, lo que lo hace accesible desde montos pequeños. Alternativa aún más barata: SGOL con TER de 0.17%. Para especulación de corto plazo sobre el precio del oro, un CFD de XAU/USD en Exness o Pepperstone tiene spread de $0.20-0.50 por onza sin comisión adicional — eficiente para operaciones de días, pero acumula swap overnight si se mantiene semanas."
+  - pregunta: "¿Qué spread tiene el XAU/USD en brokers como Exness o Pepperstone?"
+    respuesta: "En cuentas estándar durante horario de mercado normal: Exness XAU/USD tiene spread típico de $0.20-0.35 por onza, Pepperstone Razor $0.12-0.20 por onza más comisión, IC Markets Raw $0.10-0.20 por onza más comisión. En momentos de alta volatilidad (publicación de datos de inflación de EE.UU., decisiones de la FED) el spread puede ampliarse a $1-3 por onza. Para operaciones en XAU/USD de 1 lote (100 onzas), un spread de $0.25 representa $25 USD de costo en la entrada — significativo si el objetivo de la operación es menor de 100 pips."
+  - pregunta: "¿Qué porcentaje de mi portafolio debería ser oro como inversor latinoamericano?"
+    respuesta: "La recomendación académica estándar es 5-15% del portafolio total en oro. Para el inversor latinoamericano, puede tener sentido una exposición algo mayor (10-20%) dado el riesgo adicional de devaluación de monedas locales y mayor frecuencia de crisis macroeconómicas regionales. El oro funciona como seguro: no genera ingresos, pero reduce la volatilidad general del portafolio y protege en escenarios extremos. Si ya tienes inversiones en USD (ETFs del S&P 500), la dolarización implícita de esas posiciones reduce la urgencia de añadir oro específicamente como cobertura cambiaria."
+  - pregunta: "¿Los ETFs de oro como GLD o IAU son acciones reales o CFDs?"
+    respuesta: "Son participaciones reales en fondos que poseen oro físico. Cuando compras GLD en XTB, adquieres una participación del fondo SPDR Gold Shares, que tiene oro físico almacenado en bóvedas de HSBC en Londres. No es un CFD — eres propietario de una fracción del fondo. IAU funciona igual: cada participación representa 0.01 onzas de oro físico real almacenado en bóvedas de JPMorgan. La diferencia con los CFDs de XAU/USD en brokers de forex: con los ETFs posees el activo, no hay swap overnight y puedes mantenerlos indefinidamente a bajo costo."
 ---
 
 <h2>El oro como activo de inversión para el inversor latinoamericano</h2>
@@ -77,4 +86,18 @@ publicado: true
   <li><strong>Crisis de confianza sistémica:</strong> colapso bancario, guerras, pandemias. El oro actúa como activo refugio cuando los inversores pierden confianza en activos financieros tradicionales.</li>
 </ul>
 <p>Donde el oro no protege bien: mercados alcistas prolongados (1980-2000, por ejemplo, el oro perdió valor real mientras las acciones se multiplicaban), tasas de interés reales altas (el costo de oportunidad de tener un activo sin rendimiento se hace mayor).</p>
-<p>El oro es un componente de un portafolio diversificado — no la totalidad del portafolio. Combínalo con acciones globales via ETFs como el VWRA o VOO para obtener un portafolio más robusto. Lee nuestra guía sobre <a href="/blog/mejores-etfs-latinoamericanos">los mejores ETFs para LATAM</a> para el contexto completo.</p>
+<p>El oro es un componente de un portafolio diversificado — no la totalidad del portafolio. Combínalo con acciones globales via ETFs como el VWRA o VOO para obtener un portafolio más robusto. Lee nuestra guía sobre <a href="/blog/mejores-etfs-latinoamericanos">los mejores ETFs para LATAM</a> para el contexto completo.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Cuál es la forma más barata de invertir en oro desde Colombia o México?</h3>
+<p>Para inversión de largo plazo (meses o años), el ETF IAU (iShares Gold Trust) a través de XTB es la opción más barata: comisión de gestión anual del 0.25%, sin costo de swap overnight, sin premium sobre el precio spot. IAU cotiza ~$18-22 USD por participación, lo que lo hace accesible desde montos pequeños. Alternativa aún más barata: SGOL con TER de 0.17%. Para especulación de corto plazo sobre el precio del oro, un CFD de XAU/USD en Exness o Pepperstone tiene spread de $0.20-0.50 por onza sin comisión adicional — eficiente para operaciones de días, pero acumula swap overnight si se mantiene semanas.</p>
+
+<h3>¿Qué spread tiene el XAU/USD en brokers como Exness o Pepperstone?</h3>
+<p>En cuentas estándar durante horario de mercado normal: Exness XAU/USD tiene spread típico de $0.20-0.35 por onza, Pepperstone Razor $0.12-0.20 por onza más comisión, IC Markets Raw $0.10-0.20 por onza más comisión. En momentos de alta volatilidad (publicación de datos de inflación de EE.UU., decisiones de la FED) el spread puede ampliarse a $1-3 por onza. Para operaciones en XAU/USD de 1 lote (100 onzas), un spread de $0.25 representa $25 USD de costo en la entrada — significativo si el objetivo de la operación es menor de 100 pips.</p>
+
+<h3>¿Qué porcentaje de mi portafolio debería ser oro como inversor latinoamericano?</h3>
+<p>La recomendación académica estándar es 5-15% del portafolio total en oro. Para el inversor latinoamericano, puede tener sentido una exposición algo mayor (10-20%) dado el riesgo adicional de devaluación de monedas locales y mayor frecuencia de crisis macroeconómicas regionales. El oro funciona como seguro: no genera ingresos, pero reduce la volatilidad general del portafolio y protege en escenarios extremos. Si ya tienes inversiones en USD (ETFs del S&P 500), la dolarización implícita de esas posiciones reduce la urgencia de añadir oro específicamente como cobertura cambiaria.</p>
+
+<h3>¿Los ETFs de oro como GLD o IAU son acciones reales o CFDs?</h3>
+<p>Son participaciones reales en fondos que poseen oro físico. Cuando compras GLD en XTB, adquieres una participación del fondo SPDR Gold Shares, que tiene oro físico almacenado en bóvedas de HSBC en Londres. No es un CFD — eres propietario de una fracción del fondo. IAU funciona igual: cada participación representa 0.01 onzas de oro físico real almacenado en bóvedas de JPMorgan. La diferencia con los CFDs de XAU/USD en brokers de forex: con los ETFs posees el activo, no hay swap overnight y puedes mantenerlos indefinidamente a bajo costo.</p></p>

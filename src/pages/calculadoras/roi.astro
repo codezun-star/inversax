@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de ROI — Inversax" description="Calcula el retorno sobre tu inversión (ROI) y el ROI anualizado. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de ROI (Retorno sobre la Inversión) — Inversax" description="Calculadora de ROI con ROI anualizado (CAGR). Para inversiones en Colombia, México, Argentina, Chile y toda Latinoamérica. Calcula ganancia neta y multiplicador. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el ROI y cómo se calcula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El ROI (Return on Investment) mide cuánto ganaste respecto a lo invertido. Fórmula: ROI = (Valor final − Valor inicial) / Valor inicial × 100. Un ROI del 35% significa que por cada 100 invertidos, recuperaste 135."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El ROI incluye los dividendos cobrados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, si los incluyes en el valor final. Para un cálculo completo, suma los dividendos cobrados al precio actual de la acción antes de ingresarlo en la calculadora."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre ROI y CAGR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Son lo mismo cuando el período es de un año. Para períodos más largos, el ROI anualizado de esta calculadora usa la fórmula CAGR (Tasa de Crecimiento Anual Compuesto), que asume que las ganancias se reinvierten cada año y permite comparar inversiones de distintos plazos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué ROI anualizado se considera bueno en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por debajo del 5% anual probablemente no supera la inflación en muchos países latinoamericanos. Entre 5% y 10% es un rango razonable para inversiones moderadas en dólares. Por encima del 15% es excelente, pero verifica si es sostenible o fue un año atípico."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

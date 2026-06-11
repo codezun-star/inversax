@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Margen Libre Forex — Inversax" description="Calcula el margen libre disponible en tu cuenta forex y el nivel de margen. Evita margin calls conociendo tu exposición en tiempo real.">
+<Layout title="Calculadora de Margen Libre Forex — Nivel de Margen y Margin Call | Inversax" description="Calcula el margen libre disponible en tu cuenta forex, el nivel de margen actual y la distancia al margin call. Evita la liquidación forzosa monitoreando tu exposición. Para traders de Colombia, México, Chile, Perú y toda LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el margen libre en forex y cómo se calcula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El margen libre es el capital disponible para abrir nuevas posiciones o absorber pérdidas flotantes sin riesgo de margin call. Se calcula como: Margen libre = Equity − Margen usado. El equity es el saldo de la cuenta más o menos el P&L flotante de las posiciones abiertas. Si tienes 5.000 USD en saldo, P&L flotante de −200 USD y margen usado de 1.000 USD, tu equity es 4.800 USD y tu margen libre es 3.800 USD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el nivel de margen y cuándo se dispara el margin call?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El nivel de margen es el ratio entre el equity y el margen usado, expresado en porcentaje: Nivel = (Equity / Margen usado) × 100. Cuando este nivel baja del umbral del broker (normalmente 50-100%), el sistema lanza un margin call y empieza a cerrar automáticamente las posiciones con mayor pérdida. Exness, XM e IC Markets tienen umbrales de margin call distintos; consúltalos en las condiciones de tu cuenta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo evito un margin call en mi cuenta forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La clave es mantener el nivel de margen siempre por encima del 200-300% y no sobreoperar. Reglas prácticas: (1) No uses más del 10-20% de tu balance en margen simultáneamente. (2) Usa stop loss en todas tus posiciones para que las pérdidas se corten automáticamente antes de comprometer el margen. (3) Monitorea el margen libre antes de abrir nuevas posiciones. (4) Evita acumular muchas posiciones correlacionadas que pueden moverse en tu contra al mismo tiempo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El margen requerido cambia si el mercado se mueve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El margen requerido se fija en el momento de abrir la posición basado en el precio de apertura. Sin embargo, el equity (saldo + P&L flotante) sí cambia con cada movimiento del mercado. Si la posición va en tu contra, el equity cae y el nivel de margen baja. Si el equity cae por debajo del margen requerido × el umbral del broker, se dispara el margin call. El margen en sí no cambia, pero tu capacidad de absorber pérdidas sí."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -70,10 +112,27 @@ import Layout from '../../layouts/Layout.astro';
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Qué es el margen libre?</h2>
-    <p>El <strong>margen libre</strong> es el capital disponible en tu cuenta para abrir nuevas posiciones. Se calcula como: <strong>Margen libre = Equity − Margen usado</strong>. El <em>equity</em> es tu saldo más o menos el P&amp;L flotante de las posiciones abiertas.</p>
-    <p>Si el margen libre llega a cero, no puedes abrir nuevas posiciones. Si el nivel de margen (equity / margen usado × 100) baja del umbral del broker, se produce un <strong>margin call</strong>: el broker empieza a cerrar posiciones automáticamente.</p>
+    <p>El <strong>margen libre</strong> es el capital disponible en tu cuenta para abrir nuevas posiciones o absorber pérdidas flotantes sin riesgo de liquidación. Se calcula como: <strong>Margen libre = Equity − Margen usado</strong>. El equity es tu saldo más o menos el P&amp;L flotante de todas las posiciones abiertas.</p>
+    <p>Si el margen libre llega a cero, no puedes abrir nuevas posiciones. Si el <strong>nivel de margen</strong> (equity / margen usado × 100%) baja del umbral del broker, se produce un <strong>margin call</strong>: el broker empieza a cerrar automáticamente las posiciones con mayor pérdida hasta que el nivel de margen vuelva a ser seguro.</p>
+
+    <h2>Los tres niveles que debes monitorear</h2>
+    <ul>
+      <li><strong>Nivel de margen &gt; 200%:</strong> zona segura. Tienes margen libre suficiente para absorber movimientos adversos.</li>
+      <li><strong>Nivel de margen 100-200%:</strong> zona de precaución. No abras nuevas posiciones y considera reducir exposición.</li>
+      <li><strong>Nivel de margen &lt; 100%:</strong> zona de peligro. El margin call puede dispararse en cualquier momento. Cierra posiciones o deposita más capital inmediatamente.</li>
+    </ul>
+
+    <h2>Ejemplo: cuenta con 3 posiciones abiertas</h2>
+    <p>Trader con saldo de <strong>3.000 USD</strong>, P&L flotante de <strong>−250 USD</strong> y margen usado de <strong>1.200 USD</strong>:</p>
+    <ul>
+      <li>Equity: 3.000 − 250 = <strong>2.750 USD</strong></li>
+      <li>Margen libre: 2.750 − 1.200 = <strong>1.550 USD</strong></li>
+      <li>Nivel de margen: 2.750 / 1.200 × 100 = <strong>229%</strong> — zona segura</li>
+    </ul>
+    <p>Si el P&L flotante cae a −1.600 USD, el equity quedaría en 1.400 USD y el nivel de margen en 117%: zona de precaución inminente. Con stops bien colocados, esta situación nunca debería ocurrir si el riesgo por operación fue calculado correctamente desde el inicio.</p>
+
     <h2>Cómo evitar un margin call</h2>
-    <p>Mantén el nivel de margen siempre por encima del 200% — muchos traders profesionales mantienen el 300-500%. Esto significa no sobreoperar: si tienes 5.000 USD en cuenta, no uses más de 1.000-1.500 USD en margen. Combina esta calculadora con la de <a href="/calculadoras/tamano-posicion">tamaño de posición</a> para dimensionar tus trades correctamente.</p>
+    <p>La regla más efectiva: <strong>nunca uses más del 10-15% de tu balance en margen total</strong>. Si tienes 5.000 USD, limita el margen usado a 500-750 USD. Usa la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a> para que el riesgo por operación sea del 1-2%, y la de <a href="/calculadoras/apalancamiento-efectivo">apalancamiento efectivo</a> para verificar que tu exposición total sea razonable.</p>
   </div>
 </Layout>
 

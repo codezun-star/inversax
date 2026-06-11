@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Win Rate Mínimo Forex — Inversax" description="Calcula el porcentaje de operaciones ganadoras mínimo para ser rentable en forex dado un ratio riesgo/beneficio. Incluye expectativa matemática por operación.">
+<Layout title="Calculadora de Win Rate Mínimo Forex — Expectativa Matemática | Inversax" description="Calcula el porcentaje de aciertos mínimo para ser rentable en forex según tu ratio riesgo/beneficio. Incluye expectativa matemática por operación y proyección a 100 trades. Para traders de Colombia, México, Chile, Perú y toda América Latina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Puedo ser rentable en forex con menos del 50% de operaciones ganadoras?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Si tu ratio riesgo/beneficio es 1:2 (ganas el doble de lo que arriesgas), el win rate mínimo para ser rentable es solo el 33.3%. Con ratio 1:3, basta con acertar el 25%. Muchos sistemas de trading profesionales tienen win rates del 35-45% y son muy rentables porque las ganancias de los trades ganadores compensan con creces las pérdidas de los perdedores."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la expectativa matemática de un sistema de trading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La expectativa matemática es el resultado promedio por operación en términos de R (unidades de riesgo). Se calcula como: Expectativa = (Win Rate × Ganancia) − ((1 − Win Rate) × Pérdida). Si la expectativa es positiva, el sistema genera dinero en el largo plazo. Si es negativa, pierde dinero aunque ocasionalmente tenga rachas ganadoras. Un sistema con expectativa de 0.3R y riesgo de 100 USD por trade gana en promedio 30 USD por operación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántas operaciones necesito para saber si mi sistema de trading es realmente rentable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La estadística requiere al menos 100-200 operaciones en condiciones similares para sacar conclusiones con significancia estadística. Con menos de 50 trades, los resultados pueden deberse al azar. Con 100 trades puedes empezar a evaluar si la expectativa es positiva. Con 300+ trades tienes suficiente muestra para distinguir entre un sistema con ventaja real y resultados aleatorios."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es mejor tener un win rate alto o un ratio R:R alto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lo que importa es que la expectativa matemática sea positiva: puede lograrse con alto win rate (60%+) y ratio moderado (1:1.2), o con bajo win rate (35%) y ratio alto (1:2.5). Psicológicamente, los sistemas con alto win rate son más fáciles de seguir porque la mayoría de operaciones terminan en ganancia. Sin embargo, el ratio alto tiene la ventaja de que el tamaño de cada ganancia compensa varias pérdidas, siendo más robusto frente a rachas malas."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

@@ -12,6 +12,15 @@ keywords:
   - "broker regulado colombia PSE Nequi"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuánto dinero mínimo necesito para empezar a invertir desde Colombia?"
+    respuesta: "Puedes abrir cuenta desde $10 USD con Exness. Sin embargo, para gestionar el riesgo correctamente lo recomendado es un mínimo práctico de $200-500 USD. Con menos de eso, el tamaño de posiciones es tan pequeño que las ganancias no compensan el tiempo invertido. Comienza con una cuenta demo gratuita para ganar experiencia antes de arriesgar capital real."
+  - pregunta: "¿El banco colombiano puede bloquear mi tarjeta si la uso para depositar en un broker?"
+    respuesta: "Algunos bancos colombianos bloquean temporalmente transacciones hacia plataformas de trading clasificadas como alto riesgo. Si ocurre, contacta a tu banco para autorizar el comercio o usa una tarjeta prepago recargable. Bancolombia y Davivienda suelen ser los más restrictivos; los neobancos digitales como Nu generalmente no presentan este problema."
+  - pregunta: "¿Debo reportar mi cuenta en un broker ante la DIAN aunque no haya ganado nada?"
+    respuesta: "Si el saldo en tu cuenta en el exterior supera 2.000 UVT (aproximadamente $20 millones COP), debes declararlo como activo en el exterior en tu declaración de renta, independientemente de si generaste ganancias. Las pérdidas también pueden usarse para disminuir la base gravable en el mismo ejercicio fiscal."
+  - pregunta: "¿PSE funciona para depositar en Exness o IC Markets directamente?"
+    respuesta: "No de forma directa. Exness acepta PSE a través de procesadores de pago intermediarios que operan en Colombia. El flujo es: pagas con PSE al procesador, el procesador convierte a USD y envía al broker. La transacción puede tardar 1-24 horas y suele tener una comisión del procesador de 1-3%."
 ---
 
 <h2>Invertir desde Colombia: el momento es ahora</h2>
@@ -35,3 +44,13 @@ publicado: true
 
 <h2>¿Cuál es el mejor broker para ti?</h2>
 <p>Si estás comenzando, <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> es probablemente la opción más accesible: depósito mínimo bajo, soporte en español y cuenta demo gratuita. Si ya tienes experiencia y priorizas spreads bajos para trading activo, <a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">IC Markets</a> es difícil de superar. Para quienes quieren invertir en acciones y ETFs internacionales a largo plazo con una plataforma elegante, <a href="https://geolink.xtb.com/I0QSx" target="_blank" rel="noopener noreferrer nofollow sponsored">XTB</a> es la alternativa más completa disponible en Colombia hoy.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Cuánto dinero mínimo necesito para empezar a invertir desde Colombia?</h3>
+<p>Puedes abrir cuenta desde $10 USD con Exness. Sin embargo, para gestionar el riesgo correctamente lo recomendado es un mínimo práctico de $200-500 USD. Con menos de eso, el tamaño de posiciones es tan pequeño que las ganancias no compensan el tiempo invertido. Comienza con una cuenta demo gratuita para ganar experiencia antes de arriesgar capital real.</p>
+<h3>¿El banco colombiano puede bloquear mi tarjeta si la uso para depositar en un broker?</h3>
+<p>Algunos bancos colombianos bloquean temporalmente transacciones hacia plataformas de trading clasificadas como alto riesgo. Si ocurre, contacta a tu banco para autorizar el comercio o usa una tarjeta prepago recargable. Bancolombia y Davivienda suelen ser los más restrictivos; los neobancos digitales como Nu generalmente no presentan este problema.</p>
+<h3>¿Debo reportar mi cuenta en un broker ante la DIAN aunque no haya ganado nada?</h3>
+<p>Si el saldo en tu cuenta en el exterior supera 2.000 UVT (aproximadamente $20 millones COP), debes declararlo como activo en el exterior en tu declaración de renta, independientemente de si generaste ganancias. Las pérdidas también pueden usarse para disminuir la base gravable en el mismo ejercicio fiscal.</p>
+<h3>¿PSE funciona para depositar en Exness o IC Markets directamente?</h3>
+<p>No de forma directa. Exness acepta PSE a través de procesadores de pago intermediarios que operan en Colombia. El flujo es: pagas con PSE al procesador, el procesador convierte a USD y envía al broker. La transacción puede tardar 1-24 horas y suele tener una comisión del procesador de 1-3%.</p>

@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Jubilación — Inversax" description="Calcula cuánto necesitas ahorrar para jubilarte con la renta mensual que deseas. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Jubilación — ¿Cuánto Ahorrar para el Retiro? | Inversax" description="Calcula cuánto debes ahorrar mensualmente para jubilarte con la renta que deseas. Para Colombia, México, Chile, Perú y toda Latinoamérica. AFP, AFORE, ONP. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto dinero necesito para jubilarme en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de cuánto quieras gastar al mes en el retiro y cuántos años dure. Fórmula: Capital necesario = Renta mensual × (1 − (1+r)^−n) / r, donde r es la tasa mensual y n los meses de retiro. Ejemplo: para vivir con 1.500 USD/mes durante 20 años al 5% anual necesitas acumular ~227.000 USD al momento de jubilarte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto ahorrar mensualmente para el retiro si empiezo a los 30 años?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si tienes 30 años, quieres jubilarte a los 65 y vivir con 2.000 USD/mes durante 25 años, necesitas acumular ~340.000 USD. Con un rendimiento del 7% anual y 35 años de ahorro, necesitarías aportar aproximadamente 175 USD/mes. Si empiezas a los 40, esa cifra casi se triplica."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué sistema de pensiones existe en Colombia, México y Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Colombia: puedes elegir entre Colpensiones (beneficio definido) o fondos privados RAIS. México: AFORE, el saldo es tuyo pero la pensión pública es baja. Chile: AFP privadas, el ahorro es individual. Perú: ONP (beneficio definido, baja cobertura) o AFP (contribución definida). En todos los casos, el ahorro privado adicional es fundamental."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debo incluir la pensión del Estado en mi cálculo de jubilación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La calculadora no incluye pensión estatal porque varía mucho por país y nivel de cotización. En Latinoamérica, la pensión pública típicamente reemplaza el 30-50% del último salario. Úsala como ingreso complementario restándola de la renta mensual que ingresas en la calculadora para obtener solo el ahorro adicional que necesitas."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

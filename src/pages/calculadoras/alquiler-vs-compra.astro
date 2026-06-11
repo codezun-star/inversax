@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora Alquiler vs Compra de Vivienda — Inversax" description="Compara si conviene más alquilar o comprar vivienda. Considera cuota del préstamo, valorización del inmueble, costo de oportunidad y plazo de análisis.">
+<Layout title="Calculadora Alquiler vs Compra de Vivienda — ¿Qué Conviene? | Inversax" description="Compara si conviene más alquilar o comprar vivienda. Valorización, costo de oportunidad y cuota incluidos. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Conviene más alquilar o comprar vivienda en Colombia, México o Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del precio del inmueble, la cuota del crédito, el alquiler disponible en la zona y la valorización esperada. Si la cuota hipotecaria es mucho mayor que el alquiler equivalente y la valorización es moderada, alquilar e invertir la diferencia puede ser superior. Si la cuota es similar al alquiler y la zona tiene alta valorización, comprar gana en el largo plazo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el costo de oportunidad en la decisión de comprar vivienda?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El costo de oportunidad es lo que podrías ganar invirtiendo el enganche y la diferencia entre cuota y alquiler en lugar de comprar. Si el enganche es 40.000 USD y esa diferencia se invierte al 7% anual durante 10 años, crece a ~79.000 USD. Comparado con la valorización del inmueble, esto determina cuál opción es financieramente superior."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo claramente conviene comprar sobre alquilar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Comprar conviene cuando: planeas quedarte más de 7-10 años, la cuota hipotecaria es similar o menor al alquiler equivalente, la zona tiene fuerte valorización histórica, y tienes estabilidad de ingresos para asumir la hipoteca. Comprar también tiene ventajas no financieras: estabilidad de tenencia y la posibilidad de remodelar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo conviene más alquilar que comprar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Alquilar conviene cuando: planeas mudarte en menos de 5 años, la cuota hipotecaria es muy superior al alquiler equivalente, tienes flexibilidad laboral y geográfica que valoras, o el mercado inmobiliario está sobrevaluado en tu ciudad. También durante etapas de ingresos variables donde el compromiso de una hipoteca representa riesgo alto."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div style="background:#F7F7F5; padding:12px; border-radius:8px;">
@@ -99,8 +159,38 @@ import Layout from '../../layouts/Layout.astro';
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>Alquiler vs compra: no hay respuesta universal</h2>
-    <p>La decisión depende de tu situación personal: cuánto tiempo piensas quedarte, si tienes capital para el enganche, la diferencia entre cuota e alquiler, y qué podrías hacer con ese dinero si lo invirtieras. En mercados con alta valorización, comprar suele ganar en el largo plazo. En mercados estables o cuando el alquiler es muy barato vs la cuota, alquilar e invertir la diferencia puede ser superior.</p>
-    <p>El modelo compara el costo neto de comprar (cuotas + gastos − valorización del inmueble) contra el costo de alquilar (alquiler acumulado − lo que crece la diferencia invertida). Ningún modelo captura todo, pero da una buena aproximación.</p>
+    <p>La decisión depende de tu situación personal: cuánto tiempo piensas quedarte, si tienes capital para el enganche, la diferencia entre cuota e alquiler, y qué podrías hacer con ese dinero si lo invirtieras. En mercados con alta valorización, comprar suele ganar en el largo plazo. En mercados estables o cuando el alquiler es muy barato comparado con la cuota, alquilar e invertir la diferencia puede ser superior.</p>
+
+    <h2>¿Cómo funciona el modelo de esta calculadora?</h2>
+    <p>La calculadora compara dos escenarios durante el horizonte elegido:</p>
+    <ul>
+      <li><strong>Escenario Compra:</strong> Sumas las cuotas totales + gastos de mantenimiento y propiedad − valorización del inmueble. El resultado es el costo neto de comprar.</li>
+      <li><strong>Escenario Alquiler:</strong> Sumas todos los alquileres pagados (con incremento anual) − el patrimonio que acumulan invirtiendo la diferencia entre cuota y alquiler. El resultado es el costo neto de alquilar.</li>
+    </ul>
+    <p>El escenario con menor costo neto es financieramente más conveniente para el horizonte analizado.</p>
+
+    <h2>Ejemplo: Bogotá, 10 años</h2>
+    <p>Inmueble valorado en <strong>250.000 USD</strong>. Cuota hipotecaria: <strong>1.400 USD/mes</strong>. Alquiler equivalente: <strong>900 USD/mes</strong>. Valorización del inmueble: 4% anual. Gastos anuales (predial, mantenimiento): 1.5% del valor. Rendimiento inversión: 7%.</p>
+    <ul>
+      <li>Costo neto compra en 10 años: cuotas (168.000) + gastos (37.500) − valorización (120.000) = <strong>~85.000 USD</strong></li>
+      <li>Costo neto alquiler: pagos acumulados (~135.000) − inversión de la diferencia (~25.000) = <strong>~110.000 USD</strong></li>
+    </ul>
+    <p>En este escenario comprar es más conveniente por ~25.000 USD en 10 años. Pero si el horizonte es solo 5 años o la valorización es menor, el resultado puede invertirse.</p>
+
+    <h2>Factores no financieros</h2>
+    <p>La decisión no es solo financiera. Considera:</p>
+    <ul>
+      <li><strong>Estabilidad:</strong> el propietario no te puede desalojar; el arrendatario tiene menos certeza de permanencia.</li>
+      <li><strong>Flexibilidad:</strong> alquilar es más fácil de ajustar si cambias de ciudad o trabajo.</li>
+      <li><strong>Personalización:</strong> el propietario puede remodelar; el arrendatario tiene restricciones.</li>
+      <li><strong>Herencia:</strong> la vivienda propia puede transmitirse a los hijos; el capital invertido también.</li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué valorización anual usar para una ciudad latinoamericana?</h3>
+    <p>Referencia histórica: Bogotá y Medellín 4-7% anual en zonas buenas; Ciudad de México 3-6%; Santiago de Chile 5-8%; Lima 4-6%; Buenos Aires muy variable por inflación. Usa valores conservadores (3-4%) para un análisis prudente, especialmente si compras en zona con valorización incierta.</p>
+    <h3>¿El modelo incluye el enganche o cuota inicial?</h3>
+    <p>El modelo simplificado no incluye el enganche (10-30% del valor del inmueble) como variable separada. Para un análisis completo, añade el costo de oportunidad del enganche al costo de comprar: el capital que inmobilizas podría haberse invertido. Esto hace la compra aún más cara a corto plazo.</p>
   </div>
 </Layout>
 

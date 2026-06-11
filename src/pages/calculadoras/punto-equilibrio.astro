@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Punto de Equilibrio — Inversax" description="Calcula el punto de equilibrio (break-even) de tu negocio o inversión. Cuántas unidades o cuántos ingresos necesitas para cubrir todos los costos.">
+<Layout title="Calculadora de Punto de Equilibrio (Break-Even) — Inversax" description="Calculadora de punto de equilibrio para negocios en Colombia, México y Latinoamérica. Calcula cuántas unidades e ingresos necesitas para cubrir todos tus costos. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el punto de equilibrio de un negocio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fórmula: Punto de equilibrio (unidades) = Costos fijos / (Precio de venta − Costo variable por unidad). El denominador se llama margen de contribución. Por ejemplo, si los costos fijos son 5.000, el precio 50 y el costo variable 20, el punto de equilibrio es 5.000 / 30 = 167 unidades."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre costos fijos y costos variables?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los costos fijos no cambian con el volumen de ventas: alquiler, salarios base, seguros, suscripciones. Los costos variables sí cambian con cada unidad producida o vendida: materia prima, comisiones, empaque, envío. Separar ambos correctamente es esencial para calcular el break-even."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el margen de contribución?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El margen de contribución es la diferencia entre el precio de venta y el costo variable por unidad (Precio − Costo variable). Indica cuánto aporta cada unidad vendida a cubrir los costos fijos y generar ganancia. Un margen de contribución alto significa que necesitas vender menos unidades para alcanzar el break-even."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué tipos de negocios en Latinoamérica es útil la calculadora de punto de equilibrio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es útil para cualquier negocio con estructura de costos fijos y variables: comercio minorista, restaurantes, tiendas online, fabricación, servicios profesionales y startups. En países como Colombia, México, Perú o Chile, es una herramienta clave para validar la viabilidad de un emprendimiento."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -73,6 +133,25 @@ import Layout from '../../layouts/Layout.astro';
     <p>Fórmula: <strong>BE = Costos fijos / (Precio − Costo variable por unidad)</strong>. El denominador es el <em>margen de contribución</em>: cuánto aporta cada unidad vendida a cubrir los costos fijos.</p>
     <h2>Costos fijos vs variables</h2>
     <p>Los <strong>costos fijos</strong> no cambian con el volumen: alquiler, salarios base, seguros, suscripciones. Los <strong>costos variables</strong> sí cambian: materia prima, comisiones por venta, empaque, envío. Separar ambos correctamente es clave para obtener un break-even preciso.</p>
+
+    <h2>Ejemplo práctico para un negocio en Latinoamérica</h2>
+    <p>Tienes una tienda online en México con costos fijos de <strong>25.000 MXN/mes</strong> (plataforma, almacén, empleado). Vendes un producto a <strong>350 MXN</strong> con un costo variable de <strong>140 MXN</strong> por unidad. Margen de contribución = 210 MXN. Punto de equilibrio = 25.000 / 210 = <strong>119 unidades/mes</strong>. Eso equivale a unos 4 pedidos diarios para no perder dinero. Por encima de eso, cada unidad adicional genera ganancia pura.</p>
+
+    <h2>Usos del punto de equilibrio en la toma de decisiones</h2>
+    <ul>
+      <li><strong>Validar precios:</strong> Si el break-even requiere un volumen de ventas imposible para tu mercado, el precio o los costos necesitan ajustarse.</li>
+      <li><strong>Evaluar descuentos:</strong> Un descuento del 10% reduce el margen de contribución y eleva el break-even. Calcula cuántas unidades más necesitas vender para justificar la promoción.</li>
+      <li><strong>Planificar inversiones:</strong> Antes de contratar personal o ampliar la producción, calcula cómo el aumento en costos fijos eleva el break-even.</li>
+      <li><strong>Presentar a inversionistas:</strong> Mostrar tu punto de equilibrio demuestra que conoces la viabilidad de tu negocio y da confianza a potenciales socios o fondos.</li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué pasa si el margen de contribución es negativo?</h3>
+    <p>Si el precio de venta es menor que el costo variable, cada unidad que vendes genera pérdida. En ese caso no existe punto de equilibrio: cuanto más vendes, más pierdes. Debes revisar el precio, reducir costos variables o cambiar el modelo de negocio.</p>
+    <h3>¿El punto de equilibrio incluye los impuestos?</h3>
+    <p>La calculadora no incluye impuestos. Para un análisis más completo, añade el impuesto sobre la renta o el IVA según aplique en tu país (Colombia, México, Chile, etc.) al costo real de cada unidad o a los costos fijos.</p>
+    <h3>¿Puedo usar esta calculadora para un servicio (no un producto físico)?</h3>
+    <p>Sí. Para servicios, el precio es tu tarifa por hora o por proyecto, y el costo variable puede ser el tiempo del proveedor o insumos directos. Los costos fijos siguen siendo alquiler, salarios base, software, etc.</p>
   </div>
 </Layout>
 

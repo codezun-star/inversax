@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Salario Neto — Inversax" description="Calcula tu salario neto estimado después de deducciones según tu país. Cubre los 22 países de Latinoamérica y España con tasas aproximadas.">
+<Layout title="Calculadora de Salario Neto — Colombia, México, Chile y LATAM | Inversax" description="Calcula tu salario neto estimado después de impuestos y deducciones según tu país. Colombia, México, Chile, Perú, España y 22 países más. Tasas actualizadas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto se descuenta del salario bruto en Colombia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El empleado aporta 4% para salud y 4% para pensión sobre el salario bruto. La retención en la fuente aplica solo para salarios superiores a ~4,4 millones de COP mensuales y varía por tramo según tablas del DIAN. En total, las deducciones para salarios medios en Colombia rondan el 8-13% del salario bruto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto se descuenta del salario bruto en México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El empleado paga IMSS (~1.65%), INFONAVIT (5%) e ISR variable según tramo de ingreso (entre 1.92% y 35% según tablas del SAT). Para salarios medios en México, el descuento total puede estar entre 15-30% del salario bruto, siendo el ISR la contribución más significativa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué diferencia hay entre salario bruto y salario neto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El salario bruto es lo que el empleador paga o acuerda contigo antes de descuentos. El salario neto (o de bolsillo) es lo que recibes en tu cuenta bancaria después de descontar cotizaciones a seguridad social, pensión, salud e impuesto de renta retenido. La diferencia puede ser del 15% al 35% dependiendo del país y nivel salarial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo negociar mejor el salario conociendo la diferencia entre bruto y neto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Siempre compara los netos, no los brutos. Un trabajo con 5.000 USD brutos y buenos beneficios no salariales (seguro médico, bonos exentos) puede superar en neto a uno con 5.200 USD brutos sin beneficios. Usa esta calculadora para convertir cualquier oferta a neto antes de aceptar o rechazar."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

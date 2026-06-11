@@ -16,6 +16,15 @@ keywords:
   - "abrir cuenta xm"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿XM cobra comisión por inactividad y cuándo aplica exactamente?"
+    respuesta: "Sí. XM cobra $5 USD al mes si no realizas ninguna operación durante 90 días consecutivos o más. El cobro aplica mientras haya saldo disponible — si tu saldo baja a $0 la cuenta queda inactiva pero no se cobra más. Este es un detalle importante para quienes abren cuenta, depositan y luego no operan regularmente. Si sabes que no operarás en los próximos 3 meses, considera no depositar hasta que estés listo."
+  - pregunta: "¿El bono de bienvenida de XM se puede retirar directamente?"
+    respuesta: "No. Los fondos del bono de XM (hasta 50% del primer depósito) no se pueden retirar directamente. Funcionan como colchón: absorben pérdidas operativas y generan crédito adicional si alcanzas cierto volumen de trading. Al retirar fondos propios, el bono se reduce proporcionalmente. La utilidad real del bono es proteger tu capital propio durante las primeras operaciones, no convertirse en dinero en efectivo."
+  - pregunta: "¿Cuál es la diferencia práctica entre la cuenta Micro y Standard de XM?"
+    respuesta: "La diferencia principal está en el tamaño del lote. La cuenta Micro opera en micro lotes (1,000 unidades de la moneda base), mientras que Standard opera en lotes estándar (100,000 unidades). Esto significa que en cuenta Micro, 1 pip de movimiento en EUR/USD equivale a $0.10 USD de ganancia o pérdida; en Standard equivale a $10 USD. Para principiantes con capital limitado, la cuenta Micro permite practicar con dinero real minimizando el riesgo monetario por operación."
+  - pregunta: "¿Bajo qué entidad regulatoria opera XM para clientes latinoamericanos?"
+    respuesta: "La mayoría de clientes latinoamericanos son atendidos por XM Global Limited, regulada por el IFSC (International Financial Services Commission) de Belice — una regulación offshore. XM tiene entidades adicionales bajo CySEC (Europa), ASIC (Australia) y DFSA (Dubái) con mayor nivel de protección, pero estas generalmente atienden a clientes en sus respectivas regiones. La regulación IFSC tiene menores exigencias de capital y protección al inversor que ASIC o FCA — esto no convierte a XM en un broker poco confiable, pero es información relevante para evaluar el nivel de protección de tus fondos."
 ---
 
 <h2>XM: el broker más accesible para empezar desde cero</h2>
@@ -47,3 +56,13 @@ publicado: true
 <h2>¿Para quién es XM?</h2>
 <p>XM es la mejor opción si estás comenzando, tienes menos de $100 para invertir, necesitas soporte en español de calidad y quieres un broker con nombre conocido que no te exija mucho capital inicial. Si ya tienes experiencia y operas con volumen, considera subir a brokers ECN como <a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">IC Markets</a> o <a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a> para reducir costos.</p>
 <p>Abrir cuenta en XM: <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">Ir a XM</a>. Antes de decidir, lee nuestra comparativa <a href="/blog/xm-vs-exness">XM vs Exness</a> para ver cuál se adapta mejor a tu perfil.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿XM cobra comisión por inactividad y cuándo aplica exactamente?</h3>
+<p>Sí. XM cobra $5 USD al mes si no realizas ninguna operación durante 90 días consecutivos o más. El cobro aplica mientras haya saldo disponible — si tu saldo baja a $0 la cuenta queda inactiva pero no se cobra más. Este es un detalle importante para quienes abren cuenta, depositan y luego no operan regularmente. Si sabes que no operarás en los próximos 3 meses, considera no depositar hasta que estés listo.</p>
+<h3>¿El bono de bienvenida de XM se puede retirar directamente?</h3>
+<p>No. Los fondos del bono de XM (hasta 50% del primer depósito) no se pueden retirar directamente. Funcionan como colchón: absorben pérdidas operativas y generan crédito adicional si alcanzas cierto volumen de trading. Al retirar fondos propios, el bono se reduce proporcionalmente. La utilidad real del bono es proteger tu capital propio durante las primeras operaciones, no convertirse en dinero en efectivo.</p>
+<h3>¿Cuál es la diferencia práctica entre la cuenta Micro y Standard de XM?</h3>
+<p>La diferencia principal está en el tamaño del lote. La cuenta Micro opera en micro lotes (1,000 unidades de la moneda base), mientras que Standard opera en lotes estándar (100,000 unidades). En cuenta Micro, 1 pip de movimiento en EUR/USD equivale a $0.10 USD de ganancia o pérdida; en Standard equivale a $10 USD. Para principiantes con capital limitado, la cuenta Micro permite practicar con dinero real minimizando el riesgo monetario por operación.</p>
+<h3>¿Bajo qué entidad regulatoria opera XM para clientes latinoamericanos?</h3>
+<p>La mayoría de clientes latinoamericanos son atendidos por XM Global Limited, regulada por el IFSC de Belice — una regulación offshore. XM tiene entidades adicionales bajo CySEC (Europa), ASIC (Australia) y DFSA (Dubái) con mayor nivel de protección, pero estas generalmente atienden a clientes en sus respectivas regiones. La regulación IFSC tiene menores exigencias de capital y protección al inversor que ASIC o FCA, información relevante para evaluar el nivel de protección de tus fondos.</p>

@@ -18,6 +18,15 @@ keywords:
   - "libertex cuenta demo"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué significa exactamente que Libertex no tiene spread?"
+    respuesta: "En la mayoría de brokers, el costo de operar está embebido en el spread: la diferencia entre el precio de compra (ask) y el precio de venta (bid). En Libertex, el spread es cero (o muy cercano a cero) y en su lugar se cobra una comisión porcentual visible y fija sobre el valor nocional de la operación. Esto hace que el costo sea más transparente y predecible, especialmente en momentos de alta volatilidad cuando los spreads de otros brokers se ensanchan significativamente."
+  - pregunta: "¿La cuenta demo de Libertex caduca después de 30 días?"
+    respuesta: "No. Libertex ofrece cuenta demo con $50,000 USD virtuales sin límite de tiempo. Puedes usarla indefinidamente sin que expire, lo que es inusual — la mayoría de brokers limitan la demo a 30 o 90 días. Esta es una ventaja real para quienes quieren dominar la plataforma antes de depositar capital real."
+  - pregunta: "¿Puedo comprar acciones reales de Apple o Tesla en Libertex?"
+    respuesta: "No. Libertex solo ofrece CFDs (Contratos por Diferencia), no acciones reales. Cuando operas acciones en Libertex, no eres propietario de las acciones — especulas sobre el movimiento del precio. No recibes dividendos reales ni tienes derechos de voto. Si tu objetivo es construir un portafolio de acciones reales para el largo plazo, XTB es la alternativa con acciones y ETFs reales sin comisión desde LATAM."
+  - pregunta: "¿Cuál es el depósito mínimo real para empezar en Libertex?"
+    respuesta: "El depósito mínimo formal en Libertex es de $10 USD, uno de los más bajos del mercado entre brokers con regulación CySEC. Sin embargo, con $10 USD la capacidad operativa es muy limitada por los requisitos de margen. En la práctica, un capital de $100-200 USD es el mínimo razonable para operar con gestión de riesgo básica. Recuerda siempre comenzar con la cuenta demo gratuita antes de depositar."
 ---
 
 <h2>¿Qué es Libertex y cuál es su modelo de negocio?</h2>
@@ -89,3 +98,13 @@ publicado: true
 <p>Libertex es una buena opción para traders que buscan un modelo de costos transparente, quieren empezar con poco dinero (desde $10) y prefieren una plataforma propia más simple que MT4. Es especialmente bueno para especulación de corto plazo en forex, índices y criptomonedas con su modelo sin spread.</p>
 <p>No es la mejor opción si quieres acciones reales para largo plazo, o si necesitas retiros instantáneos los fines de semana.</p>
 <p>Para abrir tu cuenta: <a href="https://fwd.cx/DMQ5TyRNANPA" target="_blank" rel="noopener noreferrer nofollow sponsored">Abrir cuenta en Libertex</a>. Recuerda usar la cuenta demo antes de operar con dinero real.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Qué significa exactamente que Libertex no tiene spread?</h3>
+<p>En la mayoría de brokers, el costo de operar está embebido en el spread: la diferencia entre el precio de compra (ask) y el precio de venta (bid). En Libertex, el spread es cero (o muy cercano a cero) y en su lugar se cobra una comisión porcentual visible y fija sobre el valor nocional de la operación. Esto hace que el costo sea más transparente y predecible, especialmente en momentos de alta volatilidad cuando los spreads de otros brokers se ensanchan significativamente.</p>
+<h3>¿La cuenta demo de Libertex caduca después de 30 días?</h3>
+<p>No. Libertex ofrece cuenta demo con $50,000 USD virtuales sin límite de tiempo. Puedes usarla indefinidamente sin que expire, lo que es inusual — la mayoría de brokers limitan la demo a 30 o 90 días. Esta es una ventaja real para quienes quieren dominar la plataforma antes de depositar capital real.</p>
+<h3>¿Puedo comprar acciones reales de Apple o Tesla en Libertex?</h3>
+<p>No. Libertex solo ofrece CFDs (Contratos por Diferencia), no acciones reales. Cuando operas acciones en Libertex, no eres propietario del activo — especulas sobre el movimiento del precio, sin dividendos ni derechos de voto. Si tu objetivo es construir un portafolio de acciones reales para el largo plazo, XTB es la alternativa con acciones y ETFs reales sin comisión desde LATAM.</p>
+<h3>¿Cuál es el depósito mínimo real para empezar en Libertex?</h3>
+<p>El depósito mínimo formal en Libertex es de $10 USD, uno de los más bajos del mercado entre brokers con regulación CySEC. Sin embargo, con $10 USD la capacidad operativa es muy limitada por los requisitos de margen. En la práctica, un capital de $100-200 USD es el mínimo razonable para operar con gestión de riesgo básica. Comienza siempre con la cuenta demo gratuita antes de depositar.</p>

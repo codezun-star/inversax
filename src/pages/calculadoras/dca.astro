@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora DCA — Inversax" description="Calcula el resultado de invertir una cantidad fija cada mes (Dollar Cost Averaging). Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora DCA (Dollar Cost Averaging) — Inversax" description="Calculadora DCA: proyecta tu cartera invirtiendo montos fijos cada mes. Calcula valor final, ganancias y multiplicador. Para inversores de Colombia, México y toda Latinoamérica.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el DCA (Dollar Cost Averaging) y cómo funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El DCA consiste en invertir una cantidad fija a intervalos regulares (mensual) sin importar el precio del activo. Cuando el precio baja compras más unidades; cuando sube, menos. El resultado es un precio promedio de compra más estable y menor impacto de la volatilidad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es mejor el DCA que invertir todo de una vez (lump sum)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Estudios muestran que invertir todo de una vez supera al DCA en promedio 2/3 de las veces en mercados alcistas. Sin embargo, el DCA reduce el riesgo de mala suerte de timing y es psicológicamente más sostenible. Para la mayoría de inversores con ingresos mensuales, el DCA es la estrategia natural y óptima."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Con cuánto dinero puedo empezar una estrategia DCA en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes empezar con muy poco. Brokers como Exness, XM o XTB permiten aportes desde 10-50 USD al mes para acceder a ETFs o activos globales desde Colombia, México, Perú y toda Latinoamérica. La consistencia importa más que el monto inicial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué activos se puede aplicar la estrategia DCA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El DCA funciona mejor en activos con tendencia alcista a largo plazo: ETFs de índices (S&P 500, MSCI World), acciones de empresas sólidas, Bitcoin o criptomonedas para perfiles más especulativos. No es ideal para activos en tendencia bajista permanente."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

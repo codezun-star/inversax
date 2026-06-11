@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Comisión de Broker — Inversax" description="Compara el costo real de las comisiones de distintos brokers forex. Calcula cuánto pagas por operación y al año. Soporta todas las monedas.">
+<Layout title="Comparador de Comisiones Forex — IC Markets, Pepperstone, Exness, XTB, XM | Inversax" description="Compara el costo real de operar en IC Markets, Pepperstone, Exness, XTB y XM según tu volumen mensual. Calcula cuánto pagas al año en comisiones. La herramienta de comparación de brokers forex para traders de Colombia, México, Chile, Perú y toda LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué broker forex tiene las comisiones más bajas para traders de América Latina?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para volúmenes medios-altos (0.5 lotes o más por operación), IC Markets y Pepperstone tienen los costos más bajos con sus cuentas Raw/Razor: spread de 0.0-0.1 pips más 7 USD de comisión round trip por lote estándar. Exness Zero es comparable. Para volúmenes bajos o principiantes con micro lotes, XM Ultra Low y XTB Pro pueden resultar más económicos porque no cobran comisión fija y el spread es de 0.6-0.8 pips."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es mejor pagar spread o comisión explícita en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de tu volumen. El spread incorporado (cuentas estándar) es más predecible y simple — pagas sin darte cuenta. La comisión explícita (cuentas Raw) es más transparente y más barata para volúmenes altos. La regla práctica: si operas más de 0.5 lotes por operación, la cuenta con comisión explícita suele costar menos. Por debajo de eso, a veces la cuenta estándar es más barata por el peso de la comisión mínima por operación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El swap overnight cuenta como comisión del broker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No exactamente: el swap es un costo de financiamiento que refleja la diferencia de tasas de interés entre los dos países del par operado, más el margen del broker. Para traders intradía (que cierran antes de las 22:00 GMT), el swap no aplica y el costo total es solo spread/comisión. Para swing traders que mantienen posiciones varios días, el swap puede superar al spread como costo principal. Calcula el swap por noche con nuestra calculadora de swap overnight."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los costos de comisión cambian para micro lotes o mini lotes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En cuentas Raw, la comisión suele ser proporcional al lote: 0.7 USD por 0.1 lotes (mini), 0.07 USD por 0.01 lotes (micro). En cuentas estándar sin comisión, el spread es el mismo en pips independientemente del tamaño — pero el costo en USD escala con el lote. Un spread de 1 pip en micro lote cuesta 0.10 USD; en lote estándar, 10 USD."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

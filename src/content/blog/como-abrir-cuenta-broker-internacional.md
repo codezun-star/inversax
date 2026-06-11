@@ -18,6 +18,15 @@ keywords:
   - "tiempo verificacion broker kyc"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué documentos necesito para abrir cuenta en un broker internacional desde Colombia o México?"
+    respuesta: "Dos documentos: (1) Prueba de identidad: cédula de ciudadanía colombiana o INE/pasaporte mexicano, vigente, legible, frente y dorso. (2) Prueba de domicilio: recibo de servicios públicos (agua, luz, gas, internet) o extracto bancario emitido en los últimos 3 meses, con tu nombre completo y dirección visible. Fotos tomadas con el teléfono en buena iluminación son aceptadas por casi todos los brokers. Sin hojas impresas ni trámites presenciales. El proceso completo es online."
+  - pregunta: "¿Cuánto tarda la verificación KYC en brokers como Exness, XM o XTB?"
+    respuesta: "Exness es el más rápido: verificación automatizada en 5-30 minutos en horario laborable para documentos claros. XM tarda 30 minutos a 24 horas con revisión humana. Pepperstone 1-24 horas. XTB 1-48 horas. Binance 5 minutos a 24 horas con reconocimiento facial. Los factores que alargan el proceso: documentos borrosos, discrepancia entre el nombre registrado y el del documento, o prueba de domicilio de más de 3 meses. Sube fotos nítidas con todos los bordes del documento visibles para aprobar en el primer intento."
+  - pregunta: "¿Puedo depositar en un broker con Nequi o Daviplata desde Colombia?"
+    respuesta: "Algunos brokers lo permiten directamente (Exness tiene integración con métodos locales en Colombia), otros no. La alternativa universal es: compra USDT en Binance via P2P usando Nequi o Daviplata → transfiere el USDT al broker (Exness, XM y Pepperstone aceptan USDT). Este proceso tiene un paso adicional pero funciona desde cualquier país sin necesidad de transferencia bancaria internacional. Para México, SPEI directo está disponible en XM y Exness en algunos casos."
+  - pregunta: "¿Es seguro dar mi cédula o pasaporte a un broker internacional?"
+    respuesta: "Sí, en brokers regulados por la FCA, ASIC o CySEC. Estos reguladores exigen que los brokers protejan los datos personales bajo estándares equivalentes al GDPR europeo, con cifrado de documentos y acceso restringido. La verificación KYC es un requisito legal regulatorio, no opcional, y los brokers están obligados a no usar esos datos para otros fines. El riesgo está en brokers NO regulados — dar tu cédula a una entidad sin licencia verificable sí es un riesgo. Verifica la regulación antes de subir cualquier documento."
 ---
 
 <h2>Abrir una cuenta en un broker internacional es más simple de lo que crees</h2>
@@ -106,4 +115,18 @@ publicado: true
   <li>Entiende exactamente cómo funciona el <a href="/blog/que-es-el-apalancamiento-forex">apalancamiento</a> y el <a href="/blog/que-es-un-cfd">CFD</a> antes de tu primera operación real</li>
   <li>Comprueba el costo de spread/comisión con nuestra <a href="/calculadoras/spread">calculadora de spread</a></li>
 </ul>
-<p>El error más costoso en trading no es elegir mal el instrumento — es no entender el riesgo antes de empezar. Cada hora invertida en aprender antes del primer depósito real vale diez veces más que esa misma hora aprendiendo a costa de pérdidas reales.</p>
+<p>El error más costoso en trading no es elegir mal el instrumento — es no entender el riesgo antes de empezar. Cada hora invertida en aprender antes del primer depósito real vale diez veces más que esa misma hora aprendiendo a costa de pérdidas reales.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Qué documentos necesito para abrir cuenta en un broker internacional desde Colombia o México?</h3>
+<p>Dos documentos: (1) Prueba de identidad: cédula de ciudadanía colombiana o INE/pasaporte mexicano, vigente, legible, frente y dorso. (2) Prueba de domicilio: recibo de servicios públicos (agua, luz, gas, internet) o extracto bancario emitido en los últimos 3 meses, con tu nombre completo y dirección visible. Fotos tomadas con el teléfono en buena iluminación son aceptadas por casi todos los brokers. Sin hojas impresas ni trámites presenciales. El proceso completo es online.</p>
+
+<h3>¿Cuánto tarda la verificación KYC en brokers como Exness, XM o XTB?</h3>
+<p>Exness es el más rápido: verificación automatizada en 5-30 minutos en horario laborable para documentos claros. XM tarda 30 minutos a 24 horas con revisión humana. Pepperstone 1-24 horas. XTB 1-48 horas. Binance 5 minutos a 24 horas con reconocimiento facial. Los factores que alargan el proceso: documentos borrosos, discrepancia entre el nombre registrado y el del documento, o prueba de domicilio de más de 3 meses. Sube fotos nítidas con todos los bordes del documento visibles para aprobar en el primer intento.</p>
+
+<h3>¿Puedo depositar en un broker con Nequi o Daviplata desde Colombia?</h3>
+<p>Algunos brokers lo permiten directamente (Exness tiene integración con métodos locales en Colombia), otros no. La alternativa universal es: compra USDT en Binance via P2P usando Nequi o Daviplata → transfiere el USDT al broker (Exness, XM y Pepperstone aceptan USDT). Este proceso tiene un paso adicional pero funciona desde cualquier país sin necesidad de transferencia bancaria internacional. Para México, SPEI directo está disponible en XM y Exness en algunos casos.</p>
+
+<h3>¿Es seguro dar mi cédula o pasaporte a un broker internacional?</h3>
+<p>Sí, en brokers regulados por la FCA, ASIC o CySEC. Estos reguladores exigen que los brokers protejan los datos personales bajo estándares equivalentes al GDPR europeo, con cifrado de documentos y acceso restringido. La verificación KYC es un requisito legal regulatorio, no opcional, y los brokers están obligados a no usar esos datos para otros fines. El riesgo está en brokers NO regulados — dar tu cédula a una entidad sin licencia verificable sí es un riesgo. Verifica la regulación antes de subir cualquier documento.</p></p>

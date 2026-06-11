@@ -16,6 +16,15 @@ keywords:
   - "primeros pasos en forex"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Es legal operar forex desde Colombia, México o Chile?"
+    respuesta: "Sí, es completamente legal en todos estos países. No existe ninguna ley en Colombia, México, Chile, Perú, Argentina ni en la mayoría de países latinoamericanos que prohíba a sus ciudadanos abrir cuentas en brokers internacionales de forex. Lo que sí existe es la obligación de declarar las ganancias ante la autoridad tributaria local (DIAN en Colombia, SAT en México, SII en Chile). Las ganancias son renta de fuente extranjera y deben tributar según las reglas de cada país."
+  - pregunta: "¿Cuánto capital mínimo necesito para empezar en forex desde LATAM?"
+    respuesta: "Técnicamente puedes empezar con $5 en XM o $10 en Exness. Sin embargo, con menos de $100 USD es muy difícil aplicar gestión de riesgo correcta (el 1% de riesgo por operación serían apenas $1, lo que limita el tamaño de lote). Para practicar de forma realista con dinero real, un capital de $100-500 USD es más adecuado. Lo más importante: practica al menos 1-2 meses en cuenta demo gratuita antes de depositar capital real."
+  - pregunta: "¿Qué es un pip en forex y cuánto dinero representa?"
+    respuesta: "Un pip (percentage in point) es la unidad mínima de movimiento del precio en forex. En el par EUR/USD, un pip es la cuarta cifra decimal: un movimiento de 1.0850 a 1.0851 es 1 pip. En términos monetarios, el valor de 1 pip depende del tamaño de tu posición: con 1 lote estándar (100,000 unidades) en EUR/USD, 1 pip equivale a $10 USD. Con 1 mini lote (10,000 unidades), 1 pip = $1 USD. Con 1 micro lote (1,000 unidades), 1 pip = $0.10 USD."
+  - pregunta: "¿Cuánto tiempo tarda en aprender forex un principiante que empieza desde cero?"
+    respuesta: "Aprender los conceptos básicos (pares, pips, lotes, apalancamiento, tipos de órdenes) toma 2-4 semanas de estudio regular. Desarrollar una estrategia y probarla consistentemente en demo lleva 3-6 meses adicionales. Ser consistentemente rentable en una cuenta real puede tomar 1-2 años de práctica disciplinada. La mayoría que pierde dinero en los primeros meses lo hace por saltarse la fase de demo y depositar capital real antes de estar preparado. No hay atajos en el aprendizaje del trading."
 ---
 
 <h2>¿Qué es el mercado forex?</h2>
@@ -59,4 +68,18 @@ El apalancamiento permite controlar una posición mayor que tu capital. Con 1:10
 
 <h2>¿Cuánto capital necesitas para empezar?</h2>
 <p>Técnicamente puedes abrir una cuenta real con $5 en XM o $10 en Exness. Pero con ese capital, incluso con micro lotes, el margen de error es mínimo. Para practicar de forma más realista con dinero real, $100-500 USD es un rango más adecuado. Con $100 puedes operar 0.01 lotes (micro) con gestión de riesgo del 2% y tener suficiente colchón para aprender sin que un error te liquide inmediatamente.</p>
-<p>Revisa qué brokers están disponibles en tu país con nuestro <a href="/brokers/co">comparador por país</a> y qué herramientas de análisis y gestión de riesgo tienes en nuestras <a href="/calculadoras">calculadoras financieras</a>.</p>
+<p>Revisa qué brokers están disponibles en tu país con nuestro <a href="/brokers/co">comparador por país</a> y qué herramientas de análisis y gestión de riesgo tienes en nuestras <a href="/calculadoras">calculadoras financieras</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Es legal operar forex desde Colombia, México o Chile?</h3>
+<p>Sí, es completamente legal en todos estos países. No existe ninguna ley en Colombia, México, Chile, Perú, Argentina ni en la mayoría de países latinoamericanos que prohíba a sus ciudadanos abrir cuentas en brokers internacionales de forex. Lo que sí existe es la obligación de declarar las ganancias ante la autoridad tributaria local (DIAN en Colombia, SAT en México, SII en Chile). Las ganancias son renta de fuente extranjera y deben tributar según las reglas de cada país.</p>
+
+<h3>¿Cuánto capital mínimo necesito para empezar en forex desde LATAM?</h3>
+<p>Técnicamente puedes empezar con $5 en XM o $10 en Exness. Sin embargo, con menos de $100 USD es muy difícil aplicar gestión de riesgo correcta (el 1% de riesgo por operación serían apenas $1, lo que limita el tamaño de lote). Para practicar de forma realista con dinero real, un capital de $100-500 USD es más adecuado. Lo más importante: practica al menos 1-2 meses en cuenta demo gratuita antes de depositar capital real.</p>
+
+<h3>¿Qué es un pip en forex y cuánto dinero representa?</h3>
+<p>Un pip (percentage in point) es la unidad mínima de movimiento del precio en forex. En el par EUR/USD, un pip es la cuarta cifra decimal: un movimiento de 1.0850 a 1.0851 es 1 pip. En términos monetarios, el valor de 1 pip depende del tamaño de tu posición: con 1 lote estándar (100,000 unidades) en EUR/USD, 1 pip equivale a $10 USD. Con 1 mini lote (10,000 unidades), 1 pip = $1 USD. Con 1 micro lote (1,000 unidades), 1 pip = $0.10 USD.</p>
+
+<h3>¿Cuánto tiempo tarda en aprender forex un principiante que empieza desde cero?</h3>
+<p>Aprender los conceptos básicos (pares, pips, lotes, apalancamiento, tipos de órdenes) toma 2-4 semanas de estudio regular. Desarrollar una estrategia y probarla consistentemente en demo lleva 3-6 meses adicionales. Ser consistentemente rentable en una cuenta real puede tomar 1-2 años de práctica disciplinada. La mayoría que pierde dinero en los primeros meses lo hace por saltarse la fase de demo y depositar capital real antes de estar preparado. No hay atajos en el aprendizaje del trading.</p></p>

@@ -15,6 +15,15 @@ keywords:
   - "invertir con 10 dolares broker"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuánto dinero mínimo necesito para empezar a invertir desde Colombia o México?"
+    respuesta: "Técnicamente puedes empezar con $5 USD en XM o $10 USD en Exness para trading. Para comprar ETFs reales (VOO, SPY) en XTB puedes empezar desde $10-20 USD comprando fracciones. Para una estrategia DCA mensual en ETFs que tenga sentido real, $50-100 USD mensuales es un punto práctico de entrada. Lo más importante no es el monto inicial — es la consistencia de la aportación mensual y el tiempo que dejas trabajar el interés compuesto."
+  - pregunta: "¿Qué es mejor para empezar con $100 USD: ETFs o forex trading?"
+    respuesta: "Para la mayoría de principiantes con $100 USD, los ETFs son la opción más adecuada. El trading de forex con apalancamiento con $100 requiere una gestión de riesgo muy estricta (micro lotes, máximo 1% de riesgo por operación = $1), y cualquier error puede borrar la cuenta rápidamente. Los ETFs no tienen ese riesgo de liquidación rápida: si el S&P 500 baja un 20%, sigues teniendo las participaciones y puedes esperar la recuperación. El forex es más adecuado cuando ya tienes conocimiento y experiencia en cuenta demo."
+  - pregunta: "¿Cuánto tendré si invierto $50 USD al mes durante 20 años?"
+    respuesta: "Con un rendimiento del 8% anual (conservador para el S&P 500 histórico después de inflación), $50 USD mensuales durante 20 años resultan en aproximadamente $29,500 USD, sobre $12,000 de aportaciones totales. Es decir, el interés compuesto genera $17,500 adicionales que nunca aportaste. Con $100 mensuales al mismo rendimiento, el resultado final sería ~$59,000 USD. Puedes proyectar tu escenario exacto con la calculadora de DCA de Inversax."
+  - pregunta: "¿Es seguro invertir en ETFs del S&P 500 desde Colombia o México con poco dinero?"
+    respuesta: "Sí, en términos de seguridad regulatoria. Los ETFs como VOO (Vanguard) y SPY están registrados en la SEC y cotizan en la NYSE — son instrumentos altamente regulados. El riesgo es de mercado (el precio puede bajar), no de estafa o pérdida del activo. Si compras VOO a través de XTB (broker regulado por FCA), las acciones son tuyas y están segregadas. El único riesgo real a largo plazo es vender durante una caída del mercado, no mantener durante la recuperación."
 ---
 
 <h2>La inversión no es solo para quienes tienen mucho dinero</h2>
@@ -59,4 +68,18 @@ En este rango ya puedes construir una estrategia real. Una opción sensata: 70% 
   <li>Comienza con una cuenta demo si nunca has operado. Un mes de práctica real vale más que mil horas de teoría.</li>
   <li>Invierte tu primera cantidad fija mensual en un ETF diversificado y no la toques durante al menos 3-5 años.</li>
 </ol>
-<p>Revisa qué brokers están disponibles en tu país con nuestro <a href="/brokers/co">comparador por país</a> y usa la <a href="/calculadoras/valor-futuro">calculadora de valor futuro</a> para ver cuánto crecerá tu inversión en el tiempo.</p>
+<p>Revisa qué brokers están disponibles en tu país con nuestro <a href="/brokers/co">comparador por país</a> y usa la <a href="/calculadoras/valor-futuro">calculadora de valor futuro</a> para ver cuánto crecerá tu inversión en el tiempo.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Cuánto dinero mínimo necesito para empezar a invertir desde Colombia o México?</h3>
+<p>Técnicamente puedes empezar con $5 USD en XM o $10 USD en Exness para trading. Para comprar ETFs reales (VOO, SPY) en XTB puedes empezar desde $10-20 USD comprando fracciones. Para una estrategia DCA mensual en ETFs que tenga sentido real, $50-100 USD mensuales es un punto práctico de entrada. Lo más importante no es el monto inicial — es la consistencia de la aportación mensual y el tiempo que dejas trabajar el interés compuesto.</p>
+
+<h3>¿Qué es mejor para empezar con $100 USD: ETFs o forex trading?</h3>
+<p>Para la mayoría de principiantes con $100 USD, los ETFs son la opción más adecuada. El trading de forex con apalancamiento con $100 requiere una gestión de riesgo muy estricta (micro lotes, máximo 1% de riesgo por operación = $1), y cualquier error puede borrar la cuenta rápidamente. Los ETFs no tienen ese riesgo de liquidación rápida: si el S&P 500 baja un 20%, sigues teniendo las participaciones y puedes esperar la recuperación. El forex es más adecuado cuando ya tienes conocimiento y experiencia en cuenta demo.</p>
+
+<h3>¿Cuánto tendré si invierto $50 USD al mes durante 20 años?</h3>
+<p>Con un rendimiento del 8% anual (conservador para el S&P 500 histórico después de inflación), $50 USD mensuales durante 20 años resultan en aproximadamente $29,500 USD, sobre $12,000 de aportaciones totales. Es decir, el interés compuesto genera $17,500 adicionales que nunca aportaste. Con $100 mensuales al mismo rendimiento, el resultado final sería ~$59,000 USD. Puedes proyectar tu escenario exacto con la calculadora de DCA de Inversax.</p>
+
+<h3>¿Es seguro invertir en ETFs del S&P 500 desde Colombia o México con poco dinero?</h3>
+<p>Sí, en términos de seguridad regulatoria. Los ETFs como VOO (Vanguard) y SPY están registrados en la SEC y cotizan en la NYSE — son instrumentos altamente regulados. El riesgo es de mercado (el precio puede bajar), no de estafa o pérdida del activo. Si compras VOO a través de XTB (broker regulado por FCA), las acciones son tuyas y están segregadas. El único riesgo real a largo plazo es vender durante una caída del mercado, no mantener durante la recuperación.</p></p>

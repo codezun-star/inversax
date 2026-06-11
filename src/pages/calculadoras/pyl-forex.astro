@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora P&L Forex — Ganancias y Pérdidas — Inversax" description="Calcula las ganancias o pérdidas de una operación forex en USD. Ingresa precio de entrada, salida, tamaño en lotes y tipo de operación.">
+<Layout title="Calculadora P&L Forex — Ganancias y Pérdidas por Operación | Inversax" description="Calcula la ganancia o pérdida exacta de cualquier operación forex en USD. Ingresa precio de entrada, precio de salida, número de lotes y dirección. Herramienta gratuita para traders de Colombia, México, Chile, Perú y toda LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula la ganancia o pérdida en una operación forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "P&L = Pips ganados/perdidos × Valor del pip × Número de lotes. Para una compra de EUR/USD: si entras a 1.0850 y sales a 1.0950, el movimiento es 100 pips. Con 1 lote estándar (pip = 10 USD): P&L = 100 × 10 × 1 = 1.000 USD de ganancia. Para una venta, el resultado se invierte: el precio debe bajar para ganar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo calcular el P&L antes de entrar a una operación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es exactamente para eso que sirve esta calculadora. Ingresa tu precio de entrada planeado y tu take profit como precio de salida — obtienes el beneficio potencial. Luego cambia el precio de salida por tu stop loss para ver el riesgo en USD. Si el ratio entre los dos resultados no es al menos 1:2, considera no entrar a esa operación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el P&L se expresa en USD y no en la moneda del par?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En forex, el P&L se calcula siempre en la divisa cotizada del par (la segunda). Para EUR/USD, el resultado está en USD. Para EUR/GBP, estaría en GBP. Esta calculadora expresa el resultado en USD ya que la mayoría de cuentas de trading están denominadas en dólares, incluso para traders de LATAM. Para pares donde el USD es la divisa base (USD/JPY), el resultado se convierte usando el precio actual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afectan las comisiones y el spread al P&L real?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Esta calculadora muestra el P&L bruto (solo movimiento de precio). El P&L neto real es: P&L bruto − costo del spread − comisión del broker − swap (si mantuviste más de un día). Por ejemplo, si ganaste 100 USD en pips pero el spread costó 12 USD y la comisión 7 USD, tu ganancia neta es 81 USD. Para operaciones muy cortas (scalping), el spread y la comisión representan un porcentaje alto del resultado bruto."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -83,10 +125,30 @@ import Layout from '../../layouts/Layout.astro';
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Cómo se calcula el P&L en forex?</h2>
     <p>El <strong>P&L (Profit &amp; Loss)</strong> de una operación forex depende de tres factores: el número de pips ganados o perdidos, el valor del pip para ese par y tamaño de lote, y la dirección de la operación (compra o venta).</p>
-    <p>Para un par donde el USD es la divisa cotizada (EUR/USD, GBP/USD), el valor del pip es fijo: 10 USD por pip por lote estándar. Para otros pares (USD/JPY, USD/CAD), el valor varía con el precio de mercado.</p>
-    <h2>Cómo usarla antes de operar</h2>
-    <p>Ingresa el precio de entrada (donde entrarás) y el precio objetivo (tu take profit). La calculadora muestra el beneficio potencial en USD. Luego ingresa tu precio de stop loss para calcular el riesgo real. Si el ratio riesgo/beneficio no es favorable, reconsidera la operación.</p>
-    <p>Úsala junto a la <a href="/calculadoras/riesgo-beneficio">calculadora de riesgo/beneficio</a> y la de <a href="/calculadoras/tamano-posicion">tamaño de posición</a> para planificar cada operación con precisión.</p>
+    <p>Para pares donde el USD es la divisa cotizada (EUR/USD, GBP/USD, AUD/USD), el valor del pip es fijo: 10 USD por pip por lote estándar. Para pares donde el USD es la divisa base (USD/JPY, USD/CAD), el valor por pip varía con el precio actual del mercado.</p>
+
+    <h2>Cómo planificar cada operación con el P&L</h2>
+    <p>Antes de entrar, calcula dos escenarios:</p>
+    <ul>
+      <li><strong>Escenario ganador:</strong> entrada → take profit. El resultado es tu ganancia potencial.</li>
+      <li><strong>Escenario perdedor:</strong> entrada → stop loss. El resultado es tu pérdida máxima.</li>
+    </ul>
+    <p>Si la ganancia potencial no es al menos el doble de la pérdida máxima (ratio 1:2), reconsidera la operación. Si el ratio es bueno, usa la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a> para ajustar los lotes de modo que la pérdida máxima sea exactamente el 1-2% de tu capital.</p>
+
+    <h2>Ejemplo: operación en EUR/USD</h2>
+    <ul>
+      <li>Compra en <strong>1.0850</strong> (long)</li>
+      <li>Take profit: <strong>1.1050</strong> → 200 pips de ganancia</li>
+      <li>Stop loss: <strong>1.0750</strong> → 100 pips de pérdida</li>
+      <li>Tamaño: <strong>0.5 lotes</strong> (pip = 5 USD)</li>
+      <li>Ganancia potencial: 200 × 5 = <strong>1.000 USD</strong></li>
+      <li>Pérdida máxima: 100 × 5 = <strong>500 USD</strong></li>
+      <li>Ratio R/R: <strong>1:2</strong> — operación válida</li>
+    </ul>
+
+    <h2>Diferencia entre P&L bruto y neto</h2>
+    <p>Esta calculadora muestra el P&L bruto (solo el movimiento de precio). El P&L neto real descuenta el spread, la comisión y el swap si mantuviste la posición más de un día. Para operaciones de 200 pips, el spread de 1-2 pips es marginal (~1%). Para scalping de 5-10 pips, el spread representa el 10-20% del resultado — allí el P&L bruto y neto difieren significativamente.</p>
+    <p>Úsala junto a la <a href="/calculadoras/riesgo-beneficio">calculadora de riesgo/beneficio</a> y la de <a href="/calculadoras/tamano-posicion">tamaño de posición</a> para planificar cada operación con precisión antes de ejecutarla.</p>
   </div>
 </Layout>
 

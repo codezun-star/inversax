@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Swap Overnight Forex — Inversax" description="Calcula el costo o ganancia del swap overnight (rollover) al mantener posiciones forex abiertas más de un día. Proyecta el costo semanal y mensual.">
+<Layout title="Calculadora de Swap Overnight Forex — Costo de Rollover | Inversax" description="Calcula el costo o ganancia del swap overnight al mantener posiciones forex abiertas más de un día. Proyección semanal y mensual. Para traders de Colombia, México, Chile, Perú y toda América Latina que operan swing trading.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el swap overnight en forex y cuándo se cobra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El swap overnight (rollover) es el costo o ganancia de mantener una posición forex abierta más de 24 horas. Se aplica a las 22:00 GMT (hora del rollover del mercado interbancario). Si cierras tu posición antes de esa hora, no pagas swap. El swap refleja la diferencia de tasas de interés entre los dos países del par: si compras una divisa con tasa alta y vendes una con tasa baja, puedes recibir swap positivo (te pagan)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el miércoles se cobra triple swap?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El mercado forex liquida las operaciones en T+2 (dos días hábiles). Las posiciones abiertas el miércoles liquidarían el viernes, pero como el fin de semana no es hábil, la liquidación salta al lunes — cubriendo 3 días (sábado, domingo y lunes). Por eso el rollover del miércoles aplica 3 noches de swap en vez de 1. Los traders swing que quieren evitar el triple swap a veces cierran y reabren sus posiciones el miércoles antes de las 22:00 GMT."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde encuentro las tasas swap de mi broker para introducirlas en la calculadora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En MetaTrader 4 o MT5: clic derecho en el par de divisas en el panel de mercado → Especificaciones del contrato → Swap largo / Swap corto. En Exness, XM e IC Markets también puedes verlas en la sección de condiciones de trading de su sitio web. Las tasas se expresan en puntos por noche y pueden cambiar semanalmente según las decisiones de los bancos centrales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es una cuenta swap-free y cuándo conviene?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una cuenta swap-free (también llamada cuenta islámica) elimina el cargo de swap overnight. Fue diseñada para traders musulmanes para quienes los intereses son contrarios a la Sharia. Sin embargo, muchos brokers la ofrecen a cualquier cliente. La desventaja es que suelen cobrar una comisión administrativa fija o ampliar ligeramente el spread para compensar. Conviene si eres swing trader y el swap negativo de tus pares preferidos es significativo."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -77,10 +119,18 @@ import Layout from '../../layouts/Layout.astro';
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Qué es el swap overnight?</h2>
     <p>El <strong>swap overnight</strong> (también llamado rollover o tasa de financiamiento) es el costo o ganancia de mantener una posición forex abierta más de 24 horas. Se origina en la diferencia de tasas de interés entre los dos países de las divisas del par operado.</p>
-    <p>Si compras EUR/USD, en teoría estás "tomando prestados" dólares para comprar euros. Si la tasa de interés del euro es mayor que la del dólar, recibes swap positivo (cobras). Si es menor, pagas swap negativo.</p>
-    <h2>Cuándo el swap importa</h2>
-    <p>Para traders intradía que cierran todas las posiciones antes de las 22:00 GMT (hora de rollover), el swap no aplica. Para traders de posición o swing traders que mantienen posiciones varios días o semanas, el swap puede convertirse en un costo o ganancia significativa.</p>
-    <p>Algunos brokers ofrecen cuentas "swap-free" (islámicas) que eliminan el swap pero cobran una comisión administrativa. Si eres swing trader, revisa las tasas swap de tu broker antes de elegir el par que operas.</p>
+    <p>Si compras EUR/USD, en teoría estás "tomando prestados" dólares para comprar euros. Si la tasa de interés del euro es mayor que la del dólar, recibes swap positivo (cobras interés). Si es menor, pagas swap negativo (te cobran interés). La diferencia también incluye el margen del broker.</p>
+
+    <h2>¿Cuándo el swap importa realmente?</h2>
+    <p>Para traders intradía que cierran todas las posiciones antes de las 22:00 GMT, el swap no aplica. Para swing traders o traders de posición que mantienen operaciones varios días o semanas, el swap puede convertirse en un costo significativo — incluso mayor que el spread en algunas configuraciones.</p>
+    <p>Ejemplo: 1 lote de EUR/USD con swap long de −4.5 puntos/noche × 0.01 USD/punto = −0.045 USD/noche. En 20 noches (un mes): −0.90 USD. Parece poco, pero con 10 lotes son −9 USD/noche y −180 USD/mes. Para estrategias de carry trade donde el swap es positivo, esta misma lógica genera ingresos pasivos.</p>
+
+    <h2>Carry trade: usando el swap a tu favor</h2>
+    <p>El <strong>carry trade</strong> consiste en comprar una divisa con tasa de interés alta y vender una con tasa baja, buscando cobrar el diferencial (swap positivo) mientras la posición está abierta. Históricamente, pares como AUD/JPY o NZD/JPY han sido usados para carry trade porque Australia y Nueva Zelanda tienen tasas más altas que Japón. El riesgo es que el movimiento del precio puede superar el beneficio del swap en períodos de volatilidad.</p>
+
+    <h2>Cómo encontrar las tasas swap de tu broker</h2>
+    <p>En MetaTrader 4 o MT5: clic derecho en el par → Especificaciones del contrato → Swap largo / Swap corto. Las tasas se muestran en puntos por noche. En Exness, XM e IC Markets también están disponibles en su sitio web en la sección de condiciones de trading. Las tasas cambian semanalmente según las decisiones de los bancos centrales, especialmente la Fed y el BCE.</p>
+    <p>Si eres swing trader y el swap negativo de tus pares habituales es alto, revisa si tu broker ofrece cuenta swap-free o evalúa cambiar de par. Usa la <a href="/calculadoras/comision-broker">calculadora de comisiones</a> para calcular el costo total (spread + comisión + swap) de tu operativa mensual.</p>
   </div>
 </Layout>
 

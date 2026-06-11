@@ -16,6 +16,15 @@ keywords:
   - "mejor broker latinoamerica xtb pepperstone"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿XTB ofrece acciones reales o solo CFDs de acciones?"
+    respuesta: "XTB ofrece acciones reales — eres propietario del activo subyacente, recibes dividendos y tienes derechos de accionista. Esto aplica a más de 3,500 acciones de bolsas de EE.UU. y Europa y a más de 300 ETFs reales, con 0% de comisión hasta €100,000 mensuales. Pepperstone, en contraste, solo ofrece CFDs de acciones: no eres propietario real del activo y hay costos de financiamiento overnight. Para inversión de largo plazo en acciones, XTB no tiene competidor directo entre los brokers disponibles en LATAM."
+  - pregunta: "¿Pepperstone o XTB para operar forex con spreads bajos?"
+    respuesta: "Pepperstone gana en forex. La cuenta Razor de Pepperstone tiene spreads desde 0.0 pips en EUR/USD más comisión de $7 por lote (ida y vuelta), resultando en un costo total de $7-8 por lote. XTB Pro tiene spreads desde 0.1 pips más comisión de $3.50 por lado ($7 total), con costo efectivo ligeramente mayor. Para scalping o trading activo de forex, la cuenta Razor de Pepperstone es una de las más competitivas disponibles en LATAM."
+  - pregunta: "¿Puedo operar desde TradingView directamente con XTB o con Pepperstone?"
+    respuesta: "Con Pepperstone sí: tiene integración nativa con TradingView que permite ejecutar órdenes directamente desde los gráficos de la plataforma. XTB no tiene integración nativa con TradingView — ofrece su propia plataforma xStation 5 (con gráficos avanzados integrados) y MT4, pero no la conexión directa con TradingView que sí tiene Pepperstone. Si TradingView es tu plataforma principal de análisis, Pepperstone te da la integración más fluida."
+  - pregunta: "¿Qué broker es mejor para un inversor latinoamericano que quiere hacer las dos cosas: ETFs a largo plazo y algo de forex?"
+    respuesta: "Muchos traders avanzados de LATAM optan por abrir cuentas en ambos brokers: XTB para la parte de inversión pasiva en ETFs y acciones reales (sin comisión), y Pepperstone para el trading activo de forex con spreads ECN bajos. Esta combinación aprovecha lo mejor de cada uno. Si solo puedes elegir uno, la decisión depende de tu objetivo principal: si es inversión a largo plazo en mercados de renta variable, XTB. Si es trading activo de divisas y CFDs, Pepperstone."
 ---
 
 <h2>XTB vs Pepperstone: dos brokers excelentes, dos perfiles distintos</h2>
@@ -121,3 +130,13 @@ publicado: true
 <p><strong>Elige Pepperstone si:</strong> eres un trader activo de forex o CFDs que busca los spreads más bajos posibles. La cuenta Razor de Pepperstone es una de las más competitivas del mercado para scalping y trading de alta frecuencia. Y si ya usas TradingView para análisis, la integración directa es una ventaja concreta.</p>
 <p>Si puedes, abre cuentas en ambos — XTB para la parte de inversión de largo plazo en acciones y ETFs, Pepperstone para el trading activo de forex. Muchos traders de LATAM hacen exactamente eso.</p>
 <p>Abrir cuenta en <a href="https://geolink.xtb.com/I0QSx" target="_blank" rel="noopener noreferrer nofollow sponsored">XTB</a> · Abrir cuenta en <a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a>.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿XTB ofrece acciones reales o solo CFDs de acciones?</h3>
+<p>XTB ofrece acciones reales — eres propietario del activo subyacente, recibes dividendos y tienes derechos de accionista. Esto aplica a más de 3,500 acciones de bolsas de EE.UU. y Europa y a más de 300 ETFs reales, con 0% de comisión hasta €100,000 mensuales. Pepperstone, en contraste, solo ofrece CFDs de acciones: no eres propietario real del activo y hay costos de financiamiento overnight. Para inversión de largo plazo en acciones, XTB no tiene competidor directo entre los brokers disponibles en LATAM.</p>
+<h3>¿Pepperstone o XTB para operar forex con spreads bajos?</h3>
+<p>Pepperstone gana en forex. La cuenta Razor de Pepperstone tiene spreads desde 0.0 pips en EUR/USD más comisión de $7 por lote (ida y vuelta), resultando en un costo total de $7-8 por lote. XTB Pro tiene spreads desde 0.1 pips más comisión de $3.50 por lado ($7 total), con costo efectivo ligeramente mayor. Para scalping o trading activo de forex, la cuenta Razor de Pepperstone es una de las más competitivas disponibles en LATAM.</p>
+<h3>¿Puedo operar desde TradingView directamente con XTB o con Pepperstone?</h3>
+<p>Con Pepperstone sí: tiene integración nativa con TradingView que permite ejecutar órdenes directamente desde los gráficos de la plataforma. XTB no tiene integración nativa con TradingView — ofrece su propia plataforma xStation 5 (con gráficos avanzados integrados) y MT4, pero no la conexión directa con TradingView. Si TradingView es tu plataforma principal de análisis, Pepperstone te da la integración más fluida.</p>
+<h3>¿Qué broker es mejor para un inversor latinoamericano que quiere hacer ETFs a largo plazo y también algo de forex?</h3>
+<p>Muchos traders avanzados de LATAM optan por abrir cuentas en ambos brokers: XTB para la parte de inversión pasiva en ETFs y acciones reales (sin comisión), y Pepperstone para el trading activo de forex con spreads ECN bajos. Esta combinación aprovecha lo mejor de cada uno. Si solo puedes elegir uno, la decisión depende de tu objetivo principal: si es inversión a largo plazo en renta variable, XTB. Si es trading activo de divisas y CFDs, Pepperstone.</p>

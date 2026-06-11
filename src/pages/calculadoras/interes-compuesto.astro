@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Interés Compuesto — Inversax" description="Calcula cuánto crecerá tu inversión con el interés compuesto. Ingresa capital inicial, tasa anual, aportes mensuales y plazo. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Interés Compuesto — Inversax" description="Calculadora de interés compuesto gratis para Colombia, México y toda Latinoamérica. Proyecta capital final, ganancias y rentabilidad con aportes mensuales. Soporta 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa anual debo usar en la calculadora de interés compuesto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del instrumento. Fondos indexados tipo S&P 500 han rendido ~10% anual histórico antes de inflación. Para cálculos conservadores en dólares usa 6–7%. Para monedas locales de alta inflación como el peso argentino o el bolívar, el rendimiento real descontada la inflación es lo que importa más que la tasa nominal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La calculadora de interés compuesto incluye la inflación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Los resultados son en términos nominales. Para obtener el valor real, resta la inflación esperada de tu tasa anual. Si esperas 8% de rendimiento y 4% de inflación, usa 4% en la calculadora para ver el crecimiento real del poder adquisitivo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo funciona la capitalización mensual del interés compuesto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La calculadora usa capitalización mensual: divide la tasa anual entre 12 y aplica el interés cada mes. Los intereses de enero generan intereses en febrero y así sucesivamente. Fórmula: Capital × (1 + tasa/12)^(años×12) más el valor futuro de los aportes mensuales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Desde cuánto capital puedo empezar a aprovechar el interés compuesto en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes empezar con cualquier monto. Brokers como Exness, XTB o XM permiten abrir cuenta con 10–100 USD y acceder a ETFs o fondos indexados desde Colombia, México, Perú, Chile y el resto de Latinoamérica."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

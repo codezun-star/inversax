@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Ahorro para Meta — Inversax" description="¿Cuánto debes ahorrar cada mes para acumular un capital objetivo? Calcula el ahorro mensual necesario considerando tu capital actual y el rendimiento de tu inversión.">
+<Layout title="Calculadora de Ahorro para una Meta — ¿Cuánto Ahorrar al Mes? | Inversax" description="Calculadora de ahorro mensual para alcanzar una meta de capital. Con interés compuesto incluido. Para inversores de Colombia, México, Argentina y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo cuánto debo ahorrar cada mes para alcanzar una meta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La fórmula usa la función de valor futuro de una anualidad. Si ya tienes capital ahorrado, ese dinero crece con interés compuesto. La diferencia entre tu meta y el valor futuro del capital inicial se cubre con aportes mensuales. La calculadora hace todo esto automáticamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el interés compuesto reduce el ahorro mensual necesario?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque tanto tu capital inicial como cada aportación mensual generan rendimientos que se acumulan. Empezar 5 años antes puede reducir la cuota mensual necesaria a menos de la mitad. El tiempo y el rendimiento trabajan a tu favor cuanto antes empieces."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué rendimiento anual debo usar para mis cálculos de ahorro en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para metas importantes como la jubilación o vivienda, usa 5-7% en dólares (portafolio diversificado conservador). Para metas a corto plazo (1-3 años), reduce a 3-4% y prioriza instrumentos de bajo riesgo. Siempre compara con la tasa requerida para verificar si el rendimiento esperado es realista."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo tarda en alcanzarse una meta de 100.000 dólares ahorrando desde cero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del ahorro mensual y el rendimiento. Ahorrando 300 USD al mes al 8% anual, llegas a 100.000 en aproximadamente 17 años. Con 500 USD/mes al mismo rendimiento, en unos 12 años. Usa la calculadora para obtener el número exacto según tu situación."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -76,6 +136,29 @@ import Layout from '../../layouts/Layout.astro';
     <p>Cuanto antes empieces y mayor sea el rendimiento de tu inversión, menor será el ahorro mensual necesario. Empezar 5 años antes puede reducir la cuota mensual a menos de la mitad.</p>
     <h2>Cómo elegir el rendimiento</h2>
     <p>Usa rendimientos conservadores para metas importantes (retiro, vivienda): 5-7% en dólares es razonable para un portafolio diversificado. Para metas de corto plazo (1-3 años), reduce la tasa a 3-4% y prioriza instrumentos de bajo riesgo. Complementa con la <a href="/calculadoras/tasa-requerida">calculadora de tasa requerida</a> para verificar si el rendimiento esperado es realista.</p>
+
+    <h2>Metas comunes de ahorro en Latinoamérica</h2>
+    <ul>
+      <li><strong>Fondo de emergencia (3-6 meses de gastos):</strong> Meta típica de 5.000-15.000 USD. En 1-2 años sin rendimiento. Usa instrumentos líquidos y sin riesgo.</li>
+      <li><strong>Prima o enganche de vivienda:</strong> 10-30% del valor de la propiedad. Plazo de 3-7 años. Usa instrumentos de bajo a moderado riesgo.</li>
+      <li><strong>Retiro anticipado o FIRE:</strong> 25 veces tus gastos anuales según la regla del 4%. Meta de 300.000-600.000 USD. Plazo de 15-25 años. Portafolio en ETFs globales.</li>
+      <li><strong>Educación universitaria de los hijos:</strong> 20.000-80.000 USD dependiendo del país y la institución. Plazo de 5-15 años.</li>
+    </ul>
+
+    <h2>El impacto de empezar antes</h2>
+    <p>Si quieres acumular 100.000 USD al 7% anual:</p>
+    <ul>
+      <li>En <strong>30 años</strong>: necesitas ahorrar ~99 USD/mes</li>
+      <li>En <strong>20 años</strong>: necesitas ~217 USD/mes</li>
+      <li>En <strong>10 años</strong>: necesitas ~574 USD/mes</li>
+    </ul>
+    <p>Empezar 10 años antes reduce el ahorro mensual necesario casi a la quinta parte. El tiempo es el activo más valioso en la inversión. Complementa esta estrategia con el <a href="/calculadoras/dca">DCA mensual</a> para mantener la disciplina.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué pasa si ya tengo capital inicial ahorrado?</h3>
+    <p>El capital inicial también crece con interés compuesto durante el plazo. La calculadora lo descuenta automáticamente del total que debes cubrir con aportes mensuales. A mayor capital inicial y mayor rendimiento, menor será el ahorro mensual requerido.</p>
+    <h3>¿Dónde invertir el ahorro mensual en Colombia, México o Chile?</h3>
+    <p>Para metas a largo plazo (más de 5 años), ETFs de índices globales a través de brokers internacionales como XTB, Exness o IC Markets son una opción accesible desde toda Latinoamérica. Para metas más cortas, depósitos a plazo fijo o fondos de renta fija en USD ofrecen menor riesgo.</p>
   </div>
 </Layout>
 
@@ -99,7 +182,7 @@ import Layout from '../../layouts/Layout.astro';
     const aportado = ahorro * n + actual;
     const rendimientos = meta - aportado;
     document.getElementById('ahorro')!.textContent = fmt(ahorro, m);
-    document.getElementById('aportado')!.textContent = fmt(ahorro * n, m);
+    document.getElementById('aportado')!.textContent = fmt(ahorro * n + actual, m);
     document.getElementById('rendimientos')!.textContent = fmt(Math.max(0, rendimientos), m);
     document.getElementById('cap-final')!.textContent = fmt(capFinal, m);
   }

@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Impacto de la Devaluación — Inversax" description="Calcula cuánto pierde valor tu ahorro en moneda local por la devaluación cambiaria frente al dólar. Proyecta el equivalente en USD en el futuro.">
+<Layout title="Calculadora de Devaluación — Cuánto Pierden tus Ahorros en LATAM | Inversax" description="Calcula cuánto pierde valor tu ahorro en pesos colombianos, mexicanos, argentinos, soles u otras monedas latinoamericanas por la devaluación frente al dólar. Proyecta el equivalente en USD a 1, 5 o 10 años.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto se han devaluado el peso colombiano, mexicano o sol peruano frente al dólar históricamente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Referencia histórica promedio anual de devaluación frente al USD (últimos 10 años): Colombia (COP) ~6-8% anual, México (MXN) ~4-6%, Chile (CLP) ~4-6%, Perú (PEN) ~2-4%, Uruguay (UYU) ~7-9%, Bolivia (BOB) ~1-2% (caja de conversión), Paraguay (PYG) ~3-5%, Argentina (ARS) 50%+ anual, Venezuela (VES) 100%+ anual. Estos son promedios — en años de crisis pueden ser mucho mayores."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto vale en dólares en 10 años un ahorro de 10 millones de pesos colombianos con devaluación del 7% anual?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con un tipo de cambio actual de 4.200 COP/USD y devaluación del 7% anual: hoy equivale a 2.381 USD. En 5 años, el tipo proyectado sería ~5.893 COP/USD, y los 10M COP equivaldrían a 1.697 USD. En 10 años, el tipo proyectado sería ~8.262 COP/USD, y equivaldrían a 1.210 USD — una pérdida del 49% de valor en USD en una década, aunque el número en pesos sea el mismo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo proteger los ahorros de la devaluación siendo latinoamericano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las estrategias más comunes: (1) mantener una parte del ahorro en USD o activos denominados en USD; (2) invertir en ETFs internacionales a través de brokers como Exness, XM o Interactive Brokers; (3) bienes raíces en zonas dolarizadas o turísticas; (4) criptomonedas como cobertura parcial (alta volatilidad); (5) bonos soberanos en USD emitidos por tu propio gobierno. El porcentaje a dolarizar depende de tu exposición: si tus gastos son en moneda local, no necesitas dolarizar todo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Devaluación e inflación son lo mismo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No exactamente, aunque están relacionadas. La inflación es la pérdida de poder de compra interno — los precios locales suben. La devaluación es la pérdida de valor de la moneda frente a otras divisas (principalmente el USD). Una moneda puede devaluarse sin inflación interna (si la economía es muy productiva), o puede haber inflación sin devaluación (si el banco central interviene el tipo de cambio). En LATAM, generalmente ocurren juntas: alta inflación suele ir acompañada de devaluación."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,7 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="VES">VES — Bolívar venezolano</option><option value="BOB">BOB — Boliviano</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option>
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="PYG">PYG — Guaraní</option><option value="VES">VES — Bolívar venezolano</option><option value="CRC">CRC — Colón</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option><option value="HNL">HNL — Lempira</option><option value="NIO">NIO — Córdoba</option><option value="CUP">CUP — Peso cubano</option><option value="BZD">BZD — Dólar de Belice</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
             </select>
           </div>
           <div>
@@ -84,7 +126,7 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <script>
-  const DEC: Record<string,number> = {COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,VES:2,BOB:2,DOP:2,GTQ:2};
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
   function fmt(n: number, m: string) {
     const d = DEC[m] ?? 2;
     return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;

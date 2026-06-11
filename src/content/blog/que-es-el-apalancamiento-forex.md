@@ -16,6 +16,15 @@ keywords:
   - "apalancamiento real vs nominal"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Es peligroso el apalancamiento 1:500 que ofrecen brokers como Exness?"
+    respuesta: "El apalancamiento 1:500 disponible en algunos brokers no es peligroso por sí mismo — es peligroso si lo usas al máximo. Un trader con $1,000 y apalancamiento 1:500 puede controlar $500,000 en el mercado: un movimiento de solo el 0.2% en contra liquida toda la cuenta. Pero nadie te obliga a usar el máximo. Los traders profesionales raramente superan 10:1 de apalancamiento efectivo, aunque tengan 1:500 disponible. La disciplina en el uso del apalancamiento, no el límite ofrecido, es lo que determina el riesgo real."
+  - pregunta: "¿Cuánto apalancamiento efectivo usan realmente los traders profesionales?"
+    respuesta: "La mayoría de traders profesionales mantiene un apalancamiento efectivo de 5:1 a 20:1 máximo, independientemente del apalancamiento nominal que ofrece el broker. Un trader con $10,000 en cuenta que opera 1 lote estándar de EUR/USD está usando un apalancamiento efectivo de 10:1 ($100,000 ÷ $10,000). El número que importa no es el 1:500 del broker — es el ratio entre el valor total de tus posiciones abiertas y tu capital en cuenta."
+  - pregunta: "¿Qué es el margen en trading y cómo se diferencia del apalancamiento?"
+    respuesta: "El margen es el depósito de garantía que el broker retiene de tu cuenta cuando abres una posición. Es el dinero que está 'bloqueado' como garantía de la posición. El apalancamiento es la relación entre ese margen y el tamaño total de la posición: con apalancamiento 1:100, el margen requerido es el 1% del tamaño de la posición. Con 1:200, el 0.5%. El margen libre es el capital disponible en tu cuenta que no está retenido como garantía — si cae demasiado, recibes una llamada de margen (margin call)."
+  - pregunta: "¿Cómo calculo mi apalancamiento efectivo real en cualquier momento?"
+    respuesta: "Fórmula: Apalancamiento efectivo = Valor total de las posiciones abiertas ÷ Capital en cuenta (equity). Ejemplo: tienes $3,000 en cuenta y tienes abiertas posiciones por un valor nocional total de $60,000. Tu apalancamiento efectivo es 20:1 ($60,000 ÷ $3,000). Puedes calcularlo automáticamente con la calculadora de apalancamiento efectivo de Inversax ingresando el tamaño de tus posiciones y el balance de tu cuenta."
 ---
 
 <h2>El apalancamiento: la herramienta más poderosa y más peligrosa del forex</h2>
@@ -49,4 +58,18 @@ publicado: true
 <p>La herramienta más útil para gestionar esto correctamente es la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>: determina cuántos lotes operar dado tu capital, porcentaje de riesgo aceptado y stop loss en pips. Úsala antes de cada operación.</p>
 
 <h2>El margen: lo que el broker retiene como garantía</h2>
-<p>Cuando abres una posición, el broker reserva una parte de tu saldo como margen. Mientras la posición está abierta, ese dinero no está disponible. El <strong>margen libre</strong> es el dinero que te queda disponible para abrir nuevas posiciones o absorber pérdidas flotantes. Usa la <a href="/calculadoras/margen-libre">calculadora de margen libre</a> para monitorear en tiempo real cuánto margen tienes disponible antes de abrir cada nuevo trade.</p>
+<p>Cuando abres una posición, el broker reserva una parte de tu saldo como margen. Mientras la posición está abierta, ese dinero no está disponible. El <strong>margen libre</strong> es el dinero que te queda disponible para abrir nuevas posiciones o absorber pérdidas flotantes. Usa la <a href="/calculadoras/margen-libre">calculadora de margen libre</a> para monitorear en tiempo real cuánto margen tienes disponible antes de abrir cada nuevo trade.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Es peligroso el apalancamiento 1:500 que ofrecen brokers como Exness?</h3>
+<p>El apalancamiento 1:500 disponible en algunos brokers no es peligroso por sí mismo — es peligroso si lo usas al máximo. Un trader con $1,000 y apalancamiento 1:500 puede controlar $500,000 en el mercado: un movimiento de solo el 0.2% en contra liquida toda la cuenta. Pero nadie te obliga a usar el máximo. Los traders profesionales raramente superan 10:1 de apalancamiento efectivo, aunque tengan 1:500 disponible. La disciplina en el uso del apalancamiento, no el límite ofrecido, es lo que determina el riesgo real.</p>
+
+<h3>¿Cuánto apalancamiento efectivo usan realmente los traders profesionales?</h3>
+<p>La mayoría de traders profesionales mantiene un apalancamiento efectivo de 5:1 a 20:1 máximo, independientemente del apalancamiento nominal que ofrece el broker. Un trader con $10,000 en cuenta que opera 1 lote estándar de EUR/USD está usando un apalancamiento efectivo de 10:1 ($100,000 ÷ $10,000). El número que importa no es el 1:500 del broker — es el ratio entre el valor total de tus posiciones abiertas y tu capital en cuenta.</p>
+
+<h3>¿Qué es el margen en trading y cómo se diferencia del apalancamiento?</h3>
+<p>El margen es el depósito de garantía que el broker retiene de tu cuenta cuando abres una posición. Es el dinero que está 'bloqueado' como garantía de la posición. El apalancamiento es la relación entre ese margen y el tamaño total de la posición: con apalancamiento 1:100, el margen requerido es el 1% del tamaño de la posición. Con 1:200, el 0.5%. El margen libre es el capital disponible en tu cuenta que no está retenido como garantía — si cae demasiado, recibes una llamada de margen (margin call).</p>
+
+<h3>¿Cómo calculo mi apalancamiento efectivo real en cualquier momento?</h3>
+<p>Fórmula: Apalancamiento efectivo = Valor total de las posiciones abiertas ÷ Capital en cuenta (equity). Ejemplo: tienes $3,000 en cuenta y tienes abiertas posiciones por un valor nocional total de $60,000. Tu apalancamiento efectivo es 20:1 ($60,000 ÷ $3,000). Puedes calcularlo automáticamente con la calculadora de apalancamiento efectivo de Inversax ingresando el tamaño de tus posiciones y el balance de tu cuenta.</p></p>

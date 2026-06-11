@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Paridad de Poder Adquisitivo (PPA) — Inversax" description="Calcula la Paridad de Poder Adquisitivo entre dos países. Compara si una moneda está subvalorada o sobrevalorada respecto al tipo de cambio oficial.">
+<Layout title="Calculadora de Paridad de Poder Adquisitivo (PPA) — Big Mac Index LATAM | Inversax" description="Calcula la Paridad de Poder Adquisitivo (PPA) entre dos países y determina si el peso colombiano, mexicano, sol peruano u otra moneda latinoamericana está subvalorada o sobrevalorada frente al dólar usando el método del Big Mac Index.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la Paridad de Poder Adquisitivo (PPA) y para qué sirve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La PPA es una teoría económica que establece que el mismo bien debería costar lo mismo en dos países cuando se mide en la misma moneda. Se usa para: (1) evaluar si una moneda está sub o sobrevalorada respecto al tipo de cambio de mercado; (2) comparar el nivel de vida entre países de forma más justa que con el tipo de cambio nominal; (3) ajustar salarios y precios en comparaciones internacionales. El FMI, el Banco Mundial y The Economist la usan como referencia para análisis económicos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Están subvalorados el peso colombiano, mexicano o sol peruano según la PPA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Históricamente, la mayoría de monedas latinoamericanas están subvaloradas respecto al USD según el Big Mac Index. Colombia suele estar subvalorada entre 30-50%, México entre 25-40%, Chile entre 20-35%, Perú entre 30-45%. Esto significa que los bienes en esos países son 'baratos' medidos en dólares al tipo de cambio oficial. Argentina (con tipo oficial) y Venezuela son casos extremos de sobrevaloración oficial con mercado paralelo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El Big Mac Index es un indicador confiable de si una moneda está bien valorada?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es un indicador aproximado y popular, no un método preciso. Sus limitaciones: el Big Mac no se vende igual en todos los países, los costos locales de mano de obra y arrendamiento distorsionan el precio, y hay países donde McDonald's ajusta precios por posicionamiento de marca. Para análisis más rigurosos, el FMI usa canastas más amplias. Pero como heurística rápida para entender si una moneda está barata o cara, el Big Mac Index sigue siendo útil."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué implica para un inversor que el peso colombiano esté subvalorado según la PPA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para un inversor extranjero, significa que los activos colombianos (inmuebles, acciones, servicios) son baratos en USD. Si la moneda converge hacia la PPA, el inversor ganará tanto por la apreciación del activo como por la apreciación cambiaria. Para un latinoamericano que invierte, significa que tiene sentido diversificar hacia activos en USD (ETFs internacionales, acciones en NYSE) porque si la moneda local converge al alza ganará poder de compra, y si no converge, estará protegido contra más devaluación."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -37,7 +79,7 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda País B</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="VES">VES — Bolívar</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option>
+              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="PYG">PYG — Guaraní</option><option value="VES">VES — Bolívar</option><option value="CRC">CRC — Colón</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option><option value="HNL">HNL — Lempira</option><option value="NIO">NIO — Córdoba</option><option value="CUP">CUP — Peso cubano</option><option value="BZD">BZD — Dólar de Belice</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
             </select>
           </div>
           <div>
@@ -89,7 +131,7 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <script>
-  const DEC: Record<string,number> = {COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,VES:2,DOP:2,GTQ:2};
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
   function calcular() {
     const m = (document.getElementById('moneda') as HTMLSelectElement).value;
     const precioA = parseFloat((document.getElementById('precio-a') as HTMLInputElement).value) || 0;

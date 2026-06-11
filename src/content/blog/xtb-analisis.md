@@ -16,6 +16,15 @@ keywords:
   - "xtb vs interactive brokers"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿XTB realmente cobra 0% de comisión en la compra de acciones y ETFs?"
+    respuesta: "Sí, hasta €100,000 de volumen mensual en acciones y ETFs reales. Por encima de ese umbral, la comisión es del 0.2% con un mínimo de €10. Para la inmensa mayoría de inversores latinoamericanos, €100,000 mensuales es un límite que nunca alcanzarán, por lo que efectivamente operan sin comisión. Hay que considerar el diferencial de tipo de cambio al convertir USD a EUR o GBP para acciones europeas, que es aproximadamente 0.5%."
+  - pregunta: "¿Qué es xStation 5 y en qué se diferencia de MT4?"
+    respuesta: "xStation 5 es la plataforma propia de XTB, disponible como aplicación web sin instalación. A diferencia de MT4 (diseñado principalmente para forex con Expert Advisors), xStation 5 está construida para inversión en acciones, ETFs y forex con una interfaz más moderna. Incluye calculadoras de riesgo en tiempo real, noticias de mercado integradas, análisis de sentimiento y un diseño más intuitivo para principiantes. MT4 sigue estando disponible en XTB para quien lo necesite."
+  - pregunta: "¿XTB está disponible en Colombia, México y Chile para comprar acciones reales?"
+    respuesta: "Sí, XTB opera en Colombia, México y Chile, y desde estos países puedes acceder a la compra de acciones y ETFs reales sin comisión. Sin embargo, XTB no está disponible en todos los países de LATAM: Argentina, Venezuela, Ecuador, Bolivia, Paraguay y Uruguay tienen acceso restringido o no disponible. Verifica la disponibilidad actualizada en el sitio oficial de XTB para tu país específico."
+  - pregunta: "¿Puedo comprar el ETF VOO o SPY en XTB desde LATAM?"
+    respuesta: "Sí. XTB da acceso a ETFs reales de las principales gestoras globales, incluyendo SPY (SPDR S&P 500), VOO (Vanguard S&P 500), QQQ (Invesco Nasdaq 100) y VTI (Vanguard Total Market), entre muchos otros. Al comprar estos ETFs en XTB eres propietario real del activo, recibes dividendos cuando los distribuye el fondo y tu inversión no vence. El proceso de compra desde la app o web de xStation 5 es similar al de comprar en cualquier broker de acciones."
 ---
 
 <h2>XTB: el broker que cambió las reglas para inversores de largo plazo en LATAM</h2>
@@ -50,3 +59,13 @@ publicado: true
 <h2>¿Para quién es XTB?</h2>
 <p>XTB es la opción más indicada si: quieres invertir en acciones o ETFs reales a largo plazo (no trading), valoras una plataforma de primera clase sin instalación, y estás en uno de los países donde XTB opera. Para trading activo de forex con spreads ultra bajos, <a href="/blog/ic-markets-analisis">IC Markets</a> o <a href="/blog/pepperstone-analisis">Pepperstone</a> tienen ventaja en costo operativo.</p>
 <p>Abrir cuenta en XTB: <a href="https://geolink.xtb.com/I0QSx" target="_blank" rel="noopener noreferrer nofollow sponsored">Ir a XTB</a>. Para ver si XTB está disponible en tu país y qué otros brokers tienes: <a href="/brokers/co">comparador por país</a>.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿XTB realmente cobra 0% de comisión en la compra de acciones y ETFs?</h3>
+<p>Sí, hasta €100,000 de volumen mensual en acciones y ETFs reales. Por encima de ese umbral, la comisión es del 0.2% con un mínimo de €10. Para la inmensa mayoría de inversores latinoamericanos, €100,000 mensuales es un límite que nunca alcanzarán, por lo que efectivamente operan sin comisión. Hay que considerar el diferencial de tipo de cambio al convertir USD a EUR o GBP para acciones europeas, que es aproximadamente 0.5%.</p>
+<h3>¿Qué es xStation 5 y en qué se diferencia de MT4?</h3>
+<p>xStation 5 es la plataforma propia de XTB, disponible como aplicación web sin instalación. A diferencia de MT4 (diseñado principalmente para forex con Expert Advisors), xStation 5 está construida para inversión en acciones, ETFs y forex con una interfaz más moderna. Incluye calculadoras de riesgo en tiempo real, noticias de mercado integradas, análisis de sentimiento y un diseño más intuitivo. MT4 sigue estando disponible en XTB para quien lo necesite.</p>
+<h3>¿XTB está disponible en Colombia, México y Chile para comprar acciones reales?</h3>
+<p>Sí, XTB opera en Colombia, México y Chile, y desde estos países puedes acceder a la compra de acciones y ETFs reales sin comisión. Sin embargo, XTB no está disponible en todos los países de LATAM: Argentina, Venezuela, Ecuador, Bolivia, Paraguay y Uruguay tienen acceso restringido o no disponible. Verifica la disponibilidad actualizada en el sitio oficial de XTB para tu país específico.</p>
+<h3>¿Puedo comprar el ETF VOO o SPY en XTB desde LATAM?</h3>
+<p>Sí. XTB da acceso a ETFs reales de las principales gestoras globales, incluyendo SPY (SPDR S&P 500), VOO (Vanguard S&P 500), QQQ (Invesco Nasdaq 100) y VTI (Vanguard Total Market), entre muchos otros. Al comprar estos ETFs en XTB eres propietario real del activo, recibes dividendos cuando los distribuye el fondo y tu inversión no vence. El proceso desde xStation 5 es similar al de comprar en cualquier broker de acciones.</p>

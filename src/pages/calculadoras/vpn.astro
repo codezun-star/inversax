@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de VPN — Valor Presente Neto — Inversax" description="Calcula el Valor Presente Neto (VPN/NPV) de un proyecto de inversión. Descuenta flujos de caja futuros para evaluar si vale la pena invertir.">
+<Layout title="Calculadora de VPN (Valor Presente Neto / NPV) — Inversax" description="Calculadora de VPN/NPV gratis: evalúa proyectos de inversión descontando flujos de caja futuros. Para empresas y emprendedores de Colombia, México, Argentina y toda Latinoamérica.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el VPN (Valor Presente Neto) y para qué sirve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El VPN es la diferencia entre el valor actual de los flujos de caja futuros y la inversión inicial. Si es positivo, el proyecto crea valor y es rentable. Si es negativo, destruye valor. Es la herramienta más rigurosa para evaluar si una inversión conviene."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa de descuento debo usar en el VPN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La tasa de descuento representa el costo de oportunidad del capital: la rentabilidad mínima que exiges. Si puedes invertir en algo seguro al 8% anual, usa ese porcentaje como mínimo. Tasas más altas son más exigentes y reducen el VPN."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre VPN y TIR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El VPN te dice cuánto valor crea un proyecto en términos monetarios. La TIR (Tasa Interna de Retorno) te dice a qué tasa de rendimiento equivale el proyecto. Si la TIR supera tu tasa de descuento, el VPN será positivo. Ambos indicadores se complementan para tomar decisiones de inversión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo interpreto un VPN positivo o negativo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "VPN positivo: el proyecto genera más valor del que cuesta; conviene invertir. VPN negativo: la inversión destruye valor a esa tasa de descuento. VPN igual a cero: la inversión apenas recupera el costo del capital. Cuanto mayor el VPN positivo, más atractivo el proyecto."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -78,6 +138,25 @@ import Layout from '../../layouts/Layout.astro';
     <h2>La tasa de descuento</h2>
     <p>La tasa de descuento representa el costo de oportunidad del capital: la rentabilidad mínima que exiges. Si puedes invertir en algo seguro al 8% anual, usa esa cifra como mínimo. Tasas más altas son más exigentes y reducen el VPN.</p>
     <p>Combina este análisis con el <a href="/calculadoras/roi">ROI</a> y el <a href="/calculadoras/cagr">CAGR</a> para una evaluación completa.</p>
+
+    <h2>Ejemplo práctico de VPN para negocios en Latinoamérica</h2>
+    <p>Imagina que evalúas abrir un local en Colombia con una inversión inicial de <strong>50.000.000 COP</strong>. Esperas flujos anuales de 15M, 18M, 20M, 22M y 25M en los próximos cinco años. Con una tasa de descuento del 12% anual (tu costo de oportunidad), ingresa estos datos en la calculadora para saber si el VPN es positivo.</p>
+    <p>Si el VPN resulta en, por ejemplo, <strong>+8.500.000 COP</strong>, significa que el proyecto genera ese valor adicional por encima de lo que requiere el capital invertido. Es una señal verde para proceder.</p>
+
+    <h2>VPN vs otras métricas de inversión</h2>
+    <ul>
+      <li><strong>VPN vs ROI:</strong> El ROI no considera el valor del dinero en el tiempo. El VPN descuenta los flujos futuros, por lo que es más preciso para proyectos largos.</li>
+      <li><strong>VPN vs Payback (período de recuperación):</strong> El payback solo indica cuándo recuperas el capital, no si el proyecto es rentable en total. El VPN captura todo el horizonte del proyecto.</li>
+      <li><strong>VPN vs TIR:</strong> La TIR es la tasa que hace el VPN igual a cero. Si la TIR supera tu tasa de descuento, el VPN será positivo. Ambas métricas se complementan.</li>
+    </ul>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cómo interpreto un VPN positivo o negativo?</h3>
+    <p>VPN positivo: el proyecto crea valor y conviene invertir. VPN negativo: la inversión destruye valor a esa tasa de descuento. VPN igual a cero: la inversión apenas recupera el costo del capital. Cuanto mayor el VPN positivo, más atractivo el proyecto comparado con alternativas.</p>
+    <h3>¿Qué tasa de descuento debo usar?</h3>
+    <p>Usa la rentabilidad mínima que exiges o el costo de capital de tu empresa. Para pequeños emprendedores en Colombia o México que financian con crédito bancario (12-18% anual), esa tasa es un buen punto de partida. Si el dinero proviene de capital propio, usa tu rendimiento alternativo más seguro disponible.</p>
+    <h3>¿Puedo usar esta calculadora para evaluar una franquicia o negocio pequeño?</h3>
+    <p>Sí. Ingresa la inversión inicial (franquicia, equipos, adecuaciones), estima los flujos netos anuales esperados y define una tasa de descuento razonable. La calculadora te dirá si los flujos futuros justifican la inversión hoy.</p>
   </div>
 </Layout>
 

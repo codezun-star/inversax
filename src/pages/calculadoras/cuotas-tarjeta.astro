@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Cuotas con Tarjeta de Crédito — Inversax" description="Calcula el costo real de financiar una compra en cuotas con tarjeta de crédito. Descubre cuánto pagas de más en intereses y la tasa efectiva anual.">
+<Layout title="Calculadora de Cuotas con Tarjeta de Crédito — Costo Real | Inversax" description="Descubre cuánto cuesta realmente financiar una compra en cuotas con tarjeta de crédito. TEA incluida. Para Colombia, México, Chile, Argentina y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la tasa efectiva anual de las tarjetas de crédito en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una tasa mensual del 2.5% equivale a una TEA del 34.5%. Tasas típicas por país: Colombia 2-3% mensual (TEA 26-42%); México 3-5% mensual (TEA 42-79%); Chile 1.5-2.5% mensual (TEA 19-34%); Argentina 5-10% mensual (TEA 79-214%); España 1.5-2% mensual (TEA 19-26%). Nunca compares tasas mensuales directamente sin convertirlas a TEA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto pago de más al comprar en cuotas con tarjeta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una compra de 1.000 USD en 12 cuotas al 2.5% mensual: cuota de ~95 USD, total pagado ~1.140 USD, sobrecosto de ~140 USD (14%). A 24 cuotas al mismo interés: total ~1.283 USD, sobrecosto ~283 USD (28%). Cuantas más cuotas y mayor la tasa, mayor el dinero que regala al banco por financiar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo tiene sentido comprar en cuotas con tarjeta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Solo cuando la tasa es 0% (sin interés), que existe en algunos comercios con acuerdos bancarios. En ese caso el financiamiento es gratuito y puede convenir invertir el dinero mientras tanto. Con cualquier tasa por encima de 0%, el costo real es alto. Alternativamente, un préstamo personal en banco suele tener tasa menor que las cuotas de tarjeta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo la tasa efectiva anual (TEA) de una tarjeta de crédito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TEA = (1 + tasa mensual)^12 − 1. Ejemplos: tasa mensual 2% → TEA 26.8%; 2.5% → TEA 34.5%; 3% → TEA 42.6%; 5% → TEA 79.6%. La TEA permite comparar cualquier instrumento de crédito en la misma base anual, independientemente de cómo expresen la tasa."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -72,11 +132,42 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
-    <h2>El costo real de las cuotas</h2>
-    <p>Financiar una compra en cuotas con tarjeta de crédito tiene un costo real que va mucho más allá de la cuota mensual. Una tasa del 2.5% mensual suena pequeña, pero equivale a una <strong>Tasa Efectiva Anual (TEA) del 34.5%</strong>, que es altísima comparada con cualquier inversión razonable.</p>
-    <p>Antes de comprar en cuotas, pregúntate si puedes conseguir ese dinero más barato (préstamo personal, libranza, crédito de nomina) o si puedes ahorrar antes de comprar. Pagar de contado siempre cuesta menos.</p>
-    <h2>Cuándo sí tiene sentido</h2>
-    <p>Las cuotas sin interés (0% de tasa) son la excepción: ahí el costo real es cero y puede tener sentido financiarse si el dinero lo puedes invertir mientras tanto. Las cuotas con interés, en cambio, deben evaluarse cuidadosamente. Usa la <a href="/calculadoras/comparador-inversiones">calculadora de comparador</a> para ver cuánto perderías si ese dinero lo invirtieras en lugar de pagarlo en cuotas.</p>
+    <h2>El costo real de financiar en cuotas</h2>
+    <p>Financiar una compra en cuotas con tarjeta de crédito tiene un costo real que va mucho más allá de la cuota mensual. Una tasa del 2.5% mensual suena pequeña, pero equivale a una <strong>Tasa Efectiva Anual (TEA) del 34.5%</strong>, que es altísima comparada con cualquier inversión razonable. Financia en cuotas y pierdes dinero; invierte y ganas.</p>
+
+    <h2>Tasas de tarjetas por país (referencia)</h2>
+    <ul>
+      <li><strong>Colombia:</strong> 2-3% mensual → TEA 26-42%</li>
+      <li><strong>México:</strong> 3-5% mensual → TEA 42-79%</li>
+      <li><strong>Chile:</strong> 1.5-2.5% mensual → TEA 19-34%</li>
+      <li><strong>Perú:</strong> 3-4.5% mensual → TEA 42-70%</li>
+      <li><strong>Argentina:</strong> 5-10% mensual → TEA 79-214%</li>
+      <li><strong>España:</strong> 1.5-2% mensual → TEA 19-26%</li>
+    </ul>
+    <p>Estas tasas son estimaciones de referencia. Siempre consulta tu extracto bancario para conocer la tasa exacta que aplica tu tarjeta.</p>
+
+    <h2>¿Cuándo tiene sentido comprar en cuotas?</h2>
+    <p>Casi nunca con interés. Las excepciones son:</p>
+    <ul>
+      <li><strong>Cuotas sin interés (0%):</strong> el costo real es cero. Si el banco o el comercio ofrece financiación a 0%, puede convenir usarla y mantener el dinero invertido mientras tanto.</li>
+      <li><strong>Emergencias:</strong> si no tienes otra opción de liquidez inmediata y la necesidad es real. En ese caso es un costo de emergencia, no una estrategia financiera.</li>
+    </ul>
+    <p>Antes de comprar en cuotas con interés, pregúntate: ¿puedo conseguir ese dinero más barato con un préstamo personal o crédito de nómina? ¿Puedo ahorrar unos meses y pagar de contado? Pagar de contado siempre es la opción más barata.</p>
+
+    <h2>Ejemplo: televisor de 1.500 USD en Colombia</h2>
+    <p>Compra de <strong>1.500 USD</strong> en 24 cuotas al 2.5% mensual (TEA ~34.5%):</p>
+    <ul>
+      <li>Cuota mensual: ~84 USD</li>
+      <li>Total pagado: ~2.016 USD</li>
+      <li>Sobrecosto: <strong>516 USD (34.4% del precio)</strong></li>
+    </ul>
+    <p>Alternativa: ahorrar 125 USD/mes durante 12 meses y comprar de contado. El televisor cuesta 1.500 USD en vez de 2.016 USD. La diferencia de 516 USD se queda en tu bolsillo. Usa la <a href="/calculadoras/meta-ahorro">calculadora de meta de ahorro</a> para planificar el ahorro previo a la compra.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿La tasa mensual que muestra mi tarjeta es la tasa real?</h3>
+    <p>La tasa mensual de la tarjeta sí es la tasa que se aplica a cada período. Sin embargo, el costo total incluye también cargos por avances, seguros de tarjeta y cuotas de manejo. La TEA calculada aquí refleja solo el costo del financiamiento de compras, sin esos cargos adicionales.</p>
+    <h3>¿Debo pagar el saldo total de la tarjeta cada mes?</h3>
+    <p>Sí, siempre que puedas. Si pagas el total del saldo antes de la fecha de corte, no pagas intereses (período de gracia). Los intereses solo se generan cuando no pagas el total y el saldo queda en cuotas. Usar la tarjeta como medio de pago sin financiarte es gratis y además da puntos o millas en muchos casos.</p>
   </div>
 </Layout>
 

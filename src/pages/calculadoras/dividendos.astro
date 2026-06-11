@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Dividendos — Inversax" description="Calcula el rendimiento por dividendos (dividend yield) de una acción y tus ingresos pasivos estimados. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Dividendos y Dividend Yield — Inversax" description="Calculadora de dividendos e ingresos pasivos gratis. Calcula dividend yield, dividendo neto anual y mensual. Para inversores de Colombia, México, Argentina y toda Latinoamérica.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el dividend yield y cómo se calcula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El dividend yield es el dividendo anual por acción expresado como porcentaje del precio de la acción. Fórmula: Yield = (Dividendo anual por acción / Precio de la acción) × 100. Un yield del 4% significa que por cada 100 invertidos, recibirás 4 al año en dividendos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Un dividend yield alto siempre es buena señal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Un yield muy alto (más del 7%) puede indicar que el precio de la acción ha caído por problemas en la empresa, lo que infla el yield artificialmente. Revisa siempre el payout ratio y la sostenibilidad del dividendo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué retención de impuestos aplica para dividendos desde Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En EE.UU., los dividendos para no residentes tienen retención del 30% (o menos con convenio fiscal). En España el 19-23%. En Colombia hasta el 10%. Ingresa el porcentaje que aplica en tu caso para obtener el dividendo neto real."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el payout ratio y por qué importa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El payout ratio es el porcentaje de ganancias que la empresa distribuye como dividendo. Un payout muy alto (más del 80-90%) puede ser insostenible; la empresa podría recortar el dividendo si los beneficios caen. Revisa este dato antes de invertir para dividendos."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

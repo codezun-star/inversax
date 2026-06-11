@@ -12,6 +12,15 @@ keywords:
   - "trading paraguay guarani"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuál es la tasa exacta de impuesto sobre ganancias de trading en Paraguay?"
+    respuesta: "El IRNPF (Impuesto a la Renta de las Personas Físicas) aplica una tasa del 8% sobre las rentas netas de capital, que incluye las ganancias obtenidas en brokers internacionales. Es significativamente más baja que Colombia (hasta 39%), Chile (hasta 40%) o México (hasta 35%), y similar a la de Perú (6.25%). Consulta con un contador local para confirmar la aplicabilidad a tu situación específica."
+  - pregunta: "¿Puedo depositar guaraníes (PYG) directamente en Exness o XM?"
+    respuesta: "No directamente. Los brokers internacionales trabajan en USD o EUR. El depósito con tarjeta paraguaya convierte automáticamente de PYG a USD al tipo de cambio del día más el recargo por transacción internacional del banco (generalmente 1-3%). Para evitar ese costo, algunos traders paraguayos mantienen cuentas USD en bancos locales que permiten depósitos directos en dólares."
+  - pregunta: "¿Exness acepta documentos paraguayos para abrir cuenta?"
+    respuesta: "Sí. Exness acepta cédula de identidad paraguaya y comprobante de domicilio emitido en Paraguay para el proceso KYC. La verificación se completa habitualmente en 24-48 horas. Una vez verificado, tienes acceso completo a todos los instrumentos y métodos de pago disponibles para la región latinoamericana."
+  - pregunta: "¿Por qué Paraguay tiene una carga fiscal más baja que el resto de la región?"
+    respuesta: "El modelo fiscal paraguayo está históricamente orientado a atraer inversión extranjera y fomentar el emprendimiento. Con IVA del 10% y tasas de renta personal inferiores al 10%, Paraguay compite por capital regional junto con Uruguay. La estabilidad política relativa, el crecimiento sostenido y una política monetaria conservadora del BCP han contribuido a mantener este entorno fiscal favorable."
 ---
 
 <h2>Paraguay: impuestos bajos y creciente apertura financiera</h2>
@@ -28,3 +37,13 @@ publicado: true
 
 <h2>Por qué Paraguay atrae cada vez más inversores regionales</h2>
 <p>La combinación de bajos impuestos, libre circulación de capitales, energía eléctrica barata (Itaipú) y una economía que ha crecido de forma sostenida en la última década ha convertido a Paraguay en un destino atractivo para el inversor que busca eficiencia fiscal sin las restricciones de otros mercados del cono sur.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Cuál es la tasa exacta de impuesto sobre ganancias de trading en Paraguay?</h3>
+<p>El IRNPF aplica una tasa del 8% sobre las rentas netas de capital, que incluye las ganancias obtenidas en brokers internacionales. Es significativamente más baja que Colombia (hasta 39%), Chile (hasta 40%) o México (hasta 35%), y comparable a la de Perú (6.25%). Consulta con un contador local para confirmar la aplicabilidad a tu situación específica.</p>
+<h3>¿Puedo depositar guaraníes (PYG) directamente en Exness o XM?</h3>
+<p>No directamente. Los brokers internacionales trabajan en USD o EUR. El depósito con tarjeta paraguaya convierte automáticamente de PYG a USD al tipo de cambio del día más el recargo por transacción internacional del banco (generalmente 1-3%). Para evitar ese costo, algunos traders paraguayos mantienen cuentas USD en bancos locales que permiten depósitos directos en dólares.</p>
+<h3>¿Exness acepta documentos paraguayos para abrir cuenta?</h3>
+<p>Sí. Exness acepta cédula de identidad paraguaya y comprobante de domicilio emitido en Paraguay para el proceso KYC. La verificación se completa habitualmente en 24-48 horas. Una vez verificado, tienes acceso completo a todos los instrumentos y métodos de pago disponibles para la región latinoamericana.</p>
+<h3>¿Por qué Paraguay tiene una carga fiscal más baja que el resto de la región?</h3>
+<p>El modelo fiscal paraguayo está históricamente orientado a atraer inversión extranjera y fomentar el emprendimiento. Con IVA del 10% y tasas de renta personal inferiores al 10%, Paraguay compite por capital regional junto con Uruguay. La estabilidad política relativa, el crecimiento sostenido y una política monetaria conservadora del BCP han contribuido a mantener este entorno fiscal favorable.</p>

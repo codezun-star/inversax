@@ -12,6 +12,15 @@ keywords:
   - "plataforma inversion nicaragua cordoba"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿XM acepta cédula nicaragüense para completar la verificación KYC?"
+    respuesta: "Sí. XM acepta la cédula de identidad nicaragüense emitida por el CSE junto con un comprobante de domicilio reciente (factura de ENATREL, ENACAL o estado de cuenta bancario). El proceso de verificación se completa habitualmente en 24-72 horas. Exness también acepta documentación nicaragüense sin inconvenientes."
+  - pregunta: "¿El córdoba nicaragüense (NIO) es aceptado directamente por brokers internacionales?"
+    respuesta: "No directamente. Los brokers internacionales operan en USD o EUR. Al depositar con tarjeta nicaragüense, el banco realiza la conversión de NIO a USD al tipo de cambio del día más el recargo por transacción internacional (1-3%). Dado que el córdoba tiene una paridad gestionada frente al dólar, la conversión es predecible, pero el recargo bancario añade un costo que se puede evitar usando transferencias directas en USD."
+  - pregunta: "¿Qué método de fondeo es más viable para nicaragüenses sin tarjeta internacional?"
+    respuesta: "La vía más práctica es la ruta USDT: compras USDT en Binance P2P pagando con transferencia bancaria local en córdobas o USD en efectivo, retiras el USDT a una wallet personal (usa la red TRC20 por su bajo costo) y depositas en Exness o XM que aceptan criptomonedas. El costo total del proceso es de 1-2%. Esta es la misma ruta que usan muchos traders centroamericanos sin acceso a tarjetas internacionales."
+  - pregunta: "¿Las ganancias de trading en brokers internacionales están gravadas en Nicaragua?"
+    respuesta: "Sí, bajo la Ley de Concertación Tributaria (LCT) de Nicaragua, las rentas de capital obtenidas en el exterior por residentes nicaragüenses están sujetas al IR (Impuesto sobre la Renta). La tasa es del 15% sobre las ganancias netas de capital. La DGI (Dirección General de Ingresos) es el organismo administrador. Consulta con un contador local para determinar el tratamiento específico de tus ganancias de trading."
 ---
 
 <h2>Nicaragua: opciones limitadas pero reales para el inversor</h2>
@@ -28,3 +37,13 @@ publicado: true
 
 <h2>Recomendación práctica</h2>
 <p>Si estás en Nicaragua y quieres comenzar a invertir internacionalmente, <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a> es la opción más accesible y con mayor probabilidad de completar el registro exitosamente. Comienza con la cuenta demo gratuita para aprender sin riesgo, y cuando decidas depositar capital real, evalúa la ruta de USDT como método de fondeo más viable desde el contexto bancario nicaragüense.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿XM acepta cédula nicaragüense para completar la verificación KYC?</h3>
+<p>Sí. XM acepta la cédula de identidad nicaragüense emitida por el CSE junto con un comprobante de domicilio reciente (factura de ENATREL, ENACAL o estado de cuenta bancario). El proceso de verificación se completa habitualmente en 24-72 horas. Exness también acepta documentación nicaragüense sin inconvenientes.</p>
+<h3>¿El córdoba nicaragüense (NIO) es aceptado directamente por brokers internacionales?</h3>
+<p>No directamente. Los brokers internacionales operan en USD o EUR. Al depositar con tarjeta nicaragüense, el banco realiza la conversión de NIO a USD al tipo de cambio del día más el recargo por transacción internacional (1-3%). Dado que el córdoba tiene una paridad gestionada frente al dólar, la conversión es predecible, pero el recargo bancario añade un costo que se puede evitar usando transferencias directas en USD.</p>
+<h3>¿Qué método de fondeo es más viable para nicaragüenses sin tarjeta internacional?</h3>
+<p>La vía más práctica es la ruta USDT: compras USDT en Binance P2P pagando con transferencia bancaria local en córdobas o USD en efectivo, retiras el USDT a una wallet personal (usa la red TRC20 por su bajo costo) y depositas en Exness o XM que aceptan criptomonedas. El costo total del proceso es de 1-2%. Esta es la misma ruta que usan muchos traders centroamericanos sin acceso a tarjetas internacionales.</p>
+<h3>¿Las ganancias de trading en brokers internacionales están gravadas en Nicaragua?</h3>
+<p>Sí, bajo la Ley de Concertación Tributaria (LCT) de Nicaragua, las rentas de capital obtenidas en el exterior por residentes nicaragüenses están sujetas al IR (Impuesto sobre la Renta). La tasa es del 15% sobre las ganancias netas de capital. La DGI (Dirección General de Ingresos) es el organismo administrador. Consulta con un contador local para determinar el tratamiento específico de tus ganancias de trading.</p>

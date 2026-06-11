@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Tabla de Amortización — Inversax" description="Genera la tabla de amortización completa de tu préstamo mes a mes. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Tabla de Amortización de Préstamo — Mes a Mes | Inversax" description="Genera la tabla de amortización completa de tu préstamo: capital, interés y saldo mes a mes. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es una tabla de amortización?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una tabla de amortización es el desglose completo mes a mes de cómo se divide cada cuota entre capital e intereses, y cuánto saldo queda pendiente. En el sistema francés (cuota fija), al inicio casi todo es interés y al final casi todo es capital, porque los intereses se calculan siempre sobre el saldo pendiente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué los intereses bajan cada mes en la amortización?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque los intereses se calculan sobre el saldo pendiente, que va disminuyendo mes a mes. Cada cuota paga un poco de capital, que reduce el saldo, y el siguiente mes los intereses se calculan sobre un número menor. Por eso al inicio la mayor parte de la cuota es interés y al final casi todo es capital."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo ahorrar dinero usando la tabla de amortización?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Identifica en la tabla el mes en que el saldo es aún alto y haz un prepago extra de capital. Cada unidad de capital que reduces ahorra esa cantidad multiplicada por la tasa mensual en cada mes restante. Los prepagos en los primeros meses ahorran mucho más que los mismos prepagos al final del plazo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre amortización francesa y alemana?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En la amortización francesa (más común en Latinoamérica y España) la cuota total es fija cada mes. En la amortización alemana el capital pagado es fijo cada mes, por lo que la cuota total va disminuyendo. La francesa es más sencilla de planificar; la alemana paga menos intereses totales si el capital se mantiene constante."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

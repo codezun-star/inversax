@@ -3,9 +3,51 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Conversor de Divisas — Inversax"
-  description="Convierte entre las monedas de los 22 países de Latinoamérica y España. USD, EUR, COP, MXN, CLP, ARS, HNL, NIO, VES, CAD, BZD, CUP y más. Tasas de referencia orientativas."
+  title="Conversor de Divisas LATAM — COP, MXN, CLP, ARS, PEN y más | Inversax"
+  description="Convierte entre 21 monedas de Latinoamérica y España: pesos colombianos, mexicanos, chilenos, soles peruanos, bolívares venezolanos y más. Incluye casos especiales de Argentina, Venezuela y Cuba. Tasas de referencia orientativas."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Con qué frecuencia se actualizan las tasas de cambio en esta calculadora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las tasas son de referencia orientativa y se actualizan periódicamente para reflejar condiciones generales de mercado. No son cotizaciones en tiempo real. Para operaciones financieras reales — transferencias, cambio de divisas, inversiones — usa siempre la tasa actualizada de tu banco, casa de cambio, broker o plataformas como XE.com o Wise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo convierto pesos colombianos a pesos chilenos o soles peruanos directamente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Selecciona COP como moneda origen y CLP (o PEN) como moneda destino. El conversor calcula el tipo de cambio cruzado usando el USD como moneda puente internamente: divide el monto entre la tasa COP/USD y multiplica por la tasa destino/USD. Para ver el detalle del cruce, usa también la calculadora de cruce de divisas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el tipo de cambio para Argentina tiene múltiples valores en la práctica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Argentina tiene varios tipos de cambio simultáneos: el oficial (regulado por el BCRA), el 'blue' o informal (mercado paralelo), el MEP (compra de bonos en pesos y venta en dólares en bolsa) y el CCL (contado con liquidación). La tasa aquí mostrada es orientativa basada en el tipo de referencia. Para operaciones reales en Argentina, el tipo de cambio relevante depende del canal específico que uses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar este conversor para calcular cuánto enviar en una remesa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes usarlo para estimar el monto de referencia, pero las remesas tienen costos adicionales (comisión del servicio y margen sobre el tipo de cambio) que pueden diferir del tipo aquí mostrado. Para un cálculo completo que incluya todos los costos, usa la calculadora de remesas donde puedes ingresar la comisión y el tipo de cambio específico del servicio que piensas usar."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

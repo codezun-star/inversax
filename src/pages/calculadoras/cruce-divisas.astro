@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Cruce de Divisas — Inversax" description="Calcula el tipo de cambio cruzado entre dos monedas que no tienen cotización directa. Convierte entre cualquier par de divisas usando el USD como moneda puente.">
+<Layout title="Calculadora de Cruce de Divisas — COP a CLP, MXN a PEN y más | Inversax" description="Calcula el tipo de cambio cruzado entre dos monedas latinoamericanas usando el USD como moneda puente. Convierte COP a CLP, MXN a ARS, PEN a UYU y cualquier par de divisas sin cotización directa.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Para qué sirve calcular un tipo de cambio cruzado en la práctica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sirve para convertir entre dos monedas que no tienen cotización directa — por ejemplo, pesos colombianos a pesos chilenos, o soles peruanos a pesos mexicanos. También sirve para verificar si el tipo de cambio que ofrece un proveedor de cambios es justo respecto al tipo cruzado real, o para calcular el equivalente entre monedas cuando comercias con alguien de otro país latinoamericano."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué no existe cotización directa entre monedas latinoamericanas como COP y CLP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mayoría de monedas latinoamericanas cotizan principalmente frente al dólar (USD) porque el dólar es la moneda de reserva internacional y el principal medio de comercio exterior en la región. No existe un mercado interbancario líquido directo entre, por ejemplo, pesos colombianos y pesos chilenos porque el volumen de transacciones directas es muy bajo. Por eso toda conversión entre ellas pasa por el USD como intermediario."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo cuántos pesos mexicanos equivale 1 millón de pesos colombianos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ingresa en la calculadora: Moneda A = COP, Tasa A por USD = 4.200 (aprox.), Moneda B = MXN, Tasa B por USD = 17.5 (aprox.), Monto = 1.000.000 COP. El resultado: 1.000.000 / 4.200 × 17.5 ≈ 4.167 MXN. Actualiza las tasas con los valores del día de tu banco central o Google para mayor precisión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El tipo de cambio cruzado calculado es el que aplicará en una transacción real?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No directamente. El cruce calculado es el tipo teórico de referencia. En la práctica, si quieres convertir COP a CLP con un banco o casa de cambio, aplicarán el cruce pero añadirán su propio spread (margen de ganancia) en ambas patas — primero en COP/USD y luego en USD/CLP. El costo acumulado puede ser del 3-6%. Para el costo real de la transacción usa la calculadora de tipo de cambio efectivo."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -74,10 +116,22 @@ import Layout from '../../layouts/Layout.astro';
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Qué es un tipo de cambio cruzado?</h2>
     <p>Un <strong>tipo de cambio cruzado</strong> es el tipo de cambio entre dos monedas que se calcula a través de una tercera (normalmente el USD), ya que no tienen cotización directa en los mercados. Por ejemplo, para convertir pesos colombianos (COP) a pesos chilenos (CLP), primero se convierte COP a USD y luego USD a CLP.</p>
-    <p>Fórmula: <strong>Tasa A/B = Tasa A (por USD) / Tasa B (por USD)</strong>. Si 1 USD = 4.200 COP y 1 USD = 950 CLP, entonces 1 COP = 950/4200 CLP ≈ 0.226 CLP.</p>
-    <h2>Para qué sirve</h2>
-    <p>Esta calculadora es útil cuando necesitas saber el equivalente entre dos monedas latinoamericanas sin pasar explícitamente por el dólar, o cuando quieres verificar si el tipo de cambio que ofrece un proveedor es justo respecto al tipo de cambio cruzado real.</p>
-    <p>Complementa esta calculadora con la <a href="/calculadoras/conversion-divisas">conversión de divisas</a> y la <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a>.</p>
+    <p>Fórmula: <strong>Cruce A/B = Tasa A (por USD) / Tasa B (por USD)</strong>. Si 1 USD = 4.200 COP y 1 USD = 950 CLP, entonces 1 COP = 950 / 4.200 ≈ 0.2262 CLP. O dicho al revés: 1 millón de COP = 226.190 CLP.</p>
+
+    <h2>Ejemplos de cruces frecuentes en LATAM</h2>
+    <p>Tasas de referencia aproximadas (actualiza con los valores del día):</p>
+    <ul>
+      <li><strong>COP → CLP:</strong> 1 COP ≈ 0.22 CLP (o 1M COP ≈ 225K CLP)</li>
+      <li><strong>MXN → COP:</strong> 1 MXN ≈ 240 COP</li>
+      <li><strong>PEN → COP:</strong> 1 sol ≈ 1.100 COP</li>
+      <li><strong>MXN → CLP:</strong> 1 MXN ≈ 54 CLP</li>
+      <li><strong>BOB → PEN:</strong> 1 boliviano ≈ 0.58 soles</li>
+    </ul>
+    <p>Estos valores varían diariamente con el movimiento del USD. Para obtener tasas actualizadas, consulta el banco central de tu país o Google Finance y úsalas en la calculadora.</p>
+
+    <h2>Cuándo usar cruces de divisas</h2>
+    <p>Los cruces son útiles en comercio intrarregional (pagos entre empresas de distintos países de LATAM), en remesas entre países latinoamericanos, y para inversores que quieren entender la exposición cambiaria de sus activos en distintas monedas de la región. También son relevantes para viajeros que planean múltiples destinos latinoamericanos en un mismo viaje y quieren estimar presupuestos en moneda local de cada país.</p>
+    <p>Complementa esta calculadora con la <a href="/calculadoras/conversion-divisas">conversión de divisas</a> y la <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a> para ver el costo real incluyendo spreads.</p>
   </div>
 </Layout>
 

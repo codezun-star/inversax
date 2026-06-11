@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Inflación Personal — Inversax" description="Calcula tu inflación personal real basada en tus propios gastos. Compara si tus ingresos están creciendo más o menos que tu costo de vida.">
+<Layout title="Calculadora de Inflación Personal — Tu Inflación Real vs IPC Oficial | Inversax" description="Calcula tu inflación personal ponderada por tus propios gastos. Descubre si vivienda, educación o salud están subiendo más que el IPC oficial en Colombia, México, Chile, Perú y toda LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué mi inflación personal es diferente a la inflación oficial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El IPC oficial mide el cambio de precio de una canasta genérica representativa del promedio de la población. Si tus gastos están más concentrados en vivienda, salud o educación —categorías que suelen subir más rápido— tu inflación real puede ser bastante más alta que la cifra oficial. Por ejemplo, en Colombia alguien con hijos en colegio privado puede tener una inflación personal del 14% aunque el IPC marque el 8%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué sirve calcular la inflación personal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sirve para saber si tu salario está creciendo de verdad o solo en términos nominales. Si te subieron el 6% y tu inflación personal es del 10%, perdiste poder adquisitivo equivalente al 4%. Este dato es clave para negociar aumentos, ajustar el presupuesto o decidir si tu ahorro está rindiendo por encima o por debajo de tus costos reales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pesos (%) debo asignar a cada categoría?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El peso debe reflejar qué porcentaje de tu gasto total mensual representa cada categoría. Si gastas 1.000.000 COP en total y 350.000 van a vivienda, el peso de vivienda es 35%. Los pesos deben sumar idealmente 100% para que la inflación ponderada sea representativa. Si no sumas 100%, la calculadora igualmente muestra el resultado, pero indicará que el peso total utilizado es diferente al 100%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué significa que el color del resultado cambie a rojo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La calculadora muestra el resultado en verde (inflación menor al 5%), naranja (entre 5% y 10%) o rojo (superior al 10%). Rojo no significa necesariamente una catástrofe, pero sí indica que tus costos están creciendo rápidamente y que deberías revisar si tus ingresos y tu ahorro siguen el mismo ritmo."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -74,10 +116,42 @@ import Layout from '../../layouts/Layout.astro';
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Por qué tu inflación es diferente a la oficial?</h2>
-    <p>El índice de inflación oficial (IPC) mide el cambio de precio de una canasta genérica de bienes y servicios representativa del promedio de la población. Pero tus gastos son distintos: si gastas más en vivienda y salud que en entretenimiento, tu inflación real puede ser muy diferente a la publicada.</p>
-    <p>Una persona con hijos en colegio privado en Colombia puede tener una inflación personal del 14% aunque el IPC oficial marque el 8%. Un joven soltero que arrienda un cuarto pequeño y come en casa puede estar mucho más cerca de la cifra oficial.</p>
-    <h2>Cómo usar este dato</h2>
-    <p>Compara tu inflación personal con tu último aumento de salario. Si subiste el 6% y tu inflación personal es el 10%, perdiste poder adquisitivo. Usa esta información para negociar tu próximo aumento o para priorizar gastos. Complementa con el <a href="/calculadoras/presupuesto-503020">presupuesto 50/30/20</a> para estructurar mejor tus finanzas.</p>
+    <p>El índice de inflación oficial (IPC) mide el cambio de precio de una canasta genérica representativa del promedio de la población. Pero tus gastos son distintos: si gastas más en vivienda y salud que en entretenimiento, tu inflación real puede ser muy diferente a la publicada por el gobierno.</p>
+    <p>Una persona con hijos en colegio privado en Colombia puede tener una inflación personal del 14% aunque el IPC oficial marque el 8%. Un joven soltero que arrienda un cuarto pequeño y come en casa puede estar mucho más cerca de la cifra oficial. La misma divergencia ocurre en México, Chile, Perú y el resto de LATAM.</p>
+
+    <h2>Cómo interpretar los resultados</h2>
+    <p>La calculadora muestra tres datos clave:</p>
+    <ul>
+      <li><strong>Tu inflación personal ponderada:</strong> el promedio ponderado de cuánto subió cada categoría, ajustado por su importancia en tu presupuesto.</li>
+      <li><strong>La categoría que más subió:</strong> útil para saber dónde enfocar la reducción de gastos o la negociación.</li>
+      <li><strong>El peso total utilizado:</strong> idealmente debería ser 100%. Si es menor, la inflación calculada está subestimada porque falta alguna categoría de tu presupuesto.</li>
+    </ul>
+
+    <h2>Ejemplo: familia de clase media en México</h2>
+    <p>Familia con ingreso de <strong>25.000 MXN/mes</strong> y los siguientes gastos comparados con hace 12 meses:</p>
+    <ul>
+      <li>Vivienda (renta): 7.000 → 7.600 MXN (+8.6%) | Peso: 35%</li>
+      <li>Alimentación: 5.000 → 5.600 MXN (+12%) | Peso: 25%</li>
+      <li>Transporte: 2.500 → 2.750 MXN (+10%) | Peso: 12%</li>
+      <li>Salud: 2.000 → 2.300 MXN (+15%) | Peso: 10%</li>
+      <li>Educación: 3.000 → 3.150 MXN (+5%) | Peso: 15%</li>
+    </ul>
+    <p>Inflación personal ponderada: <strong>~10.1%</strong>. Si esta familia recibió un aumento salarial del 7%, su poder adquisitivo cayó un 3.1% en el año. En términos reales, tienen menos dinero aunque nominalmente ganen más.</p>
+
+    <h2>Cómo usar este dato en tu estrategia financiera</h2>
+    <p>Compara tu inflación personal con tu último aumento de salario. Si tu aumento no supera tu inflación personal, debes compensar con otras vías:</p>
+    <ul>
+      <li>Negociar el próximo aumento usando el argumento de tu inflación real (no la oficial).</li>
+      <li>Reducir el gasto en las categorías que más subieron o buscar alternativas más baratas.</li>
+      <li>Asegurarte de que tu ahorro e inversión rinden por encima de tu inflación personal para no perder poder adquisitivo real.</li>
+    </ul>
+    <p>Complementa con el <a href="/calculadoras/presupuesto-503020">presupuesto 50/30/20</a> para estructurar mejor tus finanzas, y con la <a href="/calculadoras/independencia-financiera">calculadora de independencia financiera</a> para ver cuánto patrimonio necesitas considerando tu inflación personal real.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Debo actualizar los datos cada mes?</h3>
+    <p>Lo ideal es calcularlo una vez al año para tener una comparación anual clara. Puedes calcularlo más seguido si sospechas que alguna categoría específica está disparada (por ejemplo, tras un incremento en el arriendo o en los precios del colegio). La comparación tiene más sentido en períodos de 12 meses porque elimina estacionalidades.</p>
+    <h3>¿Qué hago si mi inflación personal es muy alta (más del 15%)?</h3>
+    <p>Primero identifica la categoría que más está impulsando el número. Si es vivienda, considera si puedes renegociar el arriendo, mudarte a una zona más accesible o —si tienes acceso a crédito— evaluar la compra. Si es alimentación, revisa los patrones de consumo. Si es educación o salud, busca si hay alternativas de calidad similar con menor costo. Una inflación personal alta también puede ser señal de que estás bajo-invirtiendo: necesitas que tu dinero rinda más para compensar.</p>
   </div>
 </Layout>
 

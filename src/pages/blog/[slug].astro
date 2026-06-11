@@ -38,16 +38,29 @@ const articleSchema = JSON.stringify({
     logo: { '@type': 'ImageObject', url: 'https://inversax.com/og/home.png' },
   },
   datePublished: post.data.fecha ?? '',
+  dateModified: post.data.fecha ?? '',
   url: 'https://inversax.com/blog/' + post.slug,
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://inversax.com/blog/' + post.slug },
 });
+
+const faqSchema = post.data.faq ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: post.data.faq.map((f: { pregunta: string; respuesta: string }) => ({
+    '@type': 'Question',
+    name: f.pregunta,
+    acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+  })),
+}) : null;
 ---
 
 <Layout
   title={`${post.data.titulo} — Inversax`}
   description={post.data.descripcion ?? ''}
+  ogType="article"
 >
   <script slot="head" is:inline type="application/ld+json" set:html={articleSchema} />
+  {faqSchema && <script slot="head" is:inline type="application/ld+json" set:html={faqSchema} />}
   <!-- Header artículo -->
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:720px; margin:0 auto;">

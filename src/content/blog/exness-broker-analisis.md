@@ -16,6 +16,15 @@ keywords:
   - "como funciona exness"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Exness realmente procesa retiros los fines de semana?"
+    respuesta: "Sí. Exness tiene un sistema de retiros automático que opera las 24 horas del día, los 7 días de la semana, incluyendo sábados, domingos y días festivos. Un retiro vía Skrill o Neteller puede procesarse en segundos un domingo por la noche. Las transferencias bancarias locales pueden tardar 1-3 días hábiles adicionales por el proceso del banco receptor, pero la parte de Exness se completa de forma instantánea."
+  - pregunta: "¿Cuál es la diferencia real entre la cuenta Raw Spread y la cuenta Zero de Exness?"
+    respuesta: "Ambas tienen spreads bajos, pero el mecanismo difiere. Raw Spread tiene spreads desde 0.0 pips pero variables según las condiciones del mercado, más comisión de $3.50/lote por lado. La cuenta Zero tiene spread fijo de 0.0 pips en los 30 instrumentos más populares durante el 95% del tiempo, más comisión fija más alta que Raw. Para scalpers que necesitan certeza absoluta del spread, Zero es más predecible. Para traders de volumen que operan en pares menos líquidos, Raw puede ser más barata."
+  - pregunta: "¿Exness está realmente regulado por la FCA del Reino Unido?"
+    respuesta: "Exness Group Ltd tiene una entidad (Exness UK Ltd) regulada por la FCA. Sin embargo, los clientes latinoamericanos son atendidos por Exness (SC) Ltd, regulada por la FSA de Seychelles — una regulación offshore con menores exigencias que la FCA. La presencia de la FCA en el grupo añade credibilidad institucional, pero técnicamente no eres cliente de la entidad FCA si estás en LATAM. Esto es estándar en la industria y similar a IC Markets o Pepperstone."
+  - pregunta: "¿Cuánto cobra Exness de spread en EUR/USD en su cuenta estándar?"
+    respuesta: "En la cuenta Standard, el spread típico de Exness en EUR/USD es de 0.7-1.0 pips durante horario de mercado activo (sesión Londres/Nueva York). En momentos de baja liquidez (apertura asiática, viernes tarde, noticias económicas) puede subir a 1.5-2.0 pips temporalmente. Para comparar el costo exacto de tus operaciones según el par y volumen, usa la calculadora de costo del spread de Inversax."
 ---
 
 <h2>¿Qué es Exness y por qué domina en Latinoamérica?</h2>
@@ -50,3 +59,13 @@ publicado: true
 <p>Exness es una excelente opción para traders activos de forex que valoran los retiros rápidos, los spreads competitivos y la flexibilidad de cuentas. Si estás comenzando, la cuenta Standard Cent te permite practicar con dinero real sin arriesgar montos significativos. Si ya operas con volumen, la cuenta Raw Spread o Zero reducirá tus costos operativos de forma notable.</p>
 <p>Para abrir tu cuenta y empezar con el proceso de verificación: <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Abrir cuenta en Exness</a>.</p>
 <p>Antes de depositar, compara también con <a href="/blog/mejores-brokers-colombia">los brokers disponibles en tu país</a> para asegurarte de elegir el que mejor se adapta a tu situación específica.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Exness realmente procesa retiros los fines de semana?</h3>
+<p>Sí. Exness tiene un sistema de retiros automático que opera las 24 horas del día, los 7 días de la semana, incluyendo sábados, domingos y días festivos. Un retiro vía Skrill o Neteller puede procesarse en segundos un domingo por la noche. Las transferencias bancarias locales pueden tardar 1-3 días hábiles adicionales por el proceso del banco receptor, pero la parte de Exness se completa de forma instantánea.</p>
+<h3>¿Cuál es la diferencia real entre la cuenta Raw Spread y la cuenta Zero de Exness?</h3>
+<p>Ambas tienen spreads bajos, pero el mecanismo difiere. Raw Spread tiene spreads desde 0.0 pips pero variables según las condiciones del mercado, más comisión de $3.50/lote por lado. La cuenta Zero tiene spread fijo de 0.0 pips en los 30 instrumentos más populares durante el 95% del tiempo, más comisión fija más alta que Raw. Para scalpers que necesitan certeza absoluta del spread, Zero es más predecible. Para traders de volumen que operan en pares menos líquidos, Raw puede ser más barata.</p>
+<h3>¿Exness está realmente regulado por la FCA del Reino Unido?</h3>
+<p>Exness Group Ltd tiene una entidad (Exness UK Ltd) regulada por la FCA. Sin embargo, los clientes latinoamericanos son atendidos por Exness (SC) Ltd, regulada por la FSA de Seychelles — una regulación offshore con menores exigencias que la FCA. La presencia de la FCA en el grupo añade credibilidad institucional, pero técnicamente no eres cliente de la entidad FCA si estás en LATAM. Esto es estándar en la industria y similar a IC Markets o Pepperstone.</p>
+<h3>¿Cuánto cobra Exness de spread en EUR/USD en su cuenta estándar?</h3>
+<p>En la cuenta Standard, el spread típico de Exness en EUR/USD es de 0.7-1.0 pips durante horario de mercado activo (sesión Londres/Nueva York). En momentos de baja liquidez (apertura asiática, viernes tarde, noticias económicas) puede subir a 1.5-2.0 pips temporalmente. Para comparar el costo exacto de tus operaciones según el par y volumen, usa la <a href="/calculadoras/spread">calculadora de costo del spread</a>.</p>

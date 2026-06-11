@@ -1,7 +1,41 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Valor Futuro — Inversax" description="Proyecta cuánto valdrá tu inversión en el futuro con interés compuesto. Calcula el valor futuro de cualquier capital a una tasa anual.">
+<Layout title="Calculadora de Valor Futuro — Inversax" description="Calculadora de valor futuro: proyecta cuánto crecerá tu capital con interés compuesto a distintas tasas. Para inversores de Colombia, México y toda Latinoamérica. Soporta 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el valor futuro de una inversión?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El Valor Futuro (VF) es el monto al que crecerá una inversión hoy si se mantiene a una tasa de rendimiento constante durante un período. Fórmula: VF = Capital × (1 + tasa)^años. Por ejemplo, 10.000 USD al 8% anual durante 10 años = 21.589 USD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre valor futuro e interés compuesto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Son conceptos relacionados. El valor futuro usa capitalización anual y solo considera el capital inicial. La calculadora de interés compuesto usa capitalización mensual y permite agregar aportes mensuales adicionales, lo que produce resultados más precisos para inversiones con ahorro periódico."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa anual usar para calcular el valor futuro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del activo: depósitos a plazo fijo en dólares rinden 3-5% anual; fondos indexados globales como el S&P 500 han rendido ~10% histórico. Para portafolios diversificados desde Latinoamérica, 6-8% es un rango conservador y realista."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +56,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="BOB">BOB — Boliviano</option><option value="PYG">PYG — Guaraní</option><option value="VES">VES — Bolívar</option><option value="CRC">CRC — Colón</option><option value="DOP">DOP — Peso dominicano</option><option value="GTQ">GTQ — Quetzal</option><option value="HNL">HNL — Lempira</option><option value="NIO">NIO — Córdoba</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>

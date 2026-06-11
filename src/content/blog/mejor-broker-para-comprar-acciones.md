@@ -16,6 +16,15 @@ keywords:
   - "como invertir en s&p 500 desde colombia"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Puedo comprar acciones de Apple desde Colombia o México con pocos dólares?"
+    respuesta: "Sí. Con XTB puedes comprar acciones fraccionadas de Apple, Tesla, Amazon y miles de empresas globales desde Colombia, México y Chile, sin comisión de compra hasta €100,000 mensuales. Si el precio de una acción de Apple es $200, puedes comprar una fracción ($10, $20, lo que tengas) y ser propietario real de esa parte proporcional de la acción. No necesitas el precio completo de una acción. El proceso: abre cuenta en XTB → verifica tu identidad → deposita → busca el ticker (AAPL para Apple) → compra."
+  - pregunta: "¿Cuál es la diferencia real entre comprar una acción en XTB y operar un CFD de acción en Exness?"
+    respuesta: "En XTB compras la acción real: eres accionista, recibes dividendos del emisor, tu inversión no vence y no hay costos de financiamiento overnight. En Exness o XM operas un CFD: replica el precio de la acción pero no eres accionista. Recibes ajustes de dividendo (no directamente del emisor), puedes usar apalancamiento y operar en corto, pero hay costos de swap overnight que hacen los CFDs más caros para inversión de largo plazo. Regla práctica: acciones para largo plazo → XTB. Especulación a corto plazo → CFD en Exness o XM."
+  - pregunta: "¿Cómo tributan las ganancias de acciones extranjeras en Colombia o México?"
+    respuesta: "En Colombia, las ganancias de acciones extranjeras son renta de fuente extranjera. Si vendiste con ganancia y la mantuviste más de dos años, aplica la tarifa de ganancias ocasionales (10%). Si fue menos de dos años, tributa como renta ordinaria. En México, hay retención en la fuente del 10% sobre dividendos recibidos de empresas extranjeras, y las ganancias de capital están sujetas al ISR según el período de tenencia. En ambos casos: consulta con un contador local que conozca el tratamiento de activos financieros internacionales."
+  - pregunta: "¿Puedo comprar el ETF VOO desde LATAM sin pagar comisión de compra?"
+    respuesta: "Sí, si lo compras a través de XTB. XTB permite comprar VOO (Vanguard S&P 500 ETF), SPY (SPDR S&P 500 ETF), QQQ y más de 300 ETFs reales sin comisión de compra hasta €100,000 mensuales. Al comprar VOO en XTB, adquieres participaciones reales del ETF y recibes los dividendos trimestrales que distribuye Vanguard. La única consideración de costo es el diferencial de tipo de cambio al convertir USD a la moneda del activo (aproximadamente 0.5%)."
 ---
 
 <h2>Comprar acciones desde LATAM es más fácil de lo que crees</h2>
@@ -43,4 +52,18 @@ publicado: true
 <p>Usa la <a href="/calculadoras/roi">calculadora de ROI</a> para proyectar el retorno real de tu inversión en acciones, y el <a href="/calculadoras/cagr">CAGR</a> para comparar rendimientos históricos del S&P 500 con otras alternativas.</p>
 
 <h2>La recomendación práctica</h2>
-<p>Para la mayoría de inversores latinoamericanos que quieren construir riqueza a largo plazo: abre cuenta en <a href="https://geolink.xtb.com/I0QSx" target="_blank" rel="noopener noreferrer nofollow sponsored">XTB</a>, compra mensualmente un ETF del S&P 500 (SPY o VOO) con la cantidad que puedas mantener sin necesitar durante al menos 5 años. Esta estrategia de DCA (Dollar Cost Averaging) — que puedes proyectar con nuestra <a href="/calculadoras/dca">calculadora DCA</a> — supera históricamente a la mayoría de gestores activos.</p>
+<p>Para la mayoría de inversores latinoamericanos que quieren construir riqueza a largo plazo: abre cuenta en <a href="https://geolink.xtb.com/I0QSx" target="_blank" rel="noopener noreferrer nofollow sponsored">XTB</a>, compra mensualmente un ETF del S&P 500 (SPY o VOO) con la cantidad que puedas mantener sin necesitar durante al menos 5 años. Esta estrategia de DCA (Dollar Cost Averaging) — que puedes proyectar con nuestra <a href="/calculadoras/dca">calculadora DCA</a> — supera históricamente a la mayoría de gestores activos.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Puedo comprar acciones de Apple desde Colombia o México con pocos dólares?</h3>
+<p>Sí. Con XTB puedes comprar acciones fraccionadas de Apple, Tesla, Amazon y miles de empresas globales desde Colombia, México y Chile, sin comisión de compra hasta €100,000 mensuales. Si el precio de una acción de Apple es $200, puedes comprar una fracción ($10, $20, lo que tengas) y ser propietario real de esa parte proporcional de la acción. No necesitas el precio completo de una acción. El proceso: abre cuenta en XTB → verifica tu identidad → deposita → busca el ticker (AAPL para Apple) → compra.</p>
+
+<h3>¿Cuál es la diferencia real entre comprar una acción en XTB y operar un CFD de acción en Exness?</h3>
+<p>En XTB compras la acción real: eres accionista, recibes dividendos del emisor, tu inversión no vence y no hay costos de financiamiento overnight. En Exness o XM operas un CFD: replica el precio de la acción pero no eres accionista. Recibes ajustes de dividendo (no directamente del emisor), puedes usar apalancamiento y operar en corto, pero hay costos de swap overnight que hacen los CFDs más caros para inversión de largo plazo. Regla práctica: acciones para largo plazo → XTB. Especulación a corto plazo → CFD en Exness o XM.</p>
+
+<h3>¿Cómo tributan las ganancias de acciones extranjeras en Colombia o México?</h3>
+<p>En Colombia, las ganancias de acciones extranjeras son renta de fuente extranjera. Si vendiste con ganancia y la mantuviste más de dos años, aplica la tarifa de ganancias ocasionales (10%). Si fue menos de dos años, tributa como renta ordinaria. En México, hay retención en la fuente del 10% sobre dividendos recibidos de empresas extranjeras, y las ganancias de capital están sujetas al ISR según el período de tenencia. En ambos casos: consulta con un contador local que conozca el tratamiento de activos financieros internacionales.</p>
+
+<h3>¿Puedo comprar el ETF VOO desde LATAM sin pagar comisión de compra?</h3>
+<p>Sí, si lo compras a través de XTB. XTB permite comprar VOO (Vanguard S&P 500 ETF), SPY (SPDR S&P 500 ETF), QQQ y más de 300 ETFs reales sin comisión de compra hasta €100,000 mensuales. Al comprar VOO en XTB, adquieres participaciones reales del ETF y recibes los dividendos trimestrales que distribuye Vanguard. La única consideración de costo es el diferencial de tipo de cambio al convertir USD a la moneda del activo (aproximadamente 0.5%).</p></p>

@@ -12,6 +12,15 @@ keywords:
   - "plataforma trading boricua"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué es el Acta 60 de Puerto Rico y cómo beneficia concretamente a un inversor o trader?"
+    respuesta: "El Acta 60 (que unificó los anteriores Actos 20 y 22) ofrece 0% de impuesto sobre ganancias de capital en Puerto Rico para inversores que establezcan residencia real en la isla. Para calificar debes vivir en PR más de 183 días al año, y las ganancias deben generarse después de establecer residencia. La tasa del 0% aplica a ganancias de trading, dividendos y otros ingresos pasivos hasta el límite acordado. Consulta con un abogado fiscal especializado antes de tomar decisiones basadas en este incentivo."
+  - pregunta: "¿Puedo usar brokers regulados por la SEC o FINRA como TD Ameritrade o Schwab desde Puerto Rico?"
+    respuesta: "Sí, los puertorriqueños pueden usar brokers regulados por la SEC y FINRA exactamente igual que los residentes de los 50 estados. Al ser ciudadanos estadounidenses con número de seguro social (SSN), tienen acceso completo a brokers como Fidelity, Schwab, TD Ameritrade o Interactive Brokers, que también ofrecen acceso a acciones, ETFs, opciones y más. Esto es una ventaja significativa frente a cualquier otro mercado de habla hispana."
+  - pregunta: "¿Las ganancias de capital en Puerto Rico tributan igual que en el resto de EE.UU.?"
+    respuesta: "No exactamente. Puerto Rico tiene su propio código de rentas internas (aunque adaptado al federal). Los puertorriqueños no pagan impuesto federal sobre ingresos de fuente puertorriqueña, pero sí pagan impuestos locales al Departamento de Hacienda de Puerto Rico. Sin el Acta 60, las ganancias de capital están sujetas a tasas locales que pueden ser inferiores a las federales. Con el Acta 60, las ganancias de capital acumuladas post-residencia pagan 0%."
+  - pregunta: "¿Exness acepta tarjetas de bancos puertorriqueños como FirstBankPR o Popular?"
+    respuesta: "Sí. Las tarjetas Visa y Mastercard emitidas por FirstBankPR, Popular Inc. (Banco Popular de Puerto Rico), Oriental Bank o Scotiabank PR funcionan para depósitos en Exness, XM y otros brokers internacionales. Al operar en USD, no hay conversión de moneda ni recargo cambiario. Los depósitos con tarjeta son instantáneos y sin comisión en la mayoría de brokers."
 ---
 
 <h2>Puerto Rico: un caso financiero único en el mundo hispanohablante</h2>
@@ -28,3 +37,13 @@ publicado: true
 
 <h2>El contexto para el inversor puertorriqueño</h2>
 <p>Con el dólar como moneda, acceso al sistema regulatorio de EE.UU. y los incentivos del Acta 60, Puerto Rico combina lo mejor de dos mundos. Para el inversor local, <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> o <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a> son las opciones más accesibles para comenzar.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Qué es el Acta 60 de Puerto Rico y cómo beneficia concretamente a un inversor o trader?</h3>
+<p>El Acta 60 (que unificó los anteriores Actos 20 y 22) ofrece 0% de impuesto sobre ganancias de capital en Puerto Rico para inversores que establezcan residencia real en la isla. Para calificar debes vivir en Puerto Rico más de 183 días al año, y las ganancias deben generarse después de establecer residencia. Consulta con un abogado fiscal especializado antes de tomar decisiones basadas en este incentivo.</p>
+<h3>¿Puedo usar brokers regulados por la SEC o FINRA como TD Ameritrade o Schwab desde Puerto Rico?</h3>
+<p>Sí, los puertorriqueños pueden usar brokers regulados por la SEC y FINRA exactamente igual que los residentes de los 50 estados. Al ser ciudadanos estadounidenses con número de seguro social (SSN), tienen acceso completo a brokers como Fidelity, Schwab o Interactive Brokers, que ofrecen acceso a acciones, ETFs, opciones y más. Esta es una ventaja significativa frente a cualquier otro mercado de habla hispana.</p>
+<h3>¿Las ganancias de capital en Puerto Rico tributan igual que en el resto de EE.UU.?</h3>
+<p>No exactamente. Puerto Rico tiene su propio código de rentas internas. Los puertorriqueños no pagan impuesto federal sobre ingresos de fuente puertorriqueña, pero sí pagan impuestos locales al Departamento de Hacienda de Puerto Rico. Sin el Acta 60, las ganancias de capital están sujetas a tasas locales que pueden ser inferiores a las federales. Con el Acta 60, las ganancias de capital acumuladas post-residencia pagan 0%.</p>
+<h3>¿Exness acepta tarjetas de bancos puertorriqueños como FirstBankPR o Popular?</h3>
+<p>Sí. Las tarjetas Visa y Mastercard emitidas por FirstBankPR, Popular Inc., Oriental Bank o Scotiabank PR funcionan para depósitos en Exness, XM y otros brokers internacionales. Al operar en USD, no hay conversión de moneda ni recargo cambiario. Los depósitos con tarjeta son instantáneos y sin comisión en la mayoría de brokers.</p>

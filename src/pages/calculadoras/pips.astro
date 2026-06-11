@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Pips — Inversax" description="Calcula el valor monetario de un pip en forex según tu par de divisas, tamaño de lote y moneda de cuenta.">
+<Layout title="Calculadora de Valor del Pip Forex — EUR/USD, GBP/USD, USD/JPY | Inversax" description="Calcula cuánto vale cada pip en forex según tu par de divisas y tamaño de posición. Tabla de valores para 10, 50 y 100 pips. Herramienta gratuita para traders de Colombia, México, Chile, Perú y toda LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto vale un pip en un lote estándar de EUR/USD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En EUR/USD (y cualquier par donde el USD es la divisa cotizada como GBP/USD, AUD/USD, NZD/USD), 1 pip equivale a 10 USD por lote estándar de 100.000 unidades. Con un mini lote (10.000 unidades), el pip vale 1 USD; con un micro lote (1.000 unidades), vale 0.10 USD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el valor del pip es diferente para USD/JPY?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En pares con JPY (USD/JPY, EUR/JPY, GBP/JPY), 1 pip es 0.01 (no 0.0001) porque el yen cotiza con solo 2 decimales. El valor monetario varía con el precio: a 150 USD/JPY, 1 pip ≈ 6.67 USD por lote estándar. Por eso la calculadora pide el precio de mercado actual para estos pares."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es un pipette o punto en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un pipette (o punto) es el quinto decimal en la cotización de un par — es decir, 1/10 de pip. Muchos brokers modernos como Exness, IC Markets y Pepperstone cotizan con 5 decimales (EUR/USD: 1.08503). El pipette tiene valor monetario pero es tan pequeño (0.001 USD/lote estándar) que solo importa en estrategias de scalping con volúmenes muy altos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afecta el tamaño de lote al valor del pip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El valor del pip escala linealmente con el tamaño de la posición. Para EUR/USD: lote estándar (100K unidades) = 10 USD/pip; mini lote (10K) = 1 USD/pip; micro lote (1K) = 0.10 USD/pip; nano lote (100) = 0.01 USD/pip. Si operas 2 lotes estándar, el pip vale 20 USD. Si operas 0.5 lotes, vale 5 USD."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

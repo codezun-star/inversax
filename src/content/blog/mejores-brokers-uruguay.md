@@ -12,6 +12,15 @@ keywords:
   - "plataforma trading uruguay"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿En qué consiste la exención fiscal de 11 años para nuevos residentes en Uruguay?"
+    respuesta: "Uruguay ofrece a nuevos residentes fiscales la opción de exonerar las rentas de fuente extranjera durante 10 años (prorrogables a 11 bajo ciertas condiciones) bajo el IRPF. Si te mudas a Uruguay y obtienes residencia fiscal, no pagas impuesto sobre tus ganancias de trading internacional durante ese período. Es una ventaja ampliamente aprovechada por inversores argentinos y venezolanos."
+  - pregunta: "¿Los uruguayos con residencia habitual pagan impuesto sobre ganancias de trading?"
+    respuesta: "Sí. Los residentes fiscales uruguayos sin el beneficio de la exención para nuevos residentes pagan IRPF categoría II al 12% sobre las rentas de capital de fuente extranjera. Es una tasa moderada comparada con Colombia (hasta 39%), Chile (hasta 40%) o España (hasta 28%). Las rentas deben declararse anualmente ante la DGI."
+  - pregunta: "¿Hay control de cambios o restricciones para enviar dinero al exterior en Uruguay?"
+    respuesta: "No. Uruguay tiene libre circulación de capitales sin controles cambiarios. Puedes enviar dinero a un broker internacional, recibir retiros o mover fondos entre países sin restricciones del Banco Central del Uruguay (BCU). Esta es una de las diferencias más importantes respecto a Argentina, que tiene severas restricciones cambiarias."
+  - pregunta: "¿Por qué muchos argentinos se trasladan a Uruguay para operar en brokers internacionales?"
+    respuesta: "Por tres razones principales: libre circulación de capitales sin cepo, la exención fiscal de 11 años para nuevos residentes que elimina la carga impositiva en rentas extranjeras durante ese período, y la mayor estabilidad del peso uruguayo frente al argentino. El proceso de obtener residencia en Uruguay es relativamente accesible para ciudadanos argentinos."
 ---
 
 <h2>Uruguay: el mercado financiero más sofisticado del Río de la Plata</h2>
@@ -28,3 +37,13 @@ publicado: true
 
 <h2>Por qué Uruguay es una base interesante para el inversor regional</h2>
 <p>Varios inversores latinoamericanos, especialmente argentinos, han establecido residencia fiscal en Uruguay precisamente para aprovechar el régimen de exención de rentas extranjeras y operar con mayor libertad financiera. La estabilidad relativa del peso uruguayo, el sistema bancario sólido y el acceso irrestricto a divisas hacen de Uruguay una plataforma regional para la gestión de patrimonio internacional.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿En qué consiste la exención fiscal de 11 años para nuevos residentes en Uruguay?</h3>
+<p>Uruguay ofrece a nuevos residentes fiscales la opción de exonerar las rentas de fuente extranjera durante 10 años (prorrogables a 11 bajo ciertas condiciones) bajo el IRPF. Si obtienes residencia fiscal en Uruguay, no pagas impuesto sobre tus ganancias de trading internacional durante ese período. Es una ventaja ampliamente aprovechada por inversores argentinos y venezolanos que buscan mayor libertad financiera.</p>
+<h3>¿Los uruguayos con residencia habitual pagan impuesto sobre ganancias de trading?</h3>
+<p>Sí. Los residentes fiscales uruguayos sin el beneficio de la exención para nuevos residentes pagan IRPF categoría II al 12% sobre las rentas de capital de fuente extranjera. Es una tasa moderada comparada con Colombia (hasta 39%), Chile (hasta 40%) o España (hasta 28%). Las rentas deben declararse anualmente ante la DGI (Dirección General Impositiva).</p>
+<h3>¿Hay control de cambios o restricciones para enviar dinero al exterior en Uruguay?</h3>
+<p>No. Uruguay tiene libre circulación de capitales sin controles cambiarios. Puedes enviar dinero a un broker internacional, recibir retiros o mover fondos entre países sin restricciones del Banco Central del Uruguay. Esta es una de las diferencias más importantes respecto a Argentina, que tiene severas restricciones cambiarias que limitan el acceso a divisas.</p>
+<h3>¿Por qué muchos argentinos se trasladan a Uruguay para operar en brokers internacionales?</h3>
+<p>Por tres razones principales: libre circulación de capitales sin cepo, la exención fiscal de 11 años para nuevos residentes en rentas extranjeras, y la mayor estabilidad del peso uruguayo frente al argentino. El proceso de obtener residencia en Uruguay es relativamente accesible para ciudadanos argentinos y permite operar con plena libertad financiera desde el primer día.</p>

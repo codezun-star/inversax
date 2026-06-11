@@ -18,6 +18,15 @@ keywords:
   - "spread en cfd acciones indices"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué spread tiene el EUR/USD en los brokers más usados en LATAM?"
+    respuesta: "En cuenta estándar (sin comisión adicional), durante horario de mercado normal: Exness ~0.7-1.0 pips, XM ~1.0-1.6 pips, XTB ~0.9-1.3 pips. En cuenta ECN/Raw (con comisión por lote): Pepperstone Razor ~0.0-0.2 pips + $3.50/lote, Exness Raw Spread ~0.0-0.2 pips + $3.50/lote, IC Markets Raw ~0.0-0.1 pips + $3.50/lote. El EUR/USD es el par con el spread más bajo en todos los brokers por ser el más líquido del mundo."
+  - pregunta: "¿El spread en forex varía durante el día o es siempre el mismo?"
+    respuesta: "El spread variable (flotante) cambia constantemente según la liquidez del mercado. Los momentos de spread más bajo son durante el solapamiento de las sesiones de Londres y Nueva York (14:00-17:00 UTC), cuando la liquidez es máxima. Los momentos de spread más alto: apertura de la sesión asiática (baja liquidez), fines de semana, publicación de datos económicos de alto impacto (NFP en EE.UU., decisiones del BCE) donde el spread puede ser 5-10 veces mayor durante los segundos de la publicación. Los brokers con spread fijo mantienen el mismo spread siempre, pero suele ser más amplio que el spread variable en condiciones normales."
+  - pregunta: "¿Es mejor una cuenta con spread bajo y comisión (ECN) o una con spread alto y sin comisión?"
+    respuesta: "Depende del volumen de operaciones. Para scalping (muchas operaciones por día), la cuenta ECN/Raw es casi siempre más barata: con 0.1 pips de spread + $7 de comisión round trip, el costo total en 1 lote es ~$8, versus ~$15 en cuenta estándar con 1.5 pips. Para traders con pocas operaciones grandes (swing trading), la diferencia es menor. Para micro lotes (0.01 lot), la comisión fija de $3.50/lote puede ser desproporcionada. Calcula el costo total mensual con tu volumen real usando la calculadora de comisión de broker."
+  - pregunta: "¿Por qué el spread sube tanto durante las noticias económicas como el NFP?"
+    respuesta: "Durante la publicación de datos económicos de alto impacto (Non-Farm Payrolls de EE.UU., decisiones de tasas de la FED o BCE, IPC), los proveedores de liquidez (bancos grandes) amplían sus cotizaciones porque no saben en qué dirección se moverá el mercado. El riesgo de quedar del lado equivocado en un movimiento brusco es mayor, por lo que amplían el spread como compensación. En EUR/USD el spread puede pasar de 0.2 pips a 5-15 pips durante esos segundos críticos. Para estrategias de corto plazo, es recomendable no operar durante los 2-3 minutos alrededor de publicaciones de noticias de alto impacto."
 ---
 
 <h2>El spread: el costo invisible que siempre pagas en forex</h2>
@@ -126,4 +135,18 @@ publicado: true
   <li><strong>Exness (cuenta Raw Spread):</strong> ~0.0-0.2 pips + $3.50/lote</li>
   <li><strong><a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">IC Markets</a> (cuenta Raw):</strong> ~0.0-0.1 pips + $3.50/lote</li>
 </ul>
-<p>Compara todos los brokers disponibles en tu país en el <a href="/brokers/co">comparador de brokers</a>. Recuerda que el spread no es el único costo — el swap overnight y las comisiones también afectan la rentabilidad total de tu trading.</p>
+<p>Compara todos los brokers disponibles en tu país en el <a href="/brokers/co">comparador de brokers</a>. Recuerda que el spread no es el único costo — el swap overnight y las comisiones también afectan la rentabilidad total de tu trading.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Qué spread tiene el EUR/USD en los brokers más usados en LATAM?</h3>
+<p>En cuenta estándar (sin comisión adicional), durante horario de mercado normal: Exness ~0.7-1.0 pips, XM ~1.0-1.6 pips, XTB ~0.9-1.3 pips. En cuenta ECN/Raw (con comisión por lote): Pepperstone Razor ~0.0-0.2 pips + $3.50/lote, Exness Raw Spread ~0.0-0.2 pips + $3.50/lote, IC Markets Raw ~0.0-0.1 pips + $3.50/lote. El EUR/USD es el par con el spread más bajo en todos los brokers por ser el más líquido del mundo.</p>
+
+<h3>¿El spread en forex varía durante el día o es siempre el mismo?</h3>
+<p>El spread variable (flotante) cambia constantemente según la liquidez del mercado. Los momentos de spread más bajo son durante el solapamiento de las sesiones de Londres y Nueva York (14:00-17:00 UTC), cuando la liquidez es máxima. Los momentos de spread más alto: apertura de la sesión asiática (baja liquidez), fines de semana, publicación de datos económicos de alto impacto (NFP en EE.UU., decisiones del BCE) donde el spread puede ser 5-10 veces mayor durante los segundos de la publicación. Los brokers con spread fijo mantienen el mismo spread siempre, pero suele ser más amplio que el spread variable en condiciones normales.</p>
+
+<h3>¿Es mejor una cuenta con spread bajo y comisión (ECN) o una con spread alto y sin comisión?</h3>
+<p>Depende del volumen de operaciones. Para scalping (muchas operaciones por día), la cuenta ECN/Raw es casi siempre más barata: con 0.1 pips de spread + $7 de comisión round trip, el costo total en 1 lote es ~$8, versus ~$15 en cuenta estándar con 1.5 pips. Para traders con pocas operaciones grandes (swing trading), la diferencia es menor. Para micro lotes (0.01 lot), la comisión fija de $3.50/lote puede ser desproporcionada. Calcula el costo total mensual con tu volumen real usando la calculadora de comisión de broker.</p>
+
+<h3>¿Por qué el spread sube tanto durante las noticias económicas como el NFP?</h3>
+<p>Durante la publicación de datos económicos de alto impacto (Non-Farm Payrolls de EE.UU., decisiones de tasas de la FED o BCE, IPC), los proveedores de liquidez (bancos grandes) amplían sus cotizaciones porque no saben en qué dirección se moverá el mercado. El riesgo de quedar del lado equivocado en un movimiento brusco es mayor, por lo que amplían el spread como compensación. En EUR/USD el spread puede pasar de 0.2 pips a 5-15 pips durante esos segundos críticos. Para estrategias de corto plazo, es recomendable no operar durante los 2-3 minutos alrededor de publicaciones de noticias de alto impacto.</p></p>

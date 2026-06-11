@@ -12,6 +12,15 @@ keywords:
   - "SMV broker peru"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuánto impuesto pago sobre ganancias de forex o CFDs en Perú?"
+    respuesta: "Las ganancias de capital de fuente extranjera tributan al 6.25% sobre la renta neta (equivalente al 5% sobre el ingreso bruto con la deducción del 20%). Es una de las tasas más bajas de LATAM para este tipo de renta. Debes declararlas en el Formulario 709 (Declaración Jurada Anual) entre abril y mayo del año siguiente al ejercicio fiscal."
+  - pregunta: "¿Puedo usar Yape o Plin para fondear mi cuenta en un broker internacional?"
+    respuesta: "No directamente. Algunos procesadores de pago intermediarios permiten recibir pagos vía Yape y enviarlos al broker en USD, pero no es un método estable ni universal. El método más confiable sigue siendo tarjeta Visa/Mastercard de BCP, Interbank o Scotiabank, o transferencia SWIFT desde cualquier banco peruano."
+  - pregunta: "¿IC Markets acepta soles peruanos (PEN) directamente para depósitos?"
+    respuesta: "No. IC Markets trabaja en USD, EUR y AUD. El depósito con tarjeta peruana realiza automáticamente la conversión de PEN a USD al tipo de cambio del día, más el recargo por transacción internacional del banco (generalmente 1-4%). Para evitar ese recargo, puedes abrir una cuenta USD en tu banco local o usar Wise para convertir PEN a USD antes del depósito."
+  - pregunta: "¿La SUNAT ya recibe información automática de cuentas en brokers extranjeros?"
+    respuesta: "Sí. Perú es parte del CRS desde 2019 y la SUNAT recibe reportes automáticos de cuentas financieras de residentes peruanos en países participantes. El intercambio cubre saldos, dividendos, intereses y ganancias de capital. Brokers regulados por FCA, ASIC y CySEC participan en este sistema, por lo que omitir rentas extranjeras conlleva un riesgo creciente de fiscalización."
 ---
 
 <h2>El inversor peruano: más sofisticado y más conectado que nunca</h2>
@@ -32,3 +41,13 @@ publicado: true
 
 <h2>Recomendación final</h2>
 <p>Para empezar con poco capital y aprender mientras operas, <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> es la puerta de entrada más accesible desde Perú. Para traders con más experiencia que buscan condiciones ECN y spreads ultra bajos, <a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">IC Markets</a> es la referencia del sector.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Cuánto impuesto pago sobre ganancias de forex o CFDs en Perú?</h3>
+<p>Las ganancias de capital de fuente extranjera tributan al 6.25% sobre la renta neta (equivalente al 5% sobre el ingreso bruto con la deducción del 20%). Es una de las tasas más bajas de LATAM para este tipo de renta. Debes declararlas en el Formulario 709 entre abril y mayo del año siguiente al ejercicio fiscal.</p>
+<h3>¿Puedo usar Yape o Plin para fondear mi cuenta en un broker internacional?</h3>
+<p>No directamente. Algunos procesadores intermediarios permiten recibir pagos vía Yape y enviarlos al broker en USD, pero no es un método estable ni universal. El método más confiable sigue siendo tarjeta Visa/Mastercard de BCP, Interbank o Scotiabank, o transferencia SWIFT desde cualquier banco peruano.</p>
+<h3>¿IC Markets acepta soles peruanos (PEN) directamente para depósitos?</h3>
+<p>No. IC Markets trabaja en USD, EUR y AUD. El depósito con tarjeta peruana convierte automáticamente de PEN a USD al tipo de cambio del día más el recargo por transacción internacional del banco (generalmente 1-4%). Para evitar ese recargo, abre una cuenta USD en tu banco o usa Wise para convertir antes del depósito.</p>
+<h3>¿La SUNAT ya recibe información automática de cuentas en brokers extranjeros?</h3>
+<p>Sí. Perú es parte del CRS desde 2019 y la SUNAT recibe reportes automáticos de cuentas financieras de residentes peruanos en países participantes. El intercambio cubre saldos, dividendos, intereses y ganancias de capital. Brokers regulados por FCA, ASIC y CySEC participan en este sistema, por lo que omitir rentas extranjeras conlleva un riesgo real de fiscalización.</p>

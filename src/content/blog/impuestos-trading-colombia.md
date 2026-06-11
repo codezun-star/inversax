@@ -17,6 +17,15 @@ keywords:
   - "trading legal colombia impuestos"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Tengo que declarar ante la DIAN si gané menos de $1,000 USD haciendo trading?"
+    respuesta: "Depende de tu situación global, no solo del monto de trading. Estás obligado a declarar renta si eres responsable de IVA, tienes patrimonio bruto superior a 4,500 UVT (~$50 millones COP), ingresos brutos superiores a 1,400 UVT (~$65 millones COP), o consumos con tarjeta de crédito superiores a 1,400 UVT. Si no cumples ninguno de esos umbrales, técnicamente no estás obligado a declarar — pero si declaras voluntariamente, las ganancias de trading deben incluirse. Consulta con un contador tu situación específica."
+  - pregunta: "¿Cuándo son ganancia ocasional (10%) y cuándo renta ordinaria las ganancias de trading?"
+    respuesta: "La distinción clave es el tiempo de tenencia: si compraste acciones o criptomonedas y las vendiste después de más de 2 años, la ganancia es ocasional (10% fijo). Si operas forex, CFDs, o vendes activos con menos de 2 años, la ganancia es renta ordinaria (0%-39% progresivo según tu nivel de ingresos total). En la práctica, la mayoría del trading activo (forex, CFDs, operaciones de días o semanas) cae en renta ordinaria. Inversiones de largo plazo en ETFs o acciones mantenidas más de 2 años califican como ganancia ocasional."
+  - pregunta: "¿Puede la DIAN saber que tengo una cuenta en Exness, XM o IC Markets?"
+    respuesta: "Sí, potencialmente. Colombia está adherida al CRS (Common Reporting Standard) de la OCDE, el mecanismo de intercambio automático de información financiera entre más de 100 países. Los brokers regulados en países miembros del CRS (como Chipre, Reino Unido, Australia) reportan información de cuentas a sus autoridades locales, quienes la comparten con la DIAN. No todos los brokers están sujetos al CRS de la misma forma (depende de la entidad regulada), pero el riesgo de que la DIAN conozca tus cuentas en el exterior es real y crece cada año."
+  - pregunta: "¿Qué formulario uso para declarar activos en brokers extranjeros ante la DIAN?"
+    respuesta: "Para la declaración de renta ordinaria (Formulario 210), las ganancias se incluyen en las casillas de rentas de fuente extranjera. Si a 31 de diciembre tienes patrimonio en el exterior superior a aproximadamente $27,000 USD (el umbral en UVT varía cada año), debes diligenciar adicionalmente el Formato 160 como reporte informativo de activos en el exterior. El Formato 160 no genera impuesto adicional — es solo obligación de reporte. Tu contador puede generarlo automáticamente desde el software de preparación de declaraciones."
 ---
 
 <h2>Trading desde Colombia es legal — y las ganancias se deben declarar</h2>
@@ -58,4 +67,18 @@ Si tu patrimonio en el exterior supera los $27.000 USD aproximadamente, debes di
 
 <h2>Recomendación práctica</h2>
 <p>Lleva un registro mensual de tus operaciones y resultados. La mayoría de brokers permiten descargar extractos en Excel — guárdalos mensualmente para no tener que reconstruir el historial al año siguiente. Un contador con experiencia en activos internacionales puede optimizar tu situación tributaria legalmente y evitar problemas con la DIAN. El costo del contador (típicamente $300.000-600.000 COP por declaración) suele ser menor al costo de una sanción.</p>
-<p>Para ver qué brokers están disponibles y regulados en Colombia: <a href="/brokers/co">comparador de brokers para Colombia</a>.</p>
+<p>Para ver qué brokers están disponibles y regulados en Colombia: <a href="/brokers/co">comparador de brokers para Colombia</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Tengo que declarar ante la DIAN si gané menos de $1,000 USD haciendo trading?</h3>
+<p>Depende de tu situación global, no solo del monto de trading. Estás obligado a declarar renta si eres responsable de IVA, tienes patrimonio bruto superior a 4,500 UVT (~$50 millones COP), ingresos brutos superiores a 1,400 UVT (~$65 millones COP), o consumos con tarjeta de crédito superiores a 1,400 UVT. Si no cumples ninguno de esos umbrales, técnicamente no estás obligado a declarar — pero si declaras voluntariamente, las ganancias de trading deben incluirse. Consulta con un contador tu situación específica.</p>
+
+<h3>¿Cuándo son ganancia ocasional (10%) y cuándo renta ordinaria las ganancias de trading?</h3>
+<p>La distinción clave es el tiempo de tenencia: si compraste acciones o criptomonedas y las vendiste después de más de 2 años, la ganancia es ocasional (10% fijo). Si operas forex, CFDs, o vendes activos con menos de 2 años, la ganancia es renta ordinaria (0%-39% progresivo según tu nivel de ingresos total). En la práctica, la mayoría del trading activo (forex, CFDs, operaciones de días o semanas) cae en renta ordinaria. Inversiones de largo plazo en ETFs o acciones mantenidas más de 2 años califican como ganancia ocasional.</p>
+
+<h3>¿Puede la DIAN saber que tengo una cuenta en Exness, XM o IC Markets?</h3>
+<p>Sí, potencialmente. Colombia está adherida al CRS (Common Reporting Standard) de la OCDE, el mecanismo de intercambio automático de información financiera entre más de 100 países. Los brokers regulados en países miembros del CRS (como Chipre, Reino Unido, Australia) reportan información de cuentas a sus autoridades locales, quienes la comparten con la DIAN. No todos los brokers están sujetos al CRS de la misma forma (depende de la entidad regulada), pero el riesgo de que la DIAN conozca tus cuentas en el exterior es real y crece cada año.</p>
+
+<h3>¿Qué formulario uso para declarar activos en brokers extranjeros ante la DIAN?</h3>
+<p>Para la declaración de renta ordinaria (Formulario 210), las ganancias se incluyen en las casillas de rentas de fuente extranjera. Si a 31 de diciembre tienes patrimonio en el exterior superior a aproximadamente $27,000 USD (el umbral en UVT varía cada año), debes diligenciar adicionalmente el Formato 160 como reporte informativo de activos en el exterior. El Formato 160 no genera impuesto adicional — es solo obligación de reporte. Tu contador puede generarlo automáticamente desde el software de preparación de declaraciones.</p></p>

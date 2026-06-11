@@ -12,6 +12,15 @@ keywords:
   - "impuestos trading hacienda IRPF"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuáles son los límites de apalancamiento que aplican en España bajo MiFID II?"
+    respuesta: "Para clientes minoristas en España y Europa, la ESMA fija: 30:1 para pares de divisas principales (EUR/USD, GBP/USD), 20:1 para índices y oro, 10:1 para commodities distintos del oro, 5:1 para acciones individuales y 2:1 para criptomonedas. Un trader profesional puede solicitar clasificación como cliente profesional para acceder a apalancamientos mayores, aunque esto reduce también las protecciones regulatorias."
+  - pregunta: "¿XTB está regulado directamente por la CNMV en España?"
+    respuesta: "Sí. XTB tiene una entidad registrada directamente ante la CNMV (número de registro 3412), lo que lo convierte en uno de los pocos brokers de forex y CFDs con presencia regulada local en España. Esto añade una capa adicional de supervisión sobre los estándares europeos de MiFID II. Puedes verificar el registro en el portal oficial de la CNMV."
+  - pregunta: "¿Tengo que presentar el Modelo 720 si tengo cuenta en un broker?"
+    respuesta: "Sí, si el saldo en tu cuenta del broker u otras cuentas extranjeras supera los €50,000 al 31 de diciembre, debes presentar el Modelo 720 ante Hacienda antes del 31 de marzo del año siguiente. No implica pago adicional de impuestos, es solo una declaración informativa. Las sanciones por no presentarlo han sido moduladas tras la sentencia del TJUE de 2022."
+  - pregunta: "¿Puedo deducir las pérdidas de trading en la declaración de la renta en España?"
+    respuesta: "Sí. Las pérdidas patrimoniales generadas en trading pueden compensarse con ganancias patrimoniales del mismo ejercicio. Si las pérdidas superan las ganancias, el exceso puede compensarse con rendimientos del capital mobiliario positivos hasta un 25% del saldo positivo. Las pérdidas no compensadas pueden arrastrarse durante los 4 ejercicios fiscales siguientes."
 ---
 
 <h2>España: la protección al inversor más alta de los países hispanohablantes</h2>
@@ -31,3 +40,13 @@ publicado: true
 
 <h2>El broker más adecuado según tu perfil</h2>
 <p>Para trading activo con spreads mínimos, <a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a> o <a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">IC Markets</a> son las referencias. Para inversión en acciones y ETFs sin comisión con presencia regulada en España, <a href="https://geolink.xtb.com/I0QSx" target="_blank" rel="noopener noreferrer nofollow sponsored">XTB</a> es la opción más sólida del mercado.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Cuáles son los límites de apalancamiento que aplican en España bajo MiFID II?</h3>
+<p>Para clientes minoristas en España y Europa, la ESMA fija: 30:1 para pares de divisas principales (EUR/USD, GBP/USD), 20:1 para índices y oro, 10:1 para commodities distintos del oro, 5:1 para acciones individuales y 2:1 para criptomonedas. Un trader puede solicitar clasificación como cliente profesional para acceder a apalancamientos mayores, aunque esto reduce también las protecciones regulatorias.</p>
+<h3>¿XTB está regulado directamente por la CNMV en España?</h3>
+<p>Sí. XTB tiene una entidad registrada directamente ante la CNMV (número de registro 3412), lo que lo convierte en uno de los pocos brokers de forex y CFDs con presencia regulada local en España. Puedes verificar el registro en el portal oficial de la CNMV. Esto añade una capa adicional de supervisión sobre los estándares europeos de MiFID II.</p>
+<h3>¿Tengo que presentar el Modelo 720 si tengo cuenta en un broker?</h3>
+<p>Sí, si el saldo en tu cuenta del broker u otras cuentas extranjeras supera los €50,000 al 31 de diciembre, debes presentar el Modelo 720 ante Hacienda antes del 31 de marzo del año siguiente. No implica pago adicional de impuestos, es solo una declaración informativa. Las sanciones por no presentarlo han sido moduladas tras la sentencia del TJUE de 2022.</p>
+<h3>¿Puedo deducir las pérdidas de trading en la declaración de la renta en España?</h3>
+<p>Sí. Las pérdidas patrimoniales generadas en trading pueden compensarse con ganancias patrimoniales del mismo ejercicio. Si las pérdidas superan las ganancias, el exceso puede compensarse con rendimientos del capital mobiliario positivos hasta un 25% del saldo positivo de estos últimos. Las pérdidas no compensadas pueden arrastrarse durante los 4 ejercicios fiscales siguientes.</p>

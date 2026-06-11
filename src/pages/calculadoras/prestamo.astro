@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Préstamo — Inversax" description="Calcula la cuota mensual de tu préstamo y el total de intereses pagados. Soporta todas las monedas de Latinoamérica y España.">
+<Layout title="Calculadora de Préstamo — Cuota Mensual e Intereses | Inversax" description="Calculadora de préstamo: cuota mensual y total de intereses al instante. Sistema de amortización francés. Para Colombia, México, Chile, Perú y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula la cuota mensual de un préstamo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fórmula del sistema francés (cuota fija): Cuota = Capital × r × (1+r)^n / ((1+r)^n − 1), donde r = tasa mensual (tasa anual/12) y n = número de meses. Ejemplo: 10.000 USD al 12% anual a 36 meses tiene cuota de ~332 USD/mes y pagas 1.957 USD en intereses totales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto pago de intereses en total en un préstamo personal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Total intereses = (Cuota × Meses) − Capital. Con 10.000 USD al 12% anual: a 12 meses pagas 666 USD en intereses; a 36 meses, 1.957 USD; a 60 meses, 3.347 USD. Cada mes adicional de plazo aumenta el costo total aunque reduzca la cuota mensual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tasas de préstamo personal hay en Colombia, México y Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Referencia 2026: Colombia crédito consumo 24-30% E.A.; México 25-40% anual; Chile 15-25% anual; Perú 30-50% E.A.; España 6-10% TAE. Siempre compara la Tasa Efectiva Anual (TEA o CAE), que incluye todos los costos del crédito, no solo la tasa nominal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene hacer prepagos en un préstamo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, en la mayoría de casos. Cada peso de capital extra que pagas reduce el saldo sobre el que se calculan los intereses futuros. Los prepagos son más valiosos al inicio del préstamo cuando el saldo es mayor. Verifica primero si tu contrato tiene penalidad por prepago anticipado."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

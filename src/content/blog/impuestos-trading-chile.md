@@ -19,6 +19,15 @@ keywords:
   - "sii broker exness xtb chile"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Las ganancias de trading de forex tributan en Chile y a qué tasa?"
+    respuesta: "Sí, tributan. El SII clasifica las ganancias de forex y CFDs como renta de fuente extranjera, sujeta al Impuesto Global Complementario (IGC). Las tasas son progresivas: exento hasta ~$10,200 USD anuales, luego entre 4% y 35% dependiendo de tu nivel total de ingresos. Las ganancias de trading se suman a tu salario y otros ingresos para determinar el tramo que aplica. Para un trader con salario de $20,000,000 CLP anuales que ganó $5,000 USD (~$5,000,000 CLP) en trading, la suma total lo puede elevar al tramo del 13.5% o 23%."
+  - pregunta: "¿Cómo convierte el SII mis ganancias en USD a pesos chilenos para el Impuesto Global Complementario?"
+    respuesta: "El SII publica tablas de tipo de cambio mensuales que se usan para la conversión. Para operaciones realizadas durante el año, se usa el tipo de cambio del período de la operación. Para el resumen anual, el SII acepta el tipo de cambio promedio anual publicado por el Banco Central de Chile. En la práctica, muchos contadores convierten cada operación al tipo de cambio del día o del mes de la operación según el estado de cuenta del broker. Lo importante es ser consistente con el método elegido y documentarlo."
+  - pregunta: "¿Tengo que declarar al SII si solo tengo $1,000 USD en una cuenta de broker extranjero?"
+    respuesta: "Depende de si generaste ganancias durante el año y de tu situación total. Si no generaste ganancias realizadas (no cerraste posiciones con profit), no hay renta que declarar — solo activos que reportar si superan ciertos umbrales. En cuanto a bienes situados en el exterior: el SII requiere su declaración en la sección correspondiente del Formulario 22. Sin embargo, montos pequeños ($1,000 USD) raramente generan obligación fiscal adicional. Cualquier ganancia realizada, aunque sea pequeña, sí debe incluirse en la declaración de renta si estás obligado a declarar."
+  - pregunta: "¿Puedo descontar mis pérdidas en trading al declarar ante el SII?"
+    respuesta: "Las pérdidas en actividades de inversión pueden compensarse contra ganancias del mismo tipo, pero el tratamiento depende de cómo el SII clasifique tu actividad. Si es actividad habitual (inicio de actividades como primera categoría), las pérdidas son deducibles con mayor claridad. Si es actividad ocasional bajo IGC, la compensación es más restrictiva. Lo más seguro: lleva registro de todas las operaciones con pérdida y consulta con un contador si el monto total de pérdidas es significativo. No asumir automáticamente que toda pérdida es deducible sin respaldo legal."
 ---
 
 <h2>Trading desde Chile es legal — las ganancias tributan como renta extranjera</h2>
@@ -79,4 +88,18 @@ Si tienes saldos en cuentas de brokers extranjeros o criptomonedas, debes declar
 
 <h2>Recomendación práctica para traders en Chile</h2>
 <p>Lleva un registro mensual de todas tus operaciones, incluyendo fecha, activo, precio de compra, precio de venta y resultado en USD. La mayoría de brokers exportan esto automáticamente. Convierte mensualmente a pesos chilenos para simplificar la declaración en abril. Para volúmenes significativos, contrata a un contador tributarista con experiencia en rentas del exterior — el costo de la asesoría (típicamente $150,000-400,000 CLP) es menor que el costo de una sanción del SII.</p>
-<p>Compara los brokers disponibles en Chile en nuestro <a href="/brokers/cl">comparador de brokers para Chile</a>. Para proyectar el impacto de los impuestos en tus ganancias de trading, usa la <a href="/calculadoras/rendimiento-neto">calculadora de rendimiento neto después de impuestos</a>.</p>
+<p>Compara los brokers disponibles en Chile en nuestro <a href="/brokers/cl">comparador de brokers para Chile</a>. Para proyectar el impacto de los impuestos en tus ganancias de trading, usa la <a href="/calculadoras/rendimiento-neto">calculadora de rendimiento neto después de impuestos</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Las ganancias de trading de forex tributan en Chile y a qué tasa?</h3>
+<p>Sí, tributan. El SII clasifica las ganancias de forex y CFDs como renta de fuente extranjera, sujeta al Impuesto Global Complementario (IGC). Las tasas son progresivas: exento hasta ~$10,200 USD anuales, luego entre 4% y 35% dependiendo de tu nivel total de ingresos. Las ganancias de trading se suman a tu salario y otros ingresos para determinar el tramo que aplica. Para un trader con salario de $20,000,000 CLP anuales que ganó $5,000 USD (~$5,000,000 CLP) en trading, la suma total lo puede elevar al tramo del 13.5% o 23%.</p>
+
+<h3>¿Cómo convierte el SII mis ganancias en USD a pesos chilenos para el Impuesto Global Complementario?</h3>
+<p>El SII publica tablas de tipo de cambio mensuales que se usan para la conversión. Para operaciones realizadas durante el año, se usa el tipo de cambio del período de la operación. Para el resumen anual, el SII acepta el tipo de cambio promedio anual publicado por el Banco Central de Chile. En la práctica, muchos contadores convierten cada operación al tipo de cambio del día o del mes de la operación según el estado de cuenta del broker. Lo importante es ser consistente con el método elegido y documentarlo.</p>
+
+<h3>¿Tengo que declarar al SII si solo tengo $1,000 USD en una cuenta de broker extranjero?</h3>
+<p>Depende de si generaste ganancias durante el año y de tu situación total. Si no generaste ganancias realizadas (no cerraste posiciones con profit), no hay renta que declarar — solo activos que reportar si superan ciertos umbrales. En cuanto a bienes situados en el exterior: el SII requiere su declaración en la sección correspondiente del Formulario 22. Sin embargo, montos pequeños ($1,000 USD) raramente generan obligación fiscal adicional. Cualquier ganancia realizada, aunque sea pequeña, sí debe incluirse en la declaración de renta si estás obligado a declarar.</p>
+
+<h3>¿Puedo descontar mis pérdidas en trading al declarar ante el SII?</h3>
+<p>Las pérdidas en actividades de inversión pueden compensarse contra ganancias del mismo tipo, pero el tratamiento depende de cómo el SII clasifique tu actividad. Si es actividad habitual (inicio de actividades como primera categoría), las pérdidas son deducibles con mayor claridad. Si es actividad ocasional bajo IGC, la compensación es más restrictiva. Lo más seguro: lleva registro de todas las operaciones con pérdida y consulta con un contador si el monto total de pérdidas es significativo. No asumir automáticamente que toda pérdida es deducible sin respaldo legal.</p></p>

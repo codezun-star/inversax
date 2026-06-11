@@ -16,6 +16,15 @@ keywords:
   - "abrir cuenta broker latinoamerica"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Qué regulación es más segura para un inversor latinoamericano: FCA, ASIC o CySEC?"
+    respuesta: "Las tres son sólidas, con matices. La FCA (Reino Unido) es históricamente la más exigente: capital mínimo alto, segregación de fondos obligatoria y el FSCS protege hasta £85,000 por cliente en caso de insolvencia. ASIC (Australia) tiene un nivel similar de rigor y es especialmente conocida por su supervisión estricta del marketing. CySEC (Chipre/UE) es parte del sistema europeo y exige el Fondo de Compensación de Inversores (ICF) que protege hasta €20,000. Para LATAM, el broker que opera bajo entidades FCA+ASIC en su grupo (aunque te atienda la entidad offshore) da mayor confianza institucional."
+  - pregunta: "¿Cómo verifico si un broker está realmente regulado por la FCA del Reino Unido?"
+    respuesta: "Ve a register.fca.org.uk y busca el nombre del broker o su número de referencia FCA. Si aparece como 'Authorised' (autorizado), es legítimo bajo la FCA. Si dice 'Cancelled', 'Withdrawn' o simplemente no aparece, el broker no está regulado por la FCA aunque su sitio web lo afirme. El proceso toma menos de 3 minutos. Haz lo mismo para CySEC en cysec.gov.cy y para ASIC en asic.gov.au."
+  - pregunta: "¿Cuál es la diferencia práctica entre un broker Market Maker y un broker ECN para un principiante?"
+    respuesta: "Un Market Maker crea el mercado internamente y actúa como contraparte de tus operaciones. No te envía al mercado real, sino que gestiona las posiciones internamente. Son más accesibles (depósito bajo, cuentas micro) pero el spread puede ser mayor. Un broker ECN/STP envía tus órdenes directamente al mercado interbancario: spreads más bajos y sin conflicto de interés, pero generalmente requieren mayor capital mínimo ($200+). Para empezar: Market Maker regulado. Para escalar: ECN."
+  - pregunta: "¿Cuánto dinero necesito como mínimo para empezar a operar con un broker regulado desde LATAM?"
+    respuesta: "El mínimo formal varía: XM acepta desde $5 USD, Exness desde $10 USD en cuenta Standard, Pepperstone sin mínimo formal aunque se recomienda $200+, IC Markets requiere $200 USD, XTB no tiene mínimo oficial. En la práctica, con menos de $100 USD es difícil aplicar gestión de riesgo correcta (el 1-2% de riesgo por operación representa $1-2, lo que limita el tamaño mínimo de lote). Un capital de inicio práctico es $200-500 USD."
 ---
 
 <h2>Por qué elegir bien el broker es la decisión más importante que tomarás</h2>
@@ -52,4 +61,18 @@ publicado: true
 
 <h2>Criterio 7: cómo detectar un broker fraudulento</h2>
 <p>Las señales de alerta más comunes: prometen rendimientos garantizados ("gana el 20% mensual seguro"); no muestran número de licencia regulatoria verificable; tienen solo reseñas positivas con nombres genéricos; presionan para que deposites más antes de procesar un retiro; o el sitio web tiene menos de 6 meses de antigüedad.</p>
-<p>Una vez que tengas claro qué quieres, usa nuestro <a href="/brokers/co">comparador de brokers por país</a> para ver las opciones disponibles en tu región, reguladas y con enlaces directos para verificar su licencia.</p>
+<p>Una vez que tengas claro qué quieres, usa nuestro <a href="/brokers/co">comparador de brokers por país</a> para ver las opciones disponibles en tu región, reguladas y con enlaces directos para verificar su licencia.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Qué regulación es más segura para un inversor latinoamericano: FCA, ASIC o CySEC?</h3>
+<p>Las tres son sólidas, con matices. La FCA (Reino Unido) es históricamente la más exigente: capital mínimo alto, segregación de fondos obligatoria y el FSCS protege hasta £85,000 por cliente en caso de insolvencia. ASIC (Australia) tiene un nivel similar de rigor y es especialmente conocida por su supervisión estricta del marketing. CySEC (Chipre/UE) es parte del sistema europeo y exige el Fondo de Compensación de Inversores (ICF) que protege hasta €20,000. Para LATAM, el broker que opera bajo entidades FCA+ASIC en su grupo (aunque te atienda la entidad offshore) da mayor confianza institucional.</p>
+
+<h3>¿Cómo verifico si un broker está realmente regulado por la FCA del Reino Unido?</h3>
+<p>Ve a register.fca.org.uk y busca el nombre del broker o su número de referencia FCA. Si aparece como 'Authorised' (autorizado), es legítimo bajo la FCA. Si dice 'Cancelled', 'Withdrawn' o simplemente no aparece, el broker no está regulado por la FCA aunque su sitio web lo afirme. El proceso toma menos de 3 minutos. Haz lo mismo para CySEC en cysec.gov.cy y para ASIC en asic.gov.au.</p>
+
+<h3>¿Cuál es la diferencia práctica entre un broker Market Maker y un broker ECN para un principiante?</h3>
+<p>Un Market Maker crea el mercado internamente y actúa como contraparte de tus operaciones. No te envía al mercado real, sino que gestiona las posiciones internamente. Son más accesibles (depósito bajo, cuentas micro) pero el spread puede ser mayor. Un broker ECN/STP envía tus órdenes directamente al mercado interbancario: spreads más bajos y sin conflicto de interés, pero generalmente requieren mayor capital mínimo ($200+). Para empezar: Market Maker regulado. Para escalar: ECN.</p>
+
+<h3>¿Cuánto dinero necesito como mínimo para empezar a operar con un broker regulado desde LATAM?</h3>
+<p>El mínimo formal varía: XM acepta desde $5 USD, Exness desde $10 USD en cuenta Standard, Pepperstone sin mínimo formal aunque se recomienda $200+, IC Markets requiere $200 USD, XTB no tiene mínimo oficial. En la práctica, con menos de $100 USD es difícil aplicar gestión de riesgo correcta (el 1-2% de riesgo por operación representa $1-2, lo que limita el tamaño mínimo de lote). Un capital de inicio práctico es $200-500 USD.</p></p>

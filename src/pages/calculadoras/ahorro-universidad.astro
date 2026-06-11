@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Ahorro para Universidad — Inversax" description="Calcula cuánto debes ahorrar mensualmente para cubrir los estudios universitarios de tus hijos. Incluye inflación educativa y rendimiento de inversión.">
+<Layout title="Calculadora de Ahorro para Universidad — Fondo Educativo | Inversax" description="Calcula cuánto ahorrar mensualmente para la universidad de tus hijos. Con inflación educativa y rendimiento de inversión. Para Colombia, México, Chile y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta la universidad en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los costos varían enormemente. Colombia: universidades privadas 5.000-15.000 USD/año; públicas prácticamente gratuitas con matrícula simbólica. México: privadas 5.000-20.000 USD/año; UNAM y politécnicas casi gratuitas. Chile: 5.000-12.000 USD/año con aranceles y derechos básicos. Considera además gastos de vivienda, transporte y materiales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto sube el costo de la universidad cada año?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La inflación universitaria suele superar la inflación general. En Latinoamérica oscila entre 4% y 8% anual según el país. Colombia: aranceles de universidades privadas han subido 5-7% anual. México: privadas 6-8%. Chile: universidades ajustan según UF que sigue la inflación (~4-6%). Usa 5% como estimación conservadora."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde invertir el ahorro para la universidad de los hijos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del horizonte. Si faltan más de 10 años, puedes asumir más riesgo con ETFs globales (rendimiento histórico ~7-9%). Con 5-10 años, mezcla acciones y bonos (5-7%). Con menos de 5 años, instrumentos de bajo riesgo: CDTs, depósitos a plazo, CETES (3-5%). A menor tiempo restante, más conservador debe ser el instrumento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si empiezo a ahorrar para la universidad cuando mi hijo tiene 10 años?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con 8 años de ahorro (ingreso a los 18), aún es tiempo razonable para construir un fondo universitario. Por ejemplo, para una universidad de 6.000 USD/año durante 5 años con 5% de inflación y 7% de rendimiento, necesitas ahorrar aproximadamente 450-550 USD/mes. Empezar a los 5 años del niño reduciría esa cifra a ~250 USD/mes."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -22,7 +64,25 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
             <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
-              <option value="USD">USD — Dólar</option><option value="COP">COP — Peso colombiano</option><option value="MXN">MXN — Peso mexicano</option><option value="ARS">ARS — Peso argentino</option><option value="CLP">CLP — Peso chileno</option><option value="PEN">PEN — Sol peruano</option><option value="UYU">UYU — Peso uruguayo</option><option value="CAD">CAD — Dólar canadiense</option><option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
             </select>
           </div>
           <div>
@@ -75,11 +135,37 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
-    <h2>Por qué ahorrar desde temprano</h2>
-    <p>El costo de la educación universitaria crece a una tasa mayor que la inflación general. Empezar a ahorrar cuando el niño tiene pocos años permite que el interés compuesto trabaje a tu favor. Esperar hasta los 15 años puede triplicar el ahorro mensual necesario en comparación con empezar a los 5 años.</p>
-    <h2>Cómo usar la calculadora</h2>
-    <p>Ingresa el costo anual actual de la universidad que tienes en mente. La calculadora proyecta ese costo al futuro aplicando la inflación universitaria, suma todos los años de carrera, y calcula el ahorro mensual necesario considerando que ese ahorro también rinde intereses.</p>
-    <p>Para maximizar el ahorro, considera instrumentos con rendimiento real positivo (por encima de la inflación). Combina esta proyección con la <a href="/calculadoras/independencia-financiera">calculadora FIRE</a> para planificar tanto la educación de tus hijos como tu propio retiro.</p>
+    <h2>Por qué ahorrar para la universidad desde temprano</h2>
+    <p>El costo de la educación universitaria crece a una tasa mayor que la inflación general. Empezar a ahorrar cuando el niño tiene pocos años permite que el interés compuesto trabaje a tu favor. Esperar hasta los 15 años puede triplicar el ahorro mensual necesario comparado con empezar a los 5 años de edad.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Costo anual actual:</strong> el precio en hoy de la universidad que tienes en mente. Si no sabes, usa 5.000-8.000 USD/año para universidades privadas latinoamericanas, o 1.500-3.000 USD para semipúblicas.</li>
+      <li><strong>Duración de la carrera:</strong> la mayoría de licenciaturas son 4-5 años. Ingeniería y medicina pueden ser 5-7 años.</li>
+      <li><strong>Años hasta el ingreso:</strong> si tu hijo tiene 8 años y entrará a los 18, son 10 años.</li>
+      <li><strong>Inflación universitaria:</strong> usa 5% como estimación conservadora para Latinoamérica.</li>
+      <li><strong>Rendimiento del ahorro:</strong> depende del instrumento. Con +10 años, considera 6-8% en ETFs. Con 5-10 años, 4-6%. Con menos de 5 años, 3-4%.</li>
+    </ul>
+
+    <h2>Ejemplo: fondo universitario en México</h2>
+    <p>Tu hija tiene 7 años. Planeas enviarla a una universidad privada con costo actual de <strong>80.000 MXN/año</strong> durante 5 años, con 6% de inflación universitaria y rendimiento del ahorro del 7%.</p>
+    <ul>
+      <li>Años hasta el ingreso: 11</li>
+      <li>Costo proyectado primer año: ~143.000 MXN</li>
+      <li>Costo total proyectado de la carrera: ~800.000 MXN</li>
+      <li>Ahorro mensual necesario: aproximadamente <strong>3.800 MXN/mes</strong></li>
+    </ul>
+    <p>Si hubieras empezado cuando tenía 2 años (16 años de plazo), el ahorro mensual necesario sería solo ~1.800 MXN/mes. El tiempo reduce el esfuerzo a menos de la mitad.</p>
+
+    <h2>Opciones de inversión para el fondo universitario</h2>
+    <p>Con más de 10 años de horizonte, puedes invertir en ETFs de acciones globales a través de un broker internacional. Con menos tiempo, migra gradualmente a instrumentos más seguros: bonos, fondos mixtos, depósitos a plazo. Nunca pongas el fondo universitario completo en activos volátiles cuando falten menos de 3 años para el ingreso.</p>
+    <p>Combina esta proyección con la <a href="/calculadoras/meta-ahorro">calculadora de meta de ahorro</a> para ver el impacto del rendimiento en el ahorro mensual. Para planificar tanto la educación de los hijos como tu propio retiro, usa la <a href="/calculadoras/jubilacion">calculadora de jubilación</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué pasa si la universidad es pública y gratuita?</h3>
+    <p>Si tu hijo accede a una universidad pública de bajo costo, el fondo que hayas construido puede usarse para gastos de vida (vivienda, transporte, libros) o puede redirigirse a tu propio retiro. No es dinero perdido: es capital acumulado que sigue siendo tuyo y de tu familia.</p>
+    <h3>¿Debo ahorrar en moneda local o en dólares para la universidad?</h3>
+    <p>Si la universidad es local y los costos están en moneda local, ahorra en la misma moneda para evitar riesgo cambiario. Si consideras enviar a tu hijo al exterior (EE.UU., España, Canadá), ahorra en USD o EUR para estar cubierto frente a devaluaciones.</p>
   </div>
 </Layout>
 

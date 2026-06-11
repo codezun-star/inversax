@@ -12,6 +12,15 @@ keywords:
   - "broker regulado CNBV mexico"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿El SAT puede detectar mis ganancias en un broker extranjero?"
+    respuesta: "Sí. México es parte del CRS (Common Reporting Standard) de la OCDE. Muchos brokers regulados reportan automáticamente los saldos de sus clientes a las autoridades fiscales del país de residencia. Desde 2021 el SAT ha intensificado la detección de rentas extranjeras no declaradas. No declarar implica multas del 20-75% sobre el impuesto omitido más actualizaciones."
+  - pregunta: "¿Puedo depositar con SPEI en cualquier broker internacional?"
+    respuesta: "No todos los brokers aceptan SPEI directamente. Exness y XM lo aceptan a través de procesadores de pago mexicanos certificados. Recibes una CLABE interbancaria del procesador, haces la transferencia desde tu banco (BBVA, Santander, Banamex) y el fondo aparece en tu cuenta del broker en 15 minutos a 2 horas, sin comisión bancaria adicional desde banca en línea."
+  - pregunta: "¿Cuánto impuesto pago sobre ganancias de trading en México?"
+    respuesta: "Las ganancias de trading se declaran como ingresos por ganancias de capital del extranjero y se suman a tu base gravable total. La tasa efectiva depende de tus ingresos totales: el tramo más bajo (hasta $125,900 MXN anuales) paga 1.92% y el más alto (más de $3,000,000 MXN) llega al 35%. La mayoría de traders minoristas tributan entre el 10-25%."
+  - pregunta: "¿XTB tiene licencia para operar con residentes mexicanos?"
+    respuesta: "XTB opera en México bajo su entidad regulada por CySEC (Chipre) y FCA (Reino Unido). No tiene regulación CNBV específica para México, pero esto es estándar para brokers internacionales de forex y CFDs. Lo importante es que la entidad con la que abres cuenta tenga regulación de primer nivel, requisito que XTB cumple ampliamente."
 ---
 
 <h2>México: el mercado de habla hispana más grande y uno de los más dinámicos</h2>
@@ -32,3 +41,13 @@ publicado: true
 
 <h2>La estrategia correcta para empezar</h2>
 <p>Comienza con una cuenta demo en <a href="https://one.exnessonelink.com/a/c_oq7nroj1va" target="_blank" rel="noopener noreferrer nofollow sponsored">Exness</a> o <a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a> para familiarizarte con la plataforma sin arriesgar capital real. Una vez que te sientas cómodo, deposita un monto conservador y construye tu estrategia gradualmente. Evita brokers que prometen rendimientos fijos o garantizados: no existen en inversiones de mercado.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿El SAT puede detectar mis ganancias en un broker extranjero?</h3>
+<p>Sí. México es parte del CRS (Common Reporting Standard) de la OCDE. Muchos brokers regulados reportan automáticamente los saldos de sus clientes a las autoridades fiscales del país de residencia. Desde 2021 el SAT ha intensificado la detección de rentas extranjeras no declaradas. No declarar implica multas del 20-75% sobre el impuesto omitido más actualizaciones.</p>
+<h3>¿Puedo depositar con SPEI en cualquier broker internacional?</h3>
+<p>No todos los brokers aceptan SPEI directamente. Exness y XM lo aceptan a través de procesadores de pago mexicanos certificados. Recibes una CLABE interbancaria del procesador, haces la transferencia desde tu banco (BBVA, Santander, Banamex) y el fondo aparece en tu cuenta del broker en 15 minutos a 2 horas, sin comisión bancaria adicional desde banca en línea.</p>
+<h3>¿Cuánto impuesto pago sobre ganancias de trading en México?</h3>
+<p>Las ganancias de trading se declaran como ingresos por ganancias de capital del extranjero y se suman a tu base gravable total. La tasa efectiva depende de tus ingresos totales: el tramo más bajo (hasta $125,900 MXN anuales) paga 1.92% y el más alto (más de $3,000,000 MXN) llega al 35%. La mayoría de traders minoristas tributan entre el 10-25%.</p>
+<h3>¿XTB tiene licencia para operar con residentes mexicanos?</h3>
+<p>XTB opera en México bajo su entidad regulada por CySEC (Chipre) y FCA (Reino Unido). No tiene regulación CNBV específica para México, pero esto es estándar para brokers internacionales de forex y CFDs. Lo importante es que la entidad con la que abres cuenta tenga regulación de primer nivel, requisito que XTB cumple ampliamente.</p>

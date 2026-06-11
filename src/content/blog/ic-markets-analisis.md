@@ -16,6 +16,15 @@ keywords:
   - "ic markets vs pepperstone"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿IC Markets cobra comisión por inactividad?"
+    respuesta: "No. IC Markets no cobra comisión por inactividad, a diferencia de XM ($5/mes tras 90 días) o XTB (€10/mes tras 12 meses). Puedes mantener tu cuenta abierta sin operar sin costo alguno. El único costo recurrente cuando no operas es si tienes posiciones abiertas que generan swap overnight."
+  - pregunta: "¿Cuál es la latencia real de los servidores de IC Markets y por qué importa?"
+    respuesta: "IC Markets tiene servidores en los centros de datos equinix NY4 (Nueva York) y LD5 (Londres), los mismos que usan los principales bancos e instituciones financieras. La latencia media desde estos servidores es inferior a 1 milisegundo hacia los proveedores de liquidez institucional. Para un trader manual esto no tiene impacto visible. Para Expert Advisors de alta frecuencia o estrategias de scalping con ventanas de 1-2 segundos, esta latencia ultra-baja puede ser la diferencia entre que la estrategia sea rentable o no."
+  - pregunta: "¿IC Markets permite scalping y el uso de Expert Advisors sin restricciones?"
+    respuesta: "Sí, IC Markets tiene política explícita de que el scalping, el hedging y el uso de Expert Advisors están permitidos sin restricciones en todos sus tipos de cuenta. Esto contrasta con algunos brokers que limitan el holding time mínimo o restringen el uso de ciertos EAs. Es una de las razones por las que IC Markets es la referencia para traders algorítmicos serios en LATAM."
+  - pregunta: "¿IC Markets requiere exactamente $200 USD de depósito mínimo o es orientativo?"
+    respuesta: "Los $200 USD son el depósito mínimo formal requerido para abrir una cuenta Raw Spread en IC Markets. Sin ese mínimo, la cuenta no se activa para operar. Para la cuenta Standard el mínimo formal también es $200. En comparación, Exness Standard permite empezar desde $10 y XM desde $5. Este mínimo es la principal barrera de entrada de IC Markets para principiantes con poco capital."
 ---
 
 <h2>IC Markets: el broker que los scalpers profesionales eligen</h2>
@@ -49,3 +58,13 @@ publicado: true
 <h2>¿Para quién es IC Markets?</h2>
 <p>IC Markets es la opción correcta si: ya tienes experiencia operando, tu estrategia requiere spreads bajos y ejecución rápida, usas EAs o scalping, y puedes depositar al menos $200. Para principiantes que apenas comienzan, las cuentas Ultra Low de XM o la Standard de Exness son más apropiadas.</p>
 <p>Abrir cuenta en IC Markets: <a href="https://icmarkets.com/?camp=90874" target="_blank" rel="noopener noreferrer nofollow sponsored">Ir a IC Markets</a>. También puedes comparar con <a href="/blog/pepperstone-analisis">Pepperstone</a>, el otro gran ECN disponible en LATAM.</p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿IC Markets cobra comisión por inactividad?</h3>
+<p>No. IC Markets no cobra comisión por inactividad, a diferencia de XM ($5/mes tras 90 días) o XTB (€10/mes tras 12 meses). Puedes mantener tu cuenta abierta sin operar sin costo alguno. El único costo recurrente cuando no operas es si tienes posiciones abiertas que generan swap overnight.</p>
+<h3>¿Cuál es la latencia real de los servidores de IC Markets y por qué importa?</h3>
+<p>IC Markets tiene servidores en los centros de datos equinix NY4 (Nueva York) y LD5 (Londres), los mismos que usan los principales bancos e instituciones financieras. La latencia media desde estos servidores es inferior a 1 milisegundo hacia los proveedores de liquidez institucional. Para un trader manual esto no tiene impacto visible. Para Expert Advisors de alta frecuencia o estrategias de scalping con ventanas de segundos, esta latencia ultra-baja puede ser la diferencia entre que la estrategia sea rentable o no.</p>
+<h3>¿IC Markets permite scalping y el uso de Expert Advisors sin restricciones?</h3>
+<p>Sí, IC Markets tiene política explícita de que el scalping, el hedging y el uso de Expert Advisors están permitidos sin restricciones en todos sus tipos de cuenta. Esto contrasta con algunos brokers que limitan el holding time mínimo o restringen el uso de ciertos EAs. Es una de las razones por las que IC Markets es la referencia para traders algorítmicos serios en LATAM.</p>
+<h3>¿IC Markets requiere exactamente $200 USD de depósito mínimo?</h3>
+<p>Los $200 USD son el depósito mínimo formal requerido para abrir una cuenta Raw Spread en IC Markets. Sin ese mínimo, la cuenta no se activa para operar. En comparación, Exness Standard permite empezar desde $10 y XM desde $5. Este mínimo es la principal barrera de entrada de IC Markets para principiantes con poco capital, pero es coherente con su posicionamiento como broker para traders con experiencia.</p>

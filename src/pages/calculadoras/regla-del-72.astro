@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Regla del 72 — Inversax" description="Calcula en cuántos años se duplica una inversión usando la Regla del 72. También calcula qué tasa necesitas para duplicar en un tiempo dado.">
+<Layout title="Calculadora Regla del 72 — ¿En Cuántos Años se Duplica tu Dinero? | Inversax" description="Calculadora Regla del 72 gratis: calcula en cuántos años se duplica tu dinero según la tasa de interés, o qué rendimiento necesitas para duplicar en un plazo dado. Para Latinoamérica.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la Regla del 72 y cómo funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Regla del 72 es un atajo mental para estimar en cuántos años se duplica una inversión. Fórmula: Años para duplicar ≈ 72 / Tasa de retorno anual (%). Si inviertes al 9% anual, tu dinero se duplica en 72/9 = 8 años."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué se usa el número 72 y no otro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El número exacto derivado del logaritmo natural es 69,3, pero 72 se prefiere porque es divisible por más números enteros (2, 3, 4, 6, 8, 9, 12, 24, 36), lo que facilita el cálculo mental. La diferencia en el resultado es mínima."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La Regla del 72 aplica también para deudas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Si tienes una deuda al 18% anual (tarjeta de crédito típica en México o Colombia), en 72/18 = 4 años la deuda se habrá duplicado si no la pagas. Es una razón poderosa para priorizar saldar deudas de alto interés antes de invertir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué rangos de tasas es válida la Regla del 72?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La regla del 72 es una aproximación válida para tasas entre el 2% y el 20%. Para tasas muy bajas o muy altas, el resultado se desvía del valor exacto. Para cálculos precisos, usa la calculadora de interés compuesto."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

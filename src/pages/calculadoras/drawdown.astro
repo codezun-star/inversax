@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Drawdown — Inversax" description="Calcula el drawdown máximo de tu cuenta forex tras una racha perdedora y cuánto necesitas recuperar para volver al capital inicial.">
+<Layout title="Calculadora de Drawdown Forex — Racha Perdedora y Recuperación | Inversax" description="Calcula el drawdown máximo de tu cuenta forex tras una racha perdedora y cuánto necesitas ganar para recuperarte. Descubre por qué el control del riesgo por operación es la base del trading profesional. Para traders de LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué drawdown máximo es aceptable en una cuenta forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La referencia estándar en la industria: drawdown por debajo del 20% es considerado bueno; entre 20-35% es aceptable; por encima del 40% es alto y preocupante. Fondos institucionales y prop firms suelen exigir drawdowns máximos de 5-10%. Para traders particulares, un sistema que históricamente ha tenido drawdowns superiores al 30% probablemente tiene un riesgo por operación demasiado alto o reglas de gestión de pérdidas insuficientes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué un drawdown del 50% requiere ganar el 100% para recuperarse?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La matemática es asimétrica: si tienes 10.000 USD y pierdes el 50%, te quedan 5.000 USD. Para volver a 10.000 USD desde 5.000, necesitas ganar 5.000 USD — que representan el 100% de los 5.000 que te quedan. La fórmula exacta es: recuperación necesaria = (1 / (1 - drawdown%)) - 1. Un drawdown del 25% requiere el 33% para recuperarse. Un 40%, el 67%. Un 80%, el 400%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calcula la calculadora las operaciones necesarias para recuperarse?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La calculadora asume una ganancia del 2% por operación y calcula cuántas operaciones necesitas para multiplicar el capital final hasta el capital inicial, usando la fórmula: N = log(capital inicial / capital final) / log(1.02). Este es un cálculo orientativo; en la práctica, la recuperación depende de tu win rate real y del ratio R/R de tu sistema."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se relaciona el porcentaje de riesgo por operación con el drawdown máximo esperado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El drawdown sigue una distribución estadística ligada al riesgo por operación. Con el 1% de riesgo: 10 pérdidas consecutivas generan un drawdown del 9.6%; 20 pérdidas del 18%. Con el 2%: 10 pérdidas = 18.3% de drawdown; 20 pérdidas = 33%. Con el 5%: 10 pérdidas = 40% de drawdown. La regla es: multiplica el porcentaje de riesgo por operación por ~10 para estimar el drawdown esperado en una racha de 10 pérdidas consecutivas."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

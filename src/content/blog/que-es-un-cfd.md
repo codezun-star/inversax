@@ -18,6 +18,15 @@ keywords:
   - "cfd ejemplo practico"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Por qué el 75-80% de los traders pierden dinero operando CFDs?"
+    respuesta: "Los reguladores de la UE obligan a los brokers a publicar este dato. La principal causa de pérdida no es que el mercado sea imposible de ganar — es que la mayoría de traders principiantes usa exceso de apalancamiento, no aplica gestión de riesgo (sin stop loss o con riesgo mayor al 5% por operación), opera con emociones en lugar de un plan definido y paga demasiado en spreads y swaps por su estrategia. La minoría que es consistentemente rentable usa apalancamiento bajo (efectivo 5-10:1), gestiona el riesgo con disciplina y entiende el costo total de cada operación."
+  - pregunta: "¿Qué es el swap overnight y cuánto puede costarme mantener un CFD abierto varios días?"
+    respuesta: "El swap overnight es el costo de financiamiento que se aplica a cada CFD que mantienes abierto pasadas las 22:00-00:00 (hora del servidor del broker). Esencialmente es el interés que pagas por el apalancamiento utilizado. Para un CFD de acción como Apple con apalancamiento, el costo puede ser 0.02-0.05% del valor nocional por día. En 30 días, eso es 0.6-1.5% del valor total de la posición. Ejemplo: CFD de Apple por valor de $5,000 USD a 30 días → swap de $30-75 USD. Para inversión de largo plazo en acciones, las acciones reales son mucho más baratas."
+  - pregunta: "¿Puedo perder más dinero del que deposité operando CFDs en Exness o XM?"
+    respuesta: "Con protección de balance negativo (obligatoria en brokers regulados por FCA, ASIC y CySEC), no: la pérdida máxima está limitada al saldo de tu cuenta. Sin esa protección (brokers con regulaciones offshore más laxas), es teóricamente posible quedar con saldo negativo en eventos de volatilidad extrema. Exness, XM, Pepperstone, IC Markets y XTB ofrecen protección de balance negativo a sus clientes retail. Verifica esta característica en las condiciones de tu tipo de cuenta antes de operar."
+  - pregunta: "¿Cuál es la diferencia práctica entre operar un CFD de EUR/USD y un CFD de acciones de Tesla?"
+    respuesta: "Ambos son CFDs, pero tienen características distintas. El CFD de EUR/USD (forex) opera 24 horas al día 5 días a la semana, tiene liquidez muy alta, spreads bajos (0.5-1.5 pips) y swap bajo. El CFD de Tesla opera solo durante el horario de la Bolsa NASDAQ (9:30-16:00 ET), tiene spreads más altos expresados en USD (0.05-0.20% del precio), gaps frecuentes en la apertura y swaps más costosos para posiciones overnight. El forex es más predecible en liquidez; las acciones CFD tienen más riesgo de gaps por noticias corporativas."
 ---
 
 <h2>¿Qué es un CFD? La explicación sin tecnicismos</h2>
@@ -113,4 +122,18 @@ publicado: true
   <li><strong><a href="https://affs.click/nBBTT" target="_blank" rel="noopener noreferrer nofollow sponsored">XM</a>:</strong> ideal para principiantes. Recursos educativos, bono de bienvenida, depósito desde $5.</li>
   <li><strong><a href="https://pepperstone.sjv.io/c/7061517/3194997/21941" target="_blank" rel="noopener noreferrer nofollow sponsored">Pepperstone</a>:</strong> mejor para traders activos. Spreads raw desde 0.0 pips, TradingView integrado.</li>
 </ul>
-<p>Practica siempre en <a href="/blog/cuenta-demo-broker-gratis">cuenta demo</a> antes de operar con dinero real. Entiende exactamente cómo funciona el apalancamiento y el swap antes de tu primera operación real. Compara todos los brokers disponibles en tu país en el <a href="/brokers/co">comparador de brokers</a>.</p>
+<p>Practica siempre en <a href="/blog/cuenta-demo-broker-gratis">cuenta demo</a> antes de operar con dinero real. Entiende exactamente cómo funciona el apalancamiento y el swap antes de tu primera operación real. Compara todos los brokers disponibles en tu país en el <a href="/brokers/co">comparador de brokers</a>.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Por qué el 75-80% de los traders pierden dinero operando CFDs?</h3>
+<p>Los reguladores de la UE obligan a los brokers a publicar este dato. La principal causa de pérdida no es que el mercado sea imposible de ganar — es que la mayoría de traders principiantes usa exceso de apalancamiento, no aplica gestión de riesgo (sin stop loss o con riesgo mayor al 5% por operación), opera con emociones en lugar de un plan definido y paga demasiado en spreads y swaps por su estrategia. La minoría que es consistentemente rentable usa apalancamiento bajo (efectivo 5-10:1), gestiona el riesgo con disciplina y entiende el costo total de cada operación.</p>
+
+<h3>¿Qué es el swap overnight y cuánto puede costarme mantener un CFD abierto varios días?</h3>
+<p>El swap overnight es el costo de financiamiento que se aplica a cada CFD que mantienes abierto pasadas las 22:00-00:00 (hora del servidor del broker). Esencialmente es el interés que pagas por el apalancamiento utilizado. Para un CFD de acción como Apple con apalancamiento, el costo puede ser 0.02-0.05% del valor nocional por día. En 30 días, eso es 0.6-1.5% del valor total de la posición. Ejemplo: CFD de Apple por valor de $5,000 USD a 30 días → swap de $30-75 USD. Para inversión de largo plazo en acciones, las acciones reales son mucho más baratas.</p>
+
+<h3>¿Puedo perder más dinero del que deposité operando CFDs en Exness o XM?</h3>
+<p>Con protección de balance negativo (obligatoria en brokers regulados por FCA, ASIC y CySEC), no: la pérdida máxima está limitada al saldo de tu cuenta. Sin esa protección (brokers con regulaciones offshore más laxas), es teóricamente posible quedar con saldo negativo en eventos de volatilidad extrema. Exness, XM, Pepperstone, IC Markets y XTB ofrecen protección de balance negativo a sus clientes retail. Verifica esta característica en las condiciones de tu tipo de cuenta antes de operar.</p>
+
+<h3>¿Cuál es la diferencia práctica entre operar un CFD de EUR/USD y un CFD de acciones de Tesla?</h3>
+<p>Ambos son CFDs, pero tienen características distintas. El CFD de EUR/USD (forex) opera 24 horas al día 5 días a la semana, tiene liquidez muy alta, spreads bajos (0.5-1.5 pips) y swap bajo. El CFD de Tesla opera solo durante el horario de la Bolsa NASDAQ (9:30-16:00 ET), tiene spreads más altos expresados en USD (0.05-0.20% del precio), gaps frecuentes en la apertura y swaps más costosos para posiciones overnight. El forex es más predecible en liquidez; las acciones CFD tienen más riesgo de gaps por noticias corporativas.</p></p>

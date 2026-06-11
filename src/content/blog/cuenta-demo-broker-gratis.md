@@ -16,6 +16,15 @@ keywords:
   - "cuenta demo vs cuenta real diferencias"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿La cuenta demo de un broker tiene los mismos precios que la cuenta real?"
+    respuesta: "Los precios en demo se toman del feed real de mercado, así que en condiciones normales son idénticos. Las diferencias aparecen en momentos de alta volatilidad: en demo, las órdenes suelen ejecutarse al precio exacto solicitado sin deslizamiento (slippage). En cuenta real, durante la publicación de datos económicos importantes o eventos geopolíticos, el precio de ejecución puede diferir del precio visto en pantalla. Esta diferencia es menor en brokers ECN con buena liquidez como IC Markets o Pepperstone."
+  - pregunta: "¿Cuánto tiempo debo practicar en cuenta demo antes de pasar a cuenta real?"
+    respuesta: "El mínimo recomendado es 2-3 meses operando demo de forma consistente y disciplinada. Indicadores de que estás listo: llevas al menos 50-100 operaciones registradas en tu diario de trading, tu tasa de éxito es mayor al 50% con ratio riesgo/beneficio de 1:1.5 o mejor, puedes seguir tu plan de trading sin actuar por impulso, y entiendes exactamente qué hace cada orden que colocas. Pasar antes por impaciencia o porque 'ya entendí' es la causa más común de pérdidas en los primeros meses de cuenta real."
+  - pregunta: "¿Qué broker tiene la mejor cuenta demo para principiantes en LATAM?"
+    respuesta: "XM es la más accesible: hasta $100,000 de capital virtual sin límite de tiempo, en MT4 y MT5, con cuentas micro que replica bien el ambiente de poco capital inicial. Exness es excelente para quien quiere probar las cuentas Raw Spread o Zero. Pepperstone Demo es la mejor si tu objetivo es aprender a usar TradingView con ejecución real, porque es el único broker que integra TradingView con su demo de forma nativa."
+  - pregunta: "¿Los spreads de la cuenta demo son iguales a los de la cuenta real en XM o Exness?"
+    respuesta: "En XM, los spreads demo aproximan los de la cuenta real pero pueden ser ligeramente mejores (menores) que los reales en algunas condiciones de mercado. En Exness y en IC Markets, la demo de las cuentas Raw y Raw Spread está diseñada para replicar exactamente las condiciones reales, incluidos los spreads. La forma más segura de verificarlo: abre la demo y la cuenta real simultáneamente y compara el spread del EUR/USD en el mismo momento."
 ---
 
 <h2>¿Qué es una cuenta demo y por qué debes usarla antes de depositar?</h2>
@@ -55,4 +64,18 @@ Demo sin depósito, sin límite de tiempo, disponible en MT4, MT5, cTrader y Tra
 
 <h2>¿Cuándo hacer el salto a cuenta real?</h2>
 <p>Estás listo para abrir cuenta real cuando: llevas al menos 2-3 meses operando demo de forma consistente y rentable; tu tasa de éxito es mayor al 50% con un ratio riesgo/beneficio de al menos 1:1.5; eres capaz de seguir tu plan de trading sin dejarte llevar por emociones; y entiendes exactamente qué hace cada tipo de orden que colocas.</p>
-<p>Antes de pasar, asegúrate de conocer los conceptos de gestión de riesgo usando nuestras calculadoras: <a href="/calculadoras/tamano-posicion">tamaño de posición</a>, <a href="/calculadoras/riesgo-beneficio">ratio riesgo/beneficio</a> y <a href="/calculadoras/drawdown">drawdown máximo</a>. Un trade sin cálculo previo es una apuesta, no una inversión.</p>
+<p>Antes de pasar, asegúrate de conocer los conceptos de gestión de riesgo usando nuestras calculadoras: <a href="/calculadoras/tamano-posicion">tamaño de posición</a>, <a href="/calculadoras/riesgo-beneficio">ratio riesgo/beneficio</a> y <a href="/calculadoras/drawdown">drawdown máximo</a>. Un trade sin cálculo previo es una apuesta, no una inversión.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿La cuenta demo de un broker tiene los mismos precios que la cuenta real?</h3>
+<p>Los precios en demo se toman del feed real de mercado, así que en condiciones normales son idénticos. Las diferencias aparecen en momentos de alta volatilidad: en demo, las órdenes suelen ejecutarse al precio exacto solicitado sin deslizamiento (slippage). En cuenta real, durante la publicación de datos económicos importantes o eventos geopolíticos, el precio de ejecución puede diferir del precio visto en pantalla. Esta diferencia es menor en brokers ECN con buena liquidez como IC Markets o Pepperstone.</p>
+
+<h3>¿Cuánto tiempo debo practicar en cuenta demo antes de pasar a cuenta real?</h3>
+<p>El mínimo recomendado es 2-3 meses operando demo de forma consistente y disciplinada. Indicadores de que estás listo: llevas al menos 50-100 operaciones registradas en tu diario de trading, tu tasa de éxito es mayor al 50% con ratio riesgo/beneficio de 1:1.5 o mejor, puedes seguir tu plan de trading sin actuar por impulso, y entiendes exactamente qué hace cada orden que colocas. Pasar antes por impaciencia o porque 'ya entendí' es la causa más común de pérdidas en los primeros meses de cuenta real.</p>
+
+<h3>¿Qué broker tiene la mejor cuenta demo para principiantes en LATAM?</h3>
+<p>XM es la más accesible: hasta $100,000 de capital virtual sin límite de tiempo, en MT4 y MT5, con cuentas micro que replica bien el ambiente de poco capital inicial. Exness es excelente para quien quiere probar las cuentas Raw Spread o Zero. Pepperstone Demo es la mejor si tu objetivo es aprender a usar TradingView con ejecución real, porque es el único broker que integra TradingView con su demo de forma nativa.</p>
+
+<h3>¿Los spreads de la cuenta demo son iguales a los de la cuenta real en XM o Exness?</h3>
+<p>En XM, los spreads demo aproximan los de la cuenta real pero pueden ser ligeramente mejores (menores) que los reales en algunas condiciones de mercado. En Exness y en IC Markets, la demo de las cuentas Raw y Raw Spread está diseñada para replicar exactamente las condiciones reales, incluidos los spreads. La forma más segura de verificarlo: abre la demo y la cuenta real simultáneamente y compara el spread del EUR/USD en el mismo momento.</p></p>

@@ -16,6 +16,15 @@ keywords:
   - "etf renta variable latam"
 autor: "Equipo Inversax"
 publicado: true
+faq:
+  - pregunta: "¿Cuál es la diferencia entre el ETF SPY y el VOO del S&P 500?"
+    respuesta: "Ambos replican el mismo índice (S&P 500) y tienen rendimientos prácticamente idénticos. La diferencia es el costo: SPY cobra 0.09% anual en comisión de gestión (TER), mientras VOO cobra 0.03%. En $10,000 invertidos durante 20 años, esa diferencia representa aproximadamente $1,400 adicionales a favor de VOO gracias al interés compuesto. Para inversión de largo plazo, VOO es preferible por su menor costo. SPY tiene mayor liquidez (volumen de negociación diario) y es preferido por traders activos. Para un inversor latinoamericano pasivo, VOO es la mejor opción."
+  - pregunta: "¿Puedo perder todo mi dinero invirtiendo en un ETF del S&P 500?"
+    respuesta: "Perder el 100% sería teóricamente posible solo si las 500 empresas más grandes de EE.UU. quebraran simultáneamente — lo cual equivaldría al colapso total de la economía estadounidense. Históricamente, el S&P 500 ha tenido caídas de hasta el 50% (crisis 2008) pero siempre se ha recuperado y superado máximos históricos en un plazo de 5-10 años. El riesgo real es la volatilidad: si inviertes y necesitas el dinero durante una caída del mercado, podrías tener que vender con pérdida. Solución: invierte solo el dinero que no necesitarás en al menos 5 años."
+  - pregunta: "¿Los ETFs pagan dividendos a sus inversores?"
+    respuesta: "Sí. Los ETFs que replican índices de acciones distribuyen los dividendos que reciben de las empresas en su cartera. SPY y VOO pagan dividendos trimestralmente, con un yield anual aproximado de 1.2-1.5% sobre el precio de la participación. Si compras ETFs a través de XTB (acciones reales), los dividendos se acreditan en tu cuenta en efectivo en la fecha de pago. En plataformas de CFD (Exness, XM), recibes un ajuste equivalente pero no es un dividendo real del emisor."
+  - pregunta: "¿Cuánto dinero necesito para empezar a invertir en ETFs desde LATAM?"
+    respuesta: "Con XTB puedes comprar acciones fraccionadas de ETFs desde $10 USD, sin necesitar el precio completo de una participación. VOO cotiza alrededor de $520 USD por participación, pero XTB permite comprar fracciones. Para una estrategia DCA (inversión mensual constante) realista, $50-200 USD mensuales es un punto de entrada adecuado. Lo más importante no es el monto inicial — es la consistencia: invertir regularmente cada mes independientemente del precio de mercado, que es la esencia de la estrategia DCA."
 ---
 
 <h2>¿Qué es un ETF?</h2>
@@ -62,4 +71,18 @@ Mercado global: ~3.700 empresas de más de 50 países. Para quien quiere diversi
 <p>El proceso es: abrir cuenta en XTB → verificar identidad → depositar fondos → buscar el ticker del ETF (VOO, SPY, etc.) → comprar. Todo desde el navegador o la app, en menos de 10 minutos una vez verificada la cuenta.</p>
 
 <h2>¿ETFs o acciones individuales?</h2>
-<p>Para la mayoría de inversores sin tiempo ni conocimiento para analizar empresas individuales, los ETFs indexados son superiores. Diversifican automáticamente, eliminan el riesgo de que una empresa quiebre y arraigue toda tu inversión, y históricamente han superado a la mayoría de gestores activos en períodos de 10+ años. Si quieres exposición específica a empresas concretas como Apple o Nvidia, puedes combinar: una base de ETF más un porcentaje pequeño en acciones individuales.</p>
+<p>Para la mayoría de inversores sin tiempo ni conocimiento para analizar empresas individuales, los ETFs indexados son superiores. Diversifican automáticamente, eliminan el riesgo de que una empresa quiebre y arraigue toda tu inversión, y históricamente han superado a la mayoría de gestores activos en períodos de 10+ años. Si quieres exposición específica a empresas concretas como Apple o Nvidia, puedes combinar: una base de ETF más un porcentaje pequeño en acciones individuales.
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Cuál es la diferencia entre el ETF SPY y el VOO del S&P 500?</h3>
+<p>Ambos replican el mismo índice (S&P 500) y tienen rendimientos prácticamente idénticos. La diferencia es el costo: SPY cobra 0.09% anual en comisión de gestión (TER), mientras VOO cobra 0.03%. En $10,000 invertidos durante 20 años, esa diferencia representa aproximadamente $1,400 adicionales a favor de VOO gracias al interés compuesto. Para inversión de largo plazo, VOO es preferible por su menor costo. SPY tiene mayor liquidez (volumen de negociación diario) y es preferido por traders activos. Para un inversor latinoamericano pasivo, VOO es la mejor opción.</p>
+
+<h3>¿Puedo perder todo mi dinero invirtiendo en un ETF del S&P 500?</h3>
+<p>Perder el 100% sería teóricamente posible solo si las 500 empresas más grandes de EE.UU. quebraran simultáneamente — lo cual equivaldría al colapso total de la economía estadounidense. Históricamente, el S&P 500 ha tenido caídas de hasta el 50% (crisis 2008) pero siempre se ha recuperado y superado máximos históricos en un plazo de 5-10 años. El riesgo real es la volatilidad: si inviertes y necesitas el dinero durante una caída del mercado, podrías tener que vender con pérdida. Solución: invierte solo el dinero que no necesitarás en al menos 5 años.</p>
+
+<h3>¿Los ETFs pagan dividendos a sus inversores?</h3>
+<p>Sí. Los ETFs que replican índices de acciones distribuyen los dividendos que reciben de las empresas en su cartera. SPY y VOO pagan dividendos trimestralmente, con un yield anual aproximado de 1.2-1.5% sobre el precio de la participación. Si compras ETFs a través de XTB (acciones reales), los dividendos se acreditan en tu cuenta en efectivo en la fecha de pago. En plataformas de CFD (Exness, XM), recibes un ajuste equivalente pero no es un dividendo real del emisor.</p>
+
+<h3>¿Cuánto dinero necesito para empezar a invertir en ETFs desde LATAM?</h3>
+<p>Con XTB puedes comprar acciones fraccionadas de ETFs desde $10 USD, sin necesitar el precio completo de una participación. VOO cotiza alrededor de $520 USD por participación, pero XTB permite comprar fracciones. Para una estrategia DCA (inversión mensual constante) realista, $50-200 USD mensuales es un punto de entrada adecuado. Lo más importante no es el monto inicial — es la consistencia: invertir regularmente cada mes independientemente del precio de mercado, que es la esencia de la estrategia DCA.</p></p>

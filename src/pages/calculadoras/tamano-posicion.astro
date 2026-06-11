@@ -1,7 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Calculadora de Tamaño de Posición Forex — Inversax" description="Calcula el tamaño óptimo de posición en forex según tu capital, porcentaje de riesgo y stop loss en pips. Gestión de riesgo profesional.">
+<Layout title="Calculadora de Tamaño de Posición Forex — Cuántos Lotes Operar | Inversax" description="Calcula cuántos lotes operar en forex según tu capital, el porcentaje de riesgo que aceptas y los pips de stop loss. Gestión de riesgo profesional para traders de Colombia, México, Chile, Perú y toda América Latina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo el tamaño de posición correcto en forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La fórmula es: Lotes = (Capital × % de riesgo) / (Stop loss en pips × Valor del pip por lote). Por ejemplo: capital de 1.000 USD, riesgo del 1% = 10 USD de pérdida máxima, stop loss de 20 pips en EUR/USD (pip = 10 USD/lote). Lotes = 10 / (20 × 10) = 0.05 lotes (micro lotes). Nunca ajustes el stop loss para que quepan más lotes — el proceso siempre es al revés."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto debería arriesgar por operación en forex siendo principiante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lo recomendado es entre el 0.5% y el 1% por operación para principiantes. Con el 1% y 10 pérdidas consecutivas, el drawdown es de solo el 9.5%. Con el 2% y las mismas pérdidas, el drawdown ya es del 18%. Muchos traders experimentados que han sufrido cuentas fundidas en LATAM recomiendan empezar en 0.5% y subir solo cuando el sistema lleve 100+ operaciones con expectativa positiva comprobada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El tamaño de posición cambia si tengo cuenta en pesos colombianos o mexicanos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El concepto no cambia, pero el cálculo sí requiere convertir tu capital a USD si la cuenta no está en USD, ya que el valor del pip se expresa en USD. Si tienes 5.000.000 COP (~1.250 USD con tasa aproximada), el cálculo se hace sobre los 1.250 USD equivalentes. Muchos brokers en LATAM aceptan depósitos en moneda local pero convierten la cuenta a USD automáticamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo calcular el tamaño de posición para oro (XAU/USD)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Para XAU/USD, 1 lote estándar = 100 onzas troy. Un movimiento de 1 USD (equivalente a 100 pips en divisas estándar) vale 100 USD por lote. Si tu stop loss es de 5 USD de precio (500 pips convencionales) y quieres arriesgar 50 USD, operas: 50 / (5 × 100) = 0.10 lotes de oro. La calculadora incluye XAU/USD entre sus pares disponibles con el valor por pip ajustado."
+          }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
@@ -81,10 +123,24 @@ import Layout from '../../layouts/Layout.astro';
   <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
     <h2>¿Por qué calcular el tamaño de posición?</h2>
     <p>El <strong>tamaño de posición</strong> es la cantidad de lotes que operas en cada trade. Determinarlo correctamente es la base de la gestión de riesgo en forex: si operas demasiado grande, un stop loss normal puede destruir una porción significativa de tu cuenta. Si operas demasiado pequeño, no maximizas el potencial del sistema.</p>
-    <p>La fórmula es simple: <strong>Lotes = (Capital × % riesgo) / (Stop loss en pips × Valor del pip por lote)</strong>.</p>
+    <p>La fórmula es: <strong>Lotes = (Capital × % riesgo) / (Stop loss en pips × Valor del pip por lote)</strong>. Nunca ajustes el stop loss para que quepan más lotes — el proceso siempre es al revés: primero defines el stop, luego calculas los lotes.</p>
+
     <h2>El 1% de oro</h2>
     <p>Los traders profesionales suelen arriesgar entre el 0.5% y el 2% por operación. Con el 1%, puedes perder 100 operaciones consecutivas y aún conservar el 37% de tu capital. Esto te da tiempo para ajustar tu estrategia sin un drawdown catastrófico.</p>
-    <p>Combina esta calculadora con la de <a href="/calculadoras/riesgo-beneficio">riesgo/beneficio</a> para evaluar si cada operación vale la pena antes de entrar.</p>
+
+    <h2>Ejemplo práctico para traders de LATAM</h2>
+    <p>Trader con <strong>800 USD</strong> en cuenta (equivalente a aprox. 3.200.000 COP o 14.000 MXN), arriesgando el 1%, stop loss de 25 pips en EUR/USD:</p>
+    <ul>
+      <li>Riesgo en USD: 800 × 1% = <strong>8 USD</strong></li>
+      <li>Valor pip EUR/USD (1 lote): 10 USD/pip</li>
+      <li>Lotes = 8 / (25 × 10) = <strong>0.032 lotes</strong></li>
+      <li>En MT4/MT5: introduce <strong>0.03 lotes</strong> (redondeado al micro lote disponible)</li>
+    </ul>
+    <p>Con 0.03 lotes y 25 pips de stop, la pérdida máxima es 7.50 USD — exactamente el 0.94% de la cuenta. Este control permite sobrevivir rachas perdedoras y seguir operando con lógica, no con miedo.</p>
+
+    <h2>¿Qué pasa cuando la cuenta crece?</h2>
+    <p>El tamaño de posición debe actualizarse con el balance. Si empiezas con 800 USD y llegas a 1.200 USD, el riesgo del 1% sube a 12 USD y debes calcular nuevos lotes. Algunos traders recalculan cada semana; otros, al inicio de cada mes. Lo importante es que el porcentaje de riesgo sea siempre sobre el capital actual, no sobre el capital inicial.</p>
+    <p>Combina esta calculadora con la de <a href="/calculadoras/riesgo-beneficio">riesgo/beneficio</a> para evaluar si cada operación vale la pena, y con la de <a href="/calculadoras/drawdown">drawdown</a> para visualizar el impacto de rachas perdedoras con tu riesgo por operación actual.</p>
   </div>
 </Layout>
 
@@ -96,7 +152,6 @@ import Layout from '../../layouts/Layout.astro';
     const sl = parseFloat((document.getElementById('sl') as HTMLInputElement).value) || 1;
     const riesgoUsd = capital * riesgoPct;
     const lotes = riesgoUsd / (sl * pipVal);
-    const pipPorLote = pipVal * lotes;
     document.getElementById('lotes')!.textContent = lotes.toFixed(2);
     document.getElementById('riesgo-usd')!.textContent = '$ ' + riesgoUsd.toFixed(2);
     document.getElementById('mini')!.textContent = (lotes * 10).toFixed(1) + ' mini lotes';
