@@ -9,7 +9,9 @@
       "Bash(cd /c/Users/Jose/calcfit-astro && find src -type d | sort)",
       "Read(//c/Users/Jose/calcfit-astro/**)",
       "Bash(del \"C:\\\\Users\\\\Jose\\\\calcfit-astro\\\\src\\\\content\\\\config.ts\")",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(python3 -)",
+      "Bash(node -e ' *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jose\\calcfit-astro\\src\\content",

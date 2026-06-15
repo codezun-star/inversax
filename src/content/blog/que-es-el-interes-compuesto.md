@@ -1,5 +1,5 @@
 ---
-titulo: "Qué es el interés compuesto y por qué es la base de toda inversión"
+titulo: "Qué es el interés compuesto y cómo aprovecharlo"
 descripcion: "Guía completa sobre el interés compuesto: cómo funciona, la diferencia con el interés simple, ejemplos con números reales y por qué empezar a invertir antes marca una diferencia enorme."
 categoria: "general"
 fecha: "2026-06-01"
@@ -37,7 +37,7 @@ faq:
 Cada año ganas el 10% del capital inicial ($100). En 10 años acumulas $1,000 en intereses. Total final: $2,000.</p>
 
 <p><strong>Con interés compuesto:</strong><br/>
-El primer año ganas $100 (10% de $1,000). Pero el segundo año ganas el 10% de $1,100 = $110. El tercer año, el 10% de $1,210 = $121. Las ganancias generan nuevas ganancias. En 10 años el total final es $2,593 — casi $600 más que con interés simple, sin aportar un peso adicional.</p>
+El primer año ganas $100 (10% de $1,000). Pero el segundo año ganas el 10% de $1,100 = $110. El tercer año, el 10% de $1,210 = $121. Las ganancias generan nuevas ganancias. En 10 años el total final es $2,594 — casi $600 más que con interés simple, sin aportar un peso adicional.</p>
 
 <p>Proyecta exactamente cuánto crecerá tu inversión con nuestra <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>, donde puedes agregar también aportes mensuales adicionales.</p>
 
@@ -79,10 +79,10 @@ El primer año ganas $100 (10% de $1,000). Pero el segundo año ganas el 10% de 
 </ul>
 
 <h2>El interés compuesto en tu contra: las deudas</h2>
-<p>El mismo mecanismo que hace crecer tus inversiones puede destruir tu patrimonio cuando eres el deudor. Una deuda de tarjeta de crédito al 3% mensual (tasa efectiva anual del 42.6%) con saldo de $1,000 que no pagas durante 5 años crece a $6,850 — casi 7 veces. Por eso la primera prioridad financiera debe ser eliminar deudas de alto costo antes de invertir. Usa la <a href="/calculadoras/cuotas-tarjeta">calculadora de cuotas con tarjeta</a> para ver el costo real de tus deudas actuales.</p>
+<p>El mismo mecanismo que hace crecer tus inversiones puede destruir tu patrimonio cuando eres el deudor. Una deuda de tarjeta de crédito al 3% mensual (tasa efectiva anual del 42.6%) con saldo de $1,000 que no pagas durante 5 años crece a $5,900 — casi 6 veces. Por eso la primera prioridad financiera debe ser eliminar deudas de alto costo antes de invertir. Usa la <a href="/calculadoras/cuotas-tarjeta">calculadora de cuotas con tarjeta</a> para ver el costo real de tus deudas actuales.</p>
 
 <h2>El mensaje que debes llevarte</h2>
-<p>No importa cuánto tengas para empezar — lo que importa es empezar hoy. Cada año que pasa sin invertir es un año de interés compuesto que pierdes y que nunca podrás recuperar. Empieza con lo que puedas, en un instrumento diversificado de bajo costo (un ETF del S&P 500 o global), y aporta consistentemente. El tiempo hará el resto. Lee nuestra guía sobre <a href="/blog/como-invertir-con-poco-dinero">cómo invertir con poco dinero desde LATAM</a> para dar el primer paso.
+<p>No importa cuánto tengas para empezar — lo que importa es empezar hoy. Cada año que pasa sin invertir es un año de interés compuesto que pierdes y que nunca podrás recuperar. Empieza con lo que puedas, en un instrumento diversificado de bajo costo (un ETF del S&P 500 o global), y aporta consistentemente. El tiempo hará el resto. Lee nuestra guía sobre <a href="/blog/como-invertir-con-poco-dinero">cómo invertir con poco dinero desde LATAM</a> para dar el primer paso.</p>
 
 <h2>Preguntas frecuentes</h2>
 
@@ -96,4 +96,4 @@ El primer año ganas $100 (10% de $1,000). Pero el segundo año ganas el 10% de 
 <p>Las tarjetas de crédito en Colombia, México y Perú tienen tasas efectivas anuales del 30-50%. Con interés compuesto, una deuda de $1,000 a una tasa del 40% anual que no pagas durante 3 años crece a $2,744 USD — casi 3 veces el monto original. La regla de oro: ninguna inversión en mercados financieros puede garantizar rendimientos superiores al costo de una deuda con tarjeta de crédito. Paga primero las deudas de alto costo antes de invertir cualquier peso en mercados.</p>
 
 <h3>¿Cómo empiezo a aprovechar el interés compuesto hoy desde Colombia o México sin mucho dinero?</h3>
-<p>Tres pasos: (1) Calcula cuánto puedes invertir mensualmente de forma constante — aunque sean $30-50 USD. La consistencia es más importante que el monto. (2) Abre cuenta en XTB (para ETFs reales) y compra fracciones de VOO o VWRA con esa cantidad mensualmente. (3) No toques la inversión durante al menos 5-10 años. El interés compuesto necesita tiempo para hacer su efecto — los primeros años el crecimiento se ve pequeño, pero se acelera exponencialmente. El único error real es empezar tarde.</p></p>
+<p>Tres pasos: (1) Calcula cuánto puedes invertir mensualmente de forma constante — aunque sean $30-50 USD. La consistencia es más importante que el monto. (2) Abre cuenta en XTB (para ETFs reales) y compra fracciones de VOO o VWRA con esa cantidad mensualmente. (3) No toques la inversión durante al menos 5-10 años. El interés compuesto necesita tiempo para hacer su efecto — los primeros años el crecimiento se ve pequeño, pero se acelera exponencialmente. El único error real es empezar tarde.</p>

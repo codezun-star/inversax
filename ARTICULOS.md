@@ -1,7 +1,7 @@
 # Inversax — Registro de Artículos
 
 > Índice general. El detalle por categoría está en su archivo propio.
-> **Total: 54 artículos publicados**
+> **Total: 59 artículos publicados**
 
 ## Archivos de detalle
 
@@ -9,7 +9,7 @@
 |---|---|---|
 | Brokers | [ARTICULOS-BROKERS.md](ARTICULOS-BROKERS.md) | 22 |
 | Análisis | [ARTICULOS-ANALISIS.md](ARTICULOS-ANALISIS.md) | 8 |
-| Guías | [ARTICULOS-GUIAS.md](ARTICULOS-GUIAS.md) | 11 |
+| Guías | [ARTICULOS-GUIAS.md](ARTICULOS-GUIAS.md) | 20 |
 | General | [ARTICULOS-GENERAL.md](ARTICULOS-GENERAL.md) | 1 |
 
 ---
@@ -56,7 +56,7 @@
 | `binance-analisis` | Binance — análisis para LATAM | ✅ |
 | `xtb-vs-pepperstone` | XTB vs Pepperstone — comparativa | ✅ |
 
-### Guías (11)
+### Guías (20)
 
 | Slug | Tema | Estado |
 |------|------|--------|
@@ -75,6 +75,11 @@
 | `como-detectar-estafas-trading` | Cómo detectar estafas de trading | ✅ |
 | `trading-criptomonedas-latam` | Trading de criptomonedas desde LATAM | ✅ |
 | `como-invertir-en-oro` | Cómo invertir en oro desde LATAM | ✅ |
+| `como-invertir-sp500-latam` | Cómo invertir en el S&P 500 desde LATAM | ✅ |
+| `que-son-los-pips-forex` | Qué son los pips en forex y cómo se calculan | ✅ |
+| `metatrader-4-vs-metatrader-5` | MetaTrader 4 vs MetaTrader 5: cuál elegir | ✅ |
+| `que-es-copy-trading` | Copy trading: qué es y cómo empezar | ✅ |
+| `como-leer-velas-japonesas` | Cómo leer velas japonesas: guía completa | ✅ |
 
 ### General (1)
 
@@ -114,4 +119,4 @@
 
 ---
 
-*Última actualización: Mayo 2026*
+*Última actualización: Junio 2026*

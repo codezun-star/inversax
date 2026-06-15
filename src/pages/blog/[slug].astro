@@ -25,11 +25,20 @@ const pageUrl = 'https://inversax.com/blog/' + post.slug;
 const waUrl = 'https://wa.me/?text=' + encodeURIComponent(post.data.titulo + ' — ' + pageUrl);
 const xUrl = 'https://x.com/intent/tweet?url=' + encodeURIComponent(pageUrl) + '&text=' + encodeURIComponent(post.data.titulo);
 
+// Fecha legible "22 de mayo de 2026" sin depender de ICU
+const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+let fechaFmt = '';
+if (post.data.fecha) {
+  const [yy, mm, dd] = post.data.fecha.split('-');
+  fechaFmt = `${parseInt(dd, 10)} de ${meses[parseInt(mm, 10) - 1]} de ${yy}`;
+}
+
 const articleSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: post.data.titulo,
   description: post.data.descripcion ?? '',
+  image: 'https://inversax.com/og/home.png',
   author: { '@type': 'Organization', name: post.data.autor ?? 'Equipo Inversax' },
   publisher: {
     '@type': 'Organization',
@@ -39,8 +48,18 @@ const articleSchema = JSON.stringify({
   },
   datePublished: post.data.fecha ?? '',
   dateModified: post.data.fecha ?? '',
-  url: 'https://inversax.com/blog/' + post.slug,
-  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://inversax.com/blog/' + post.slug },
+  url: pageUrl,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+});
+
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://inversax.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://inversax.com/blog' },
+    { '@type': 'ListItem', position: 3, name: post.data.titulo, item: pageUrl },
+  ],
 });
 
 const faqSchema = post.data.faq ? JSON.stringify({
@@ -60,6 +79,7 @@ const faqSchema = post.data.faq ? JSON.stringify({
   ogType="article"
 >
   <script slot="head" is:inline type="application/ld+json" set:html={articleSchema} />
+  <script slot="head" is:inline type="application/ld+json" set:html={breadcrumbSchema} />
   {faqSchema && <script slot="head" is:inline type="application/ld+json" set:html={faqSchema} />}
   <!-- Header artículo -->
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
@@ -97,8 +117,8 @@ const faqSchema = post.data.faq ? JSON.stringify({
         <span style="font-size:13px; color:#A8A29E;">
           Por <strong style="color:#57534E;">{post.data.autor}</strong>
         </span>
-        {post.data.fecha && (
-          <span style="font-size:13px; color:#A8A29E;">{post.data.fecha}</span>
+        {fechaFmt && (
+          <span style="font-size:13px; color:#A8A29E;">{fechaFmt}</span>
         )}
       </div>
     </div>
