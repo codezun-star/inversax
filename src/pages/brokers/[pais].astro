@@ -41,8 +41,8 @@ const avisoRestriccion = paisesRestringidos[codigoPais] ?? null;
 const schemaJson = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Mejores brokers para invertir en ' + pais.nombre + ' 2026',
-  description: 'Comparativa de los ' + brokersList.length + ' mejores brokers disponibles en ' + pais.nombre + ' en 2026.',
+  name: 'Mejores brokers para invertir en ' + pais.nombre,
+  description: 'Comparativa de los ' + brokersList.length + ' mejores brokers disponibles en ' + pais.nombre + '.',
   numberOfItems: brokersList.length,
   itemListElement: brokersList.map((b, i) => ({
     '@type': 'ListItem',
@@ -84,8 +84,8 @@ const brokersData = brokersList.map((b, i) => {
 ---
 
 <Layout
-  title={'Mejores brokers en ' + pais.nombre + ' 2026 — Inversax'}
-  description={'Comparativa de los ' + brokersList.length + ' mejores brokers para invertir en ' + pais.nombre + ' en 2026. Regulación, depósito mínimo, spreads y métodos de pago locales.'}
+  title={'Mejores brokers en ' + pais.nombre + ' — Inversax'}
+  description={'Comparativa de los ' + brokersList.length + ' mejores brokers para invertir en ' + pais.nombre + '. Regulación, depósito mínimo, spreads y métodos de pago locales.'}
 >
   <script slot="head" is:inline type="application/ld+json" set:html={schemaJson} />
 
