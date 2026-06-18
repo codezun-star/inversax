@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora de Precio Justo de una Acción (Número de Graham) — Inversax" description="Calcula el precio justo de una acción usando el Número de Graham. Descubre si una acción está infravalorada o sobrevalorada antes de invertir.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué pasa si el Graham Number es negativo o cero?","acceptedAnswer":{"@type":"Answer","text":"Si EPS o BVPS son negativos, la fórmula no produce un resultado válido. Esto generalmente indica que la empresa tiene pérdidas o deuda neta, lo que en cualquier caso señala mayor riesgo y requiere análisis más profundo."}},{"@type":"Question","name":"¿Puedo usarlo para acciones de LATAM?","acceptedAnswer":{"@type":"Answer","text":"Sí, aunque debes usar EPS y BVPS en la misma moneda que el precio de la acción. Para acciones en pesos colombianos, argentinos o soles peruanos, los resultados son directamente comparables en esa moneda."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

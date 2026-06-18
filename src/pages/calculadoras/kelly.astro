@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora del Criterio de Kelly — Inversax" description="Calcula el porcentaje óptimo de tu capital a arriesgar por operación usando el Criterio de Kelly. Evita el sobredimensionamiento y protege tu cuenta de trading.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué significa Kelly negativo o cero?","acceptedAnswer":{"@type":"Answer","text":"Si el Criterio de Kelly da negativo o cero, la estrategia no es rentable en su configuración actual. No deberías operar con esos parámetros. Un resultado negativo significa que las pérdidas superan las ganancias en términos esperados."}},{"@type":"Question","name":"¿Puedo usar Kelly con acciones o solo con forex?","acceptedAnswer":{"@type":"Answer","text":"Kelly funciona con cualquier activo donde puedas estimar la probabilidad de ganancia y los montos promedio. Se usa en forex, acciones, opciones e incluso en carteras de largo plazo para decidir el peso de cada activo."}},{"@type":"Question","name":"¿Cómo combino Kelly con otras calculadoras?","acceptedAnswer":{"@type":"Answer","text":"Usa primero la calculadora de riesgo/beneficio para evaluar cada operación, y luego Kelly para decidir el tamaño. También complementa bien con la calculadora de tamaño de posición."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

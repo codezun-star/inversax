@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora de Ahorrar en Dólares vs Moneda Local — Inversax" description="Compara cuánto vale tu ahorro mensual en dólares vs en moneda local considerando inflación y devaluación. Esencial para inversores de Latinoamérica.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Por qué el escenario local se expresa en USD?","acceptedAnswer":{"@type":"Answer","text":"Comparar en USD es la forma más honesta de medir el poder adquisitivo real a largo plazo. Si el dinero local se devalúa significativamente, su equivalente en USD será mucho menor aunque el monto nominal en moneda local parezca grande."}},{"@type":"Question","name":"¿Qué rendimiento en USD es razonable usar?","acceptedAnswer":{"@type":"Answer","text":"Para cálculos conservadores usa 3–5% (equivalente a T-Bills o ETFs de bonos cortos). Para carteras diversificadas en acciones, 7–9% histórico. Para cálculos de seguridad (solo preservar valor) usa 3–4%."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

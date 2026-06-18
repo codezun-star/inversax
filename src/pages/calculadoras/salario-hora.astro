@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora de Salario por Hora — Inversax" description="Convierte tu salario mensual, anual o semanal a salario por hora real. Calcula cuánto ganas por hora, por día y por semana según tus horas de trabajo.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo se calculan las horas anuales?","acceptedAnswer":{"@type":"Answer","text":"Se calcula como: (52 semanas — semanas de vacaciones) × horas por semana. Por ejemplo: (52 — 2) × 40 = 2.000 horas anuales. El salario anual dividido entre 2.000 da el valor por hora real."}},{"@type":"Question","name":"¿Debo incluir el salario en 13° mes o aguinaldo?","acceptedAnswer":{"@type":"Answer","text":"Si cobras aguinaldo, suma ese monto al total anual antes de calcular. En muchos países de LATAM el aguinaldo equivale a un mes de salario adicional, lo que incrementa aproximadamente un 8% el salario efectivo por hora."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

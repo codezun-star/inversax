@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Simulador de Cuenta de Trading — Inversax" description="Proyecta el crecimiento esperado de tu cuenta de trading según tu win rate, ratio riesgo-beneficio, riesgo por operación y número de trades.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Por qué el resultado puede ser menor con más operaciones incluso con edge positivo?","acceptedAnswer":{"@type":"Answer","text":"Con riesgo alto por operación, el efecto de las pérdidas en compounding puede superar las ganancias incluso con edge positivo. Esto ocurre cuando el porcentaje de riesgo es mayor que el Kelly óptimo. La solución es reducir el riesgo por operación. Usa la calculadora de Kelly para encontrar el tamaño óptimo."}},{"@type":"Question","name":"¿Cómo sé si mis estadísticas son representativas?","acceptedAnswer":{"@type":"Answer","text":"Necesitas un mínimo de 30–50 operaciones para tener significancia estadística. Con menos operaciones, la variabilidad de los resultados es tan alta que las estadísticas no son predictivas del futuro."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

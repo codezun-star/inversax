@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora Avalancha vs Bola de Nieve para Pagar Deudas — Inversax" description="Compara los métodos avalancha y bola de nieve para pagar tus deudas más rápido. Calcula cuántos meses tardarás y cuánto pagarás de intereses con cada estrategia.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué pasa si se cancela una deuda antes de lo esperado?","acceptedAnswer":{"@type":"Answer","text":"La calculadora redistribuye automáticamente el pago: cuando una deuda se liquida, su pago mínimo más el extra se suman y se aplican a la siguiente deuda en la lista. Esto acelera cada deuda subsiguiente, creando el efecto bola de nieve o avalancha característico de cada método."}},{"@type":"Question","name":"¿Debo incluir la hipoteca?","acceptedAnswer":{"@type":"Answer","text":"Generalmente no. La hipoteca tiene tasas bajas y ventajas fiscales en muchos países. Estos métodos están pensados para deudas de consumo (tarjetas de crédito, créditos personales, préstamos de vehículo) con tasas altas. La hipoteca se maneja mejor con su propia estrategia de amortización."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

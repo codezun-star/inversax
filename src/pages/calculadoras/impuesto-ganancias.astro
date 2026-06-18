@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora de Impuesto sobre Ganancias de Capital — Inversax" description="Calcula cuánto pagarás de impuesto al vender acciones, ETFs o criptomonedas. Tasas para Colombia, México, Argentina, Chile, Perú, Uruguay y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Se paga impuesto si reinvierto los dividendos?","acceptedAnswer":{"@type":"Answer","text":"Depende del país. En Colombia y México los dividendos tienen retención en origen. En ETFs acumulativos (sin distribución de dividendos), el impuesto puede diferirse hasta la venta, aunque la regulación local determina exactamente cómo tributa para residentes de LATAM."}},{"@type":"Question","name":"¿Las criptomonedas tienen el mismo impuesto que las acciones?","acceptedAnswer":{"@type":"Answer","text":"En la mayoría de países de LATAM, las criptomonedas tributan como activos de capital a tasas similares a las acciones. México, Colombia y Argentina han publicado lineamientos específicos. La regulación evoluciona rápidamente: siempre verifica con un contador local."}},{"@type":"Question","name":"¿En qué brokers puedo invertir desde LATAM?","acceptedAnswer":{"@type":"Answer","text":"Brokers como Exness, XTB o Interactive Brokers permiten acceder a mercados globales. La obligación tributaria es del inversor independientemente del broker utilizado."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">

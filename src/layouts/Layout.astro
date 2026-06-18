@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { grupos } from '../lib/calculadoras';
 
 interface Props {
   title?: string;
@@ -42,6 +43,35 @@ const orgSchema = JSON.stringify({
     },
   ],
 });
+
+// Breadcrumb automático para páginas de calculadoras.
+// Las páginas de blog y país emiten su propio BreadcrumbList, así que solo
+// se genera aquí para rutas /calculadoras/* (calculadoras individuales y categorías).
+const calcPath = Astro.url.pathname.replace(/\/$/, '');
+const calcAll = grupos.flatMap((g) => g.calculadoras.map((c) => ({ href: c.href, titulo: c.titulo })));
+const calcHit = calcAll.find((c) => c.href === calcPath);
+const catHit = grupos.find((g) => '/calculadoras/' + g.slug === calcPath);
+let calcCrumbs: { name: string; item: string }[] | null = null;
+if (calcHit) {
+  calcCrumbs = [
+    { name: 'Inicio', item: 'https://inversax.com' },
+    { name: 'Calculadoras', item: 'https://inversax.com/calculadoras' },
+    { name: calcHit.titulo, item: 'https://inversax.com' + calcPath },
+  ];
+} else if (catHit) {
+  calcCrumbs = [
+    { name: 'Inicio', item: 'https://inversax.com' },
+    { name: 'Calculadoras', item: 'https://inversax.com/calculadoras' },
+    { name: catHit.categoria, item: 'https://inversax.com' + calcPath },
+  ];
+}
+const calcBreadcrumbSchema = calcCrumbs
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: calcCrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: b.item })),
+    })
+  : null;
 ---
 
 <!doctype html>
@@ -74,6 +104,7 @@ const orgSchema = JSON.stringify({
 
     <!-- JSON-LD global: Organización + sitio -->
     <script is:inline type="application/ld+json" set:html={orgSchema} />
+    {calcBreadcrumbSchema && <script is:inline type="application/ld+json" set:html={calcBreadcrumbSchema} />}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -2,6 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Calculadora de Dólar Paralelo y Brecha Cambiaria — Inversax" description="Calcula la brecha entre el tipo de cambio oficial y el paralelo o blue. Especial para Argentina, Venezuela y Cuba. Convierte montos entre el tipo oficial y el informal.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Dónde consulto los tipos de cambio actualizados?","acceptedAnswer":{"@type":"Answer","text":"Para Argentina: dolarito.ar o ambito.com muestran todas las cotizaciones en tiempo real. Para Venezuela: monitordolarvenezuela.com. Para Cuba: el tipo informal varía mucho; ONEI publica el oficial. Siempre verifica en múltiples fuentes."}},{"@type":"Question","name":"¿Cómo afecta la brecha al envío de remesas?","acceptedAnswer":{"@type":"Answer","text":"En países con alta brecha cambiaria, las remesas pueden valer significativamente más si el destinatario las recibe en moneda extranjera y las convierte al tipo paralelo. Usa la calculadora de remesas para calcular el monto que llega considerando el tipo de cambio real."}}]}
+    </script>
+  </Fragment>
   <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
     <div style="max-width:800px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
