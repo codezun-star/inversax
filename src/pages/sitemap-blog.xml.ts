@@ -12,6 +12,7 @@ ${posts
   .map(
     (p) => `  <url>
     <loc>${BASE}/blog/${p.slug}</loc>
+    <lastmod>${p.data.fecha}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`

@@ -1,47 +1,58 @@
 import type { APIRoute } from 'astro';
 import { paises } from '../lib/paises';
+import { grupos } from '../lib/calculadoras';
 
 const BASE = 'https://inversax.com';
+const LASTMOD = new Date().toISOString().slice(0, 10);
+
+interface Entry {
+  url: string;
+  priority: string;
+  changefreq: string;
+}
 
 export const GET: APIRoute = () => {
-  const staticPages: Array<{ url: string; priority: string; changefreq: string }> = [
-    { url: '',                                       priority: '1.0', changefreq: 'weekly'  },
-    { url: '/brokers',                               priority: '0.9', changefreq: 'weekly'  },
-    { url: '/calculadoras',                          priority: '0.8', changefreq: 'monthly' },
-    { url: '/calculadoras/interes-compuesto',        priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/salario-neto',             priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/conversion-divisas',       priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/roi',                      priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/cagr',                     priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/regla-del-72',             priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/inflacion',                priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/meta-ahorro',              priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/fondo-emergencia',         priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/prestamo',                 priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/amortizacion',             priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/dividendos',               priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/dca',                      priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/jubilacion',               priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/independencia-financiera', priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/pips',                     priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/apalancamiento',           priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/riesgo-beneficio',         priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/spread',                   priority: '0.7', changefreq: 'monthly' },
-    { url: '/calculadoras/comision-broker',          priority: '0.7', changefreq: 'monthly' },
-    { url: '/blog',                                  priority: '0.8', changefreq: 'weekly'  },
-    { url: '/privacidad',                            priority: '0.3', changefreq: 'yearly'  },
-    { url: '/legal',                                 priority: '0.3', changefreq: 'yearly'  },
-    { url: '/contacto',                              priority: '0.5', changefreq: 'yearly'  },
-    { url: '/acerca',                                priority: '0.5', changefreq: 'yearly'  },
+  // Páginas núcleo del sitio
+  const corePages: Entry[] = [
+    { url: '',             priority: '1.0', changefreq: 'weekly'  },
+    { url: '/brokers',     priority: '0.9', changefreq: 'weekly'  },
+    { url: '/calculadoras', priority: '0.8', changefreq: 'monthly' },
+    { url: '/blog',        priority: '0.8', changefreq: 'weekly'  },
+    { url: '/acerca',      priority: '0.5', changefreq: 'yearly'  },
+    { url: '/contacto',    priority: '0.5', changefreq: 'yearly'  },
+    { url: '/privacidad',  priority: '0.3', changefreq: 'yearly'  },
+    { url: '/legal',       priority: '0.3', changefreq: 'yearly'  },
   ];
 
-  const countryPages = paises.map((p) => ({
+  // Una página por país: /brokers/co, /brokers/mx, ...
+  const countryPages: Entry[] = paises.map((p) => ({
     url: `/brokers/${p.codigo}`,
     priority: '0.8',
     changefreq: 'monthly',
   }));
 
-  const allPages = [...staticPages, ...countryPages];
+  // Páginas de categoría de calculadoras: /calculadoras/inversion, ...
+  const categoryPages: Entry[] = grupos.map((g) => ({
+    url: `/calculadoras/${g.slug}`,
+    priority: '0.7',
+    changefreq: 'monthly',
+  }));
+
+  // Todas las calculadoras individuales, generadas desde la fuente de datos
+  const calculatorPages: Entry[] = grupos.flatMap((g) =>
+    g.calculadoras.map((c) => ({
+      url: c.href,
+      priority: '0.6',
+      changefreq: 'monthly',
+    }))
+  );
+
+  const allPages = [
+    ...corePages,
+    ...countryPages,
+    ...categoryPages,
+    ...calculatorPages,
+  ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -49,6 +60,7 @@ ${allPages
   .map(
     (p) => `  <url>
     <loc>${BASE}${p.url}</loc>
+    <lastmod>${LASTMOD}</lastmod>
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>
   </url>`
