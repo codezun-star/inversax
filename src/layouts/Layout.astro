@@ -19,6 +19,29 @@ const {
 } = Astro.props;
 
 const canonicalURL = canonical ?? Astro.url.href;
+
+// JSON-LD global de marca: Organization + WebSite (presente en todas las páginas)
+const orgSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://inversax.com/#organization',
+      name: 'Inversax',
+      url: 'https://inversax.com',
+      logo: { '@type': 'ImageObject', url: 'https://inversax.com/logo.svg' },
+      description: 'Comparador independiente de brokers financieros para inversores de habla hispana en Latinoamérica y España.',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://inversax.com/#website',
+      url: 'https://inversax.com',
+      name: 'Inversax',
+      inLanguage: 'es',
+      publisher: { '@id': 'https://inversax.com/#organization' },
+    },
+  ],
+});
 ---
 
 <!doctype html>
@@ -47,6 +70,9 @@ const canonicalURL = canonical ?? Astro.url.href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD global: Organización + sitio -->
+    <script is:inline type="application/ld+json" set:html={orgSchema} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

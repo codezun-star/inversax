@@ -52,15 +52,18 @@ const schemaJson = JSON.stringify({
       name: b.nombre,
       description: b.descripcion,
       url: b.afiliado,
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: String(b.calificacion),
-        bestRating: '5',
-        worstRating: '1',
-        ratingCount: '1',
-      },
     },
   })),
+});
+
+const breadcrumbJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://inversax.com' },
+    { '@type': 'ListItem', position: 2, name: 'Brokers', item: 'https://inversax.com/brokers' },
+    { '@type': 'ListItem', position: 3, name: pais.nombre, item: 'https://inversax.com/brokers/' + codigoPais },
+  ],
 });
 
 const brokersData = brokersList.map((b, i) => {
@@ -88,6 +91,7 @@ const brokersData = brokersList.map((b, i) => {
   description={'Comparativa de los ' + brokersList.length + ' mejores brokers para invertir en ' + pais.nombre + '. Regulación, depósito mínimo, spreads y métodos de pago locales.'}
 >
   <script slot="head" is:inline type="application/ld+json" set:html={schemaJson} />
+  <script slot="head" is:inline type="application/ld+json" set:html={breadcrumbJson} />
 
 <!-- HERO -->
 <div class="hero-dark">
