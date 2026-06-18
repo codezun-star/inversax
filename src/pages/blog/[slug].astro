@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, getEntry, render } from 'astro:content';
+import { getPais } from '../../lib/paises';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -32,6 +33,29 @@ if (post.data.fecha) {
   const [yy, mm, dd] = post.data.fecha.split('-');
   fechaFmt = `${parseInt(dd, 10)} de ${meses[parseInt(mm, 10) - 1]} de ${yy}`;
 }
+
+// CTA de brokers orientado al país del artículo (si lo tiene)
+const paisInfo = post.data.pais ? getPais(post.data.pais) : undefined;
+const ctaHref = paisInfo ? '/brokers/' + paisInfo.codigo : '/brokers';
+const ctaTitulo = paisInfo ? '¿Buscas el mejor broker en ' + paisInfo.nombre + '?' : '¿Buscas el mejor broker para tu país?';
+const ctaTexto = paisInfo
+  ? 'Compara los brokers disponibles en ' + paisInfo.nombre + ': regulación, depósito mínimo y métodos de pago locales.'
+  : 'Compara todos los brokers disponibles por país, regulación, depósito mínimo y más.';
+const ctaLabel = paisInfo ? 'Ver brokers en ' + paisInfo.nombre : 'Ver comparador de brokers';
+
+// Artículos relacionados: prioriza mismo país, luego misma categoría, luego recientes
+const todosPosts = await getCollection('blog', (e) => e.data.publicado !== false);
+const relacionados = todosPosts
+  .filter((p) => p.slug !== post.slug)
+  .map((p) => {
+    let score = 0;
+    if (post.data.pais && p.data.pais === post.data.pais) score += 2;
+    if (p.data.categoria === post.data.categoria) score += 1;
+    return { p, score };
+  })
+  .sort((a, b) => b.score - a.score || b.p.data.fecha.localeCompare(a.p.data.fecha))
+  .slice(0, 3)
+  .map((x) => x.p);
 
 const articleSchema = JSON.stringify({
   '@context': 'https://schema.org',
@@ -167,22 +191,48 @@ const faqSchema = post.data.faq ? JSON.stringify({
       </div>
     </div>
 
-    <!-- CTA brokers -->
+    <!-- CTA brokers (orientado al país del artículo) -->
     <div style="margin-top:40px; background:#FFF4EC; border:1px solid #FFD4A8; border-radius:12px; padding:24px;">
       <p style="font-size:15px; font-weight:700; color:#1A1A1A; margin:0 0 6px;">
-        ¿Buscas el mejor broker para tu país?
+        {ctaTitulo}
       </p>
       <p style="font-size:13px; color:#78716C; line-height:1.55; margin:0 0 14px;">
-        Compara todos los brokers disponibles por país, regulación, depósito mínimo y más.
+        {ctaTexto}
       </p>
-      <a href="/brokers" class="btn-primary btn-sm" style="font-size:14px; padding:11px 20px; border-radius:9px;">
-        Ver comparador de brokers
+      <a href={ctaHref} class="btn-primary btn-sm" style="font-size:14px; padding:11px 20px; border-radius:9px;">
+        {ctaLabel}
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </a>
     </div>
+
+    <!-- Artículos relacionados -->
+    {relacionados.length > 0 && (
+      <div style="margin-top:40px; padding-top:28px; border-top:1px solid #E2DDD8;">
+        <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#A8A29E; margin:0 0 14px;">Artículos relacionados</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          {relacionados.map((r) => {
+            const rHref = '/blog/' + r.slug;
+            const rCat = categorias[r.data.categoria] ?? r.data.categoria;
+            const rPais = r.data.pais ? r.data.pais.toUpperCase() : '';
+            return (
+              <a href={rHref} style="display:flex; align-items:center; gap:14px; background:#fff; border:1px solid #E2DDD8; border-radius:10px; padding:14px 16px; text-decoration:none;">
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap;">
+                    <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#FFF4EC; color:#FF8C42; padding:2px 8px; border-radius:4px;">{rCat}</span>
+                    {rPais && <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#F0EDE7; color:#78716C; padding:2px 8px; border-radius:4px;">{rPais}</span>}
+                  </div>
+                  <p style="font-size:14px; font-weight:700; color:#1A1A1A; margin:0; line-height:1.4;">{r.data.titulo}</p>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C7BFB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )}
 
     <!-- Volver -->
     <div style="margin-top:24px;">
