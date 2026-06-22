@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora del Costo Real de un Auto al Mes — Inversax" description="Calcula cuánto te cuesta de verdad tener un auto: depreciación, gasolina, seguro y mantenimiento. El costo mensual real más allá de la cuota. Para LATAM y España, 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta tener un auto al mes?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El costo real de un auto incluye la depreciación (lo que pierde de valor), la gasolina, el seguro, el mantenimiento y las cuotas si está financiado. La depreciación suele ser el mayor costo oculto, aunque no lo pagues en efectivo cada mes." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la depreciación de un auto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es la pérdida de valor del vehículo con el tiempo. Un auto nuevo puede perder entre el 15% y el 25% de su valor el primer año y seguir cayendo después. Es un costo real aunque no salga de tu bolsillo cada mes." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué importa calcular el costo real de un auto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Porque la cuota del crédito es solo una parte. Al sumar depreciación, gasolina, seguro y mantenimiento, muchas personas descubren que su auto les cuesta el doble de lo que creían, dinero que podrían invertir." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Costo Real de un Auto</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Costo Real de un Auto</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Suma depreciación, gasolina, seguro y mantenimiento para saber cuánto te cuesta de verdad tu carro al mes.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del auto</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del auto</label>
+            <input id="precio" type="number" value="350000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Años que lo usarás</label>
+            <input id="anos" type="number" value="5" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Depreciación anual (%)</label>
+            <input id="dep" type="number" value="15" min="0" max="100" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Gasolina al mes</label>
+            <input id="gas" type="number" value="2000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Seguro anual</label><input id="seguro" type="number" value="12000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Mantenimiento anual</label><input id="mant" type="number" value="9000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Costo real al mes</p>
+          <p id="r-mes" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Depreciación mensual</span><span id="r-dep" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Gastos operativos al mes</span><span id="r-oper" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo total en el periodo</span><span id="r-total" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La depreciación se calcula sobre el valor que pierde el auto en el periodo. No incluye la cuota del crédito ni el costo de oportunidad del dinero.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cuánto cuesta de verdad tener un auto?</h2>
+    <p>El costo de un auto va mucho más allá de su cuota. El gasto más grande suele ser invisible: la <strong>depreciación</strong>, es decir, el valor que pierde año a año. Sumada a gasolina, seguro y mantenimiento, revela el verdadero costo mensual de tenencia.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio y años de uso:</strong> base para calcular la depreciación.</li>
+      <li><strong>Depreciación anual:</strong> 15%-20% es habitual; los autos nuevos pierden más al inicio.</li>
+      <li><strong>Gasolina, seguro y mantenimiento:</strong> tus gastos operativos reales.</li>
+    </ul>
+
+    <h2>El costo de oportunidad de tu auto</h2>
+    <p>Ese dinero podría estar invirtiéndose. Mira cuánto crecería con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a> y, si lo financias, suma la cuota con la <a href="/calculadoras/credito-automotriz">calculadora de crédito automotriz</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Comprar nuevo o usado sale más a cuenta?</h3>
+    <p>Un auto usado de pocos años evita la mayor caída de depreciación, que ocurre en los primeros 12-24 meses. Por eso suele tener un costo real por kilómetro menor.</p>
+    <h3>¿Incluyo tenencia, verificación o peajes?</h3>
+    <p>Puedes sumarlos al mantenimiento anual para un cálculo más completo según tu país.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const dep = (parseFloat((document.getElementById('dep') as HTMLInputElement).value) || 0) / 100;
+    const gas = parseFloat((document.getElementById('gas') as HTMLInputElement).value) || 0;
+    const seguro = parseFloat((document.getElementById('seguro') as HTMLInputElement).value) || 0;
+    const mant = parseFloat((document.getElementById('mant') as HTMLInputElement).value) || 0;
+    const valorFinal = precio * Math.pow(1 - dep, anos);
+    const depTotal = precio - valorFinal;
+    const depMensual = depTotal / (anos * 12);
+    const operMensual = gas + seguro / 12 + mant / 12;
+    const costoMensual = depMensual + operMensual;
+    const costoTotal = costoMensual * anos * 12;
+    document.getElementById('r-mes')!.textContent = fmt(costoMensual, m);
+    document.getElementById('r-dep')!.textContent = fmt(depMensual, m);
+    document.getElementById('r-oper')!.textContent = fmt(operMensual, m);
+    document.getElementById('r-total')!.textContent = fmt(costoTotal, m);
+  }
+  ['moneda','precio','anos','dep','gas','seguro','mant'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Tipo de Cambio Promedio — Inversax" description="Calcula el precio promedio ponderado al que compraste una divisa tras varias operaciones a distintos valores. Conoce tu costo medio del dólar. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el tipo de cambio promedio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Se suma todo el dinero en moneda local que gastaste comprando divisa y se divide entre la cantidad total de divisa adquirida. Es un promedio ponderado: las compras más grandes pesan más en el resultado." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué sirve conocer mi dólar promedio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Te dice a qué precio promedio dolarizaste tus ahorros. Sirve para saber si estás ganando o perdiendo respecto al valor actual y para tomar mejores decisiones al seguir comprando o vender." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Comprar dólares poco a poco reduce el riesgo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Comprar en varios momentos (en lugar de todo de golpe) promedia el precio y reduce el riesgo de comprar todo en un pico. Es la misma lógica del dollar cost averaging aplicada a la divisa." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Tipo de Cambio Promedio</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Tipo de Cambio Promedio</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula a qué precio promedio compraste tu divisa tras varias operaciones.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tus compras de divisa</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Compra 1 — divisa (USD)</label><input id="q1" type="number" value="500" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Precio</label><input id="p1" type="number" value="3800" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Compra 2 — divisa (USD)</label><input id="q2" type="number" value="300" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Precio</label><input id="p2" type="number" value="4100" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Compra 3 — divisa (USD)</label><input id="q3" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Precio</label><input id="p3" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Compra 4 — divisa (USD)</label><input id="q4" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+            <div style="flex:1;"><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Precio</label><input id="p4" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tipo de cambio promedio</p>
+          <p id="r-prom" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total de divisa comprada</span><span id="r-div" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total gastado (moneda local)</span><span id="r-gastado" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Promedio ponderado = total gastado ÷ total de divisa. Deja en 0 las compras que no uses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el tipo de cambio promedio?</h2>
+    <p>Cuando compras dólares (u otra divisa) en varias ocasiones a distintos precios, tu <strong>tipo de cambio promedio</strong> es el costo medio ponderado de toda esa divisa. Es el valor que define si, respecto al precio actual, vas ganando o perdiendo con tus ahorros dolarizados.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Divisa de cada compra:</strong> cuántos dólares (o euros) compraste.</li>
+      <li><strong>Precio:</strong> el tipo de cambio al que compraste en cada ocasión.</li>
+    </ul>
+
+    <h2>Dolarizar con cabeza</h2>
+    <p>Comprar de a poco promedia el precio, igual que el <a href="/calculadoras/dca">dollar cost averaging</a> en inversiones. Para ver si tu estrategia de ahorro en dólares supera a la moneda local, usa la <a href="/calculadoras/ahorro-dolares">calculadora de ahorrar en dólares vs moneda local</a>, y para calcular tu ganancia, la <a href="/calculadoras/ganancia-dolar">calculadora de ganancia por comprar/vender dólares</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Sirve para euros u otra divisa?</h3>
+    <p>Sí. El cálculo es el mismo para cualquier divisa: solo cambia la moneda y los precios.</p>
+    <h3>¿Incluye comisiones?</h3>
+    <p>No directamente. Para un costo exacto, suma las comisiones al precio de cada compra.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    let totalDiv = 0, totalLocal = 0;
+    for (let i = 1; i <= 4; i++) {
+      const q = parseFloat((document.getElementById('q' + i) as HTMLInputElement).value) || 0;
+      const p = parseFloat((document.getElementById('p' + i) as HTMLInputElement).value) || 0;
+      totalDiv += q; totalLocal += q * p;
+    }
+    const prom = totalDiv > 0 ? totalLocal / totalDiv : 0;
+    document.getElementById('r-prom')!.textContent = fmt(prom, m);
+    document.getElementById('r-div')!.textContent = 'US$ ' + new Intl.NumberFormat('es', { maximumFractionDigits: 2 }).format(totalDiv);
+    document.getElementById('r-gastado')!.textContent = fmt(totalLocal, m);
+  }
+  ['moneda','q1','p1','q2','p2','q3','p3','q4','p4'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

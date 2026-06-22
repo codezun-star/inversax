@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Patrimonio Neto — Inversax" description="Calcula tu patrimonio neto restando tus deudas a tus activos. Conoce tu situación financiera real, tu ratio de endeudamiento y cómo mejorarlo. Para LATAM y España, 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el patrimonio neto y cómo se calcula?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El patrimonio neto es la diferencia entre todo lo que tienes (activos) y todo lo que debes (pasivos). Se calcula sumando tus activos —efectivo, inversiones, propiedades, vehículos— y restando tus deudas. Es la foto más honesta de tu salud financiera." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es malo tener patrimonio neto negativo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un patrimonio neto negativo significa que debes más de lo que tienes. Es común al inicio (por créditos de estudios o hipotecas recientes), pero el objetivo es que crezca con el tiempo. Lo importante es la tendencia, no solo el número." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Con qué frecuencia debo calcular mi patrimonio neto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Una o dos veces al año es suficiente para ver tu progreso. Calcularlo cada mes puede generar ansiedad por la volatilidad de las inversiones, sin aportar información útil para decisiones de largo plazo." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Patrimonio Neto</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Patrimonio Neto</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Resta tus deudas a tus activos para conocer tu situación financiera real.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <div>
+          <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+          <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box; margin-bottom:18px;">
+            <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+            <option value="COP">COP — Peso colombiano</option>
+            <option value="MXN">MXN — Peso mexicano</option>
+            <option value="ARS">ARS — Peso argentino</option>
+            <option value="CLP">CLP — Peso chileno</option>
+            <option value="PEN">PEN — Sol peruano</option>
+            <option value="UYU">UYU — Peso uruguayo</option>
+            <option value="EUR">EUR — Euro (España)</option>
+          </select>
+        </div>
+        <h2 style="font-size:14px; font-weight:700; color:#16A34A; margin:0 0 12px;">Activos (lo que tienes)</h2>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+          <div><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Efectivo y ahorros</label><input id="a1" type="number" value="8000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          <div><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Inversiones (acciones, fondos, cripto)</label><input id="a2" type="number" value="15000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          <div><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Propiedades (valor de mercado)</label><input id="a3" type="number" value="90000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          <div><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Vehículos y otros bienes</label><input id="a4" type="number" value="12000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+        </div>
+        <h2 style="font-size:14px; font-weight:700; color:#DC2626; margin:0 0 12px;">Pasivos (lo que debes)</h2>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Hipoteca y préstamos largos</label><input id="p1" type="number" value="60000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+          <div><label style="font-size:12px; font-weight:600; color:#78716C; display:block; margin-bottom:4px;">Tarjetas y deudas de corto plazo</label><input id="p2" type="number" value="4000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" /></div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Patrimonio neto</p>
+          <p id="r-neto" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total de activos</span><span id="r-act" style="font-size:13px; font-weight:700; color:#16A34A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total de pasivos</span><span id="r-pas" style="font-size:13px; font-weight:700; color:#DC2626;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ratio de endeudamiento</span><span id="r-ratio" style="font-size:13px; font-weight:700; color:#22C55E;">0%</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El ratio de endeudamiento (pasivos ÷ activos) por debajo del 35% se considera saludable. Lo importante es que tu patrimonio neto crezca año a año.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el patrimonio neto?</h2>
+    <p>El <strong>patrimonio neto</strong> es lo que realmente posees: el total de tus <strong>activos</strong> menos el total de tus <strong>pasivos</strong>. Es el mejor indicador de tu salud financiera porque, a diferencia del ingreso, mide riqueza acumulada, no flujo.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Activos:</strong> incluye efectivo, inversiones y bienes a su valor de mercado actual.</li>
+      <li><strong>Pasivos:</strong> incluye todas tus deudas pendientes, no la cuota mensual.</li>
+    </ul>
+
+    <h2>Cómo hacer crecer tu patrimonio</h2>
+    <p>Dos palancas: reducir pasivos y aumentar activos. Acelera el pago de deudas caras con la <a href="/calculadoras/deuda-bola-nieve">calculadora de avalancha vs bola de nieve</a> y haz crecer tus activos invirtiendo: proyecta el efecto con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>. Tu <a href="/calculadoras/tasa-ahorro">tasa de ahorro</a> determina la velocidad.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Incluyo mi vivienda habitual?</h3>
+    <p>Sí, a valor de mercado, y la hipoteca pendiente como pasivo. Algunos prefieren calcular también el patrimonio "líquido" excluyendo la vivienda.</p>
+    <h3>¿El auto cuenta como activo?</h3>
+    <p>Sí, pero recuerda que se deprecia. Calcula su costo real de tenencia con la <a href="/calculadoras/costo-real-auto">calculadora de costo real de un auto</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    let act = 0, pas = 0;
+    ['a1','a2','a3','a4'].forEach(id => act += parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0);
+    ['p1','p2'].forEach(id => pas += parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0);
+    const neto = act - pas;
+    const ratio = act > 0 ? (pas / act) * 100 : 0;
+    document.getElementById('r-neto')!.textContent = fmt(neto, m);
+    document.getElementById('r-act')!.textContent = fmt(act, m);
+    document.getElementById('r-pas')!.textContent = fmt(pas, m);
+    document.getElementById('r-ratio')!.textContent = ratio.toFixed(1) + '%';
+    document.getElementById('card')!.style.background = neto >= 0 ? '#22C55E' : '#EF4444';
+  }
+  ['moneda','a1','a2','a3','a4','p1','p2'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

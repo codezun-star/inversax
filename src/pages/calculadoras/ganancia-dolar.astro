@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Ganancia por Comprar y Vender Dólares — Inversax" description="Calcula tu ganancia o pérdida al comprar y vender dólares, en términos nominales y reales ajustados por inflación. Descubre si de verdad ganaste con el dólar. Para LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo cuánto gané con el dólar?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Divide lo que invertiste entre el precio de compra para saber cuántos dólares conseguiste, multiplícalos por el precio de venta y resta tu inversión inicial. La diferencia es tu ganancia nominal en moneda local." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué mi ganancia real es menor que la nominal?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Porque la inflación reduce el poder de compra de tu moneda. Si el dólar subió 30% pero la inflación fue del 25%, tu ganancia real es de apenas un 4%. La ganancia real es la que de verdad importa." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Comprar dólares siempre es buena inversión?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No necesariamente. El dólar protege frente a la devaluación local, pero no genera rendimiento por sí mismo y puede quedar por debajo de la inflación en dólares. Para hacerlo crecer, hay que invertirlo." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Ganancia con el Dólar</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Ganancia por Comprar y Vender Dólares</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula tu ganancia nominal y real (ajustada por inflación) al comprar y vender divisa.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu operación</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto invertido (moneda local)</label>
+            <input id="monto" type="number" value="1000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de compra del dólar</label>
+            <input id="compra" type="number" value="800" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de venta del dólar</label>
+            <input id="venta" type="number" value="1050" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Inflación del periodo (%)</label>
+            <input id="inf" type="number" value="20" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Ganancia nominal</p>
+          <p id="r-nominal" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Rentabilidad nominal</span><span id="r-pctnom" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Rentabilidad real (ajustada por inflación)</span><span id="r-pctreal" style="font-size:13px; font-weight:700; color:#8B5CF6;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Dólares comprados</span><span id="r-usd" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La ganancia real descuenta la inflación local del periodo. Una ganancia nominal positiva puede ser una pérdida real si la inflación fue mayor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Ganaste de verdad con el dólar?</h2>
+    <p>Comprar dólares barato y venderlos caro parece ganancia segura, pero la <strong>inflación</strong> puede comerse buena parte de ese beneficio. Esta calculadora separa la <strong>ganancia nominal</strong> (en cifras) de la <strong>ganancia real</strong> (en poder de compra), que es la que cuenta.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Monto y precios:</strong> lo que invertiste y los tipos de cambio de compra y venta.</li>
+      <li><strong>Inflación del periodo:</strong> la acumulada entre que compraste y vendiste.</li>
+    </ul>
+
+    <h2>El dólar protege, pero no rinde</h2>
+    <p>Guardar dólares te cubre de la devaluación, pero no crece solo. Para hacerlo trabajar, inviértelo: mira el efecto con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>. Y compara ahorrar en dólares frente a la moneda local con la <a href="/calculadoras/ahorro-dolares">calculadora de ahorrar en dólares</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué inflación uso, la local o la de EE.UU.?</h3>
+    <p>Para medir tu poder de compra local, usa la inflación de tu país. Si planeas gastar en el exterior, la de EE.UU. es más relevante.</p>
+    <h3>¿Incluye el spread de la casa de cambio?</h3>
+    <p>Si usas el precio real de compra y de venta (no el del mercado), sí. Analiza ese costo con la <a href="/calculadoras/spread-cambiario">calculadora de spread cambiario</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return (n >= 0 ? '' : '−') + new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(Math.abs(n)) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const compra = parseFloat((document.getElementById('compra') as HTMLInputElement).value) || 0;
+    const venta = parseFloat((document.getElementById('venta') as HTMLInputElement).value) || 0;
+    const inf = (parseFloat((document.getElementById('inf') as HTMLInputElement).value) || 0) / 100;
+    const usd = compra > 0 ? monto / compra : 0;
+    const valorVenta = usd * venta;
+    const ganNom = valorVenta - monto;
+    const pctNom = monto > 0 ? (ganNom / monto) * 100 : 0;
+    const pctReal = ((1 + pctNom / 100) / (1 + inf) - 1) * 100;
+    document.getElementById('r-nominal')!.textContent = fmt(ganNom, m);
+    document.getElementById('r-pctnom')!.textContent = pctNom.toFixed(2) + '%';
+    document.getElementById('r-pctreal')!.textContent = pctReal.toFixed(2) + '%';
+    document.getElementById('r-usd')!.textContent = 'US$ ' + new Intl.NumberFormat('es', { maximumFractionDigits: 2 }).format(usd);
+    document.getElementById('card')!.style.background = ganNom >= 0 ? '#8B5CF6' : '#EF4444';
+  }
+  ['moneda','monto','compra','venta','inf'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

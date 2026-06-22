@@ -1,0 +1,138 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Conversión Cripto a Moneda Local — Inversax" description="Convierte USDT, BTC o cualquier criptomoneda a tu moneda local y al revés, usando el precio que indiques. Para Colombia, México, Argentina y toda LATAM. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo convierto cripto a mi moneda local?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiplica la cantidad de cripto por el precio de una unidad en tu moneda local. Por ejemplo, 50 USDT a un precio de 4.000 pesos por USDT equivalen a 200.000 pesos. Para el camino inverso, divide el monto local entre el precio." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el precio de 1 USDT no es exactamente 1 dólar en pesos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Aunque USDT está vinculado al dólar, su precio en pesos en los exchanges P2P refleja la oferta y demanda local, y suele acercarse al dólar paralelo o financiero, no al oficial. Por eso conviene usar el precio real del exchange." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Esta calculadora usa precios en tiempo real?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Es 100% offline: tú ingresas el precio actual de tu exchange y la calculadora hace la conversión. Así funciona con cualquier cripto y cualquier moneda sin depender de APIs externas." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Conversión Cripto</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Conversión de Cripto a Moneda Local</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Convierte USDT, BTC o cualquier cripto a tu moneda y al revés, con el precio que indiques.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="USD">USD — Dólar</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Cantidad de cripto (ej. USDT)</label>
+            <input id="cripto" type="number" value="100" min="0" step="0.00000001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de 1 unidad (en moneda local)</label>
+            <input id="precio" type="number" value="4000" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto en moneda local (para el camino inverso)</label>
+            <input id="monto" type="number" value="400000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Valor en moneda local</p>
+          <p id="r-local" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Cripto que compras con el monto</span><span id="r-cripto" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Precio por unidad</span><span id="r-precio" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Ingresa el precio real de tu exchange (P2P o spot). No incluye comisiones de retiro ni de la red blockchain.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Convierte cripto a tu moneda en segundos</h2>
+    <p>Ya sea para vender <strong>USDT</strong>, calcular cuánto vale tu <strong>BTC</strong> o saber cuánta cripto compras con cierto dinero, esta calculadora hace la conversión en ambos sentidos usando el precio que tú indiques, sin depender de cotizaciones automáticas.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Cantidad de cripto:</strong> lo que tienes, para convertir a moneda local.</li>
+      <li><strong>Precio por unidad:</strong> el valor actual en tu exchange.</li>
+      <li><strong>Monto local:</strong> para ver cuánta cripto puedes comprar.</li>
+    </ul>
+
+    <h2>La cripto como dólar en LATAM</h2>
+    <p>En muchos países, comprar USDT es una vía práctica para dolarizar ahorros. Compara el costo frente al dólar tradicional con la <a href="/calculadoras/arbitraje-dolar-cripto">calculadora de arbitraje dólar/cripto</a> y aprende más en nuestra guía de <a href="/blog/trading-criptomonedas-latam">trading de criptomonedas desde LATAM</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Sirve para cualquier criptomoneda?</h3>
+    <p>Sí. Solo cambia el precio por unidad: funciona igual para USDT, BTC, ETH o cualquier token.</p>
+    <h3>¿Incluye comisiones del exchange?</h3>
+    <p>No. Para el costo real, resta las comisiones de compra/venta y de retiro de tu plataforma.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const cripto = parseFloat((document.getElementById('cripto') as HTMLInputElement).value) || 0;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const valorLocal = cripto * precio;
+    const criptoEq = precio > 0 ? monto / precio : 0;
+    document.getElementById('r-local')!.textContent = fmt(valorLocal, m);
+    document.getElementById('r-cripto')!.textContent = criptoEq.toFixed(2) + ' u.';
+    document.getElementById('r-precio')!.textContent = fmt(precio, m);
+  }
+  ['moneda','cripto','precio','monto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Dólar Tarjeta (con Impuestos) — Inversax" description="Calcula el precio final del dólar tarjeta o dólar ahorro sumando impuestos y percepciones al tipo oficial. Porcentajes editables para que siga siendo válida. Para Argentina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el dólar tarjeta?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El dólar tarjeta se calcula sumando al tipo de cambio oficial los impuestos y percepciones vigentes, expresados como porcentaje. Si el oficial está en 1.000 y los recargos suman 60%, el dólar tarjeta queda en 1.600 por dólar." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las percepciones del dólar tarjeta se recuperan?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Algunas percepciones funcionan como adelanto de impuestos (Ganancias o Bienes Personales) y pueden computarse o pedir su devolución según tu situación fiscal. El impuesto PAIS, en cambio, no es recuperable. Consulta tu caso con un contador." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene el dólar tarjeta o el dólar MEP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Para compras en el exterior, a veces conviene pagar con tarjeta y luego cancelar el resumen con dólares comprados por MEP, que suele ser más barato. Compara ambos valores antes de decidir cómo pagar." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Dólar Tarjeta</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Dólar Tarjeta</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el precio final del dólar tarjeta sumando impuestos y percepciones al tipo oficial.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Dólar oficial (pesos)</label>
+            <input id="oficial" type="number" value="1000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Impuesto / percepción 1 (%)</label>
+            <input id="p1" type="number" value="30" min="0" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Percepción 2 (%)</label>
+            <input id="p2" type="number" value="30" min="0" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto de la compra (dólares)</label>
+            <input id="monto" type="number" value="100" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Dólar tarjeta (pesos)</p>
+          <p id="r-final" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Recargo total</span><span id="r-recargo" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo en pesos de tu compra</span><span id="r-costo" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Impuestos pagados (pesos)</span><span id="r-imp" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Los porcentajes de impuestos cambian con el tiempo y según la normativa; edítalos para reflejar los vigentes en tu compra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el dólar tarjeta?</h2>
+    <p>El <strong>dólar tarjeta</strong> es el tipo de cambio que pagas al comprar en el exterior con tarjeta o adquirir servicios en dólares. Resulta de sumar al dólar oficial una serie de impuestos y percepciones, lo que encarece bastante el valor final.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Dólar oficial:</strong> el tipo de cambio base del día.</li>
+      <li><strong>Percepciones:</strong> ajusta los porcentajes a la normativa vigente.</li>
+      <li><strong>Monto en dólares:</strong> el valor de tu compra o servicio.</li>
+    </ul>
+
+    <h2>¿Y si pago de otra forma?</h2>
+    <p>A menudo sale más barato comprar dólares por bolsa y cancelar el resumen. Compáralo con la <a href="/calculadoras/dolar-mep">calculadora de dólar MEP</a> y con el <a href="/calculadoras/dolar-paralelo">dólar blue</a>. Para servicios en streaming o software, evalúa también la vía cripto en la <a href="/calculadoras/arbitraje-dolar-cripto">calculadora de arbitraje dólar/cripto</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué mi resumen vino más caro?</h3>
+    <p>Porque al oficial se le suman las percepciones. Esta calculadora te muestra el valor final y cuánto pagaste solo de impuestos.</p>
+    <h3>¿Puedo recuperar algo?</h3>
+    <p>Parte de las percepciones puede computarse contra otros impuestos según tu situación. Consulta a un contador para tu caso.</p>
+  </div>
+</Layout>
+
+<script>
+  function fmtPesos(n: number) { return new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n); }
+  function calcular() {
+    const oficial = parseFloat((document.getElementById('oficial') as HTMLInputElement).value) || 0;
+    const p1 = parseFloat((document.getElementById('p1') as HTMLInputElement).value) || 0;
+    const p2 = parseFloat((document.getElementById('p2') as HTMLInputElement).value) || 0;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const recargo = p1 + p2;
+    const final = oficial * (1 + recargo / 100);
+    const costo = monto * final;
+    const imp = monto * (final - oficial);
+    document.getElementById('r-final')!.textContent = '$' + fmtPesos(final);
+    document.getElementById('r-recargo')!.textContent = recargo.toFixed(1) + '%';
+    document.getElementById('r-costo')!.textContent = '$' + fmtPesos(costo);
+    document.getElementById('r-imp')!.textContent = '$' + fmtPesos(imp);
+  }
+  ['oficial','p1','p2','monto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

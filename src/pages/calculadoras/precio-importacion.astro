@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Costo de Importación — Inversax" description="Calcula el costo final de traer un producto del exterior: precio, envío, aranceles e impuestos y conversión a tu moneda local. Para compras internacionales desde LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el costo de importar un producto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Se suma el precio del producto y el envío, se aplican los aranceles e impuestos como porcentaje sobre ese subtotal y se convierte el total a tu moneda local con el tipo de cambio. Así obtienes el costo real puesto en tu país." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué impuestos paga una importación?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Suele haber aranceles aduaneros e impuestos al valor agregado (IVA), que varían por país y tipo de producto. Algunos países tienen un mínimo exento por debajo del cual no se cobran impuestos en envíos pequeños." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El tipo de cambio influye mucho en el costo final?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Mucho. Como el precio suele estar en dólares, una devaluación de tu moneda encarece toda la compra. Usa el tipo de cambio efectivo que realmente pagarás, no el oficial de referencia." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Costo de Importación</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Costo de Importación</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el costo final de traer un producto del exterior, impuestos y conversión incluidos.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de la compra</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del producto (USD)</label>
+            <input id="precio" type="number" value="200" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Costo de envío (USD)</label>
+            <input id="envio" type="number" value="35" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Aranceles + impuestos (%)</label>
+            <input id="imp" type="number" value="40" min="0" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio (1 USD = ? local)</label>
+            <input id="tasa" type="number" value="4000" min="0" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Costo final (moneda local)</p>
+          <p id="r-local" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Subtotal (producto + envío)</span><span id="r-sub" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Impuestos y aranceles (USD)</span><span id="r-imp" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo total (USD)</span><span id="r-usd" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Los aranceles e impuestos varían por país y producto. Verifica el mínimo exento y el porcentaje aplicable a tu envío.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cuánto cuesta importar un producto?</h2>
+    <p>El precio que ves en la tienda extranjera es solo el comienzo. Al importar debes sumar el <strong>envío</strong>, los <strong>aranceles e impuestos</strong> y, sobre todo, la <strong>conversión a tu moneda</strong>. El total puede superar con facilidad el precio inicial.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio y envío:</strong> normalmente en dólares.</li>
+      <li><strong>Aranceles + impuestos:</strong> el porcentaje que aplica tu aduana.</li>
+      <li><strong>Tipo de cambio:</strong> el que realmente pagarás al convertir.</li>
+    </ul>
+
+    <h2>El tipo de cambio importa</h2>
+    <p>Como casi todo se cotiza en dólares, el tipo de cambio define gran parte del costo. Usa el valor efectivo con la <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a> y, si pagas con tarjeta internacional, suma el recargo con la <a href="/calculadoras/costo-tarjeta-extranjera">calculadora de costo de tarjeta en el extranjero</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Todos los envíos pagan impuestos?</h3>
+    <p>No siempre. Muchos países tienen un mínimo exento para envíos de bajo valor. Ajusta el porcentaje a 0 si tu compra queda por debajo.</p>
+    <h3>¿Incluye el costo de nacionalización?</h3>
+    <p>Si tu courier cobra gestión aduanera, súmala dentro del porcentaje de impuestos o al envío para un cálculo más exacto.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const envio = parseFloat((document.getElementById('envio') as HTMLInputElement).value) || 0;
+    const imp = (parseFloat((document.getElementById('imp') as HTMLInputElement).value) || 0) / 100;
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0;
+    const subUSD = precio + envio;
+    const impUSD = subUSD * imp;
+    const totalUSD = subUSD + impUSD;
+    const local = totalUSD * tasa;
+    document.getElementById('r-local')!.textContent = fmt(local, m);
+    document.getElementById('r-sub')!.textContent = 'US$ ' + subUSD.toFixed(2);
+    document.getElementById('r-imp')!.textContent = 'US$ ' + impUSD.toFixed(2);
+    document.getElementById('r-usd')!.textContent = 'US$ ' + totalUSD.toFixed(2);
+  }
+  ['moneda','precio','envio','imp','tasa'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Compounding (Interés Compuesto en Trading) — Inversax" description="Proyecta el crecimiento de tu cuenta de trading reinvirtiendo un porcentaje fijo de ganancia por operación o periodo. Plan de capitalización compounding con interés compuesto.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es un plan de compounding en trading?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es reinvertir las ganancias de tu cuenta de trading para que el capital crezca de forma compuesta. En lugar de retirar las ganancias, las dejas trabajando, de modo que cada periodo operas con un capital mayor que el anterior." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es realista ganar un porcentaje fijo cada periodo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Los rendimientos del trading son irregulares: habrá periodos ganadores y perdedores. El compounding muestra el potencial teórico de una ganancia media constante, pero debes tomarlo como una proyección, no como una promesa." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué porcentajes pequeños se vuelven grandes?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Por el interés compuesto. Un 2% mensual reinvertido durante años multiplica el capital varias veces, porque cada ganancia se calcula sobre un saldo cada vez mayor. El tiempo es el verdadero motor del crecimiento." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Compounding</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Plan de Capitalización (Compounding)</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Proyecta cómo crece tu cuenta reinvirtiendo un porcentaje fijo de ganancia por periodo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu plan</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial (USD)</label>
+            <input id="capital" type="number" value="1000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ganancia por periodo (%)</label>
+            <input id="g" type="number" value="2" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de periodos</label>
+            <input id="n" type="number" value="50" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Aporte por periodo (USD, opcional)</label>
+            <input id="aporte" type="number" value="0" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Capital final</p>
+          <p id="r-final" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ganancia total</span><span id="r-ganancia" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Multiplicador del capital</span><span id="r-mult" style="font-size:13px; font-weight:700; color:#1A1A1A;">0x</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ganancia del último periodo</span><span id="r-ultimo" style="font-size:13px; font-weight:700; color:#3B82F6;">0</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Proyección teórica con ganancia constante. En la realidad los resultados varían: úsala como meta, no como garantía.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el compounding en trading?</h2>
+    <p>El <strong>compounding</strong> consiste en reinvertir las ganancias para que tu cuenta crezca de forma compuesta. Cada periodo operas con un capital mayor, así que la misma ganancia porcentual produce cada vez más dinero. Es el mismo principio del <a href="/calculadoras/interes-compuesto">interés compuesto</a> aplicado al trading.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Ganancia por periodo:</strong> tu rendimiento medio por operación, día o semana.</li>
+      <li><strong>Número de periodos:</strong> cuántas operaciones o periodos proyectas.</li>
+      <li><strong>Aporte opcional:</strong> si sumas capital nuevo cada periodo.</li>
+    </ul>
+
+    <h2>La trampa de las proyecciones lineales</h2>
+    <p>Un 2% por operación suena modesto, pero el compounding lo dispara. El problema es que los rendimientos reales no son constantes. Antes de fiarte de una proyección, valida tu estrategia con la <a href="/calculadoras/simulador-cuenta">calculadora de simulador de cuenta</a> y tu <a href="/calculadoras/expectativa-trading">expectativa matemática</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cada cuánto debo aumentar el tamaño de posición?</h3>
+    <p>Si haces compounding, ajusta el tamaño a tu nuevo capital en cada operación. Calcúlalo con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>.</p>
+    <h3>¿Conviene retirar ganancias?</h3>
+    <p>Retirar reduce el efecto compuesto pero asegura beneficios. Muchos traders combinan ambas cosas: reinvierten una parte y retiran otra.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const capital = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const g = (parseFloat((document.getElementById('g') as HTMLInputElement).value) || 0) / 100;
+    const n = parseFloat((document.getElementById('n') as HTMLInputElement).value) || 0;
+    const aporte = parseFloat((document.getElementById('aporte') as HTMLInputElement).value) || 0;
+    let saldo = capital, ultimoG = 0;
+    for (let k = 0; k < n; k++) {
+      const gan = saldo * g;
+      ultimoG = gan;
+      saldo += gan + aporte;
+    }
+    const aportadoTotal = capital + aporte * n;
+    const ganancia = saldo - aportadoTotal;
+    const mult = capital > 0 ? saldo / capital : 0;
+    const f = (x: number) => new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(x) + ' USD';
+    document.getElementById('r-final')!.textContent = f(saldo);
+    document.getElementById('r-ganancia')!.textContent = f(ganancia);
+    document.getElementById('r-mult')!.textContent = mult.toFixed(2) + 'x';
+    document.getElementById('r-ultimo')!.textContent = f(ultimoG);
+  }
+  ['capital','g','n','aporte'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

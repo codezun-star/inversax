@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Dólar MEP y CCL — Inversax" description="Calcula el tipo de cambio del dólar MEP o CCL a partir del precio de un bono o CEDEAR en pesos y en dólares, con comisiones. Cuántos dólares obtienes. Para Argentina.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el dólar MEP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El dólar MEP se calcula dividiendo el precio de un bono o CEDEAR en pesos entre su precio en dólares. Por ejemplo, si el AL30 cotiza a 1.500 pesos y el AL30D a 1,20 dólares, el MEP implícito es 1.250 pesos por dólar, antes de comisiones." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre dólar MEP y CCL?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ambos se obtienen comprando un activo en pesos y vendiéndolo en dólares. En el MEP los dólares quedan en una cuenta local; en el CCL (contado con liquidación) se acreditan en una cuenta del exterior. El CCL suele cotizar algo más alto." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El dólar MEP es legal en Argentina?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Es una operación bursátil legal que se realiza a través de un broker o ALyC, comprando y vendiendo títulos. Conviene revisar el parking (plazo mínimo de tenencia) y las comisiones de tu broker antes de operar." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Dólar MEP / CCL</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Dólar MEP / CCL</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el tipo de cambio implícito a partir del precio de un bono o CEDEAR en pesos y en dólares.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del activo</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del activo en pesos (ej. AL30)</label>
+            <input id="pesos" type="number" value="1500" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del activo en dólares (ej. AL30D)</label>
+            <input id="usd" type="number" value="1.20" min="0.0001" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Comisiones totales (%)</label>
+            <input id="com" type="number" value="1.5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto a convertir (pesos)</label>
+            <input id="monto" type="number" value="1000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Dólar MEP (con comisiones)</p>
+          <p id="r-mep" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">MEP sin comisiones</span><span id="r-bruto" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Dólares que obtienes</span><span id="r-usd" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo en comisiones</span><span id="r-com" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">MEP = precio en pesos ÷ precio en dólares. Los precios de los bonos cambian en tiempo real; usa cotizaciones del momento de operar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el dólar MEP?</h2>
+    <p>El <strong>dólar MEP</strong> (Mercado Electrónico de Pagos) es una forma legal de comprar dólares en Argentina a través de la bolsa: compras un bono o CEDEAR en pesos y lo vendes en su versión en dólares. El tipo de cambio implícito resulta de dividir ambos precios.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio en pesos y en dólares:</strong> del mismo activo (por ejemplo AL30 y AL30D).</li>
+      <li><strong>Comisiones:</strong> las que cobra tu broker por compra y venta.</li>
+      <li><strong>Monto:</strong> cuántos pesos quieres convertir a dólares.</li>
+    </ul>
+
+    <h2>Compáralo con otras vías</h2>
+    <p>El MEP suele ser más barato que el dólar tarjeta. Compáralo con la <a href="/calculadoras/dolar-tarjeta">calculadora de dólar tarjeta</a>, con el <a href="/calculadoras/dolar-paralelo">dólar blue</a> y con comprar dólares vía cripto en la <a href="/calculadoras/arbitraje-dolar-cripto">calculadora de arbitraje dólar/cripto</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué es el parking?</h3>
+    <p>Es el plazo mínimo que debes mantener el título antes de venderlo en la otra moneda. Puede ser de 0 a 1 día según el activo y la operación (MEP o CCL).</p>
+    <h3>¿Conviene MEP o CCL?</h3>
+    <p>Si quieres los dólares en una cuenta local, MEP. Si los necesitas en el exterior, CCL. Esta calculadora sirve para ambos: solo cambia el activo y los precios de referencia.</p>
+  </div>
+</Layout>
+
+<script>
+  function fmtPesos(n: number) { return new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n); }
+  function calcular() {
+    const pesos = parseFloat((document.getElementById('pesos') as HTMLInputElement).value) || 0;
+    const usd = parseFloat((document.getElementById('usd') as HTMLInputElement).value) || 0;
+    const com = (parseFloat((document.getElementById('com') as HTMLInputElement).value) || 0) / 100;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const mepBruto = usd > 0 ? pesos / usd : 0;
+    const mepNeto = mepBruto * (1 + com);
+    const usdObtenidos = mepNeto > 0 ? monto / mepNeto : 0;
+    const usdSinCom = mepBruto > 0 ? monto / mepBruto : 0;
+    const costoCom = (usdSinCom - usdObtenidos) * mepBruto;
+    document.getElementById('r-mep')!.textContent = '$' + fmtPesos(mepNeto);
+    document.getElementById('r-bruto')!.textContent = '$' + fmtPesos(mepBruto);
+    document.getElementById('r-usd')!.textContent = 'US$ ' + fmtPesos(usdObtenidos);
+    document.getElementById('r-com')!.textContent = '$' + fmtPesos(costoCom);
+  }
+  ['pesos','usd','com','monto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

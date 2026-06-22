@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Distancia en Pips entre Dos Precios — Inversax" description="Calcula cuántos pips hay entre dos precios de cualquier par de divisas, la diferencia de precio y la variación porcentual. Rápido, para forex, sin fórmulas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calculan los pips entre dos precios?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Se resta un precio del otro y se divide entre el tamaño del pip. En pares estándar el pip vale 0.0001, así que un movimiento de 1.1050 a 1.1080 son 30 pips. En pares con yen el pip vale 0.01." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto vale un pip en pares con yen (JPY)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "En pares con yen, como USD/JPY, el pip es la segunda cifra decimal (0.01). Por eso un movimiento de 150.20 a 150.50 equivale a 30 pips, no a 3.000." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Pips y puntos son lo mismo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No siempre. Un punto (o pipette) suele ser la décima parte de un pip: la quinta cifra decimal en pares estándar. Muchas plataformas muestran precios con un decimal extra que corresponde a esos puntos." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Distancia en Pips</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Distancia en Pips entre Dos Precios</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuántos pips separan dos precios, la diferencia y la variación porcentual.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Los dos precios</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de par</label>
+            <select id="pip" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="0.0001">Par estándar (1 pip = 0.0001)</option>
+              <option value="0.01">Par con JPY (1 pip = 0.01)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio 1</label>
+            <input id="p1" type="number" value="1.10500" min="0" step="0.00001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio 2</label>
+            <input id="p2" type="number" value="1.10800" min="0" step="0.00001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Distancia en pips</p>
+          <p id="r-pips" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Diferencia de precio</span><span id="r-diff" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">En puntos (pipettes)</span><span id="r-puntos" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Variación porcentual</span><span id="r-pct" style="font-size:13px; font-weight:700; color:#3B82F6;">0%</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Selecciona el tipo de par para que el tamaño del pip sea correcto. Para saber cuánto vale cada pip en dinero, usa la calculadora de valor del pip.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo medir la distancia en pips?</h2>
+    <p>Un <strong>pip</strong> es la unidad mínima de variación habitual de un par de divisas. Medir la distancia en pips entre dos precios es esencial para definir stops, objetivos y el tamaño de tu posición. Basta restar los precios y dividir entre el tamaño del pip.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Tipo de par:</strong> estándar (0.0001) o con yen (0.01).</li>
+      <li><strong>Precio 1 y Precio 2:</strong> el orden no importa; se usa el valor absoluto.</li>
+    </ul>
+
+    <h2>De los pips al dinero</h2>
+    <p>Saber cuántos pips hay es el primer paso; el segundo es traducirlos a dinero. Hazlo con la <a href="/calculadoras/pips">calculadora de valor del pip</a> y define tus niveles con la <a href="/calculadoras/stop-loss-take-profit">calculadora de stop loss y take profit</a>. Si empiezas, lee <a href="/blog/que-son-los-pips-forex">qué son los pips en forex</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué son los puntos o pipettes?</h3>
+    <p>Son la décima parte de un pip (un decimal adicional). Esta calculadora también te los muestra para que interpretes bien el precio de tu plataforma.</p>
+    <h3>¿Sirve para oro o índices?</h3>
+    <p>Para esos instrumentos el "punto" se define distinto. Usa la <a href="/calculadoras/valor-punto-indices">calculadora de valor del punto en índices</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const pipSize = parseFloat((document.getElementById('pip') as HTMLSelectElement).value);
+    const p1 = parseFloat((document.getElementById('p1') as HTMLInputElement).value) || 0;
+    const p2 = parseFloat((document.getElementById('p2') as HTMLInputElement).value) || 0;
+    const diff = Math.abs(p1 - p2);
+    const pips = diff / pipSize;
+    const puntos = pips * 10;
+    const pct = p1 > 0 ? (diff / p1) * 100 : 0;
+    const dec = pipSize === 0.01 ? 3 : 5;
+    document.getElementById('r-pips')!.textContent = pips.toFixed(1);
+    document.getElementById('r-diff')!.textContent = diff.toFixed(dec);
+    document.getElementById('r-puntos')!.textContent = puntos.toFixed(0);
+    document.getElementById('r-pct')!.textContent = pct.toFixed(2) + '%';
+  }
+  ['pip','p1','p2'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

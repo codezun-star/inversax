@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Spread Cambiario (Compra/Venta) — Inversax" description="Calcula la brecha entre el precio de compra y venta de una casa de cambio, el spread porcentual y cuánto pierdes en una conversión de ida y vuelta. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el spread cambiario?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El spread cambiario es la diferencia entre el precio al que una casa de cambio te vende una divisa y el precio al que te la compra. Esa brecha es la ganancia del intermediario y tu costo: compras más caro y vendes más barato." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afecta el spread a mi cambio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Cuanto mayor el spread, más pierdes. Si cambias dinero y al rato lo vuelves a cambiar, pagas el spread dos veces. Por eso conviene comparar varias casas de cambio y elegir la de menor brecha." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué spread es razonable?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Depende del mercado y la divisa, pero spreads por debajo del 1%-2% suelen ser competitivos para divisas líquidas. Aeropuertos y hoteles aplican spreads mucho más altos, a veces del 10% o más." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Spread Cambiario</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Spread Cambiario</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula la brecha entre compra y venta y cuánto pierdes en una conversión de ida y vuelta.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Cotizaciones</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio al que te VENDEN la divisa (alto)</label>
+            <input id="venta" type="number" value="4150" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio al que te COMPRAN la divisa (bajo)</label>
+            <input id="compra" type="number" value="3950" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto a cambiar (moneda local)</label>
+            <input id="monto" type="number" value="1000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Spread cambiario</p>
+          <p id="r-spread" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Diferencia compra/venta</span><span id="r-dif" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Divisa que recibes por tu monto</span><span id="r-divisa" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Pérdida en ida y vuelta</span><span id="r-perdida" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Spread % se calcula sobre el precio medio. La pérdida de ida y vuelta es lo que dejas si cambias tu dinero y lo vuelves a cambiar de inmediato.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el spread cambiario?</h2>
+    <p>El <strong>spread cambiario</strong> es la brecha entre el precio de venta y el de compra de una divisa en una casa de cambio o banco. Tú siempre compras al precio alto y vendes al bajo, así que esa diferencia es un costo invisible que pagas en cada operación.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio de venta:</strong> al que la casa de cambio te entrega la divisa.</li>
+      <li><strong>Precio de compra:</strong> al que te la recompra.</li>
+      <li><strong>Monto:</strong> lo que piensas cambiar, para ver la pérdida real.</li>
+    </ul>
+
+    <h2>No confundas spread con comisión</h2>
+    <p>Además del spread, muchos operadores cobran comisiones. Calcula el costo total con la <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a>, y si envías dinero al exterior, mira la <a href="/calculadoras/remesas">calculadora de remesas</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué el aeropuerto es tan caro?</h3>
+    <p>Porque aplican spreads enormes aprovechando la falta de alternativas. Cambia poco efectivo allí y el resto en sitios con menor brecha.</p>
+    <h3>¿El dólar blue tiene spread?</h3>
+    <p>Sí, también cotiza con precio de compra y venta. Puedes analizarlo junto a la <a href="/calculadoras/dolar-paralelo">calculadora de dólar paralelo</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function fmtN(n: number) { return new Intl.NumberFormat('es', { maximumFractionDigits: 2 }).format(n); }
+  function calcular() {
+    const venta = parseFloat((document.getElementById('venta') as HTMLInputElement).value) || 0;
+    const compra = parseFloat((document.getElementById('compra') as HTMLInputElement).value) || 0;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const dif = venta - compra;
+    const mid = (venta + compra) / 2;
+    const spreadPct = mid > 0 ? (dif / mid) * 100 : 0;
+    const divisa = venta > 0 ? monto / venta : 0;
+    const back = divisa * compra;
+    const perdida = monto - back;
+    document.getElementById('r-spread')!.textContent = spreadPct.toFixed(2) + '%';
+    document.getElementById('r-dif')!.textContent = fmtN(dif);
+    document.getElementById('r-divisa')!.textContent = 'US$ ' + fmtN(divisa);
+    document.getElementById('r-perdida')!.textContent = fmtN(perdida);
+  }
+  ['venta','compra','monto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

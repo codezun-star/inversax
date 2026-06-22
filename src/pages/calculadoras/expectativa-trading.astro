@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Expectativa Matemática en Trading — Inversax" description="Calcula la expectativa matemática de tu sistema de trading: cuánto ganas o pierdes en promedio por operación según tu win rate y tus ganancias y pérdidas medias.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la expectativa matemática en trading?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es la ganancia o pérdida promedio que puedes esperar por cada operación a largo plazo. Se calcula como (win rate × ganancia media) − (tasa de pérdida × pérdida media). Si es positiva, el sistema gana dinero con el tiempo." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo ser rentable con un win rate bajo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Con un win rate del 40% puedes ganar dinero si tus operaciones ganadoras son bastante mayores que las perdedoras. Lo que importa es la expectativa, que combina el porcentaje de aciertos con el tamaño de ganancias y pérdidas." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el win rate de equilibrio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es el porcentaje mínimo de operaciones ganadoras que necesitas para no perder dinero, dado el tamaño de tus ganancias y pérdidas. Por encima de ese win rate, tu expectativa es positiva." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Expectativa Matemática</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Expectativa Matemática</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Cuánto ganas o pierdes en promedio por operación según tu win rate y tus ganancias y pérdidas medias.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu sistema</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Win rate (%)</label>
+            <input id="wr" type="number" value="45" min="0" max="100" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ganancia media por operación ganadora (USD)</label>
+            <input id="win" type="number" value="200" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Pérdida media por operación perdedora (USD)</label>
+            <input id="loss" type="number" value="100" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Expectativa por operación</p>
+          <p id="r-exp" style="font-size:34px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Resultado esperado en 100 operaciones</span><span id="r-100" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ratio ganancia/pérdida</span><span id="r-ratio" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Win rate de equilibrio</span><span id="r-be" style="font-size:13px; font-weight:700; color:#3B82F6;">0%</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Expectativa = (win rate × ganancia media) − (tasa de pérdida × pérdida media). Positiva = sistema rentable a largo plazo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la expectativa matemática?</h2>
+    <p>La <strong>expectativa matemática</strong> es el corazón de cualquier sistema de trading: te dice cuánto puedes esperar ganar o perder, en promedio, por cada operación. Una expectativa positiva significa que, con suficientes operaciones, el sistema gana dinero aunque tenga rachas malas.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Win rate:</strong> el porcentaje de operaciones ganadoras.</li>
+      <li><strong>Ganancia y pérdida medias:</strong> el resultado promedio de tus trades positivos y negativos.</li>
+    </ul>
+
+    <h2>Win rate alto no significa rentable</h2>
+    <p>Un sistema con 70% de aciertos puede perder dinero si las pérdidas son enormes. Lo que manda es la expectativa. Comprueba el porcentaje mínimo de aciertos con la <a href="/calculadoras/win-rate">calculadora de win rate mínimo</a> y dimensiona el riesgo con el <a href="/calculadoras/kelly">criterio de Kelly</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿La expectativa garantiza ganancias?</h3>
+    <p>No en cada operación. Garantiza la tendencia a largo plazo si mantienes la disciplina y la muestra es grande. Mide el peligro de las rachas con la <a href="/calculadoras/riesgo-de-ruina">calculadora de riesgo de ruina</a>.</p>
+    <h3>¿En qué unidades trabajo?</h3>
+    <p>Puedes usar dinero o múltiplos de R (riesgo). Si usas R, pon 1 como pérdida media y tu ratio como ganancia media.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const wr = (parseFloat((document.getElementById('wr') as HTMLInputElement).value) || 0) / 100;
+    const win = parseFloat((document.getElementById('win') as HTMLInputElement).value) || 0;
+    const loss = parseFloat((document.getElementById('loss') as HTMLInputElement).value) || 0;
+    const exp = wr * win - (1 - wr) * loss;
+    const ratio = loss > 0 ? win / loss : 0;
+    const be = (win + loss) > 0 ? loss / (win + loss) * 100 : 0;
+    const f = (x: number) => (x >= 0 ? '' : '−') + new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(x)) + ' USD';
+    document.getElementById('r-exp')!.textContent = f(exp);
+    document.getElementById('r-100')!.textContent = f(exp * 100);
+    document.getElementById('r-ratio')!.textContent = ratio.toFixed(2) + ' : 1';
+    document.getElementById('r-be')!.textContent = be.toFixed(1) + '%';
+    document.getElementById('card')!.style.background = exp >= 0 ? '#3B82F6' : '#EF4444';
+  }
+  ['wr','win','loss'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

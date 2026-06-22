@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Profit Factor (Factor de Beneficio) — Inversax" description="Calcula el profit factor o factor de beneficio de tu estrategia de trading: cuánto ganas por cada unidad que pierdes. La métrica clave del backtesting. Con interpretación.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el profit factor?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El profit factor o factor de beneficio es la ganancia bruta total dividida entre la pérdida bruta total de una estrategia. Indica cuánto ganas por cada unidad de moneda que pierdes. Un profit factor mayor que 1 significa que la estrategia es rentable." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué profit factor es bueno?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Por debajo de 1 la estrategia pierde dinero. Entre 1 y 1,5 es marginal; entre 1,5 y 2 es buena; por encima de 2 es excelente. Valores muy altos en pocas operaciones pueden ser engañosos por falta de muestra." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El profit factor basta para evaluar una estrategia?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Conviene mirarlo junto al drawdown máximo, el número de operaciones y la expectativa. Una estrategia con buen profit factor pero drawdowns enormes puede ser inoperable en la práctica." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Profit Factor</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Profit Factor</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Cuánto ganas por cada unidad que pierdes: la métrica clave para evaluar tu estrategia.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Resultados de tu estrategia</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ganancia bruta total (suma de ganadoras)</label>
+            <input id="gan" type="number" value="6000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Pérdida bruta total (suma de perdedoras)</label>
+            <input id="per" type="number" value="3500" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de operaciones (opcional)</label>
+            <input id="ops" type="number" value="100" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Profit Factor</p>
+          <p id="r-pf" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Beneficio neto</span><span id="r-neto" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Resultado medio por operación</span><span id="r-medio" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Veredicto</span><span id="r-verdict" style="font-size:13px; font-weight:700; color:#3B82F6;">—</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Profit factor = ganancia bruta ÷ pérdida bruta. Por encima de 1 la estrategia gana; cuanto mayor, mejor (con muestra suficiente).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el profit factor?</h2>
+    <p>El <strong>profit factor</strong> resume en un número la rentabilidad de una estrategia: divide todo lo que ganaste entre todo lo que perdiste. Un valor de 1,8 significa que por cada 1 que perdiste, ganaste 1,80. Es una de las métricas favoritas para comparar sistemas en el backtesting.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Ganancia bruta:</strong> la suma de todas tus operaciones positivas.</li>
+      <li><strong>Pérdida bruta:</strong> la suma (en positivo) de todas tus operaciones negativas.</li>
+      <li><strong>Número de operaciones:</strong> opcional, para el resultado medio por trade.</li>
+    </ul>
+
+    <h2>No te quedes solo con un número</h2>
+    <p>Un profit factor alto con drawdowns enormes puede ser intolerable. Combínalo con la <a href="/calculadoras/drawdown">calculadora de drawdown</a>, la <a href="/calculadoras/expectativa-trading">expectativa matemática</a> y el <a href="/calculadoras/ratio-sharpe">ratio de Sharpe</a> para una visión completa.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cuántas operaciones necesito para confiar en el dato?</h3>
+    <p>Cuantas más, mejor. Con menos de 30-50 operaciones, el profit factor puede estar dominado por la suerte de unas pocas operaciones.</p>
+    <h3>¿Un profit factor de 5 es realista?</h3>
+    <p>Rara vez de forma sostenida. Valores tan altos suelen indicar pocas operaciones, curve fitting o un periodo excepcional.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const gan = parseFloat((document.getElementById('gan') as HTMLInputElement).value) || 0;
+    const per = parseFloat((document.getElementById('per') as HTMLInputElement).value) || 0;
+    const ops = parseFloat((document.getElementById('ops') as HTMLInputElement).value) || 0;
+    const pf = per > 0 ? gan / per : 0;
+    const neto = gan - per;
+    const medio = ops > 0 ? neto / ops : 0;
+    const f = (x: number) => (x >= 0 ? '' : '−') + new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(x));
+    let verdict = '—', color = '#3B82F6';
+    if (per > 0) {
+      if (pf < 1) { verdict = 'Perdedora'; color = '#EF4444'; }
+      else if (pf < 1.5) { verdict = 'Marginal'; color = '#F59E0B'; }
+      else if (pf < 2) { verdict = 'Buena'; color = '#22C55E'; }
+      else { verdict = 'Excelente'; color = '#16A34A'; }
+    }
+    document.getElementById('r-pf')!.textContent = per > 0 ? pf.toFixed(2) : '∞';
+    document.getElementById('r-neto')!.textContent = f(neto);
+    document.getElementById('r-medio')!.textContent = f(medio);
+    document.getElementById('r-verdict')!.textContent = verdict;
+    document.getElementById('r-verdict')!.style.color = color;
+    document.getElementById('card')!.style.background = color;
+  }
+  ['gan','per','ops'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

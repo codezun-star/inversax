@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora del Ratio de Sharpe — Inversax" description="Calcula el ratio de Sharpe de tu cartera o estrategia: el rendimiento ajustado al riesgo según la tasa libre de riesgo y la volatilidad. Con interpretación del resultado.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el ratio de Sharpe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El ratio de Sharpe mide el rendimiento de una inversión por unidad de riesgo. Se calcula restando la tasa libre de riesgo al rendimiento y dividiendo entre la volatilidad (desviación estándar). Cuanto mayor, mejor relación rentabilidad/riesgo." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué ratio de Sharpe es bueno?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Por debajo de 1 se considera pobre, entre 1 y 2 bueno, entre 2 y 3 muy bueno y por encima de 3 excelente. Permite comparar estrategias o carteras con distinto nivel de riesgo en igualdad de condiciones." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué sirve el ratio de Sharpe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sirve para comparar inversiones ajustando por riesgo. Una cartera que rinde 12% con mucha volatilidad puede ser peor que otra que rinde 9% de forma estable. El Sharpe revela cuál ofrece mejor rendimiento por riesgo asumido." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Ratio de Sharpe</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora del Ratio de Sharpe</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Mide el rendimiento ajustado al riesgo de tu cartera o estrategia.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento de la cartera (% anual)</label>
+            <input id="ret" type="number" value="12" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa libre de riesgo (% anual)</label>
+            <input id="rf" type="number" value="4" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Volatilidad / desviación estándar (%)</label>
+            <input id="vol" type="number" value="10" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Ratio de Sharpe</p>
+          <p id="r-sharpe" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Exceso de rendimiento</span><span id="r-exceso" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Veredicto</span><span id="r-verdict" style="font-size:13px; font-weight:700; color:#3B82F6;">—</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Sharpe = (rendimiento − tasa libre de riesgo) ÷ volatilidad. Compara estrategias usando el mismo periodo y la misma base (anual).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el ratio de Sharpe?</h2>
+    <p>El <strong>ratio de Sharpe</strong> responde a una pregunta clave: ¿cuánto rendimiento extra obtengo por cada unidad de riesgo que asumo? Penaliza la volatilidad, así que premia las estrategias que ganan de forma estable frente a las que dan tumbos.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Rendimiento:</strong> el retorno anual de tu cartera o estrategia.</li>
+      <li><strong>Tasa libre de riesgo:</strong> el rendimiento de un activo seguro (bono soberano de referencia).</li>
+      <li><strong>Volatilidad:</strong> la desviación estándar de tus retornos.</li>
+    </ul>
+
+    <h2>Compara estrategias con la misma vara</h2>
+    <p>El Sharpe permite comparar una cartera agresiva con una conservadora en igualdad de condiciones. Acompáñalo con el <a href="/calculadoras/profit-factor">profit factor</a>, el <a href="/calculadoras/drawdown">drawdown máximo</a> y el <a href="/calculadoras/rendimiento-cartera">rendimiento de cartera</a> para decidir con criterio.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué tasa libre de riesgo uso en LATAM?</h3>
+    <p>Suele usarse el rendimiento de los bonos del Tesoro de EE.UU. para carteras en dólares, o el bono soberano de referencia de tu país para inversiones en moneda local.</p>
+    <h3>¿Por qué penaliza la volatilidad incluso al alza?</h3>
+    <p>Porque el Sharpe no distingue volatilidad buena de mala. Para penalizar solo las caídas existe el ratio de Sortino, una variante del mismo concepto.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const ret = parseFloat((document.getElementById('ret') as HTMLInputElement).value) || 0;
+    const rf = parseFloat((document.getElementById('rf') as HTMLInputElement).value) || 0;
+    const vol = parseFloat((document.getElementById('vol') as HTMLInputElement).value) || 0;
+    const exceso = ret - rf;
+    const sharpe = vol > 0 ? exceso / vol : 0;
+    let verdict = '—', color = '#3B82F6';
+    if (vol > 0) {
+      if (sharpe < 1) { verdict = 'Pobre'; color = '#EF4444'; }
+      else if (sharpe < 2) { verdict = 'Bueno'; color = '#22C55E'; }
+      else if (sharpe < 3) { verdict = 'Muy bueno'; color = '#16A34A'; }
+      else { verdict = 'Excelente'; color = '#15803D'; }
+    }
+    document.getElementById('r-sharpe')!.textContent = sharpe.toFixed(2);
+    document.getElementById('r-exceso')!.textContent = exceso.toFixed(2) + '%';
+    document.getElementById('r-verdict')!.textContent = verdict;
+    document.getElementById('r-verdict')!.style.color = color;
+    document.getElementById('card')!.style.background = color;
+  }
+  ['ret','rf','vol'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

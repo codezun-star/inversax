@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Arbitraje Dólar/Cripto (USDT) — Inversax" description="Compara cuántos dólares obtienes comprando USDT con tu moneda local frente al dólar oficial, blue o paralelo. Calcula la diferencia real y la mejor vía. Para Argentina, Venezuela y LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Conviene comprar dólares con cripto (USDT)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Depende de los precios. Si el precio del USDT en tu moneda local es menor que el del dólar que puedes conseguir por la vía tradicional, comprar USDT te da más dólares por el mismo dinero. Esta calculadora compara ambas rutas." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el arbitraje dólar/cripto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es aprovechar la diferencia de precio entre comprar dólares por la vía tradicional (oficial, blue o paralelo) y comprarlos a través de una stablecoin como USDT. La brecha entre ambos puede hacer una vía más conveniente que la otra." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tiene riesgos comprar USDT?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí: el riesgo del exchange, de la stablecoin y de las comisiones de red y retiro. Usa plataformas reconocidas, verifica las comisiones y considera el spread P2P antes de asumir que la vía cripto es siempre mejor." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Arbitraje Dólar / Cripto</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Arbitraje Dólar / Cripto (USDT)</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Compara cuántos dólares obtienes vía cripto frente al dólar oficial, blue o paralelo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="BOB">BOB — Boliviano</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto a convertir (moneda local)</label>
+            <input id="monto" type="number" value="1000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del USDT (en moneda local)</label>
+            <input id="usdt" type="number" value="1020" min="0.0001" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del dólar tradicional (oficial/blue)</label>
+            <input id="trad" type="number" value="1080" min="0.0001" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Dólares vía cripto (USDT)</p>
+          <p id="r-cripto" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Dólares vía dólar tradicional</span><span id="r-trad" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Diferencia a favor</span><span id="r-dif" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Mejor vía</span><span id="r-mejor" style="font-size:13px; font-weight:700; color:#1A1A1A;">—</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Compara cuántos USD obtienes por cada vía. No incluye comisiones del exchange ni de la red; réstalas para un cálculo exacto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el arbitraje dólar/cripto?</h2>
+    <p>En muchos países con restricciones cambiarias, comprar dólares a través de una stablecoin como <strong>USDT</strong> puede salir más barato (o más caro) que por la vía tradicional. El <strong>arbitraje</strong> consiste en comparar ambas rutas y elegir la que te da más dólares por tu dinero.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Monto:</strong> lo que quieres convertir en moneda local.</li>
+      <li><strong>Precio del USDT:</strong> el de tu exchange (P2P o spot).</li>
+      <li><strong>Dólar tradicional:</strong> el oficial, blue o paralelo según tu caso.</li>
+    </ul>
+
+    <h2>Compara todas tus opciones</h2>
+    <p>Antes de decidir, mira también la <a href="/calculadoras/dolar-mep">calculadora de dólar MEP</a>, el <a href="/calculadoras/dolar-paralelo">dólar blue</a> y convierte tu cripto con la <a href="/calculadoras/conversion-cripto">calculadora de conversión cripto</a>. Aprende a operar de forma segura en nuestra guía de <a href="/blog/trading-criptomonedas-latam">criptomonedas desde LATAM</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Es legal comprar dólares con USDT?</h3>
+    <p>En la mayoría de países sí, aunque la regulación varía. Infórmate de las reglas locales y usa plataformas reconocidas.</p>
+    <h3>¿Por qué a veces conviene y a veces no?</h3>
+    <p>Porque el precio del USDT fluctúa con la oferta y demanda local. Cuando hay mucha demanda de dólares, el USDT puede cotizar por encima del paralelo, y la vía tradicional gana.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const usdt = parseFloat((document.getElementById('usdt') as HTMLInputElement).value) || 0;
+    const trad = parseFloat((document.getElementById('trad') as HTMLInputElement).value) || 0;
+    const usdCripto = usdt > 0 ? monto / usdt : 0;
+    const usdTrad = trad > 0 ? monto / trad : 0;
+    const dif = usdCripto - usdTrad;
+    const f = (x: number) => 'US$ ' + new Intl.NumberFormat('es', { maximumFractionDigits: 2 }).format(x);
+    document.getElementById('r-cripto')!.textContent = f(usdCripto);
+    document.getElementById('r-trad')!.textContent = f(usdTrad);
+    document.getElementById('r-dif')!.textContent = f(Math.abs(dif));
+    document.getElementById('r-mejor')!.textContent = dif > 0 ? 'Cripto (USDT)' : (dif < 0 ? 'Dólar tradicional' : 'Iguales');
+    document.getElementById('card')!.style.background = dif >= 0 ? '#8B5CF6' : '#EF4444';
+  }
+  ['moneda','monto','usdt','trad'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

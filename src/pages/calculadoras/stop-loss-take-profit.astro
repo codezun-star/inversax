@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Stop Loss y Take Profit — Inversax" description="Calcula los niveles exactos de stop loss y take profit en precio según tu entrada, distancia en pips y ratio riesgo/beneficio. Con riesgo y ganancia en dinero. Para forex y CFD.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el stop loss y el take profit?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Partes del precio de entrada y de la distancia del stop loss en pips. El take profit se sitúa a una distancia igual al stop loss multiplicada por tu ratio riesgo/beneficio. En una compra el SL va por debajo y el TP por encima; en una venta, al revés." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué ratio riesgo/beneficio debo usar?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un ratio de 1:2 o superior es habitual: arriesgas 1 para ganar 2. Cuanto mayor el ratio, menor el porcentaje de aciertos que necesitas para ser rentable. La calculadora muestra el take profit según el ratio que elijas." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde debo colocar el stop loss?",
+          "acceptedAnswer": { "@type": "Answer", "text": "En un nivel técnico que invalide tu idea (debajo de un soporte en compras, encima de una resistencia en ventas), no a una distancia arbitraria. Luego ajusta el tamaño de la posición para que esa distancia represente el riesgo que toleras." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Stop Loss y Take Profit</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Stop Loss y Take Profit</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula los niveles de SL y TP en precio según tu entrada, distancia en pips y ratio R:R.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu operación</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de operación</label>
+            <select id="dir" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="long">Compra (largo)</option>
+              <option value="short">Venta (corto)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de par</label>
+            <select id="pip" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="0.0001">Par estándar (1 pip = 0.0001)</option>
+              <option value="0.01">Par con JPY (1 pip = 0.01)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de entrada</label>
+            <input id="entrada" type="number" value="1.10000" min="0" step="0.00001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Stop loss (pips)</label>
+            <input id="slpips" type="number" value="30" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ratio riesgo/beneficio (1:X)</label>
+            <input id="rr" type="number" value="2" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Valor por pip (USD, opcional)</label>
+            <input id="pipval" type="number" value="10" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Take Profit (precio)</p>
+          <p id="r-tp" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Stop Loss (precio)</span><span id="r-sl" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Take Profit en pips</span><span id="r-tppips" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Riesgo / Ganancia objetivo (USD)</span><span id="r-money" style="font-size:13px; font-weight:700; color:#3B82F6;">0</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El valor por pip depende de tu tamaño de posición. Calcúlalo con la calculadora de tamaño de posición para ajustar el riesgo a tu capital.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué son el stop loss y el take profit?</h2>
+    <p>El <strong>stop loss (SL)</strong> es el precio al que cierras una operación perdedora para limitar el riesgo; el <strong>take profit (TP)</strong> es el precio al que aseguras la ganancia. Definirlos antes de entrar es la base de una operativa disciplinada.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Tipo y entrada:</strong> compra o venta, y el precio al que entras.</li>
+      <li><strong>Stop loss en pips y ratio R:R:</strong> definen dónde queda el TP.</li>
+      <li><strong>Valor por pip:</strong> opcional, para ver el riesgo y la ganancia en dinero.</li>
+    </ul>
+
+    <h2>Une las piezas de tu gestión de riesgo</h2>
+    <p>Estos niveles cobran sentido junto al tamaño de posición. Calcula cuántos lotes operar con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>, evalúa la operación con la <a href="/calculadoras/riesgo-beneficio">calculadora de riesgo/beneficio</a> y aprende más en nuestra guía de <a href="/blog/gestion-del-riesgo-forex">gestión del riesgo en forex</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Conviene un stop loss más amplio?</h3>
+    <p>Un SL más amplio reduce el riesgo de que te saquen por ruido, pero exige una posición más pequeña para mantener el mismo riesgo en dinero.</p>
+    <h3>¿El TP debe ser siempre mayor que el SL?</h3>
+    <p>No siempre, pero un ratio favorable (1:2 o más) te permite ser rentable acertando menos de la mitad de las veces. Compruébalo con la <a href="/calculadoras/win-rate">calculadora de win rate mínimo</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const dir = (document.getElementById('dir') as HTMLSelectElement).value;
+    const pipSize = parseFloat((document.getElementById('pip') as HTMLSelectElement).value);
+    const entrada = parseFloat((document.getElementById('entrada') as HTMLInputElement).value) || 0;
+    const slPips = parseFloat((document.getElementById('slpips') as HTMLInputElement).value) || 0;
+    const rr = parseFloat((document.getElementById('rr') as HTMLInputElement).value) || 0;
+    const pipVal = parseFloat((document.getElementById('pipval') as HTMLInputElement).value) || 0;
+    const tpPips = slPips * rr;
+    const dec = pipSize === 0.01 ? 3 : 5;
+    let sl = 0, tp = 0;
+    if (dir === 'long') { sl = entrada - slPips * pipSize; tp = entrada + tpPips * pipSize; }
+    else { sl = entrada + slPips * pipSize; tp = entrada - tpPips * pipSize; }
+    const riesgo = slPips * pipVal;
+    const ganancia = tpPips * pipVal;
+    document.getElementById('r-tp')!.textContent = tp.toFixed(dec);
+    document.getElementById('r-sl')!.textContent = sl.toFixed(dec);
+    document.getElementById('r-tppips')!.textContent = tpPips.toFixed(0) + ' pips';
+    document.getElementById('r-money')!.textContent = riesgo.toFixed(2) + ' / ' + ganancia.toFixed(2);
+  }
+  ['dir','pip','entrada','slpips','rr','pipval'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

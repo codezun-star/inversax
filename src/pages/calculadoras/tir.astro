@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de TIR (Tasa Interna de Retorno) — Inversax" description="Calcula la TIR (Tasa Interna de Retorno) de un proyecto o inversión a partir de la inversión inicial y hasta 5 flujos de caja anuales. Con ejemplo y explicación. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la TIR (Tasa Interna de Retorno)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La TIR es la tasa de descuento que hace que el Valor Presente Neto (VPN) de todos los flujos de caja de un proyecto sea igual a cero. Representa la rentabilidad anual promedio que genera la inversión. Cuanto mayor es la TIR, más rentable es el proyecto." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se interpreta la TIR?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Si la TIR es mayor que tu tasa mínima exigida o el costo de tu capital, el proyecto crea valor y conviene. Si es menor, el proyecto destruye valor. Por ejemplo, una TIR del 18% es atractiva si tu alternativa segura rinde 8%." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre TIR y VPN?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El VPN expresa la ganancia en unidades monetarias usando una tasa de descuento que tú eliges; la TIR expresa la rentabilidad en porcentaje y no depende de una tasa externa. Ambas se complementan: el VPN dice cuánto ganas y la TIR a qué tasa." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">TIR</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de TIR</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Tasa Interna de Retorno: la rentabilidad anual que iguala los flujos de caja de un proyecto a su inversión inicial.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Flujos de caja</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Inversión inicial (año 0)</label>
+            <input id="inv" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Flujo año 1</label>
+            <input id="cf1" type="number" value="3000" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Flujo año 2</label>
+            <input id="cf2" type="number" value="3500" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Flujo año 3</label>
+            <input id="cf3" type="number" value="4000" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Flujo año 4 (opcional)</label>
+            <input id="cf4" type="number" value="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Flujo año 5 (opcional)</label>
+            <input id="cf5" type="number" value="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">TIR (Tasa Interna de Retorno)</p>
+          <p id="r-tir" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total recuperado</span><span id="r-total" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ganancia neta (sin descontar)</span><span id="r-ganancia" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Multiplicador</span><span id="r-mult" style="font-size:13px; font-weight:700; color:#FF8C42;">0x</span></div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La TIR se calcula por aproximación numérica. Si los flujos no permiten una solución (todos negativos o positivos), aparece "no calculable".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la TIR?</h2>
+    <p>La <strong>TIR (Tasa Interna de Retorno)</strong> es la tasa de descuento que hace que el <a href="/calculadoras/vpn">Valor Presente Neto (VPN)</a> de un proyecto sea cero. Dicho de forma simple: es la rentabilidad anual promedio que genera una inversión teniendo en cuenta cuándo llega cada flujo de dinero.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Inversión inicial:</strong> el desembolso en el año 0 (se ingresa en positivo).</li>
+      <li><strong>Flujos año 1 a 5:</strong> el dinero que recibes cada año. Deja en 0 los años que no apliquen.</li>
+    </ul>
+
+    <h2>¿Cómo interpretar la TIR?</h2>
+    <p>Compara la TIR con tu tasa mínima exigida (o el costo de tu capital). Si la TIR es mayor, el proyecto crea valor; si es menor, lo destruye. Para ver cuánto ganas en dinero a una tasa concreta, combínala con la <a href="/calculadoras/vpn">calculadora de VPN</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿La TIR sirve para comparar inversiones de distinto plazo?</h3>
+    <p>Sí, porque expresa la rentabilidad en porcentaje anual. Aun así, conviene mirarla junto al VPN y al monto invertido para no engañarse con proyectos pequeños de TIR alta.</p>
+    <h3>¿Por qué a veces no se puede calcular?</h3>
+    <p>La TIR requiere al menos un cambio de signo entre la inversión y los flujos. Si todos los flujos son positivos o todos negativos, no existe una solución real.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function npv(rate: number, inv: number, cfs: number[]) {
+    let v = -inv;
+    for (let i = 0; i < cfs.length; i++) v += cfs[i] / Math.pow(1 + rate, i + 1);
+    return v;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const inv = parseFloat((document.getElementById('inv') as HTMLInputElement).value) || 0;
+    const cfs = ['cf1','cf2','cf3','cf4','cf5'].map(id => parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0);
+    const total = cfs.reduce((a, b) => a + b, 0);
+    const ganancia = total - inv;
+    const mult = inv > 0 ? total / inv : 0;
+    document.getElementById('r-total')!.textContent = fmt(total, m);
+    document.getElementById('r-ganancia')!.textContent = fmt(ganancia, m);
+    document.getElementById('r-mult')!.textContent = mult.toFixed(2) + 'x';
+    // TIR por bisección
+    let lo = -0.99, hi = 5;
+    const fLo = npv(lo, inv, cfs), fHi = npv(hi, inv, cfs);
+    const el = document.getElementById('r-tir')!;
+    if (fLo * fHi > 0 || inv <= 0) { el.textContent = 'no calculable'; el.style.fontSize = '22px'; return; }
+    el.style.fontSize = '36px';
+    for (let i = 0; i < 200; i++) {
+      const mid = (lo + hi) / 2;
+      const f = npv(mid, inv, cfs);
+      if (Math.abs(f) < 1e-7) { lo = hi = mid; break; }
+      if (fLo * f < 0) hi = mid; else lo = mid;
+    }
+    el.textContent = ((lo + hi) / 2 * 100).toFixed(2) + '%';
+  }
+  ['moneda','inv','cf1','cf2','cf3','cf4','cf5'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

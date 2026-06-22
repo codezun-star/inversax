@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Remesa Inversa — Cuánto Enviar — Inversax" description="Calcula cuánto debes enviar en el origen para que tu familia reciba el monto exacto que quieres, descontando comisiones fijas, porcentuales y el tipo de cambio. Para remesas a LATAM.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé cuánto enviar para que llegue una cantidad exacta?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Hay que trabajar al revés desde el monto a recibir: se descuenta el tipo de cambio y las comisiones porcentuales, y se suma la comisión fija. Esta calculadora hace ese cálculo inverso para decirte exactamente cuánto enviar en el origen." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué comisiones tiene una remesa?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Suele haber una comisión fija por envío, a veces una comisión porcentual y, sobre todo, el margen en el tipo de cambio. Este último es el costo menos visible y a menudo el más alto." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo abarato el envío de remesas?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Compara el tipo de cambio real de varias plataformas, no solo la comisión anunciada. Enviar montos mayores con menos frecuencia reduce el peso de la comisión fija por operación." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Remesa Inversa</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Remesa Inversa</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto enviar para que llegue el monto exacto que quieres, tras comisiones y cambio.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del envío</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto que debe RECIBIR (moneda destino)</label>
+            <input id="recibir" type="number" value="500000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio (1 origen = ? destino)</label>
+            <input id="tasa" type="number" value="4000" min="0.0001" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Comisión porcentual (%)</label>
+            <input id="pct" type="number" value="2" min="0" max="99" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Comisión fija (moneda origen)</label>
+            <input id="fija" type="number" value="5" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Debes enviar (moneda origen)</p>
+          <p id="r-enviar" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo total en comisiones (origen)</span><span id="r-com" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Llega al destino</span><span id="r-recibe" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo sobre lo enviado</span><span id="r-pct" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Calcula al revés desde el monto a recibir. El tipo de cambio es el valor de 1 unidad de la moneda de origen en la moneda de destino.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es una remesa inversa?</h2>
+    <p>Normalmente calculas cuánto llega al enviar una cantidad. La <strong>remesa inversa</strong> hace lo contrario: partes del monto que quieres que tu familia <strong>reciba</strong> y calcula cuánto debes enviar para que, tras comisiones y tipo de cambio, llegue exactamente esa cifra.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Monto a recibir:</strong> lo que quieres que llegue, en moneda del destino.</li>
+      <li><strong>Tipo de cambio:</strong> cuántas unidades de destino da una de origen.</li>
+      <li><strong>Comisiones:</strong> la porcentual y la fija que aplica la plataforma.</li>
+    </ul>
+
+    <h2>Envía de forma más barata</h2>
+    <p>El mayor costo suele estar escondido en el tipo de cambio. Compáralo con la <a href="/calculadoras/remesas">calculadora de remesas</a> tradicional y con el <a href="/calculadoras/tipo-cambio-efectivo">tipo de cambio efectivo</a>. En algunos corredores, enviar cripto y convertir a moneda local sale más a cuenta: revísalo con la <a href="/calculadoras/conversion-cripto">calculadora de conversión cripto</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué necesito una remesa inversa?</h3>
+    <p>Cuando el receptor necesita una cantidad concreta (una renta, una factura, una matrícula) y no quieres que llegue de menos por las comisiones.</p>
+    <h3>¿Incluye el margen del tipo de cambio?</h3>
+    <p>Sí, si ingresas el tipo de cambio real que aplica la plataforma (no el de referencia del mercado).</p>
+  </div>
+</Layout>
+
+<script>
+  function fmtN(n: number) { return new Intl.NumberFormat('es', { maximumFractionDigits: 2 }).format(n); }
+  function calcular() {
+    const recibir = parseFloat((document.getElementById('recibir') as HTMLInputElement).value) || 0;
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0;
+    const pct = (parseFloat((document.getElementById('pct') as HTMLInputElement).value) || 0) / 100;
+    const fija = parseFloat((document.getElementById('fija') as HTMLInputElement).value) || 0;
+    // (enviar - fija) * (1 - pct) * tasa = recibir
+    const enviar = tasa > 0 && pct < 1 ? recibir / ((1 - pct) * tasa) + fija : 0;
+    const comision = fija + (enviar - fija) * pct;
+    const pctTotal = enviar > 0 ? (comision / enviar) * 100 : 0;
+    document.getElementById('r-enviar')!.textContent = fmtN(enviar);
+    document.getElementById('r-com')!.textContent = fmtN(comision);
+    document.getElementById('r-recibe')!.textContent = fmtN(recibir);
+    document.getElementById('r-pct')!.textContent = pctTotal.toFixed(2) + '%';
+  }
+  ['recibir','tasa','pct','fija'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

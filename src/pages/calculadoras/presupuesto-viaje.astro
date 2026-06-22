@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Presupuesto de Viaje en Otra Moneda — Inversax" description="Calcula cuánto dinero necesitas para tu viaje en otra moneda: gasto diario, días, tipo de cambio y un colchón de seguridad. Convierte a tu moneda local. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo el presupuesto de un viaje al extranjero?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiplica tu gasto diario estimado en la moneda del destino por el número de días, añade un colchón de imprevistos (10%-20%) y conviértelo a tu moneda local con el tipo de cambio. Así sabes cuánto dinero llevar." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto colchón debo dejar para imprevistos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Entre un 10% y un 20% del presupuesto es razonable para cubrir gastos no planeados, subidas de precios o variaciones del tipo de cambio. Para destinos caros o viajes largos, acércate al 20%." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene cambiar dinero antes o pagar con tarjeta?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Depende del país y de los recargos de tu tarjeta. Lleva algo de efectivo para gastos pequeños y compara el costo real de pagar con tarjeta en moneda extranjera, que puede incluir recargos y un tipo de cambio menos favorable." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Presupuesto de Viaje</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Presupuesto de Viaje en Otra Moneda</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto dinero necesitas para tu viaje y conviértelo a tu moneda local.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu viaje</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tu moneda local</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="USD">USD — Dólar</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Gasto diario (en moneda del destino)</label>
+            <input id="diario" type="number" value="80" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de días</label>
+            <input id="dias" type="number" value="10" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tipo de cambio (1 unidad destino = ? local)</label>
+            <input id="tasa" type="number" value="4000" min="0" step="0.0001" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Colchón de imprevistos (%)</label>
+            <input id="colchon" type="number" value="15" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#8B5CF6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Presupuesto total (tu moneda)</p>
+          <p id="r-local" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total en moneda del destino</span><span id="r-destino" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Gasto por día (tu moneda)</span><span id="r-diaLocal" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Colchón incluido (tu moneda)</span><span id="r-colchon" style="font-size:13px; font-weight:700; color:#8B5CF6;">0</span></div>
+        </div>
+        <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El tipo de cambio es el valor de 1 unidad de la moneda del destino en tu moneda local. No incluye vuelos ni alojamiento si los pagaste por separado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo presupuestar un viaje al extranjero?</h2>
+    <p>La forma más fiable es pensar en <strong>gasto diario</strong>: cuánto necesitas por día en comida, transporte y actividades, multiplicado por los días del viaje, más un <strong>colchón</strong> para imprevistos. Luego se convierte a tu moneda con el tipo de cambio.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Gasto diario:</strong> estímalo en la moneda del país que visitas.</li>
+      <li><strong>Tipo de cambio:</strong> cuántas unidades de tu moneda equivalen a una del destino.</li>
+      <li><strong>Colchón:</strong> 15% es un buen punto de partida.</li>
+    </ul>
+
+    <h2>Cambia tu dinero de forma inteligente</h2>
+    <p>El tipo de cambio que ves no es el que recibes: bancos y casas de cambio aplican un margen. Calcula el costo real con la <a href="/calculadoras/tipo-cambio-efectivo">calculadora de tipo de cambio efectivo</a> y el <a href="/calculadoras/spread-cambiario">spread cambiario</a>. Si pagarás con tarjeta, revisa el <a href="/calculadoras/costo-tarjeta-extranjera">costo de tarjeta en el extranjero</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Incluyo vuelos y hotel?</h3>
+    <p>Si ya los pagaste en tu moneda, no. Esta calculadora se centra en el gasto en destino. Puedes sumarlos aparte para el total del viaje.</p>
+    <h3>¿Y si el tipo de cambio cambia durante el viaje?</h3>
+    <p>Por eso existe el colchón. En monedas volátiles, considera un colchón mayor o cambiar en varios momentos.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const diario = parseFloat((document.getElementById('diario') as HTMLInputElement).value) || 0;
+    const dias = parseFloat((document.getElementById('dias') as HTMLInputElement).value) || 0;
+    const tasa = parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0;
+    const colchon = (parseFloat((document.getElementById('colchon') as HTMLInputElement).value) || 0) / 100;
+    const totalDestino = diario * dias * (1 + colchon);
+    const enLocal = totalDestino * tasa;
+    const porDiaLocal = diario * tasa;
+    const colchonLocal = diario * dias * colchon * tasa;
+    document.getElementById('r-local')!.textContent = fmt(enLocal, m);
+    document.getElementById('r-destino')!.textContent = new Intl.NumberFormat('es', { maximumFractionDigits: 2 }).format(totalDestino);
+    document.getElementById('r-diaLocal')!.textContent = fmt(porDiaLocal, m);
+    document.getElementById('r-colchon')!.textContent = fmt(colchonLocal, m);
+  }
+  ['moneda','diario','dias','tasa','colchon'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

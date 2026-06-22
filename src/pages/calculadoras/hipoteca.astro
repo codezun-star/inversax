@@ -1,0 +1,157 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Hipoteca — Simulador de Cuota — Inversax" description="Simulador de hipoteca gratis: calcula la cuota mensual, el total de intereses y el costo real de tu vivienda según enganche, plazo y tasa. Para LATAM y España, 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula la cuota de una hipoteca?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La cuota mensual se calcula con la fórmula de amortización francesa: Cuota = Préstamo × i / (1 − (1+i)^−n), donde i es la tasa mensual y n el número de meses. La cuota es fija e incluye capital e intereses." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto enganche o pie necesito para una hipoteca?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Lo habitual es aportar entre el 10% y el 20% del valor de la vivienda como enganche, pie o entrada. Un enganche mayor reduce el monto financiado, la cuota mensual y los intereses totales que pagarás." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué parte de mi ingreso debe ir a la hipoteca?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Como regla general, la cuota de la hipoteca no debería superar el 30%-35% de tus ingresos netos mensuales para mantener una salud financiera sana y poder afrontar imprevistos." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Hipoteca</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Hipoteca</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula la cuota mensual, los intereses totales y el costo real de tu vivienda.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos de la hipoteca</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de la vivienda</label>
+            <input id="precio" type="number" value="150000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Enganche / pie / entrada (%)</label>
+            <input id="enganche" type="number" value="20" min="0" max="100" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (años)</label>
+            <input id="anos" type="number" value="20" min="1" max="40" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de interés anual (%)</label>
+            <input id="tasa" type="number" value="11" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Cuota mensual</p>
+          <p id="r-cuota" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Monto financiado</span><span id="r-financiado" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total de intereses</span><span id="r-intereses" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo total de la vivienda</span><span id="r-total" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Sistema de amortización francés (cuota fija). No incluye seguros, comisiones de apertura ni impuestos asociados a la compra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo funciona una hipoteca?</h2>
+    <p>Una <strong>hipoteca</strong> es un préstamo a largo plazo para comprar vivienda, garantizado con el propio inmueble. Pagas una cuota mensual fija (sistema francés) que al principio es casi toda intereses y, con el tiempo, va amortizando más capital.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio y enganche:</strong> el enganche reduce el monto financiado y la cuota.</li>
+      <li><strong>Plazo:</strong> a mayor plazo, cuota más baja pero muchos más intereses totales.</li>
+      <li><strong>Tasa:</strong> incluso un punto porcentual cambia mucho el costo final.</li>
+    </ul>
+
+    <h2>Plazo corto vs largo</h2>
+    <p>Alargar el plazo baja la cuota pero dispara los intereses. Compara escenarios con la <a href="/calculadoras/comparador-plazos">calculadora de comparador de plazos</a> y revisa la tabla mes a mes con la <a href="/calculadoras/amortizacion">calculadora de amortización</a>. Antes de comprometerte, mira cuánta deuda puedes asumir con la <a href="/calculadoras/capacidad-endeudamiento">calculadora de capacidad de endeudamiento</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Conviene más comprar o seguir alquilando?</h3>
+    <p>Depende del precio, la tasa y cuánto tiempo vivirás ahí. Compáralo con la <a href="/calculadoras/alquiler-vs-compra">calculadora de alquiler vs compra</a>.</p>
+    <h3>¿Cuánto debo ahorrar para el enganche?</h3>
+    <p>Usa la <a href="/calculadoras/ahorro-enganche">calculadora de ahorro para el enganche</a> para saber cuánto guardar al mes y en cuánto tiempo lo reúnes.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const eng = (parseFloat((document.getElementById('enganche') as HTMLInputElement).value) || 0) / 100;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const tasa = (parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0) / 100;
+    const prestamo = precio * (1 - eng);
+    const i = tasa / 12;
+    const n = anos * 12;
+    const cuota = i > 0 ? prestamo * i / (1 - Math.pow(1 + i, -n)) : prestamo / n;
+    const totalPagado = cuota * n;
+    const intereses = totalPagado - prestamo;
+    const costoTotal = precio * eng + totalPagado;
+    document.getElementById('r-cuota')!.textContent = fmt(cuota, m);
+    document.getElementById('r-financiado')!.textContent = fmt(prestamo, m);
+    document.getElementById('r-intereses')!.textContent = fmt(intereses, m);
+    document.getElementById('r-total')!.textContent = fmt(costoTotal, m);
+  }
+  ['moneda','precio','enganche','anos','tasa'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

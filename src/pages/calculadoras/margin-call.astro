@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Margin Call y Stop Out — Inversax" description="Calcula tu nivel de margen y a qué pérdida saltan el margin call y el stop out de tu broker según tu equity y margen usado. Evita el cierre forzado de tus posiciones.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es un margin call?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El margin call es el aviso del broker de que tu nivel de margen ha caído por debajo de un umbral (por ejemplo 100%) porque tus posiciones acumulan pérdidas. Si no aportas fondos o cierras posiciones, puedes llegar al stop out." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el stop out?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El stop out es el nivel (por ejemplo 50%) en el que el broker cierra automáticamente tus posiciones para evitar que tu cuenta quede en negativo. Es la última línea de defensa cuando el margen libre se agota." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo evito un margin call?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usa menos apalancamiento, mantén un margen libre amplio, coloca stop loss y no abras posiciones demasiado grandes para tu capital. Cuanto mayor sea tu nivel de margen, más lejos estarás del margin call." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Margin Call</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Margin Call y Stop Out</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula tu nivel de margen y a qué pérdida saltan el margin call y el stop out.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu cuenta</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Equity (capital actual, USD)</label>
+            <input id="equity" type="number" value="2000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Margen usado (USD)</label>
+            <input id="margen" type="number" value="500" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Nivel de margin call (%)</label>
+            <input id="mc" type="number" value="100" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Nivel de stop out (%)</label>
+            <input id="so" type="number" value="50" min="0" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Nivel de margen actual</p>
+          <p id="r-nivel" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Pérdida hasta el margin call</span><span id="r-mc" style="font-size:13px; font-weight:700; color:#F59E0B;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Pérdida hasta el stop out</span><span id="r-so" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Margen libre</span><span id="r-libre" style="font-size:13px; font-weight:700; color:#3B82F6;">0</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Nivel de margen = Equity ÷ Margen usado × 100. Los umbrales de margin call y stop out varían según el broker; consúltalos en tu plataforma.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el nivel de margen?</h2>
+    <p>El <strong>nivel de margen</strong> es la relación entre tu equity (capital incluyendo pérdidas y ganancias flotantes) y el margen que tienes bloqueado en posiciones abiertas. Cuanto más alto, más seguro estás; cuando cae, te acercas al <strong>margin call</strong> y luego al <strong>stop out</strong>.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Equity y margen usado:</strong> los ves en tu plataforma de trading.</li>
+      <li><strong>Niveles de margin call y stop out:</strong> los define tu broker (típico 100% y 50%).</li>
+    </ul>
+
+    <h2>Protege tu cuenta del cierre forzado</h2>
+    <p>Operar con demasiado apalancamiento deja poco margen libre y te expone al stop out ante cualquier movimiento. Calcula tu apalancamiento real con la <a href="/calculadoras/apalancamiento-efectivo">calculadora de apalancamiento efectivo</a> y dimensiona tus entradas con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿El margin call cierra mis posiciones?</h3>
+    <p>No directamente: es un aviso. El cierre forzado ocurre en el stop out si el nivel sigue cayendo.</p>
+    <h3>¿Puedo quedar debiendo dinero al broker?</h3>
+    <p>Con protección de saldo negativo, no. Muchos brokers regulados la ofrecen; verifica que el tuyo la incluya. Repasa el concepto en la <a href="/calculadoras/margen-libre">calculadora de margen libre</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const equity = parseFloat((document.getElementById('equity') as HTMLInputElement).value) || 0;
+    const margen = parseFloat((document.getElementById('margen') as HTMLInputElement).value) || 0;
+    const mc = (parseFloat((document.getElementById('mc') as HTMLInputElement).value) || 0) / 100;
+    const so = (parseFloat((document.getElementById('so') as HTMLInputElement).value) || 0) / 100;
+    const nivel = margen > 0 ? (equity / margen) * 100 : 0;
+    const lossMC = equity - margen * mc;
+    const lossSO = equity - margen * so;
+    const libre = equity - margen;
+    const f = (x: number) => new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(x) + ' USD';
+    document.getElementById('r-nivel')!.textContent = nivel.toFixed(0) + '%';
+    document.getElementById('r-mc')!.textContent = f(Math.max(lossMC, 0));
+    document.getElementById('r-so')!.textContent = f(Math.max(lossSO, 0));
+    document.getElementById('r-libre')!.textContent = f(libre);
+    document.getElementById('card')!.style.background = nivel >= 200 ? '#3B82F6' : (nivel >= 100 ? '#F59E0B' : '#EF4444');
+  }
+  ['equity','margen','mc','so'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

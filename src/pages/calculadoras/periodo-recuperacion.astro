@@ -1,0 +1,142 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Periodo de Recuperación (Payback) — Inversax" description="Calcula el periodo de recuperación (payback) de una inversión: en cuántos años y meses recuperas el capital con los flujos de caja. Incluye payback descontado. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el periodo de recuperación o payback?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El periodo de recuperación (payback) es el tiempo que tarda una inversión en devolver el capital inicial mediante los flujos de caja que genera. Si inviertes 10.000 y recibes 2.500 al año, el payback es de 4 años." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el payback descontado?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El payback descontado tiene en cuenta el valor del dinero en el tiempo: descuenta cada flujo futuro a una tasa antes de sumarlo. Siempre es mayor que el payback simple porque el dinero futuro vale menos que el de hoy." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El payback es suficiente para decidir una inversión?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No por sí solo. El payback ignora lo que ocurre después de recuperar el capital. Conviene combinarlo con el VPN y la TIR, que sí miden la rentabilidad total del proyecto." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Periodo de Recuperación</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Periodo de Recuperación (Payback)</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula en cuánto tiempo recuperas el capital invertido con los flujos de caja que genera el proyecto.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Inversión inicial</label>
+            <input id="inv" type="number" value="10000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Flujo de caja anual</label>
+            <input id="flujo" type="number" value="2500" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de descuento anual (%)</label>
+            <input id="tasa" type="number" value="10" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Periodo de recuperación</p>
+          <p id="r-payback" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">En meses</span><span id="r-meses" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Payback descontado</span><span id="r-desc" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span></div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El payback simple supone flujos iguales cada año. El descontado ajusta cada flujo por la tasa de descuento, reflejando el valor del dinero en el tiempo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el periodo de recuperación?</h2>
+    <p>El <strong>periodo de recuperación</strong> o <strong>payback</strong> responde a una pregunta muy práctica: ¿en cuánto tiempo recupero lo que invertí? Es una de las métricas más usadas para evaluar proyectos por su sencillez, especialmente cuando importa la liquidez.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Inversión inicial:</strong> el desembolso al arrancar el proyecto.</li>
+      <li><strong>Flujo de caja anual:</strong> el dinero neto que genera cada año.</li>
+      <li><strong>Tasa de descuento:</strong> para el payback descontado, suele ser tu costo de capital.</li>
+    </ul>
+
+    <h2>Sus límites</h2>
+    <p>El payback ignora lo que pasa después de recuperar el capital y, en su versión simple, el valor del dinero en el tiempo. Por eso conviene complementarlo con la <a href="/calculadoras/vpn">calculadora de VPN</a> y la <a href="/calculadoras/tir">calculadora de TIR</a>, que sí miden la rentabilidad total.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué payback se considera bueno?</h3>
+    <p>Depende del sector y del riesgo. En general, cuanto más corto, mejor, porque recuperas el capital antes y reduces la incertidumbre.</p>
+    <h3>¿Sirve para un negocio o solo para inversiones financieras?</h3>
+    <p>Sirve para ambos. Es muy común en decisiones de negocio: comprar maquinaria, abrir un local o lanzar un producto.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function calcular() {
+    const inv = parseFloat((document.getElementById('inv') as HTMLInputElement).value) || 0;
+    const flujo = parseFloat((document.getElementById('flujo') as HTMLInputElement).value) || 0;
+    const r = (parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0) / 100;
+    const pb = flujo > 0 ? inv / flujo : 0;
+    document.getElementById('r-payback')!.textContent = pb > 0 ? pb.toFixed(2) + ' años' : '—';
+    document.getElementById('r-meses')!.textContent = pb > 0 ? Math.round(pb * 12) + ' meses' : '—';
+    // Payback descontado
+    let acum = 0, anio = 0, res = '—';
+    if (flujo > 0) {
+      for (anio = 1; anio <= 60; anio++) {
+        const prev = acum;
+        acum += flujo / Math.pow(1 + r, anio);
+        if (acum >= inv) {
+          const frac = (inv - prev) / (acum - prev);
+          res = (anio - 1 + frac).toFixed(2) + ' años';
+          break;
+        }
+      }
+      if (acum < inv) res = '> 60 años';
+    }
+    document.getElementById('r-desc')!.textContent = res;
+  }
+  ['moneda','inv','flujo','tasa'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

@@ -1,31 +1,29 @@
 > Parte de la documentación de Inversax.
-> Ver índice general en [ARTICULOS.md](ARTICULOS.md)
+> Lista completa en [ARTICULOS.md](ARTICULOS.md) · **6 artículos generales publicados**.
 
 # Inversax — Artículos: General
 
-## Artículos Publicados (1)
+La lista íntegra (con slugs) vive en el índice maestro [ARTICULOS.md](ARTICULOS.md).
 
-| # | Slug | Título | Keywords principales | Fecha | Estado |
-|---|------|--------|---------------------|-------|--------|
-| 1 | `mejor-broker-para-comprar-acciones` | Mejor broker para comprar acciones desde Latinoamérica | mejor broker acciones latam, comprar apple tesla desde colombia, acciones reales vs cfd, etf sp500 latam | 2026-05-27 | ✅ Publicado |
+## Publicados (6)
 
----
+| Slug | Título |
+|------|--------|
+| `mejor-broker-para-comprar-acciones` | Mejor broker para comprar acciones desde LATAM |
+| `que-es-el-interes-compuesto` | Qué es el interés compuesto |
+| `como-invertir-con-poco-dinero` | Cómo invertir con poco dinero |
+| `que-es-un-etf` | Qué es un ETF |
+| `mejores-etfs-latinoamericanos` | Mejores ETFs para latinoamericanos |
+| `cuanto-necesito-para-vivir-de-dividendos` | Cuánto necesitas para vivir de dividendos ⭐ (jun 2026) |
 
-## Próximos artículos generales pendientes
-
-| Tipo | Título propuesto | Notas |
-|------|-----------------|-------|
-| General | Qué es el interés compuesto: guía para principiantes de LATAM | Enlazar calculadora interés compuesto |
-| General | Cómo empezar a invertir con poco dinero en Latinoamérica | Top-of-funnel amplísimo |
-| General | ETFs: la forma más sencilla de invertir en bolsa desde LATAM | Alto volumen de búsqueda |
-| General | Bitcoin en Latinoamérica: cómo invertir de forma segura | Enlazar Binance + calculadoras |
-| General | Diferencia entre trading e inversión: cuál es mejor para ti | Educacional, segmenta audiencia |
+> ⭐ Artículo añadido en la expansión de junio 2026, anclado a la calculadora `vivir-de-dividendos`.
 
 ---
 
 ## Notas editoriales
 
 - La categoría "general" cubre finanzas personales e inversión más allá de forex/brokers.
-- Estos artículos tienen el mayor potencial de tráfico orgánico total (audiencia más amplia).
-- Siempre enlazar al comparador de brokers y a calculadoras relevantes para capturar conversiones.
-- Son artículos evergreen por definición — nunca deben mencionar años en slug ni en título.
+- Mayor potencial de tráfico orgánico total (audiencia más amplia).
+- Siempre enlazar al comparador de brokers y a calculadoras relevantes.
+- Artículos evergreen: nunca mencionar años en slug ni título.
+</content>

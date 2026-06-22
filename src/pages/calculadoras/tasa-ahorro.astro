@@ -1,0 +1,142 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Tasa de Ahorro — Inversax" description="Calcula tu tasa de ahorro (qué porcentaje de tus ingresos ahorras) y en cuántos años podrías alcanzar la independencia financiera. La métrica clave del movimiento FIRE. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula la tasa de ahorro?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La tasa de ahorro es el porcentaje de tus ingresos netos que ahorras o inviertes: ahorro mensual dividido entre ingreso mensual, por 100. Si ganas 2.000 y ahorras 500, tu tasa de ahorro es del 25%." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa de ahorro es buena?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ahorrar el 20% ya es sólido. El movimiento FIRE busca tasas del 40%-60% para alcanzar la independencia financiera en una o dos décadas. Cuanto mayor la tasa, antes llegas, porque ahorras más y necesitas mantener menos gasto." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué la tasa de ahorro define cuándo me jubilo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Porque determina dos cosas a la vez: cuánto inviertes y qué nivel de gasto necesitas sostener. Una tasa alta acelera ambos lados de la ecuación, por lo que importa mucho más que el monto absoluto de tu sueldo." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Tasa de Ahorro</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Tasa de Ahorro</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Descubre qué porcentaje de tus ingresos ahorras y en cuántos años podrías ser independiente financieramente.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tus números</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ingreso mensual neto</label>
+            <input id="ingreso" type="number" value="2000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ahorro / inversión mensual</label>
+            <input id="ahorro" type="number" value="500" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento real anual esperado (%)</label>
+            <input id="rend" type="number" value="5" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Tu tasa de ahorro</p>
+          <p id="r-tasa" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Gasto mensual</span><span id="r-gasto" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Años hasta la independencia financiera</span><span id="r-anos" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Capital objetivo (25× gastos)</span><span id="r-objetivo" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Estimación partiendo de cero, con la regla del 4% (25× gastos) y rendimiento real (ya descontada la inflación). Es orientativa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la tasa de ahorro?</h2>
+    <p>La <strong>tasa de ahorro</strong> es el porcentaje de tus ingresos que destinas a ahorrar o invertir. Es la métrica más importante de las finanzas personales porque define a la vez cuánto acumulas y qué nivel de gasto necesitas sostener en el futuro.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Ingreso neto:</strong> lo que recibes en la mano cada mes.</li>
+      <li><strong>Ahorro mensual:</strong> lo que inviertes o guardas de forma consistente.</li>
+      <li><strong>Rendimiento real:</strong> el retorno esperado ya descontada la inflación (5% es prudente).</li>
+    </ul>
+
+    <h2>Por qué la tasa de ahorro lo es todo</h2>
+    <p>Pasar de ahorrar 10% a 30% no solo triplica lo que inviertes: también reduce tu gasto objetivo, así que el efecto en los años hasta la independencia es enorme. Profundiza con la <a href="/calculadoras/independencia-financiera">calculadora FIRE</a> y proyecta el crecimiento con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cuánto capital necesito al final?</h3>
+    <p>Según la <a href="/calculadoras/regla-4-por-ciento">regla del 4%</a>, unas 25 veces tus gastos anuales. Esta calculadora lo estima automáticamente.</p>
+    <h3>¿Cuento el aporte a mi pensión obligatoria?</h3>
+    <p>Puedes incluirlo si lo consideras parte de tu ahorro para el retiro. Lo importante es ser consistente con el criterio.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const ingreso = parseFloat((document.getElementById('ingreso') as HTMLInputElement).value) || 0;
+    const ahorro = parseFloat((document.getElementById('ahorro') as HTMLInputElement).value) || 0;
+    const r = (parseFloat((document.getElementById('rend') as HTMLInputElement).value) || 0) / 100;
+    const tasa = ingreso > 0 ? (ahorro / ingreso) * 100 : 0;
+    const gasto = Math.max(ingreso - ahorro, 0);
+    const annualSavings = ahorro * 12;
+    const target = gasto * 12 * 25;
+    let anos = 0;
+    if (annualSavings > 0) {
+      anos = r > 0 ? Math.log(target * r / annualSavings + 1) / Math.log(1 + r) : target / annualSavings;
+    }
+    document.getElementById('r-tasa')!.textContent = tasa.toFixed(1) + '%';
+    document.getElementById('r-gasto')!.textContent = fmt(gasto, m);
+    document.getElementById('r-anos')!.textContent = (annualSavings > 0 && isFinite(anos)) ? anos.toFixed(1) + ' años' : '—';
+    document.getElementById('r-objetivo')!.textContent = fmt(target, m);
+  }
+  ['moneda','ingreso','ahorro','rend'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

@@ -1,0 +1,150 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Interés Simple — Inversax" description="Calculadora de interés simple online: calcula el interés y el valor final de un capital sin reinversión. Compara con el interés compuesto. Fórmula, ejemplos y 19 monedas de LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el interés simple?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El interés simple se calcula con la fórmula I = Capital × tasa × tiempo. El interés se calcula siempre sobre el capital inicial, sin reinvertir las ganancias. Por ejemplo, 1000 al 10% anual durante 3 años genera 1000 × 0.10 × 3 = 300 de interés." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre interés simple y compuesto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "En el interés simple las ganancias no se reinvierten: cada período ganas lo mismo. En el interés compuesto las ganancias se suman al capital y generan nuevas ganancias, por lo que el crecimiento es exponencial. A mayor plazo, mayor es la diferencia a favor del compuesto." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde se usa el interés simple?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El interés simple se usa en muchos préstamos personales, créditos de corto plazo, algunos bonos y en el cálculo de intereses moratorios. La mayoría de las inversiones de largo plazo, en cambio, funcionan con interés compuesto." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Interés Simple</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Interés Simple</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el interés y el valor final de un capital sin reinversión, y cuánto dejas de ganar frente al interés compuesto.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital inicial</label>
+            <input id="capital" type="number" value="1000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de interés anual (%)</label>
+            <input id="tasa" type="number" value="10" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (años)</label>
+            <input id="anos" type="number" value="3" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Valor final (interés simple)</p>
+          <p id="r-final" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Interés simple ganado</span><span id="r-interes" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Valor final con interés compuesto</span><span id="r-comp" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Dejas de ganar (compuesto − simple)</span><span id="r-dif" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span></div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Interés simple: I = Capital × tasa × tiempo. No reinvierte ganancias. Cuanto más largo el plazo, más conviene el interés compuesto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el interés simple?</h2>
+    <p>El <strong>interés simple</strong> es el que se calcula siempre sobre el capital inicial, sin reinvertir las ganancias. Cada período ganas exactamente la misma cantidad. Su fórmula es <strong>I = C × i × t</strong>, donde C es el capital, i la tasa por período y t el número de períodos.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Capital inicial:</strong> el monto que inviertes o prestas al inicio.</li>
+      <li><strong>Tasa anual:</strong> el porcentaje de interés que se aplica cada año.</li>
+      <li><strong>Plazo:</strong> el tiempo en años durante el que se aplica el interés.</li>
+    </ul>
+    <p>La calculadora muestra además cuánto tendrías con <a href="/calculadoras/interes-compuesto">interés compuesto</a> y la diferencia, para que veas el costo de no reinvertir.</p>
+
+    <h2>Interés simple vs interés compuesto</h2>
+    <p>Con interés simple, 1.000 al 10% durante 10 años generan 1.000 de interés (100 cada año). Con interés compuesto, los mismos datos producen 1.594 de interés, porque cada año ganas sobre un capital mayor. La diferencia crece de forma exponencial con el plazo. Por eso casi todas las inversiones de largo plazo buscan el efecto compuesto.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Dónde se aplica el interés simple?</h3>
+    <p>En muchos préstamos personales, créditos de corto plazo, intereses moratorios y algunos bonos. Para entender el otro modelo, revisa nuestra <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>.</p>
+    <h3>¿Cómo paso una tasa anual a mensual en interés simple?</h3>
+    <p>Basta dividir entre 12: una tasa simple del 12% anual equivale a 1% mensual. En interés compuesto la conversión no es lineal.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const c = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const r = (parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0) / 100;
+    const t = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 0;
+    const interes = c * r * t;
+    const vf = c + interes;
+    const vfComp = c * Math.pow(1 + r, t);
+    const dif = vfComp - vf;
+    document.getElementById('r-final')!.textContent = fmt(vf, m);
+    document.getElementById('r-interes')!.textContent = fmt(interes, m);
+    document.getElementById('r-comp')!.textContent = fmt(vfComp, m);
+    document.getElementById('r-dif')!.textContent = fmt(dif, m);
+  }
+  ['moneda','capital','tasa','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

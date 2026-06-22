@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Valor del Punto en Índices y Acciones — Inversax" description="Calcula el valor de cada punto en índices y acciones CFD como US30, NAS100 o SP500 según tu lotaje y la ganancia o pérdida de un movimiento. Para traders de CFD.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto vale un punto en US30 o NAS100?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Depende del broker y del tamaño del contrato. En muchos brokers, 1 lote de US30 equivale a 1 USD por punto, pero hay variaciones. Consulta la especificación del instrumento en tu plataforma e ingrésala en la calculadora." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo calculo mi ganancia en índices CFD?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiplica el valor por punto de un lote por el número de lotes y por los puntos que se movió el precio. Por ejemplo, 2 lotes a 1 USD/punto en un movimiento de 50 puntos dan 100 USD de resultado." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es lo mismo un punto que un pip?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. En índices y acciones se habla de puntos, que corresponden a una unidad del precio del instrumento, mientras que el pip es propio de los pares de divisas. Por eso los índices usan esta calculadora y no la del pip." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Valor del Punto (Índices)</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Valor del Punto en Índices y Acciones</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto vale cada punto en índices y acciones CFD y el resultado de un movimiento.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu posición</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Valor por punto de 1 lote (USD)</label>
+            <input id="vpl" type="number" value="1" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Número de lotes</label>
+            <input id="lotes" type="number" value="1" min="0" step="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Movimiento del precio (puntos)</label>
+            <input id="puntos" type="number" value="50" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+        <div style="margin-top:18px; padding:12px 14px; background:#F7F7F5; border-radius:8px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Valores orientativos por lote (verifica en tu broker): US30 ≈ 1 USD/pto · NAS100 ≈ 1 USD/pto · SP500 ≈ 1 USD/pto · GER40 ≈ 1 EUR/pto.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Resultado del movimiento</p>
+          <p id="r-pl" style="font-size:34px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Valor por punto de tu posición</span><span id="r-vpt" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Valor de 10 puntos</span><span id="r-10" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Valor de 100 puntos</span><span id="r-100" style="font-size:13px; font-weight:700; color:#3B82F6;">0</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Resultado = valor por punto × lotes × puntos. Un movimiento negativo indica pérdida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el valor del punto en índices?</h2>
+    <p>En índices y acciones CFD el precio se mueve en <strong>puntos</strong>, no en pips. El <strong>valor del punto</strong> indica cuánto ganas o pierdes por cada punto que se mueve el precio, según el tamaño de tu posición. Es imprescindible para gestionar el riesgo en instrumentos como US30, NAS100 o SP500.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Valor por punto de 1 lote:</strong> tómalo de la especificación de tu broker.</li>
+      <li><strong>Lotes:</strong> el tamaño de tu posición.</li>
+      <li><strong>Movimiento en puntos:</strong> cuánto esperas (o se movió) el precio.</li>
+    </ul>
+
+    <h2>Gestiona el riesgo en índices</h2>
+    <p>Los índices se mueven rápido, así que dimensiona bien la posición con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a> y vigila el apalancamiento con la <a href="/calculadoras/margin-call">calculadora de margin call</a>. Para divisas usa en cambio la <a href="/calculadoras/pips">calculadora de valor del pip</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué difiere entre brokers?</h3>
+    <p>Porque el tamaño del contrato por lote no está estandarizado en CFD. Verifica siempre la ficha del instrumento en tu plataforma.</p>
+    <h3>¿Sirve para oro (XAUUSD)?</h3>
+    <p>Sí, si introduces el valor por punto correspondiente al oro de tu broker, normalmente referido al movimiento de un dólar en el precio.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const vpl = parseFloat((document.getElementById('vpl') as HTMLInputElement).value) || 0;
+    const lotes = parseFloat((document.getElementById('lotes') as HTMLInputElement).value) || 0;
+    const puntos = parseFloat((document.getElementById('puntos') as HTMLInputElement).value) || 0;
+    const vpt = vpl * lotes;
+    const pl = vpt * puntos;
+    const f = (x: number) => (x >= 0 ? '' : '−') + new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(x)) + ' USD';
+    document.getElementById('r-pl')!.textContent = f(pl);
+    document.getElementById('r-vpt')!.textContent = f(vpt);
+    document.getElementById('r-10')!.textContent = f(vpt * 10);
+    document.getElementById('r-100')!.textContent = f(vpt * 100);
+    document.getElementById('card')!.style.background = pl >= 0 ? '#3B82F6' : '#EF4444';
+  }
+  ['vpl','lotes','puntos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

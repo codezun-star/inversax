@@ -39,12 +39,13 @@ Modelo de negocio: **afiliados** — cada botón "Abrir cuenta en X" lleva un en
 ```
 InversaxV2/
 ├── CLAUDE.md
-├── ARTICULOS.md              # Índice general de 32 artículos
+├── ARTICULOS.md              # Índice general de 69 artículos
 ├── ARTICULOS-BROKERS.md      # 22 artículos de brokers por país
-├── ARTICULOS-ANALISIS.md     # 5 análisis de brokers
-├── ARTICULOS-GUIAS.md        # 4 guías
-├── ARTICULOS-GENERAL.md      # 1 artículo general
-├── CALCULADORAS.md           # Índice de 52 calculadoras
+├── ARTICULOS-ANALISIS.md     # 10 análisis de brokers
+├── ARTICULOS-GUIAS.md        # 31 guías
+├── ARTICULOS-GENERAL.md      # 6 artículos generales
+├── ANALISIS-SEO.md           # Análisis de demanda + validación SEO
+├── CALCULADORAS.md           # Índice de 100 calculadoras
 ├── CALCULADORAS-INVERSION.md
 ├── CALCULADORAS-PLANIFICACION.md
 ├── CALCULADORAS-FOREX.md
@@ -57,7 +58,7 @@ InversaxV2/
 └── src/
     ├── content/
     │   ├── config.ts         # defineCollection con schema Zod para blog
-    │   └── blog/             # 32 artículos .md publicados
+    │   └── blog/             # 69 artículos .md publicados
     ├── layouts/
     │   └── Layout.astro      # head, DM Sans font, Header, main slot, Footer
     ├── components/
@@ -66,7 +67,7 @@ InversaxV2/
     ├── lib/
     │   ├── brokers.ts        # Array de 7 brokers con links de afiliado reales
     │   ├── paises.ts         # Array de 22 países con moneda, métodos de pago y brokerRecomendado
-    │   └── calculadoras.ts   # Array de 4 grupos con 52 calculadoras totales
+    │   └── calculadoras.ts   # Array de 4 grupos con 100 calculadoras totales
     └── pages/
         ├── index.astro
         ├── 404.astro
@@ -76,7 +77,7 @@ InversaxV2/
         ├── calculadoras/
         │   ├── index.astro          # Listing con tags de filtro, máx 12 por categoría
         │   ├── [categoria].astro    # Páginas de categoría: /calculadoras/inversion, etc.
-        │   └── [52 archivos .astro individuales]
+        │   └── [100 archivos .astro individuales]
         ├── blog/
         │   ├── [...page].astro  # Listado paginado (10/página): /blog, /blog/2, /blog/3...
         │   └── [slug].astro     # Artículo individual con botones de compartir
@@ -184,14 +185,14 @@ La lógica en `[pais].astro` busca en el array filtrado el broker cuyo `id` coin
 
 ## Calculadoras (`src/lib/calculadoras.ts`)
 
-**52 calculadoras** en 4 categorías. Fuente única de datos compartida entre `index.astro` y `[categoria].astro`.
+**100 calculadoras** en 4 categorías. Fuente única de datos compartida entre `index.astro` y `[categoria].astro`.
 
 | Categoría | slug | Color | Calculadoras |
 |---|---|---|---|
-| Inversión | `inversion` | `#FF8C42` | 15 |
-| Planificación personal | `planificacion` | `#22C55E` | 15 |
-| Forex y trading | `forex` | `#3B82F6` | 13 |
-| Divisas | `divisas` | `#8B5CF6` | 9 |
+| Inversión | `inversion` | `#FF8C42` | 27 |
+| Planificación personal | `planificacion` | `#22C55E` | 27 |
+| Forex y trading | `forex` | `#3B82F6` | 25 |
+| Divisas | `divisas` | `#8B5CF6` | 21 |
 
 Ver lista completa en [CALCULADORAS.md](CALCULADORAS.md).
 
@@ -298,7 +299,7 @@ npm run preview   # preview del build estático
 - `public/robots.txt` permite todo, apunta al sitemap
 - `[pais].astro` — JSON-LD `ItemList` + `FinancialService` en `<head>`
 - `[slug].astro` — JSON-LD `Article` en `<head>`
-- GA4 snippet comentado en `Layout.astro` — buscar `G-XXXXXXXXXX` para activar
+- GA4 **activo** en `Layout.astro` con Measurement ID `G-E8YH3R6PPW`
 - Favicon: `/favicon.svg` (no `/logo.svg`)
 
 ---

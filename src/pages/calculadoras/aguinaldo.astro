@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Aguinaldo / Prima de Navidad — Inversax" description="Calcula tu aguinaldo, prima de navidad o decimotercer salario según tu sueldo y los meses trabajados en el año. Para México, Colombia y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el aguinaldo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El aguinaldo se calcula tomando el salario diario y multiplicándolo por los días de aguinaldo que corresponden por ley, ajustado por la proporción del año trabajado. La fórmula base es: salario diario × días de aguinaldo × (meses trabajados / 12)." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántos días de aguinaldo me corresponden?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Varía por país. En México el mínimo legal es 15 días de salario; en Colombia la prima equivale a 30 días al año (15 en junio y 15 en diciembre); en muchos países se paga un salario mensual completo como decimotercer sueldo. Ajusta los días en la calculadora." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El aguinaldo se calcula proporcional si no trabajé todo el año?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Si ingresaste a mitad de año, el aguinaldo es proporcional a los meses efectivamente trabajados. Por eso la calculadora pide los meses trabajados durante el año." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Aguinaldo / Prima</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Aguinaldo / Prima</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula tu aguinaldo, prima de navidad o decimotercer salario según los meses trabajados.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tus datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Salario mensual bruto</label>
+            <input id="salario" type="number" value="15000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Días de aguinaldo al año</label>
+            <input id="dias" type="number" value="15" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Meses trabajados en el año</label>
+            <input id="meses" type="number" value="12" min="1" max="12" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Aguinaldo estimado</p>
+          <p id="r-aguinaldo" style="font-size:34px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Salario diario</span><span id="r-diario" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Proporción del año</span><span id="r-prop" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Si trabajaste el año completo</span><span id="r-full" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Cálculo orientativo sobre el salario bruto y un mes de 30 días. La fórmula legal exacta varía por país; ajusta los días de aguinaldo según tu legislación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el aguinaldo o prima?</h2>
+    <p>El <strong>aguinaldo</strong> (México), la <strong>prima de servicios</strong> (Colombia) o el <strong>decimotercer salario</strong> (varios países) es una remuneración adicional anual obligatoria. Suele pagarse a fin de año y equivale a un número de días de salario que depende de la ley de cada país.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Salario mensual bruto:</strong> tu sueldo antes de deducciones.</li>
+      <li><strong>Días de aguinaldo:</strong> 15 (mínimo en México), 30 (un mes), o lo que aplique.</li>
+      <li><strong>Meses trabajados:</strong> para el cálculo proporcional si no fue el año completo.</li>
+    </ul>
+
+    <h2>Qué hacer con el aguinaldo</h2>
+    <p>Antes de gastarlo, considera reforzar tu <a href="/calculadoras/fondo-emergencia">fondo de emergencia</a> o invertirlo: con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a> verás cuánto puede crecer si lo inviertes en lugar de gastarlo.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿El aguinaldo paga impuestos?</h3>
+    <p>En muchos países una parte del aguinaldo está exenta y el resto tributa. Para estimar tu sueldo neto general usa la <a href="/calculadoras/salario-neto">calculadora de salario neto</a>.</p>
+    <h3>¿Se calcula sobre el salario bruto o neto?</h3>
+    <p>Normalmente sobre el salario bruto integrado. Esta calculadora usa el bruto que ingreses.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const salario = parseFloat((document.getElementById('salario') as HTMLInputElement).value) || 0;
+    const dias = parseFloat((document.getElementById('dias') as HTMLInputElement).value) || 0;
+    const meses = parseFloat((document.getElementById('meses') as HTMLInputElement).value) || 0;
+    const diario = salario / 30;
+    const prop = Math.min(meses, 12) / 12;
+    const full = diario * dias;
+    const aguinaldo = full * prop;
+    document.getElementById('r-aguinaldo')!.textContent = fmt(aguinaldo, m);
+    document.getElementById('r-diario')!.textContent = fmt(diario, m);
+    document.getElementById('r-prop')!.textContent = (prop * 100).toFixed(0) + '%';
+    document.getElementById('r-full')!.textContent = fmt(full, m);
+  }
+  ['moneda','salario','dias','meses'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Reto de Fondeo (Prop Firm) — Inversax" description="Planifica tu reto de fondeo o prop firm: cuánto arriesgar por operación para llegar al objetivo de profit sin romper el drawdown diario ni total. Operaciones necesarias y límites de pérdida.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es un reto de fondeo o prop firm?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es una evaluación en la que una firma de fondeo te da capital virtual y debes alcanzar un objetivo de ganancia sin superar un límite de pérdida diaria ni total. Si lo apruebas, operas una cuenta fondeada y compartes las ganancias." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto debo arriesgar por operación en un reto de fondeo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Lo prudente es arriesgar entre el 0,5% y el 1% por operación para que una racha de pérdidas no rompa el drawdown. Cuanto menor el riesgo por operación, más pérdidas consecutivas soportas, pero más operaciones necesitas para el objetivo." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué la mayoría falla los retos de fondeo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Por arriesgar demasiado para llegar rápido al objetivo, lo que viola el drawdown ante la primera mala racha. La clave es un riesgo por operación bajo, una expectativa positiva y paciencia con el número de operaciones." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Reto de Fondeo</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Reto de Fondeo</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Planifica tu prop firm: cuántas operaciones necesitas y cuántas pérdidas seguidas rompen el reto.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Parámetros del reto</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tamaño de la cuenta (USD)</label>
+            <input id="cuenta" type="number" value="100000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Objetivo de profit (%)</label>
+            <input id="obj" type="number" value="10" min="0" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Drawdown máximo total (%)</label>
+            <input id="dd" type="number" value="10" min="0" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Riesgo por operación (%)</label>
+            <input id="riesgo" type="number" value="1" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ratio riesgo/beneficio (1:X)</label>
+            <input id="rr" type="number" value="2" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Win rate esperado (%)</label>
+            <input id="wr" type="number" value="50" min="1" max="99" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Operaciones necesarias (aprox.)</p>
+          <p id="r-trades" style="font-size:34px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Objetivo en dinero</span><span id="r-obj" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Expectativa por operación</span><span id="r-exp" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Pérdidas seguidas que rompen el reto</span><span id="r-perdidas" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p id="hint" style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Si tu expectativa por operación es negativa, el reto no es viable con esos parámetros: mejora el win rate o el ratio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>Cómo planificar un reto de fondeo</h2>
+    <p>Aprobar un <strong>reto de fondeo</strong> no es cuestión de suerte, sino de matemáticas: necesitas una <strong>expectativa positiva</strong> y un <strong>riesgo por operación</strong> lo bastante bajo para sobrevivir a las malas rachas sin tocar el drawdown.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Objetivo y drawdown:</strong> los límites que impone la firma de fondeo.</li>
+      <li><strong>Riesgo por operación:</strong> cuánto arriesgas de la cuenta en cada trade.</li>
+      <li><strong>Ratio y win rate:</strong> definen tu expectativa por operación.</li>
+    </ul>
+
+    <h2>El factor decisivo: tu expectativa</h2>
+    <p>La expectativa por operación determina si el reto es viable. Profundiza con la <a href="/calculadoras/expectativa-trading">calculadora de expectativa matemática</a> y mide el peligro de las rachas con la <a href="/calculadoras/riesgo-de-ruina">calculadora de riesgo de ruina</a>. Para dimensionar cada entrada usa la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué arriesgar solo 1% si tardo más?</h3>
+    <p>Porque proteger el drawdown es más importante que la velocidad. Con 1% de riesgo soportas muchas más pérdidas seguidas antes de romper el reto.</p>
+    <h3>¿El cálculo garantiza aprobar?</h3>
+    <p>No. Es una estimación basada en promedios; los resultados reales varían operación a operación. Sirve para fijar parámetros prudentes.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const cuenta = parseFloat((document.getElementById('cuenta') as HTMLInputElement).value) || 0;
+    const obj = (parseFloat((document.getElementById('obj') as HTMLInputElement).value) || 0) / 100;
+    const ddPct = (parseFloat((document.getElementById('dd') as HTMLInputElement).value) || 0);
+    const riesgoPct = (parseFloat((document.getElementById('riesgo') as HTMLInputElement).value) || 0);
+    const rr = parseFloat((document.getElementById('rr') as HTMLInputElement).value) || 0;
+    const wr = (parseFloat((document.getElementById('wr') as HTMLInputElement).value) || 0) / 100;
+    const objMoney = cuenta * obj;
+    const riesgoMoney = cuenta * riesgoPct / 100;
+    const expR = wr * rr - (1 - wr); // en múltiplos de R
+    const expMoney = expR * riesgoMoney;
+    const perdidas = riesgoPct > 0 ? Math.floor(ddPct / riesgoPct) : 0;
+    const tradesEl = document.getElementById('r-trades')!;
+    if (expMoney <= 0) {
+      tradesEl.textContent = 'No viable';
+      tradesEl.style.fontSize = '26px';
+      document.getElementById('card')!.style.background = '#EF4444';
+    } else {
+      tradesEl.style.fontSize = '34px';
+      document.getElementById('card')!.style.background = '#3B82F6';
+      tradesEl.textContent = Math.ceil(objMoney / expMoney) + ' ops';
+    }
+    document.getElementById('r-obj')!.textContent = objMoney.toFixed(2) + ' USD';
+    document.getElementById('r-exp')!.textContent = expMoney.toFixed(2) + ' USD';
+    document.getElementById('r-perdidas')!.textContent = perdidas + ' seguidas';
+  }
+  ['cuenta','obj','dd','riesgo','rr','wr'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

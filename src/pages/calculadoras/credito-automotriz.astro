@@ -1,0 +1,156 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Crédito Automotriz — Simulador de Auto — Inversax" description="Simula el financiamiento de un auto: cuota mensual, intereses totales y costo real del crédito según enganche, plazo y tasa. Para LATAM y España, 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula la cuota de un crédito automotriz?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Se usa la fórmula de amortización: Cuota = Monto financiado × i / (1 − (1+i)^−n), donde i es la tasa mensual y n el número de meses. El monto financiado es el precio del auto menos el enganche o pago inicial." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto enganche conviene dar para un auto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un enganche del 20% al 30% reduce la cuota y los intereses, y evita quedar con una deuda mayor que el valor del auto, que se deprecia rápido. Cuanto mayor el enganche, menor el costo total del crédito." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es buena idea financiar un auto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un auto es un activo que se deprecia, así que financiarlo a tasas altas encarece mucho un bien que pierde valor. Si lo financias, prioriza plazos cortos y compara la cuota con tu presupuesto y tu costo real de tenencia." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Crédito Automotriz</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Crédito Automotriz</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Simula la cuota mensual, los intereses y el costo total de financiar un auto.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del crédito</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio del auto</label>
+            <input id="precio" type="number" value="350000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Enganche / pago inicial (%)</label>
+            <input id="enganche" type="number" value="20" min="0" max="100" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (meses)</label>
+            <input id="meses" type="number" value="48" min="1" max="96" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de interés anual (%)</label>
+            <input id="tasa" type="number" value="14" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Cuota mensual</p>
+          <p id="r-cuota" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Monto financiado</span><span id="r-financiado" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Total de intereses</span><span id="r-intereses" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Costo total del auto</span><span id="r-total" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Cuota fija (sistema francés). No incluye seguro del auto, GPS, comisión de apertura ni depreciación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo funciona un crédito automotriz?</h2>
+    <p>Un <strong>crédito automotriz</strong> financia la compra de un vehículo a cambio de un pago inicial (enganche) y cuotas mensuales fijas. Como el auto se deprecia con rapidez, el costo de los intereses pesa mucho en un bien que va perdiendo valor.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio y enganche:</strong> un enganche mayor reduce cuota e intereses.</li>
+      <li><strong>Plazo en meses:</strong> 36, 48 o 60 son los más comunes.</li>
+      <li><strong>Tasa anual:</strong> compárala entre varias financieras antes de firmar.</li>
+    </ul>
+
+    <h2>El costo va más allá de la cuota</h2>
+    <p>Tener un auto cuesta más que su cuota: suma seguro, gasolina, mantenimiento y depreciación con la <a href="/calculadoras/costo-real-auto">calculadora de costo real de un auto</a>. Y revisa si encaja en tu presupuesto con la <a href="/calculadoras/capacidad-endeudamiento">calculadora de capacidad de endeudamiento</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Conviene un plazo largo para bajar la cuota?</h3>
+    <p>Baja la cuota pero dispara los intereses y el riesgo de deber más que el valor del auto. Compara escenarios con la <a href="/calculadoras/comparador-plazos">calculadora de comparador de plazos</a>.</p>
+    <h3>¿Y si mejor ahorro y pago de contado?</h3>
+    <p>Suele ser lo más barato. Calcula cuánto guardar al mes con la <a href="/calculadoras/meta-ahorro">calculadora de meta de ahorro</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const eng = (parseFloat((document.getElementById('enganche') as HTMLInputElement).value) || 0) / 100;
+    const n = parseFloat((document.getElementById('meses') as HTMLInputElement).value) || 1;
+    const tasa = (parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0) / 100;
+    const financiado = precio * (1 - eng);
+    const i = tasa / 12;
+    const cuota = i > 0 ? financiado * i / (1 - Math.pow(1 + i, -n)) : financiado / n;
+    const totalPagado = cuota * n;
+    const intereses = totalPagado - financiado;
+    const costoTotal = precio * eng + totalPagado;
+    document.getElementById('r-cuota')!.textContent = fmt(cuota, m);
+    document.getElementById('r-financiado')!.textContent = fmt(financiado, m);
+    document.getElementById('r-intereses')!.textContent = fmt(intereses, m);
+    document.getElementById('r-total')!.textContent = fmt(costoTotal, m);
+  }
+  ['moneda','precio','enganche','meses','tasa'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

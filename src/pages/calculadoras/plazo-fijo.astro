@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Plazo Fijo y CDT — Inversax" description="Calcula el rendimiento de un plazo fijo o CDT: intereses brutos, retención de impuestos e interés neto. Para Argentina, Colombia, México y toda Latinoamérica. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calculan los intereses de un plazo fijo o CDT?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El interés bruto de un plazo fijo o CDT se calcula como Capital × tasa nominal anual × (días o meses del plazo / período anual). A ese interés se le descuenta la retención de impuestos que aplique en tu país para obtener el interés neto que recibes." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la retención de un CDT o plazo fijo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es el impuesto que la entidad financiera retiene sobre los intereses ganados antes de pagártelos. En Colombia la retención en la fuente sobre rendimientos suele ser del 4% al 7%; en otros países varía. Ajusta el porcentaje según tu situación." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene más un plazo fijo o un fondo indexado?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El plazo fijo da una tasa conocida y bajo riesgo, ideal para el corto plazo y el fondo de emergencia. Para el largo plazo, los fondos indexados de acciones históricamente ofrecen mayor rendimiento, aunque con volatilidad. Compara siempre la tasa con la inflación esperada." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Plazo Fijo / CDT</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Plazo Fijo / CDT</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula los intereses de tu depósito a plazo fijo o CDT, la retención de impuestos y cuánto recibes neto al vencimiento.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del depósito</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital depositado</label>
+            <input id="capital" type="number" value="1000000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa nominal anual (%)</label>
+            <input id="tasa" type="number" value="11" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Plazo (meses)</label>
+            <input id="meses" type="number" value="12" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Retención de impuestos (%)</label>
+            <input id="ret" type="number" value="4" min="0" max="100" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Total a recibir al vencimiento</p>
+          <p id="r-total" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Interés bruto</span><span id="r-bruto" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Retención de impuestos</span><span id="r-ret" style="font-size:13px; font-weight:700; color:#EF4444;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Interés neto</span><span id="r-neto" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span></div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Cálculo con interés simple para el plazo (lo habitual en CDT a vencimiento). La retención aplica solo sobre el interés, no sobre el capital.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es un plazo fijo o CDT?</h2>
+    <p>Un <strong>plazo fijo</strong> (Argentina, Uruguay) o <strong>CDT</strong> (Certificado de Depósito a Término, Colombia) es un depósito en el que entregas un capital al banco por un plazo determinado a cambio de una tasa de interés conocida de antemano. Es de bajo riesgo y la rentabilidad está garantizada, pero a cambio de menor liquidez.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Capital depositado:</strong> el monto que entregas al banco.</li>
+      <li><strong>Tasa nominal anual:</strong> la tasa que ofrece la entidad (E.A. o nominal).</li>
+      <li><strong>Plazo en meses:</strong> 90, 180, 360 días suelen ser 3, 6 y 12 meses.</li>
+      <li><strong>Retención:</strong> el impuesto que retiene el banco sobre los intereses.</li>
+    </ul>
+
+    <h2>El enemigo silencioso: la inflación</h2>
+    <p>Una tasa del 11% solo es buena si la inflación es menor. Si los precios suben más que tu tasa, pierdes poder adquisitivo aunque tu saldo crezca. Comprueba tu rendimiento real con la <a href="/calculadoras/rentabilidad-real">calculadora de rentabilidad real</a> y compara alternativas de largo plazo con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿La tasa es la misma que la rentabilidad real?</h3>
+    <p>No. La tasa nominal no descuenta la inflación. Para saber cuánto ganas de verdad, resta la inflación a tu rendimiento con nuestra <a href="/calculadoras/rentabilidad-real">calculadora de rentabilidad real</a>.</p>
+    <h3>¿Y si renuevo el plazo fijo varias veces?</h3>
+    <p>Al renovar reinviertes el capital más los intereses, activando el interés compuesto. Proyecta ese escenario con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const c = parseFloat((document.getElementById('capital') as HTMLInputElement).value) || 0;
+    const r = (parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0) / 100;
+    const meses = parseFloat((document.getElementById('meses') as HTMLInputElement).value) || 0;
+    const ret = (parseFloat((document.getElementById('ret') as HTMLInputElement).value) || 0) / 100;
+    const bruto = c * r * (meses / 12);
+    const retencion = bruto * ret;
+    const neto = bruto - retencion;
+    const total = c + neto;
+    document.getElementById('r-total')!.textContent = fmt(total, m);
+    document.getElementById('r-bruto')!.textContent = fmt(bruto, m);
+    document.getElementById('r-ret')!.textContent = '− ' + fmt(retencion, m);
+    document.getElementById('r-neto')!.textContent = fmt(neto, m);
+  }
+  ['moneda','capital','tasa','meses','ret'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

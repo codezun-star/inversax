@@ -1,0 +1,138 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de la Regla del 4% — Cuánto para Jubilarte — Inversax" description="Calcula con la regla del 4% cuánto capital necesitas para jubilarte y cuánto puedes retirar al año sin agotar tu dinero. Tu número FIRE. Para LATAM y España, 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la regla del 4%?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La regla del 4% dice que puedes retirar el 4% de tu cartera el primer año de jubilación y ajustar ese monto por inflación cada año, con alta probabilidad de que el dinero dure 30 años o más. Equivale a necesitar 25 veces tus gastos anuales." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto necesito para jubilarme según la regla del 4%?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiplica tus gastos anuales por 25. Si gastas 20.000 al año, necesitas 500.000 invertidos. Si prefieres ser más conservador, usa una tasa de retiro del 3,5% (multiplicar por 28,5)." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La regla del 4% funciona en Latinoamérica?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La regla se basa en carteras diversificadas en dólares o mercados desarrollados. En países con alta inflación local conviene mantener la cartera en activos globales y ser algo más conservador con la tasa de retiro." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Regla del 4%</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de la Regla del 4%</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula cuánto capital necesitas para vivir de tus inversiones y cuánto puedes retirar sin agotarlo.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tus datos</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Gasto mensual deseado en el retiro</label>
+            <input id="gasto" type="number" value="1500" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Tasa de retiro anual (%)</label>
+            <input id="tasa" type="number" value="4" min="1" max="10" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Capital invertido actual (opcional)</label>
+            <input id="actual" type="number" value="50000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Capital necesario</p>
+          <p id="r-capital" style="font-size:30px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Gasto anual a cubrir</span><span id="r-anual" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Retiro mensual con tu capital actual</span><span id="r-retiro" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Te falta</span><span id="r-falta" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Capital necesario = gasto anual ÷ tasa de retiro. Con el 4%, equivale a 25 veces tus gastos anuales. Es una guía, no una garantía.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es la regla del 4%?</h2>
+    <p>La <strong>regla del 4%</strong> es la base del movimiento FIRE (independencia financiera): puedes retirar el 4% de tu cartera el primer año y ajustar por inflación los siguientes, con buenas probabilidades de que el dinero dure 30 años o más. En la práctica, significa acumular <strong>25 veces tus gastos anuales</strong>.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Gasto mensual deseado:</strong> lo que querrás gastar ya retirado.</li>
+      <li><strong>Tasa de retiro:</strong> 4% es el estándar; 3,5% es más conservador.</li>
+      <li><strong>Capital actual:</strong> opcional, para ver cuánto te falta.</li>
+    </ul>
+
+    <h2>El camino hacia tu número</h2>
+    <p>Una vez que conoces tu número, calcula cuántos años de aportes necesitas con la <a href="/calculadoras/independencia-financiera">calculadora de independencia financiera (FIRE)</a> y proyéctalo con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a>. Tu <a href="/calculadoras/tasa-ahorro">tasa de ahorro</a> es el factor que más acelera la meta.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Es lo mismo que vivir de dividendos?</h3>
+    <p>Son enfoques distintos. La regla del 4% incluye vender participaciones; vivir de dividendos solo usa el reparto. Compáralo con la <a href="/calculadoras/vivir-de-dividendos">calculadora de vivir de dividendos</a>.</p>
+    <h3>¿Debo restar la pensión pública?</h3>
+    <p>Sí. Si esperas una pensión, réstala de tu gasto mensual antes de calcular el capital necesario.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const gasto = parseFloat((document.getElementById('gasto') as HTMLInputElement).value) || 0;
+    const tasa = (parseFloat((document.getElementById('tasa') as HTMLInputElement).value) || 0) / 100;
+    const actual = parseFloat((document.getElementById('actual') as HTMLInputElement).value) || 0;
+    const anual = gasto * 12;
+    const capital = tasa > 0 ? anual / tasa : 0;
+    const retiroMensual = actual * tasa / 12;
+    const falta = Math.max(capital - actual, 0);
+    document.getElementById('r-capital')!.textContent = capital > 0 ? fmt(capital, m) : '—';
+    document.getElementById('r-anual')!.textContent = fmt(anual, m);
+    document.getElementById('r-retiro')!.textContent = fmt(retiroMensual, m);
+    document.getElementById('r-falta')!.textContent = fmt(falta, m);
+  }
+  ['moneda','gasto','tasa','actual'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

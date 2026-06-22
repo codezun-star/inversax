@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Riesgo de Ruina en Trading — Inversax" description="Calcula la probabilidad de fundir tu cuenta de trading (riesgo de ruina) según tu win rate, ratio riesgo/beneficio y riesgo por operación. Estimación por simulación Monte Carlo.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el riesgo de ruina?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El riesgo de ruina es la probabilidad de perder todo tu capital de trading (o una parte que te obligue a parar) antes de que tu ventaja estadística se materialice. Depende de tu win rate, tu ratio riesgo/beneficio y, sobre todo, de cuánto arriesgas por operación." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo reduzco el riesgo de ruina?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La forma más eficaz es reducir el riesgo por operación: pasar del 5% al 1% por trade puede llevar el riesgo de ruina de casi seguro a prácticamente cero, siempre que tu sistema tenga expectativa positiva." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Un sistema rentable puede arruinarte?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Aunque tu expectativa sea positiva, arriesgar demasiado por operación puede llevarte a la ruina durante una mala racha antes de recuperarte. Por eso la gestión del tamaño de posición es tan importante como la estrategia." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Riesgo de Ruina</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Calculadora de Riesgo de Ruina</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Estima la probabilidad de fundir tu cuenta según tu win rate, ratio R:R y riesgo por operación.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Tu sistema</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Win rate (%)</label>
+            <input id="wr" type="number" value="50" min="1" max="99" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Ratio riesgo/beneficio (1:X)</label>
+            <input id="rr" type="number" value="1.5" min="0.1" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Riesgo por operación (% del capital)</label>
+            <input id="risk" type="number" value="2" min="0.1" max="50" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+        <div style="margin-top:18px; padding:12px 14px; background:#F7F7F5; border-radius:8px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Ruina = perder el 100% del capital. Estimación por simulación de Monte Carlo (miles de secuencias de operaciones).</p>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="card" style="background:#3B82F6; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Riesgo de ruina (estimado)</p>
+          <p id="r-ror" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Expectativa por operación (en R)</span><span id="r-exp" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Pérdidas seguidas para arruinarte</span><span id="r-rachas" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Veredicto</span><span id="r-verdict" style="font-size:13px; font-weight:700; color:#3B82F6;">—</span></div>
+        </div>
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Si la expectativa es negativa, la ruina tiende al 100% con suficientes operaciones. Reducir el riesgo por operación es la palanca más poderosa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el riesgo de ruina?</h2>
+    <p>El <strong>riesgo de ruina</strong> es la probabilidad de perder todo tu capital antes de que tu ventaja estadística dé frutos. Es el concepto que separa a los traders que sobreviven de los que vuelan su cuenta: incluso con una estrategia ganadora, arriesgar demasiado por operación puede arruinarte en una mala racha.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Win rate y ratio R:R:</strong> definen tu expectativa por operación.</li>
+      <li><strong>Riesgo por operación:</strong> el porcentaje del capital que arriesgas en cada trade.</li>
+    </ul>
+    <p>La calculadora simula miles de secuencias de operaciones y cuenta en cuántas se pierde todo el capital.</p>
+
+    <h2>La palanca que lo cambia todo</h2>
+    <p>Baja el riesgo por operación y verás caer el riesgo de ruina en picado. Dimensiona cada entrada con la <a href="/calculadoras/tamano-posicion">calculadora de tamaño de posición</a>, calcula el porcentaje óptimo con el <a href="/calculadoras/kelly">criterio de Kelly</a> y valida tu ventaja con la <a href="/calculadoras/expectativa-trading">expectativa matemática</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Por qué el resultado cambia un poco cada vez?</h3>
+    <p>Porque usa simulación aleatoria (Monte Carlo). Las variaciones son pequeñas y la conclusión se mantiene estable.</p>
+    <h3>¿Qué riesgo de ruina es aceptable?</h3>
+    <p>Lo más cercano posible a 0%. Por encima del 5%-10% deberías reducir el riesgo por operación, aunque tu sistema sea rentable.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const wr = (parseFloat((document.getElementById('wr') as HTMLInputElement).value) || 0) / 100;
+    const rr = parseFloat((document.getElementById('rr') as HTMLInputElement).value) || 0;
+    const risk = (parseFloat((document.getElementById('risk') as HTMLInputElement).value) || 0) / 100;
+    const expR = wr * rr - (1 - wr);
+    const rachas = risk > 0 ? Math.ceil(1 / risk) : 0;
+    // Monte Carlo
+    const sims = 3000, maxTrades = 800;
+    let ruinas = 0;
+    for (let s = 0; s < sims; s++) {
+      let bal = 1.0;
+      for (let t = 0; t < maxTrades; t++) {
+        if (Math.random() < wr) bal += risk * rr; else bal -= risk;
+        if (bal <= 0) { ruinas++; break; }
+      }
+    }
+    const ror = (ruinas / sims) * 100;
+    let verdict = 'Bajo', color = '#22C55E';
+    if (ror >= 50) { verdict = 'Muy alto'; color = '#EF4444'; }
+    else if (ror >= 10) { verdict = 'Alto'; color = '#F59E0B'; }
+    else if (ror >= 2) { verdict = 'Moderado'; color = '#3B82F6'; }
+    document.getElementById('r-ror')!.textContent = ror.toFixed(1) + '%';
+    document.getElementById('r-exp')!.textContent = expR.toFixed(3) + ' R';
+    document.getElementById('r-rachas')!.textContent = rachas + ' seguidas';
+    document.getElementById('r-verdict')!.textContent = verdict;
+    document.getElementById('r-verdict')!.style.color = color;
+    document.getElementById('card')!.style.background = color;
+  }
+  ['wr','rr','risk'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

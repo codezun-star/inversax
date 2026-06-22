@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Ahorro por Cambiar Hábitos — Inversax" description="¿Cuánto ahorrarías si dejas el cigarro, el café diario o las apps? Calcula el monto a 1, 5 y 10 años si lo inviertes. El costo real de los pequeños gastos. Para LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto ahorro si dejo un gasto diario pequeño?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un gasto diario pequeño se multiplica rápido: 5 al día son unos 150 al mes y 1.800 al año. Si en lugar de gastarlo lo inviertes a un rendimiento razonable, en 10 años puede convertirse en una suma muy superior gracias al interés compuesto." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿De verdad importan los gastos hormiga?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, cuando son recurrentes. No se trata de no disfrutar, sino de ser consciente: un hábito de pocos pesos al día puede equivaler a miles invertidos en una década. Eliminar los que no aportan valor libera dinero para tus metas." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo convierto un ahorro en inversión?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Automatiza una transferencia mensual por el monto que dejaste de gastar hacia un fondo indexado o ETF diversificado. Así el dinero que antes desaparecía en gastos hormiga empieza a trabajar para ti con aportes constantes." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Ahorro por Cambiar Hábitos</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Ahorro por Cambiar Hábitos</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Descubre en cuánto se convierte un gasto cotidiano si dejas de gastarlo y lo inviertes.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">El hábito</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Monto del gasto</label>
+            <input id="monto" type="number" value="5" min="0" step="0.5" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Frecuencia</label>
+            <select id="freq" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="diario">Cada día</option>
+              <option value="semanal">Cada semana</option>
+              <option value="mensual">Cada mes</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Rendimiento anual al invertir (%)</label>
+            <input id="rend" type="number" value="8" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#22C55E; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">A 10 años invertido</p>
+          <p id="r-10" style="font-size:32px; font-weight:800; margin:0; letter-spacing:-0.5px;">0</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Equivale al mes</span><span id="r-mes" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">A 1 año invertido</span><span id="r-1" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">A 5 años invertido</span><span id="r-5" style="font-size:13px; font-weight:700; color:#22C55E;">0</span></div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">Asume que inviertes el ahorro cada mes con interés compuesto. Día = ×30, semana = ×4,33 para llevarlo a base mensual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>El costo real de los pequeños gastos</h2>
+    <p>Un gasto cotidiano parece insignificante, pero repetido cientos de veces al año se convierte en una cifra enorme, sobre todo si ese dinero pudo invertirse. No se trata de privarte de todo, sino de elegir qué gastos te aportan valor y cuáles solo drenan tu capacidad de ahorro.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Monto y frecuencia:</strong> define el hábito (café, cigarro, suscripciones, delivery).</li>
+      <li><strong>Rendimiento:</strong> el retorno anual que esperas al invertir ese dinero.</li>
+    </ul>
+
+    <h2>Convierte el ahorro en patrimonio</h2>
+    <p>El verdadero poder está en invertir lo que dejas de gastar. Proyéctalo con la <a href="/calculadoras/interes-compuesto">calculadora de interés compuesto</a> y la <a href="/calculadoras/dca">calculadora DCA</a>, y mide cómo ese hábito mejora tu <a href="/calculadoras/tasa-ahorro">tasa de ahorro</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿No es exagerar con un café?</h3>
+    <p>El objetivo no es satanizar un gusto, sino visualizar el efecto acumulado. Si el café te hace feliz, mantenlo y recorta otro gasto que no valores tanto.</p>
+    <h3>¿Dónde invierto ese dinero?</h3>
+    <p>Para montos pequeños y constantes, los ETFs diversificados son ideales. Lee cómo empezar en nuestra guía de <a href="/blog/como-invertir-con-poco-dinero">cómo invertir con poco dinero</a>.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function fv(monthly: number, i: number, years: number) {
+    const n = years * 12;
+    return i > 0 ? monthly * (Math.pow(1 + i, n) - 1) / i : monthly * n;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const monto = parseFloat((document.getElementById('monto') as HTMLInputElement).value) || 0;
+    const freq = (document.getElementById('freq') as HTMLSelectElement).value;
+    const rend = (parseFloat((document.getElementById('rend') as HTMLInputElement).value) || 0) / 100;
+    const monthly = freq === 'diario' ? monto * 30 : (freq === 'semanal' ? monto * 4.333 : monto);
+    const i = rend / 12;
+    document.getElementById('r-mes')!.textContent = fmt(monthly, m);
+    document.getElementById('r-1')!.textContent = fmt(fv(monthly, i, 1), m);
+    document.getElementById('r-5')!.textContent = fmt(fv(monthly, i, 5), m);
+    document.getElementById('r-10')!.textContent = fmt(fv(monthly, i, 10), m);
+  }
+  ['moneda','monto','freq','rend'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

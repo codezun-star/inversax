@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Rendimiento de un Bono — Inversax" description="Calcula el rendimiento corriente y el rendimiento al vencimiento (YTM aproximado) de un bono según su precio, cupón y valor nominal. Renta fija para inversores de LATAM y España.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el rendimiento de un bono?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El rendimiento corriente es el cupón anual dividido entre el precio de mercado del bono. El rendimiento al vencimiento (YTM) añade además la ganancia o pérdida de capital al recibir el valor nominal al vencimiento, repartida en los años que faltan." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si compro un bono bajo la par?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Comprar bajo la par (a un precio menor que su valor nominal) aumenta tu rendimiento, porque al vencimiento cobras el nominal completo, sumando una ganancia de capital al cupón. Lo contrario ocurre si compras sobre la par." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué baja el precio de un bono cuando suben las tasas?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Porque los bonos nuevos pagan cupones más altos, así que los antiguos pierden atractivo y su precio cae hasta que su rendimiento se iguala al del mercado. La relación entre precio y tasa de un bono es inversa." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Rendimiento de un Bono</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Rendimiento de un Bono</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula el rendimiento corriente y el rendimiento al vencimiento (YTM) de un bono de renta fija.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del bono</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Valor nominal (al vencimiento)</label>
+            <input id="nominal" type="number" value="1000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de compra (mercado)</label>
+            <input id="precio" type="number" value="950" min="0.01" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Cupón anual (%)</label>
+            <input id="cupon" type="number" value="5" min="0" step="0.1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Años hasta el vencimiento</label>
+            <input id="anos" type="number" value="5" min="1" step="1" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Rendimiento corriente</p>
+          <p id="r-corriente" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Rendimiento al vencimiento (YTM aprox.)</span><span id="r-ytm" style="font-size:13px; font-weight:700; color:#FF8C42;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Cupón anual</span><span id="r-cupon" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ganancia de capital al vencimiento</span><span id="r-capital" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">El YTM mostrado es una aproximación estándar. El YTM exacto requiere resolver la ecuación de precio del bono de forma iterativa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Qué es el rendimiento de un bono?</h2>
+    <p>Un <strong>bono</strong> es un préstamo que haces a un gobierno o empresa a cambio de cupones periódicos y la devolución del valor nominal al vencimiento. Su <strong>rendimiento corriente</strong> es el cupón sobre el precio que pagaste; el <strong>rendimiento al vencimiento (YTM)</strong> añade la ganancia o pérdida de capital.</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Valor nominal:</strong> lo que cobras al vencimiento (normalmente 100 o 1.000).</li>
+      <li><strong>Precio de compra:</strong> lo que pagas hoy en el mercado.</li>
+      <li><strong>Cupón:</strong> el interés anual que paga el bono sobre el nominal.</li>
+      <li><strong>Años al vencimiento:</strong> el plazo restante.</li>
+    </ul>
+
+    <h2>Bonos en una cartera diversificada</h2>
+    <p>Los bonos aportan estabilidad frente a la volatilidad de las acciones. Para comparar su rendimiento real frente a la inflación de tu país usa la <a href="/calculadoras/rentabilidad-real">calculadora de rentabilidad real</a>, y para valorar proyectos con flujos similares, la <a href="/calculadoras/tir">calculadora de TIR</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué es comprar "a la par"?</h3>
+    <p>Comprar a la par es pagar exactamente el valor nominal. En ese caso el rendimiento corriente y el cupón coinciden, y no hay ganancia de capital.</p>
+    <h3>¿El YTM considera la reinversión de cupones?</h3>
+    <p>El YTM asume que reinviertes los cupones a la misma tasa. En la práctica eso no siempre ocurre, por lo que el rendimiento realizado puede variar.</p>
+  </div>
+</Layout>
+
+<script>
+  function calcular() {
+    const nominal = parseFloat((document.getElementById('nominal') as HTMLInputElement).value) || 0;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const cuponPct = (parseFloat((document.getElementById('cupon') as HTMLInputElement).value) || 0) / 100;
+    const anos = parseFloat((document.getElementById('anos') as HTMLInputElement).value) || 1;
+    const cuponAnual = nominal * cuponPct;
+    const corriente = precio > 0 ? (cuponAnual / precio) * 100 : 0;
+    const gananciaCapital = nominal - precio;
+    const ytm = precio > 0 ? ((cuponAnual + gananciaCapital / anos) / ((nominal + precio) / 2)) * 100 : 0;
+    const fmt2 = (n: number) => new Intl.NumberFormat('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+    document.getElementById('r-corriente')!.textContent = corriente.toFixed(2) + '%';
+    document.getElementById('r-ytm')!.textContent = ytm.toFixed(2) + '%';
+    document.getElementById('r-cupon')!.textContent = fmt2(cuponAnual);
+    const capEl = document.getElementById('r-capital')!;
+    capEl.textContent = (gananciaCapital >= 0 ? '+' : '') + fmt2(gananciaCapital);
+    capEl.style.color = gananciaCapital >= 0 ? '#16A34A' : '#EF4444';
+  }
+  ['nominal','precio','cupon','anos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>

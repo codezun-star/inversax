@@ -1,0 +1,156 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de Rentabilidad de un Alquiler (Inmueble) — Inversax" description="Calcula la rentabilidad bruta y neta de un alquiler o inmueble, el ingreso neto anual y en cuántos años recuperas la inversión. Para inversión inmobiliaria en LATAM y España. 19 monedas.">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula la rentabilidad de un alquiler?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La rentabilidad bruta es el alquiler anual dividido entre el precio de compra, por 100. La rentabilidad neta resta los gastos anuales (impuestos, mantenimiento, comunidad, seguro) al alquiler antes de dividir entre la inversión total. La neta es la cifra que de verdad importa." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué rentabilidad neta es buena en un inmueble?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Como referencia general, una rentabilidad neta por alquiler por debajo del 3% suele ser baja, entre 4% y 6% es razonable, y por encima del 7% es atractiva, aunque depende del país, la zona y el riesgo de impago o vacancia. Compárala siempre con alternativas como bonos o fondos." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La rentabilidad incluye la revalorización del inmueble?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Esta calculadora mide solo la rentabilidad por alquiler (flujo de caja). La revalorización del precio del inmueble es una ganancia adicional separada que depende del mercado y no está garantizada." }
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+  <div style="background:#fff; border-bottom:1px solid #E2DDD8; padding:40px 20px 32px;">
+    <div style="max-width:800px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#A8A29E; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="/" style="text-decoration:none; color:#A8A29E;">Inicio</a><span>›</span>
+        <a href="/calculadoras" style="text-decoration:none; color:#A8A29E;">Calculadoras</a><span>›</span>
+        <span style="color:#57534E;">Rentabilidad de un Inmueble</span>
+      </div>
+      <h1 style="font-size:clamp(22px,4vw,32px); font-weight:800; color:#1A1A1A; margin:0 0 8px; letter-spacing:-0.3px;">Rentabilidad de un Inmueble</h1>
+      <p style="font-size:15px; color:#57534E; line-height:1.65; margin:0;">Calcula la rentabilidad bruta y neta de un alquiler y descubre en cuántos años recuperas lo invertido.</p>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:40px 20px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#fff; border:1px solid #E2DDD8; border-radius:14px; padding:28px;">
+        <h2 style="font-size:16px; font-weight:700; color:#1A1A1A; margin:0 0 20px;">Datos del inmueble</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Moneda</label>
+            <select id="moneda" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:14px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; cursor:pointer; box-sizing:border-box;">
+              <option value="USD">USD — Dólar (EC, PA, SV, PR)</option>
+              <option value="COP">COP — Peso colombiano</option>
+              <option value="MXN">MXN — Peso mexicano</option>
+              <option value="ARS">ARS — Peso argentino</option>
+              <option value="CLP">CLP — Peso chileno</option>
+              <option value="PEN">PEN — Sol peruano</option>
+              <option value="UYU">UYU — Peso uruguayo</option>
+              <option value="BOB">BOB — Boliviano</option>
+              <option value="PYG">PYG — Guaraní paraguayo</option>
+              <option value="VES">VES — Bolívar venezolano</option>
+              <option value="CRC">CRC — Colón costarricense</option>
+              <option value="DOP">DOP — Peso dominicano</option>
+              <option value="GTQ">GTQ — Quetzal guatemalteco</option>
+              <option value="HNL">HNL — Lempira hondureño</option>
+              <option value="NIO">NIO — Córdoba nicaragüense</option>
+              <option value="CUP">CUP — Peso cubano</option>
+              <option value="BZD">BZD — Dólar de Belice</option>
+              <option value="CAD">CAD — Dólar canadiense</option>
+              <option value="EUR">EUR — Euro (España)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Precio de compra</label>
+            <input id="precio" type="number" value="120000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Costos de compra (notaría, impuestos)</label>
+            <input id="costos" type="number" value="9000" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Alquiler mensual</label>
+            <input id="alquiler" type="number" value="650" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:13px; font-weight:600; color:#57534E; display:block; margin-bottom:6px;">Gastos anuales (impuestos, mantenimiento, comunidad)</label>
+            <input id="gastos" type="number" value="1800" min="0" style="width:100%; border:1px solid #E2DDD8; border-radius:8px; padding:10px 14px; font-size:15px; font-family:inherit; background:#F7F7F5; color:#1A1A1A; outline:none; box-sizing:border-box;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#FF8C42; border-radius:14px; padding:24px; color:#fff;">
+          <p style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px; opacity:0.85;">Rentabilidad neta anual</p>
+          <p id="r-neta" style="font-size:36px; font-weight:800; margin:0; letter-spacing:-0.5px;">0%</p>
+        </div>
+        <div style="background:#fff; border:1px solid #E2DDD8; border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Rentabilidad bruta</span><span id="r-bruta" style="font-size:13px; font-weight:700; color:#1A1A1A;">0%</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Ingreso neto anual</span><span id="r-ingreso" style="font-size:13px; font-weight:700; color:#1A1A1A;">0</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="font-size:13px; color:#57534E;">Años para recuperar la inversión</span><span id="r-payback" style="font-size:13px; font-weight:700; color:#FF8C42;">0</span></div>
+        </div>
+        <div style="background:#FFF4EC; border:1px solid #FFD4A8; border-radius:10px; padding:14px 16px;">
+          <p style="font-size:12px; color:#78716C; line-height:1.6; margin:0;">La rentabilidad neta usa la inversión total (precio + costos de compra). No incluye la revalorización del inmueble ni periodos de vacancia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:800px; margin:0 auto; padding:0 20px 60px;" class="prose">
+    <h2>¿Cómo se calcula la rentabilidad de un alquiler?</h2>
+    <p>La <strong>rentabilidad bruta</strong> es el alquiler anual dividido entre el precio de compra. La <strong>rentabilidad neta</strong> —la que de verdad importa— resta primero todos los gastos anuales y divide entre la inversión total, incluyendo los costos de compra (notaría, impuestos, registro).</p>
+
+    <h2>¿Cómo usar esta calculadora?</h2>
+    <ul>
+      <li><strong>Precio de compra y costos:</strong> juntos forman tu inversión total real.</li>
+      <li><strong>Alquiler mensual:</strong> lo que cobras por arrendar; se anualiza por 12.</li>
+      <li><strong>Gastos anuales:</strong> predial/IBI, mantenimiento, comunidad, seguro y vacancia estimada.</li>
+    </ul>
+
+    <h2>Alquilar para invertir vs comprar para vivir</h2>
+    <p>Si dudas entre comprar tu vivienda o alquilarla, usa también la <a href="/calculadoras/alquiler-vs-compra">calculadora de alquiler vs compra</a>. Y si comparas el inmueble con invertir ese dinero en bolsa, mira la <a href="/calculadoras/costo-oportunidad">calculadora de costo de oportunidad</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Qué rentabilidad neta es buena?</h3>
+    <p>Como referencia, por debajo del 3% es baja, entre 4% y 6% razonable y por encima del 7% atractiva, según país, zona y riesgo de impago.</p>
+    <h3>¿Debo incluir la hipoteca en el cálculo?</h3>
+    <p>Esta calculadora mide la rentabilidad del activo sin apalancamiento. Si financias la compra, calcula la cuota con la <a href="/calculadoras/hipoteca">calculadora de hipoteca</a> y compárala con el alquiler neto.</p>
+  </div>
+</Layout>
+
+<script>
+  const DEC: Record<string,number> = {USD:2,COP:0,MXN:2,ARS:0,CLP:0,PEN:2,UYU:2,BOB:2,PYG:0,VES:2,CRC:0,DOP:2,GTQ:2,HNL:2,NIO:2,CUP:2,BZD:2,CAD:2,EUR:2};
+  function fmt(n: number, m: string) {
+    const d = DEC[m] ?? 2;
+    return new Intl.NumberFormat('es',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n) + ' ' + m;
+  }
+  function calcular() {
+    const m = (document.getElementById('moneda') as HTMLSelectElement).value;
+    const precio = parseFloat((document.getElementById('precio') as HTMLInputElement).value) || 0;
+    const costos = parseFloat((document.getElementById('costos') as HTMLInputElement).value) || 0;
+    const alquiler = parseFloat((document.getElementById('alquiler') as HTMLInputElement).value) || 0;
+    const gastos = parseFloat((document.getElementById('gastos') as HTMLInputElement).value) || 0;
+    const ingresoBruto = alquiler * 12;
+    const ingresoNeto = ingresoBruto - gastos;
+    const inversion = precio + costos;
+    const bruta = precio > 0 ? (ingresoBruto / precio) * 100 : 0;
+    const neta = inversion > 0 ? (ingresoNeto / inversion) * 100 : 0;
+    const payback = ingresoNeto > 0 ? inversion / ingresoNeto : 0;
+    document.getElementById('r-neta')!.textContent = neta.toFixed(2) + '%';
+    document.getElementById('r-bruta')!.textContent = bruta.toFixed(2) + '%';
+    document.getElementById('r-ingreso')!.textContent = fmt(ingresoNeto, m);
+    document.getElementById('r-payback')!.textContent = payback > 0 ? payback.toFixed(1) + ' años' : '—';
+  }
+  ['moneda','precio','costos','alquiler','gastos'].forEach(id => document.getElementById(id)?.addEventListener('input', calcular));
+  calcular();
+</script>
+<style>@media(max-width:600px){div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column!important;}}</style>
+</content>
